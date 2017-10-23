@@ -23,6 +23,8 @@ class Task: PFObject {
     //many task in one room: room: Room <--->> tasks: [Task]  (Room object)
     @NSManaged var room: Room
     
+    //temp
+    @NSManaged var roomOne: String
 
     //use the built in property objectId to access specific object
     

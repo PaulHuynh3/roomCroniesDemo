@@ -63,25 +63,10 @@ class AddTaskViewController: UIViewController {
             task.priority = priorityNumber
         }
         
-        
-        /*
-         
-         //create the className
-         let game = PFObject(className:"Game")
-         game["createdBy"] = PFUser.currentUser()
-         
-
-         //query for the information.
-         
-         let gameQuery = PFQuery(className:"Game")
-         if let user = PFUser.currentUser() {
-         gameQuery.whereKey("createdBy", equalTo: user)
-         }
-         
-         */
-        
+        //says that this task is created by current user.
 //        task["roomOne"] = PFUser.current()
-//
+        
+// does the query
 //        let taskQuery = PFQuery(className:"Task")
 //        if let user = PFUser.current(){
 //
@@ -110,6 +95,27 @@ class AddTaskViewController: UIViewController {
         dismiss(animated: true, completion: nil)
         
     }
+    
+    //        task["roomOne"] = PFUser.current()
+    //
+    //        let taskQuery = PFQuery(className:"Task")
+    //        if let user = PFUser.current(){
+    //
+    //            taskQuery.whereKey("roomOne", equalTo:user)
+    //        }
+    
+    //fetch the room's object id
+    func fetchRoom() {
+        let taskQuery = PFQuery(className: "Task")
+        if let user = PFUser.current(){
+            
+            taskQuery.whereKey("roomOne", equalTo: user)
+        }
+        
+    }
+    
+    
+    
     
     
     
