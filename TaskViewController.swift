@@ -70,6 +70,8 @@ class TaskViewController: UIViewController, UITableViewDataSource, UITableViewDe
                 fatalError("unexpected destination:\(segue.destination)")
             }
             
+            
+            
             //set to be the task delegate
             addTaskVC.taskDelegate = self
             

@@ -63,8 +63,11 @@ class AddTaskViewController: UIViewController {
             task.priority = priorityNumber
         }
         
+        
+        
         //says that this task is created by current user.
-//        task["roomOne"] = PFUser.current()
+//        task.room = PFUser.current()
+        
         
 // does the query
 //        let taskQuery = PFQuery(className:"Task")
