@@ -16,8 +16,13 @@ class RoomCroniesModel: PFObject {
 
         
         //hey jaison
+<<<<<<< HEAD
+=======
+        //hey paul
+>>>>>>> 8d697e96e12ec9d2adf5b56034fcbbf63bb7ce45
         
     }
+    
     
     
 }
