@@ -43,14 +43,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     private func createRoom() {
         
-        let room = PFObject(className: "room")
+        let room = PFObject(className: "Room")
         
-        room["roomName"] = "Party Room"
-//        room["personInRoom"] = "Paul"
-//        room["personInRoom"] = "Jaison"
-//        room["numberOfPerson"] = 2
-        
-        room["personInRoom"] = PFObject.init(withoutDataWithClassName:"person", objectId:"gm2hmLvXrA")
+        room["roomName"] = "roomOne"
         
         room.saveInBackground{ (success, error) in
             if let error = error {
@@ -64,13 +59,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     private func createPaul() {
         
-        let paul = PFObject(className: "person")
+        let paul = PFObject(className: "Person")
         paul["userName"] = "Paul"
         paul["userPassword"] = "password"
         paul["userEmail"] = "paul.huynh3@gmail.com"
     
         
-        paul["roomName"] = PFObject.init(withoutDataWithClassName:"room", objectId: "AZqNFRt8BA")
+        paul["roomName"] = PFObject.init(withoutDataWithClassName:"Room", objectId: "AZqNFRt8BA")
         
         paul.saveInBackground { (success, error) in
             
@@ -86,7 +81,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     private func createJaison() {
         
-        let jaison = PFObject(className: "person")
+        let jaison = PFObject(className: "Person")
         jaison["userName"] = "Jaison"
         jaison["userPassword"] = "password"
         jaison["userEmail"] = "jb@gmail.com"
@@ -94,8 +89,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         
         //establish the relationship.
-        //Room
-        jaison["roomName"] = PFObject.init(withoutDataWithClassName:"room", objectId: "AZqNFRt8BA")
+        jaison["roomName"] = PFObject.init(withoutDataWithClassName:"Room", objectId: "AZqNFRt8BA")
         
 
         jaison.saveInBackground{ (success, error) in
@@ -110,7 +104,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     private func paulCreateTask() {
         
-        let taskOne = PFObject(className: "task")
+        let taskOne = PFObject(className: "Task")
         taskOne["taskName"] = "Pay hydro bill"
         taskOne["taskDescription"] = "last month's hydro bill!!!"
         taskOne["isExpense"] = true
@@ -120,7 +114,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         //establish the relationship.
         //taskCreator
-        taskOne["taskCreator"] = PFObject.init(withoutDataWithClassName:"person", objectId:"gm2hmLvXrA")
+        taskOne["taskCreator"] = PFObject.init(withoutDataWithClassName:"Person", objectId:"gm2hmLvXrA")
         
         
         taskOne.saveInBackground{ (success, error) in
@@ -135,7 +129,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     private func paulCreateExpense() {
     
-        let hydroExpense = PFObject(className: "expense")
+        let hydroExpense = PFObject(className: "Expense")
         hydroExpense["expenseName"] = "Hydro bill"
         hydroExpense["isPaid"] = false
         hydroExpense["dateCreated"] = "October 20, 2017"
@@ -145,8 +139,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
       
         
         //establish the relationship.
-        hydroExpense["expenseCreator"] = PFObject.init(withoutDataWithClassName:"person", objectId:"0htDcFZSKp")
-        hydroExpense["expenseOwer"] = PFObject.init(withoutDataWithClassName:"person", objectId:"gm2hmLvXrA")
+        hydroExpense["expenseCreator"] = PFObject.init(withoutDataWithClassName:"Person", objectId:"0htDcFZSKp")
+        hydroExpense["expenseOwer"] = PFObject.init(withoutDataWithClassName:"Person", objectId:"gm2hmLvXrA")
         
         
         hydroExpense.saveInBackground{ (success, error) in
@@ -165,7 +159,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     //this fetches the person based on predicate
     private func fetchPerson() {
         let predicate = NSPredicate(format: "age > 18")
-        let query = PFQuery(className: "person", predicate: predicate)
+        let query = PFQuery(className: "Person", predicate: predicate)
         query.findObjectsInBackground {(person: [PFObject]?, error: Error?) in
             
             if let error = error {

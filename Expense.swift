@@ -35,7 +35,7 @@ class Expense: PFObject {
 extension Expense: PFSubclassing {
 
     static func parseClassName() -> String{
-    return "expense"
+    return "Expense"
     }
 
 }

@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Parse
 
 protocol AddTaskDelegate {
     
@@ -25,8 +26,6 @@ class AddTaskViewController: UIViewController {
     @IBOutlet weak var taskPriorityTextField: UITextField!
     
     
-    
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -41,13 +40,12 @@ class AddTaskViewController: UIViewController {
             }
         }
         
-        
     }
     
     
     @IBAction func saveButtonTapped(_ sender: UIBarButtonItem) {
         
-        let task = Task ()
+        let task = Task()
         
         
         if let name = taskNameTextField.text {
@@ -65,14 +63,29 @@ class AddTaskViewController: UIViewController {
             task.priority = priorityNumber
         }
         
-        task.saveInBackground()
+        //says that this task is created by current user.
+//        task["roomOne"] = PFUser.current()
         
-       
+// does the query
+//        let taskQuery = PFQuery(className:"Task")
+//        if let user = PFUser.current(){
+//
+//            taskQuery.whereKey("roomOne", equalTo:user)
+//        }
+        
+
+        
+        task.saveInBackground { (success, error) in
+            print(#line, success)
+            print(#line, error?.localizedDescription ?? "No error saving")
+        }
+        
+        
         taskDelegate?.addTaskObject(task: task)
         
         //presented modally.
         dismiss(animated: true, completion: nil)
-
+        
     }
     
     
@@ -82,6 +95,27 @@ class AddTaskViewController: UIViewController {
         dismiss(animated: true, completion: nil)
         
     }
+    
+    //        task["roomOne"] = PFUser.current()
+    //
+    //        let taskQuery = PFQuery(className:"Task")
+    //        if let user = PFUser.current(){
+    //
+    //            taskQuery.whereKey("roomOne", equalTo:user)
+    //        }
+    
+    //fetch the room's object id
+    func fetchRoom() {
+        let taskQuery = PFQuery(className: "Task")
+        if let user = PFUser.current(){
+            
+            taskQuery.whereKey("roomOne", equalTo: user)
+        }
+        
+    }
+    
+    
+    
     
     
     
