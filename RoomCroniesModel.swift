@@ -15,6 +15,8 @@ class RoomCroniesModel: PFObject {
         super.init()
 
         
+        //hey jaison 
+        
     }
     
     
