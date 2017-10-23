@@ -19,7 +19,6 @@ class TaskViewController: UIViewController, UITableViewDataSource, UITableViewDe
     override func viewDidLoad() {
         super.viewDidLoad()
         fetchTask()
-       let room = Room()
         
     }
     

@@ -8,7 +8,6 @@
 
 import UIKit
 import Parse
-//HEYYYYYYYYYYYYYYYYYYYYYYYYYY
 
 class Person: PFObject {
     
@@ -24,37 +23,37 @@ class Person: PFObject {
     override init() {
     super.init ()
         
-    
+        
     }
     
     
     
     
-//     convenience init?(name:String, email:String, password:String, roomName:Room){
-//        self.init()
-//        
-//        //error handling
-//        guard !name.isEmpty else {
-//            return nil
-//        }
-//        
-//        guard !email.isEmpty else {
-//            return nil
-//        }
-//        
-//        guard !password.isEmpty else {
-//            return nil
-//        }
-//        
-//        
-//        //Initialize stored properties
-//        self.userName = name
-//        self.userEmail = email
-//        self.userPassword = password
-//        self.roomName = roomName
-//        
-//        
-//    }
+     convenience init?(name:String, email:String, password:String, roomName:Room){
+        self.init()
+        
+        //error handling
+        guard !name.isEmpty else {
+            return nil
+        }
+        
+        guard !email.isEmpty else {
+            return nil
+        }
+        
+        guard !password.isEmpty else {
+            return nil
+        }
+        
+        
+        //Initialize stored properties
+        self.userName = name
+        self.userEmail = email
+        self.userPassword = password
+        self.roomName = roomName
+        
+        
+    }
     
     
 }

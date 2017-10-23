@@ -24,6 +24,7 @@ class AddTaskViewController: UIViewController {
     @IBOutlet weak var taskDescriptionTextField: UITextField!
     @IBOutlet weak var taskPriorityTextField: UITextField!
     
+    @IBOutlet weak var objectIDTextField: UITextField!
     
     
     
@@ -64,6 +65,12 @@ class AddTaskViewController: UIViewController {
             
             task.priority = priorityNumber
         }
+        
+        if let objectID = objectIDTextField.text{
+            
+            task.objectId = objectID
+        }
+        
         
         task.saveInBackground()
         
