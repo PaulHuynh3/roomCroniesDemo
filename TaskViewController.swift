@@ -110,7 +110,7 @@ class TaskViewController: UIViewController, UITableViewDataSource, UITableViewDe
     //MARK: Fetch Parse
     
     func fetchTask() {
-        let query = PFQuery(className: "task")
+        let query = PFQuery(className: "Task")
         
         //findObjectsInBackground already made a network request so we dont need to call it with a completion handler.
         
