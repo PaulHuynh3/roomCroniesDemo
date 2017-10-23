@@ -22,6 +22,7 @@ class Task: PFObject {
     @NSManaged var completeDate: Date
     //many task in one room: room: Room <--->> tasks: [Task]  (Room object)
     @NSManaged var room: Room
+    
 
     //use the built in property objectId to access specific object
     
@@ -48,7 +49,7 @@ extension Task: PFSubclassing{
     
     static func parseClassName() -> String {
         
-        return "task"
+        return "Task"
     }
     
 }

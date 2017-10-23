@@ -47,7 +47,7 @@ class Room: PFObject{
 extension Room: PFSubclassing {
     
     static func parseClassName() -> String {
-        return "room"
+        return "Room"
     }
     
 }

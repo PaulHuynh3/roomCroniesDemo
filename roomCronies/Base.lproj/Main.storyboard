@@ -122,18 +122,10 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
-                            <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Object ID" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="udY-Sb-ClF">
-                                <rect key="frame" x="83" y="371" width="228" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <nil key="textColor"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits"/>
-                            </textField>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                     <connections>
-                        <outlet property="objectIDTextField" destination="udY-Sb-ClF" id="ziA-42-8qg"/>
                         <outlet property="taskDescriptionTextField" destination="5Xa-99-Avw" id="q5e-3x-aM9"/>
                         <outlet property="taskNameTextField" destination="XIq-FN-PvO" id="iKe-X7-r1N"/>
                         <outlet property="taskPriorityTextField" destination="AY6-hR-PR4" id="Gfw-zs-gfH"/>

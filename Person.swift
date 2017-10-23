@@ -63,7 +63,7 @@ class Person: PFObject {
 extension Person: PFSubclassing {
     
     static func parseClassName() -> String {
-        return "person"
+        return "Person"
     }
     
 }

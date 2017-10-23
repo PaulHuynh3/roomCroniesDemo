@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Parse
 
 protocol AddTaskDelegate {
     
@@ -24,9 +25,6 @@ class AddTaskViewController: UIViewController {
     @IBOutlet weak var taskDescriptionTextField: UITextField!
     @IBOutlet weak var taskPriorityTextField: UITextField!
     
-    @IBOutlet weak var objectIDTextField: UITextField!
-    
-    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -42,13 +40,12 @@ class AddTaskViewController: UIViewController {
             }
         }
         
-        
     }
     
     
     @IBAction func saveButtonTapped(_ sender: UIBarButtonItem) {
         
-        let task = Task ()
+        let task = Task()
         
         
         if let name = taskNameTextField.text {
@@ -66,20 +63,44 @@ class AddTaskViewController: UIViewController {
             task.priority = priorityNumber
         }
         
-        if let objectID = objectIDTextField.text{
-            
-            task.objectId = objectID
+        
+        /*
+         
+         //create the className
+         let game = PFObject(className:"Game")
+         game["createdBy"] = PFUser.currentUser()
+         
+
+         //query for the information.
+         
+         let gameQuery = PFQuery(className:"Game")
+         if let user = PFUser.currentUser() {
+         gameQuery.whereKey("createdBy", equalTo: user)
+         }
+         
+         */
+        
+//        task["roomOne"] = PFUser.current()
+//
+//        let taskQuery = PFQuery(className:"Task")
+//        if let user = PFUser.current(){
+//
+//            taskQuery.whereKey("roomOne", equalTo:user)
+//        }
+        
+
+        
+        task.saveInBackground { (success, error) in
+            print(#line, success)
+            print(#line, error?.localizedDescription ?? "No error saving")
         }
         
         
-        task.saveInBackground()
-        
-       
         taskDelegate?.addTaskObject(task: task)
         
         //presented modally.
         dismiss(animated: true, completion: nil)
-
+        
     }
     
     
