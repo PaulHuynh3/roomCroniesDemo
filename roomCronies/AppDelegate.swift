@@ -18,7 +18,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         
         configureParse()
-        createRoom()
+//        createRoom()
 //        createJaison()
 //        createPaul()
 //        paulCreateTask()
@@ -46,8 +46,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let room = PFObject(className: "room")
         
         room["roomName"] = "Party Room"
-        
-        room["personInRoom"] = PFObject.init(withoutDataWithClassName:"person", objectId:"gm2hmLvXrA")
         
         room.saveInBackground{ (success, error) in
             if let error = error {
