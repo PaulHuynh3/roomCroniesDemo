@@ -9,9 +9,9 @@
 /* Begin PBXBuildFile section */
 		6738886CF8FC3D67F0D7E7AF /* Pods_roomCronies.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 59EC5A51E70C805646D8EEF2 /* Pods_roomCronies.framework */; };
 		88161C451F9E8B0700D8CD20 /* Secret.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88161C441F9E8B0700D8CD20 /* Secret.swift */; };
+		88161C481F9EAD6500D8CD20 /* Media.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 88161C471F9EAD6500D8CD20 /* Media.xcassets */; };
 		DA7AB7AD1F99219D00E816C9 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA7AB7AC1F99219D00E816C9 /* AppDelegate.swift */; };
 		DA7AB7B21F99219D00E816C9 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DA7AB7B01F99219D00E816C9 /* Main.storyboard */; };
-		DA7AB7B41F99219D00E816C9 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DA7AB7B31F99219D00E816C9 /* Assets.xcassets */; };
 		DA7AB7B71F99219D00E816C9 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DA7AB7B51F99219D00E816C9 /* LaunchScreen.storyboard */; };
 		DAF3FA021F9A27270095B7A4 /* Person.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAF3FA011F9A27270095B7A4 /* Person.swift */; };
 		DAF3FA041F9A5BA60095B7A4 /* Room.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAF3FA031F9A5BA60095B7A4 /* Room.swift */; };
@@ -29,11 +29,11 @@
 		59EC5A51E70C805646D8EEF2 /* Pods_roomCronies.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_roomCronies.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		88161C441F9E8B0700D8CD20 /* Secret.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Secret.swift; sourceTree = "<group>"; };
 		88161C461F9E8F1F00D8CD20 /* roomCronies.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = roomCronies.entitlements; sourceTree = "<group>"; };
+		88161C471F9EAD6500D8CD20 /* Media.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Media.xcassets; sourceTree = "<group>"; };
 		DA0F0FDD1F9926250057F23E /* roomCronies-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "roomCronies-Bridging-Header.h"; sourceTree = "<group>"; };
 		DA7AB7A91F99219D00E816C9 /* roomCronies.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = roomCronies.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DA7AB7AC1F99219D00E816C9 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		DA7AB7B11F99219D00E816C9 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
-		DA7AB7B31F99219D00E816C9 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		DA7AB7B61F99219D00E816C9 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		DA7AB7B81F99219D00E816C9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		DAF3FA011F9A27270095B7A4 /* Person.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Person.swift; sourceTree = "<group>"; };
@@ -139,11 +139,11 @@
 			children = (
 				88161C461F9E8F1F00D8CD20 /* roomCronies.entitlements */,
 				DA7AB7AC1F99219D00E816C9 /* AppDelegate.swift */,
-				DA7AB7B31F99219D00E816C9 /* Assets.xcassets */,
 				DA7AB7B51F99219D00E816C9 /* LaunchScreen.storyboard */,
 				DA7AB7B81F99219D00E816C9 /* Info.plist */,
 				88161C441F9E8B0700D8CD20 /* Secret.swift */,
 				DA0F0FDD1F9926250057F23E /* roomCronies-Bridging-Header.h */,
+				88161C471F9EAD6500D8CD20 /* Media.xcassets */,
 			);
 			path = roomCronies;
 			sourceTree = "<group>";
@@ -218,7 +218,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				DA7AB7B71F99219D00E816C9 /* LaunchScreen.storyboard in Resources */,
-				DA7AB7B41F99219D00E816C9 /* Assets.xcassets in Resources */,
+				88161C481F9EAD6500D8CD20 /* Media.xcassets in Resources */,
 				DA7AB7B21F99219D00E816C9 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
