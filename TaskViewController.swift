@@ -12,7 +12,7 @@ import Parse
 class TaskViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, AddTaskDelegate {
 // created an instance of this property this way will create your property before viewdidload
 //    lazy var myRoom = Room(roomName: "car")
-    //this tells you to create an initializer without putting "?" on room because its created before view did load.
+//this tells you to create an initializer without putting "?" on room because its created before view did load.
     var myRoom : Room?
     
     @IBOutlet weak var tableView: UITableView!
@@ -21,10 +21,10 @@ class TaskViewController: UIViewController, UITableViewDataSource, UITableViewDe
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        //        fetchTask()
-        //create an instance of a room in viewdidload so it will stay the same except everytime the user clicks start
-        myRoom = Room(roomName: "StoryBook")
-        fetchTaskByRoom()
+        fetchRoomRelatedTask()
+        
+        //create an instance of a room in viewdidload so it will stay the same except everytime the user clicks start... This should be when the user creates the login page
+//        myRoom = Room(roomName: "StoryBook")
         
     }
     
@@ -118,17 +118,12 @@ class TaskViewController: UIViewController, UITableViewDataSource, UITableViewDe
     
     //MARK: Fetch Parse
     
-    func fetchTask() {
-        let query = PFQuery(className: "Task")
-        
-        //        if let user = PFUser.current(){
-        //
-        //            query.whereKey("room", equalTo: user)
-        //        }
-        
+    func fetchRoomRelatedTask() {
+        let query = PFQuery(className: "Room")
+
         //findObjectsInBackground already made a network request so we dont need to call it with a completion handler.
         
-        query.findObjectsInBackground { (task:[PFObject]?, error: Error?) in
+        query.findObjectsInBackground { (rooms:[PFObject]?, error: Error?) in
             
             //error handling
             if let error = error {
@@ -136,8 +131,14 @@ class TaskViewController: UIViewController, UITableViewDataSource, UITableViewDe
                 return
             }
             
-            self.tasks.append(contentsOf: task as! [Task])
-            self.tableView.reloadData()
+            guard let rooms = rooms as? [Room] else { return }
+            //fetch the first room.
+            //In the future this will need to be configure for which room or rooms to fetch.
+            //rooms is an array but rooms.first gives the first element so its fine.
+            self.myRoom = rooms.first
+            
+            //fetching all the task associated with the room.
+            self.fetchTaskByRoom()
             
         }
         
@@ -147,15 +148,13 @@ class TaskViewController: UIViewController, UITableViewDataSource, UITableViewDe
     func fetchTaskByRoom() {
         let taskQuery = PFQuery(className: "Task")
         taskQuery.order(byAscending: "taskName")
-        //can also use nspredicate
+        
+        //fetch room by its variable.
+        taskQuery.whereKey("room", equalTo: self.myRoom)
         
         
-        //right way to do it..
-//        taskQuery.whereKey("room", equalTo: myRoom)
-        
-        
-        //temp way to do it
-        taskQuery.whereKey("room", equalTo: PFObject(withoutDataWithClassName:"Room", objectId: "Va0wayaQBg"))
+        //temp way to fetch room.
+//        taskQuery.whereKey("room", equalTo: PFObject(withoutDataWithClassName:"Room", objectId: "ogro8r3MMC"))
         
         taskQuery.findObjectsInBackground { (task:[PFObject]?, error: Error?) in
             
@@ -177,34 +176,26 @@ class TaskViewController: UIViewController, UITableViewDataSource, UITableViewDe
     
     
     
-    
-    
-    
-    //MARK: Create Person object & Room object
-    
-    //    func createObject() {
+    //    func fetchAllTask() {
+    //        let query = PFQuery(className: "Task")
     //
-    //        let apartment = Room()
+    //        //findObjectsInBackground already made a network request so we dont need to call it with a completion handler.
     //
-    //        apartment.roomName = "imagination"
+    //        query.findObjectsInBackground { (task:[PFObject]?, error: Error?) in
     //
+    //            //error handling
+    //            if let error = error {
+    //                print(#line, error.localizedDescription)
+    //                return
+    //            }
     //
-    //        apartment.saveInBackground()
+    //            self.tasks.append(contentsOf: task as! [Task])
+    //            self.tableView.reloadData()
     //
+    //        }
     //
-    //        let paul = Person(name: "Paul", email: "paul@gmail.com", password: "password", roomName: apartment.objectId!)
-    //        let jaison = Person(name: "Jaison", email: "jai@gmail.com", password:"password", roomName: apartment.objectId!)
-    //
-    //        apartment.members = [paul!,jaison!]
-    //
-    //        apartment.saveInBackground()
-    //        paul?.saveInBackground()
-    //        jaison?.saveInBackground()
-    //
-    //        self.tableView.reloadData()
     //    }
-    
-    
+
     
     
     
