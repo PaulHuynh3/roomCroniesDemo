@@ -20,6 +20,7 @@ class TaskViewController: UIViewController, UITableViewDataSource, UITableViewDe
     override func viewDidLoad() {
         super.viewDidLoad()
         fetchTask()
+//        fetchRoom()
         //create an instance of a room in viewdidload so it will stay the same.
         myRoom = Room(roomName:"apartment")
         
@@ -119,6 +120,11 @@ class TaskViewController: UIViewController, UITableViewDataSource, UITableViewDe
     func fetchTask() {
         let query = PFQuery(className: "Task")
         
+//        if let user = PFUser.current(){
+//
+//            query.whereKey("room", equalTo: user)
+//        }
+        
         //findObjectsInBackground already made a network request so we dont need to call it with a completion handler.
         
         query.findObjectsInBackground { (task:[PFObject]?, error: Error?) in
@@ -136,8 +142,25 @@ class TaskViewController: UIViewController, UITableViewDataSource, UITableViewDe
         
     }
     
+    //fetch specific task created by specific room ID
+    func fetchRoom() {
+        let taskQuery = PFQuery(className: "Task")
+        //can also use nspredicate
+        taskQuery.whereKey("room", equalTo:"Va0wayaQBg")
+        
+        taskQuery.findObjectsInBackground { (task:[PFObject]?, error: Error?) in
+            
+            //error handling
+            if let error = error {
+                print(#line, error.localizedDescription)
+                return
+            }
+        
+        self.tasks.append(contentsOf: task as! [Task])
+        self.tableView.reloadData()
+    }
     
-    
+}
     
     
     

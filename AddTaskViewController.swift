@@ -65,20 +65,8 @@ class AddTaskViewController: UIViewController {
         }
         
         //the property passed from the segue.
-        task.room = roomObject!
+      //  task.room = roomObject!
         
-        //says that this task is created by current user.
-//        task.room = PFUser.current()
-        
-        
-// does the query
-//        let taskQuery = PFQuery(className:"Task")
-//        if let user = PFUser.current(){
-//
-//            taskQuery.whereKey("roomOne", equalTo:user)
-//        }
-        
-
         
         task.saveInBackground { (success, error) in
             print(#line, success)
@@ -101,25 +89,29 @@ class AddTaskViewController: UIViewController {
         
     }
     
-    //        task["room"] = PFUser.current()
-    //
-    //        let taskQuery = PFQuery(className:"Task")
-    //        if let user = PFUser.current(){
-    //
-    //            taskQuery.whereKey("roomOne", equalTo:user)
-    //        }
     
     //fetch the room's object id
     func fetchRoom() {
         let taskQuery = PFQuery(className: "Task")
         if let user = PFUser.current(){
             
-            taskQuery.whereKey("roomOne", equalTo: user)
+            taskQuery.whereKey("room", equalTo: user)
         }
         
     }
     
     
+    
+    //says that this task is created by current user.
+    //        task.room = PFUser.current()
+    
+    
+    // does the query
+    //        let taskQuery = PFQuery(className:"Task")
+    //        if let user = PFUser.current(){
+    //
+    //            taskQuery.whereKey("roomOne", equalTo:user)
+    //        }
     
     
     
