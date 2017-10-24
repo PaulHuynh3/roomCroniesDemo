@@ -9,7 +9,11 @@
 import UIKit
 import Parse
 
-class Person: PFObject {
+class Person: PFObject, PFSubclassing {
+    
+    static func parseClassName() -> String {
+        return "Person"
+    }
     
     @NSManaged var userName:String
     @NSManaged var userEmail:String
@@ -19,48 +23,59 @@ class Person: PFObject {
     @NSManaged var taskDoer: [Task]
     
     
-    //create room when person is created.
-    override init() {
-    super.init ()
-        
-        
+    
+    func signup(with userName: String, and password: String, completion: @escaping (Bool, Error?)-> Void) {
+        let user = PFUser()
+        user.username = userName
+        user.password = password
+        user.signUpInBackground { success, error in
+            completion(success, error)
+        }
     }
-     convenience init?(name:String, email:String, password:String, roomName:Room){
-        self.init()
-        
-        //error handling
-        guard !name.isEmpty else {
-            return nil
-        }
-        
-        guard !email.isEmpty else {
-            return nil
-        }
-        
-        guard !password.isEmpty else {
-            return nil
-        }
-        
-        
-        //Initialize stored properties
-        self.userName = name
-        self.userEmail = email
-        self.userPassword = password
-        self.roomName = roomName
-        
-        
-    }
+    
+    
     
     
 }
+
+
+//     convenience init?(name:String, email:String, password:String, roomName:Room){
+//        self.init()
+//
+//        //error handling
+//        guard !name.isEmpty else {
+//            return nil
+//        }
+//
+//        guard !email.isEmpty else {
+//            return nil
+//        }
+//
+//        guard !password.isEmpty else {
+//            return nil
+//        }
+//
+//
+//        //Initialize stored properties
+//        self.userName = name
+//        self.userEmail = email
+//        self.userPassword = password
+//        self.roomName = roomName
+//
+//
+//    }
+//
+//
+//}
+
 
 
 //This allows the other controller to use dot notation properties.
-extension Person: PFSubclassing {
-    
-    static func parseClassName() -> String {
-        return "Person"
-    }
-    
-}
+//extension Person: PFSubclassing {
+//
+//    static func parseClassName() -> String {
+//        return "Person"
+//    }
+//
+//}
 

@@ -69,7 +69,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1334" y="122"/>
+            <point key="canvasLocation" x="1198" y="122"/>
         </scene>
         <!--Add Task VC-->
         <scene sceneID="nQW-GT-W8n">
@@ -167,7 +167,7 @@
                                 <state key="normal" title="Login"/>
                                 <connections>
                                     <action selector="loginButtonTapped:" destination="g8F-iV-f6O" eventType="touchUpInside" id="nyo-kj-pSz"/>
-                                    <segue destination="BYZ-38-t0r" kind="show" id="bss-aZ-WP5"/>
+                                    <segue destination="BYZ-38-t0r" kind="show" identifier="userCredentialSegue" id="bss-aZ-WP5"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="E6E-CE-THj">
@@ -176,7 +176,7 @@
                                 <state key="normal" title="Register"/>
                                 <connections>
                                     <action selector="registerButtonTapped:" destination="g8F-iV-f6O" eventType="touchUpInside" id="INA-I2-Aox"/>
-                                    <segue destination="Ygk-Bd-EhF" kind="show" id="9hD-Dc-IZg"/>
+                                    <segue destination="Ygk-Bd-EhF" kind="show" identifier="userRegisterSegue" id="9hD-Dc-IZg"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -192,10 +192,10 @@
             </objects>
             <point key="canvasLocation" x="-1239.2" y="121.88905547226388"/>
         </scene>
-        <!--View Controller-->
+        <!--Registration-->
         <scene sceneID="cev-nV-ecm">
             <objects>
-                <viewController id="Ygk-Bd-EhF" sceneMemberID="viewController">
+                <viewController title="Registration" id="Ygk-Bd-EhF" customClass="RegisterViewController" customModule="roomCronies" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="z4A-pD-Qos"/>
                         <viewControllerLayoutGuide type="bottom" id="tE7-G1-hii"/>
@@ -221,14 +221,18 @@
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3xc-9P-QJQ">
                                 <rect key="frame" x="107" y="244" width="132" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Sign in"/>
+                                <state key="normal" title="Sign Up"/>
                                 <connections>
-                                    <segue destination="BYZ-38-t0r" kind="show" id="tbZ-NT-yxn"/>
+                                    <action selector="signUpButtonTapped:" destination="Ygk-Bd-EhF" eventType="touchUpInside" id="XzW-PD-OXs"/>
+                                    <segue destination="BYZ-38-t0r" kind="show" identifier="userSignUpSegue" id="tbZ-NT-yxn"/>
                                 </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
+                    <connections>
+                        <outlet property="usernameTextField" destination="6Ih-JB-oDw" id="n49-W7-Cjq"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Dy5-pI-Z7G" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

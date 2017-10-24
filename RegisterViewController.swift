@@ -1,5 +1,5 @@
 //
-//  LoginViewController.swift
+//  RegisterViewController.swift
 //  roomCronies
 //
 //  Created by Paul on 2017-10-24.
@@ -7,12 +7,14 @@
 //
 
 import UIKit
+import Parse
 
-class LoginViewController: UIViewController {
+class RegisterViewController: UIViewController {
 
-    @IBOutlet weak var userNameTextField: UITextField!
+    @IBOutlet weak var usernameTextField: UITextField!
     
     @IBOutlet weak var passwordTextField: UITextField!
+    
     
     
     override func viewDidLoad() {
@@ -20,23 +22,14 @@ class LoginViewController: UIViewController {
 
     }
 
-    //MARK: IBActions
     
-    @IBAction func loginButtonTapped(_ sender: UIButton) {
+
+    @IBAction func signUpButtonTapped(_ sender: UIButton) {
         
         
     }
     
     
-    //maybe i dont need this.
-    @IBAction func registerButtonTapped(_ sender: UIButton) {
-        
-        
-    }
-    
-
-    
-
     /*
     // MARK: - Navigation
 
