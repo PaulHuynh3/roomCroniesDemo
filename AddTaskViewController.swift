@@ -20,6 +20,7 @@ class AddTaskViewController: UIViewController {
     
     //this value will either be an existing task or to create a new task
     var task: Task?
+    var roomObject: Room?
     
     @IBOutlet weak var taskNameTextField: UITextField!
     @IBOutlet weak var taskDescriptionTextField: UITextField!
@@ -63,7 +64,8 @@ class AddTaskViewController: UIViewController {
             task.priority = priorityNumber
         }
         
-        
+        //the property passed from the segue.
+        task.room = roomObject!
         
         //says that this task is created by current user.
 //        task.room = PFUser.current()
@@ -99,7 +101,7 @@ class AddTaskViewController: UIViewController {
         
     }
     
-    //        task["roomOne"] = PFUser.current()
+    //        task["room"] = PFUser.current()
     //
     //        let taskQuery = PFQuery(className:"Task")
     //        if let user = PFUser.current(){

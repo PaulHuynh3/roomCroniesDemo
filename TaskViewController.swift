@@ -11,6 +11,7 @@ import Parse
 
 class TaskViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, AddTaskDelegate {
     
+    var myRoom: Room?
     
     @IBOutlet weak var tableView: UITableView!
     
@@ -19,6 +20,8 @@ class TaskViewController: UIViewController, UITableViewDataSource, UITableViewDe
     override func viewDidLoad() {
         super.viewDidLoad()
         fetchTask()
+        //create an instance of a room in viewdidload so it will stay the same.
+        myRoom = Room(roomName:"apartment")
         
     }
     
@@ -69,7 +72,9 @@ class TaskViewController: UIViewController, UITableViewDataSource, UITableViewDe
             guard let addTaskVC = segue.destination as? AddTaskViewController else{
                 fatalError("unexpected destination:\(segue.destination)")
             }
-            
+            //pass the roomObject to addTask
+            //assigning the property to the room object created in viewdidload.
+            addTaskVC.roomObject = myRoom
             
             
             //set to be the task delegate
