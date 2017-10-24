@@ -10,10 +10,10 @@ import UIKit
 import Parse
 
 class TaskViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, AddTaskDelegate {
-    
-    var myRoom: Room?
-    
-    var cheapRoom = RoomCroniesModel.init()
+// created an instance of this property this way will create your property before viewdidload
+//    lazy var myRoom = Room(roomName: "car")
+    //this tells you to create an initializer without putting "?" on room because its created before view did load.
+    var myRoom : Room?
     
     @IBOutlet weak var tableView: UITableView!
     
@@ -22,9 +22,9 @@ class TaskViewController: UIViewController, UITableViewDataSource, UITableViewDe
     override func viewDidLoad() {
         super.viewDidLoad()
         //        fetchTask()
-        myRoom = Room(roomName:"apartment")
+        //create an instance of a room in viewdidload so it will stay the same except everytime the user clicks start
+        myRoom = Room(roomName: "StoryBook")
         fetchTaskByRoom()
-        //create an instance of a room in viewdidload so it will stay the same.
         
     }
     
@@ -151,7 +151,7 @@ class TaskViewController: UIViewController, UITableViewDataSource, UITableViewDe
         
         
         //right way to do it..
-        //        taskQuery.whereKey("room", equalTo: myRoom)
+//        taskQuery.whereKey("room", equalTo: myRoom)
         
         
         //temp way to do it
@@ -167,9 +167,9 @@ class TaskViewController: UIViewController, UITableViewDataSource, UITableViewDe
             
             //currently adding all PFObjects no matter if they are associated with the room.
             //add condition to make it only add specific ones.
-            if myRoom?.objectId = "Va0wayaQBg" {
+//            if myRoom.objectId = "Va0wayaQBg" {
                 self.tasks.append(contentsOf: task as! [Task])
-            }
+//            }
             self.tableView.reloadData()
         }
         

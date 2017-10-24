@@ -12,7 +12,6 @@ class RoomCroniesModel: PFObject {
     
     override init() {
         super.init()
-        let cheapRoom = Room(roomName: "cheapRoom")
         
     }
     
