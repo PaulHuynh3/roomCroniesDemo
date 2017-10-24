@@ -65,7 +65,7 @@ class AddTaskViewController: UIViewController {
         }
         
         //the property passed from the segue.
-      //  task.room = roomObject!
+        task.room = roomObject!
         
         
         task.saveInBackground { (success, error) in
