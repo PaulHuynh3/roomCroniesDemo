@@ -26,6 +26,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         //        fetchPerson()
         registerForPushNotifications()
         
+        
+        
         return true
     }
     
@@ -212,6 +214,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         print("Device Token: \(token)")
         
         let installation = PFInstallation.current()
+        installation!["room"] = PFUser.current        
         installation?.setDeviceTokenFrom(deviceToken)
         installation?.saveInBackground()
     }
@@ -236,6 +239,7 @@ extension AppDelegate: UNUserNotificationCenterDelegate {
         PFPush.handle(notification.request.content.userInfo)
         completionHandler(.alert)
     }
+
 }
 
 
