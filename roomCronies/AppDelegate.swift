@@ -18,12 +18,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         
         configureParse()
-//        createRoom()
-//        createJaison()
-//        createPaul()
-//        paulCreateTask()
-//        paulCreateExpense()
-//        fetchPerson()
+        //        createRoom()
+        //        createJaison()
+        //        createPaul()
+        //        paulCreateTask()
+        //        paulCreateExpense()
+        //        fetchPerson()
         registerForPushNotifications()
         
         return true
@@ -33,7 +33,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     private func configureParse() {
         
         let configuration = ParseClientConfiguration {
-            $0.applicationId = "com.Paul.Room"
+            $0.applicationId = "com.Paul.Room" //changed bundleID to PaulJaison, NOT YET
             $0.clientKey = MASTER_KEY
             $0.server = "http://roomcronies.herokuapp.com/parse"
         }
@@ -63,7 +63,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         paul["userName"] = "Paul"
         paul["userPassword"] = "password"
         paul["userEmail"] = "paul.huynh3@gmail.com"
-    
+        
         
         paul["roomName"] = PFObject.init(withoutDataWithClassName:"Room", objectId: "AZqNFRt8BA")
         
@@ -91,7 +91,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         //establish the relationship.
         jaison["roomName"] = PFObject.init(withoutDataWithClassName:"Room", objectId: "AZqNFRt8BA")
         
-
+        
         jaison.saveInBackground{ (success, error) in
             if let error = error {
                 print (#line, error)
@@ -128,7 +128,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     private func paulCreateExpense() {
-    
+        
         let hydroExpense = PFObject(className: "Expense")
         hydroExpense["expenseName"] = "Hydro bill"
         hydroExpense["isPaid"] = false
@@ -136,7 +136,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         hydroExpense["dateCompleted"] = "N/A"
         hydroExpense["expenseOwer"] = "Jaison"
         
-      
+        
         
         //establish the relationship.
         hydroExpense["expenseCreator"] = PFObject.init(withoutDataWithClassName:"Person", objectId:"0htDcFZSKp")
@@ -180,7 +180,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
         
     }
-
+    
     //MARK: - adding push notifications
     func registerForPushNotifications() {
         UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .sound, .badge]) {
@@ -223,8 +223,19 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     private func application(application: UIApplication, didReceiveRemoteNotification userInfo: [NSObject : AnyObject]) {
         PFPush.handle(userInfo)
+    }
+    
 }
 
+extension AppDelegate: UNUserNotificationCenter {
+    
+    func userNotificationCenter(_ center: UNUserNotificationCenter,
+                                willPresent notification: UNNotification,
+                                withCompletionHandler completionHandler:
+        @escaping (UNNotificationPresentationOptions) -> Void) {
+        PFPush.handle(notification.request.content.userInfo)
+        completionHandler(.alert)
+    }
 }
 
 
