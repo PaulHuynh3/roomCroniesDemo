@@ -25,10 +25,6 @@ class Person: PFObject {
         
         
     }
-    
-    
-    
-    
      convenience init?(name:String, email:String, password:String, roomName:Room){
         self.init()
         
