@@ -13,16 +13,18 @@ class TaskViewController: UIViewController, UITableViewDataSource, UITableViewDe
     
     var myRoom: Room?
     
+    var cheapRoom = RoomCroniesModel.init()
+    
     @IBOutlet weak var tableView: UITableView!
     
     var tasks:[Task] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        fetchTask()
-//        fetchRoom()
-        //create an instance of a room in viewdidload so it will stay the same.
+        //        fetchTask()
         myRoom = Room(roomName:"apartment")
+        fetchTaskByRoom()
+        //create an instance of a room in viewdidload so it will stay the same.
         
     }
     
@@ -36,7 +38,6 @@ class TaskViewController: UIViewController, UITableViewDataSource, UITableViewDe
     
     public func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int{
         return tasks.count
-        
         
     }
     
@@ -120,10 +121,10 @@ class TaskViewController: UIViewController, UITableViewDataSource, UITableViewDe
     func fetchTask() {
         let query = PFQuery(className: "Task")
         
-//        if let user = PFUser.current(){
-//
-//            query.whereKey("room", equalTo: user)
-//        }
+        //        if let user = PFUser.current(){
+        //
+        //            query.whereKey("room", equalTo: user)
+        //        }
         
         //findObjectsInBackground already made a network request so we dont need to call it with a completion handler.
         
@@ -143,10 +144,18 @@ class TaskViewController: UIViewController, UITableViewDataSource, UITableViewDe
     }
     
     //fetch specific task created by specific room ID
-    func fetchRoom() {
+    func fetchTaskByRoom() {
         let taskQuery = PFQuery(className: "Task")
+        taskQuery.order(byAscending: "taskName")
         //can also use nspredicate
-        taskQuery.whereKey("room", equalTo:"Va0wayaQBg")
+        
+        
+        //right way to do it..
+        //        taskQuery.whereKey("room", equalTo: myRoom)
+        
+        
+        //temp way to do it
+        taskQuery.whereKey("room", equalTo: PFObject(withoutDataWithClassName:"Room", objectId: "Va0wayaQBg"))
         
         taskQuery.findObjectsInBackground { (task:[PFObject]?, error: Error?) in
             
@@ -155,12 +164,16 @@ class TaskViewController: UIViewController, UITableViewDataSource, UITableViewDe
                 print(#line, error.localizedDescription)
                 return
             }
+            
+            //currently adding all PFObjects no matter if they are associated with the room.
+            //add condition to make it only add specific ones.
+            if myRoom?.objectId = "Va0wayaQBg" {
+                self.tasks.append(contentsOf: task as! [Task])
+            }
+            self.tableView.reloadData()
+        }
         
-        self.tasks.append(contentsOf: task as! [Task])
-        self.tableView.reloadData()
     }
-    
-}
     
     
     
@@ -169,29 +182,29 @@ class TaskViewController: UIViewController, UITableViewDataSource, UITableViewDe
     
     //MARK: Create Person object & Room object
     
-//    func createObject() {
-//        
-//        let apartment = Room()
-//        
-//        apartment.roomName = "imagination"
-//        
-//        
-//        apartment.saveInBackground()
-//        
-//        
-//        let paul = Person(name: "Paul", email: "paul@gmail.com", password: "password", roomName: apartment.objectId!)
-//        let jaison = Person(name: "Jaison", email: "jai@gmail.com", password:"password", roomName: apartment.objectId!)
-//        
-//        apartment.members = [paul!,jaison!]
-//        
-//        apartment.saveInBackground()
-//        paul?.saveInBackground()
-//        jaison?.saveInBackground()
-//        
-//        self.tableView.reloadData()
-//    }
+    //    func createObject() {
+    //
+    //        let apartment = Room()
+    //
+    //        apartment.roomName = "imagination"
+    //
+    //
+    //        apartment.saveInBackground()
+    //
+    //
+    //        let paul = Person(name: "Paul", email: "paul@gmail.com", password: "password", roomName: apartment.objectId!)
+    //        let jaison = Person(name: "Jaison", email: "jai@gmail.com", password:"password", roomName: apartment.objectId!)
+    //
+    //        apartment.members = [paul!,jaison!]
+    //
+    //        apartment.saveInBackground()
+    //        paul?.saveInBackground()
+    //        jaison?.saveInBackground()
+    //
+    //        self.tableView.reloadData()
+    //    }
     
-  
+    
     
     
     
