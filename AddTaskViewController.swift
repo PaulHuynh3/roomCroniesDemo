@@ -64,7 +64,7 @@ class AddTaskViewController: UIViewController {
             task.priority = priorityNumber
         }
         
-        //the property passed from the segue.
+        //the roomObject passed from the segue.
         task.room = roomObject!
         
         

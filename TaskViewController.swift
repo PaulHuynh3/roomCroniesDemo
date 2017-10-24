@@ -21,7 +21,7 @@ class TaskViewController: UIViewController, UITableViewDataSource, UITableViewDe
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        fetchRoomRelatedTask()
+        fetchRoom()
         
         //create an instance of a room in viewdidload so it will stay the same except everytime the user clicks start... This should be when the user creates the login page
 //        myRoom = Room(roomName: "StoryBook")
@@ -118,7 +118,7 @@ class TaskViewController: UIViewController, UITableViewDataSource, UITableViewDe
     
     //MARK: Fetch Parse
     
-    func fetchRoomRelatedTask() {
+    func fetchRoom() {
         let query = PFQuery(className: "Room")
 
         //findObjectsInBackground already made a network request so we dont need to call it with a completion handler.
@@ -150,6 +150,7 @@ class TaskViewController: UIViewController, UITableViewDataSource, UITableViewDe
         taskQuery.order(byAscending: "taskName")
         
         //fetch room by its variable.
+        //equalTo have to be accessed by the myRoom property because its an object. If its not an object parse will let you access using strings
         taskQuery.whereKey("room", equalTo: self.myRoom)
         
         
@@ -165,10 +166,10 @@ class TaskViewController: UIViewController, UITableViewDataSource, UITableViewDe
             }
             
             //currently adding all PFObjects no matter if they are associated with the room.
-            //add condition to make it only add specific ones.
-//            if myRoom.objectId = "Va0wayaQBg" {
+            //add a condition to make it only add specific ones.
+            if (self.myRoom != nil) {
                 self.tasks.append(contentsOf: task as! [Task])
-//            }
+            }
             self.tableView.reloadData()
         }
         
