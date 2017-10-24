@@ -10,6 +10,7 @@
 		6738886CF8FC3D67F0D7E7AF /* Pods_roomCronies.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 59EC5A51E70C805646D8EEF2 /* Pods_roomCronies.framework */; };
 		88161C451F9E8B0700D8CD20 /* Secret.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88161C441F9E8B0700D8CD20 /* Secret.swift */; };
 		88161C481F9EAD6500D8CD20 /* Media.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 88161C471F9EAD6500D8CD20 /* Media.xcassets */; };
+		DA42202A1F9FF7F0009FB67F /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA4220291F9FF7F0009FB67F /* LoginViewController.swift */; };
 		DA7AB7AD1F99219D00E816C9 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA7AB7AC1F99219D00E816C9 /* AppDelegate.swift */; };
 		DA7AB7B21F99219D00E816C9 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DA7AB7B01F99219D00E816C9 /* Main.storyboard */; };
 		DA7AB7B71F99219D00E816C9 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DA7AB7B51F99219D00E816C9 /* LaunchScreen.storyboard */; };
@@ -31,6 +32,7 @@
 		88161C461F9E8F1F00D8CD20 /* roomCronies.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = roomCronies.entitlements; sourceTree = "<group>"; };
 		88161C471F9EAD6500D8CD20 /* Media.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Media.xcassets; sourceTree = "<group>"; };
 		DA0F0FDD1F9926250057F23E /* roomCronies-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "roomCronies-Bridging-Header.h"; sourceTree = "<group>"; };
+		DA4220291F9FF7F0009FB67F /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		DA7AB7A91F99219D00E816C9 /* roomCronies.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = roomCronies.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DA7AB7AC1F99219D00E816C9 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		DA7AB7B11F99219D00E816C9 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -98,6 +100,7 @@
 		DA0F0FE21F99282A0057F23E /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				DA4220291F9FF7F0009FB67F /* LoginViewController.swift */,
 				DAF3FA091F9A99120095B7A4 /* TaskViewController.swift */,
 				DAF3FA0D1F9A9CFD0095B7A4 /* TaskViewCell.swift */,
 				DAF3FA0B1F9A99780095B7A4 /* AddTaskViewController.swift */,
@@ -296,6 +299,7 @@
 				DAF3FA0E1F9A9CFD0095B7A4 /* TaskViewCell.swift in Sources */,
 				DAFEEE5A1F9D857800BAB132 /* RoomCroniesModel.swift in Sources */,
 				DAF3FA041F9A5BA60095B7A4 /* Room.swift in Sources */,
+				DA42202A1F9FF7F0009FB67F /* LoginViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
