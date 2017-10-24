@@ -64,7 +64,8 @@ class AddTaskViewController: UIViewController {
             task.priority = priorityNumber
         }
         
-        //the property passed from the segue.
+        //the roomObject passed from the segue.
+
         task.room = roomObject!
         
         
@@ -89,16 +90,6 @@ class AddTaskViewController: UIViewController {
         
     }
     
-    
-    //fetch the room's object id
-    func fetchRoom() {
-        let taskQuery = PFQuery(className: "Task")
-        if let user = PFUser.current(){
-            
-            taskQuery.whereKey("room", equalTo: user)
-        }
-        
-    }
     
     
     

@@ -12,7 +12,7 @@ class RoomCroniesModel: PFObject {
     
     override init() {
         super.init()
-
+        
     }
     
     
