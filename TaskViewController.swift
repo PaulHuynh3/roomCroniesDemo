@@ -25,8 +25,8 @@ class TaskViewController: UIViewController, UITableViewDataSource, UITableViewDe
         
         //create an instance of a room in viewdidload so it will stay the same except everytime the user clicks start... This should be when the user creates the login page
 //        myRoom = Room(roomName: "StoryBook")
+        navigationController?.isNavigationBarHidden = false
         let backgroundImage = UIImage(named: "iphone-3.jpg")
-        
         let imageView = UIImageView(image: backgroundImage)
         self.tableView.backgroundView = imageView
     }
