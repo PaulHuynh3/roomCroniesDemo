@@ -17,6 +17,7 @@ class RegisterViewController: UIViewController {
     
     @IBOutlet weak var passwordTextField: UITextField!
     
+    @IBOutlet weak var existingRoomID: UITextField!
     
     
     //MARK: IBAction
