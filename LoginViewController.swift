@@ -24,9 +24,7 @@ class LoginViewController: UIViewController {
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(true)
-        
         checkLoginState()
-        
     }
     
     private func checkLoginState() {
@@ -39,28 +37,14 @@ class LoginViewController: UIViewController {
     }
     
     
-    //MARK: User Authorization
-    func checkFields() {
-        if userNameTextField.text == "" || passwordTextField.text == "" {
-            print("Username and Password cannot be empty. Please enter and try again!")
-            return
-        }
-    }
-
-    
     //MARK: IBActions
-    //will fix this tomorrow.
     @IBAction func loginButtonTapped(_ sender: UIButton) {
-        if userNameTextField.text == "" || passwordTextField.text == "" {
-            print("Username and Password fields cannot be empty. Please enter and try again!")
-            return
-        } else {
-        
-        
-    guard let username = userNameTextField.text,
-          let password = passwordTextField.text else {
-            print("Username and Password fields cannot be empty. Please enter and try again!")
-            return
+        guard let username = userNameTextField.text,
+              let password = passwordTextField.text,
+                  username.isEmpty == false,
+                  password.isEmpty == false else {
+                print("Username and Password fields cannot be empty. Please enter and try again!")
+                return
         }
         Person.login(with: username, and: password) { (success: Bool, error: Error?) in
             
@@ -73,20 +57,18 @@ class LoginViewController: UIViewController {
             
         }
         
-    }
-        
 }
-    
-    
-    
-    /*
-     // MARK: - Navigation
-     
-     // In a storyboard-based application, you will often want to do a little preparation before navigation
-     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-     // Get the new view controller using segue.destinationViewController.
-     // Pass the selected object to the new view controller.
-     }
-     */
-    
+
+
+
+/*
+ // MARK: - Navigation
+ 
+ // In a storyboard-based application, you will often want to do a little preparation before navigation
+ override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+ // Get the new view controller using segue.destinationViewController.
+ // Pass the selected object to the new view controller.
+ }
+ */
+
 }

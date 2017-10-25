@@ -182,7 +182,6 @@
                                 <state key="normal" title="Login"/>
                                 <connections>
                                     <action selector="loginButtonTapped:" destination="g8F-iV-f6O" eventType="touchUpInside" id="nyo-kj-pSz"/>
-                                    <segue destination="BYZ-38-t0r" kind="show" identifier="TaskViewControllerSegue" id="bss-aZ-WP5"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -193,6 +192,7 @@
                         <outlet property="passwordTextField" destination="wmY-tT-Nq4" id="145-Ul-YaR"/>
                         <outlet property="roomIdentificationTextField" destination="9Me-GG-o6K" id="BmJ-DW-K6i"/>
                         <outlet property="userNameTextField" destination="ewC-pD-ydo" id="kFo-mE-q5o"/>
+                        <segue destination="BYZ-38-t0r" kind="show" identifier="TaskViewControllerSegue" id="98Q-oU-gbY"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="oZO-Ut-CQ0" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -266,6 +266,6 @@
     </scenes>
     <inferredMetricsTieBreakers>
         <segue reference="Vba-1d-IgB"/>
-        <segue reference="bss-aZ-WP5"/>
+        <segue reference="98Q-oU-gbY"/>
     </inferredMetricsTieBreakers>
 </document>
