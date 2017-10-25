@@ -179,5 +179,11 @@ class TaskViewController: UIViewController, UITableViewDataSource, UITableViewDe
 }
 
 
-
+//MARK: IBAction
+extension TaskViewController {
+    @IBAction func logoutTapped(_ sender: UIBarButtonItem) {
+        PFUser.logOut()
+        navigationController?.popToRootViewController(animated: true)
+    }
+}
 

@@ -19,10 +19,8 @@ class LoginViewController: UIViewController {
     private func segue(){
         performSegue(withIdentifier: "TaskViewControllerSegue", sender: nil)
     }
-    //prior to merge
     
     //MARK:Life Cycle
-    
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(true)
 //        checkLoginState()

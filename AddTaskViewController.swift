@@ -65,10 +65,11 @@ class AddTaskViewController: UIViewController {
         }
         
         //the roomObject passed from the segue.
-
         task.room = roomObject!
+        
         guard  let currentUser = PFUser.current() else {
             // take to login screen
+            navigationController?.popToRootViewController(animated: true)
             return
         }
         
