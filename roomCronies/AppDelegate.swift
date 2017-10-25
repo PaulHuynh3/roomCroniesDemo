@@ -25,9 +25,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         //        paulCreateExpense()
         //        fetchPerson()
         registerForPushNotifications()
-        
-        
-        
+
         return true
     }
     
@@ -67,7 +65,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         paul["userEmail"] = "paul.huynh3@gmail.com"
         
         
-        paul["roomName"] = PFObject.init(withoutDataWithClassName:"Room", objectId: "AZqNFRt8BA")
+        paul["roomName"] = PFObject.init(withoutDataWithClassName:"Room", objectId: "ogro8r3MMC")
         
         paul.saveInBackground { (success, error) in
             
@@ -91,7 +89,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         
         //establish the relationship.
-        jaison["roomName"] = PFObject.init(withoutDataWithClassName:"Room", objectId: "AZqNFRt8BA")
+        jaison["roomName"] = PFObject.init(withoutDataWithClassName:"Room", objectId: "ogro8r3MMC")
         
         
         jaison.saveInBackground{ (success, error) in
@@ -214,7 +212,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         print("Device Token: \(token)")
         
         let installation = PFInstallation.current()
-        installation!["room"] = PFUser.current        
         installation?.setDeviceTokenFrom(deviceToken)
         installation?.saveInBackground()
     }
@@ -239,7 +236,7 @@ extension AppDelegate: UNUserNotificationCenterDelegate {
         PFPush.handle(notification.request.content.userInfo)
         completionHandler(.alert)
     }
-
+    
 }
 
 
@@ -247,13 +244,13 @@ extension AppDelegate: UNUserNotificationCenterDelegate {
 
 
 
-    //    private func deleteObject() {
-    //        fetchPersonCompletion{ (person) in
-    //            person.deleteInBackground(block: { (success, _) in
-    //                print(#line, "Ian dies!")
-    //            })
-    //        }
-    //    }
+//    private func deleteObject() {
+//        fetchPersonCompletion{ (person) in
+//            person.deleteInBackground(block: { (success, _) in
+//                print(#line, "Ian dies!")
+//            })
+//        }
+//    }
 
 
 
