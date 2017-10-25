@@ -6,6 +6,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13173"/>
+        <capability name="Navigation items with more than one left or right bar item" minToolsVersion="7.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -67,11 +68,14 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Your Tasks" id="EQt-hI-AjG">
-                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="LIu-cK-gz3">
-                            <connections>
-                                <segue destination="kec-Il-1J7" kind="presentation" identifier="AddTaskSegue" id="Vba-1d-IgB"/>
-                            </connections>
-                        </barButtonItem>
+                        <rightBarButtonItems>
+                            <barButtonItem systemItem="add" id="LIu-cK-gz3">
+                                <connections>
+                                    <segue destination="kec-Il-1J7" kind="presentation" identifier="AddTaskSegue" id="Vba-1d-IgB"/>
+                                </connections>
+                            </barButtonItem>
+                            <barButtonItem title="Log Out" id="xm5-io-vlu"/>
+                        </rightBarButtonItems>
                     </navigationItem>
                     <connections>
                         <outlet property="tableView" destination="6d0-p1-UIp" id="vel-LF-XWJ"/>
