@@ -20,10 +20,10 @@ class LoginViewController: UIViewController {
         performSegue(withIdentifier: "TaskViewControllerSegue", sender: nil)
     }
     
-    //MARK:Life Cycle
+    //MARK: Life Cycle
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(true)
-//        checkLoginState()
+        //        checkLoginState()
     }
     
     private func checkLoginState() {
@@ -39,9 +39,9 @@ class LoginViewController: UIViewController {
     //MARK: IBActions
     @IBAction func loginButtonTapped(_ sender: UIButton) {
         guard let username = userNameTextField.text,
-              let password = passwordTextField.text,
-                  username.isEmpty == false,
-                  password.isEmpty == false else {
+            let password = passwordTextField.text,
+            username.isEmpty == false,
+            password.isEmpty == false else {
                 print("Username and Password fields cannot be empty. Please enter and try again!")
                 return
         }
@@ -53,18 +53,33 @@ class LoginViewController: UIViewController {
             }
             self.segue()
         }
-}
-
-
-
-/*
- // MARK: - Navigation
- 
- // In a storyboard-based application, you will often want to do a little preparation before navigation
- override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
- // Get the new view controller using segue.destinationViewController.
- // Pass the selected object to the new view controller.
- }
- */
-
+    }
+    
+    
+    
+    // MARK: - Navigation
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        super.prepare(for: segue , sender: sender)
+        
+        switch (segue.identifier ?? "") {
+        case "TaskViewControllerSegue":
+            guard let taskViewController = segue.destination as? TaskViewController else {
+                fatalError("unexpected destination:\(segue.destination)")
+            }
+            
+            
+        case "userRegisterSegue":
+            guard let registerController = segue.destination as? RegisterViewController else {
+                fatalError("unexpected destination:\(segue.destination)")
+            }
+            
+        default:
+            fatalError("unexpected segue identifier \(String(describing: segue.identifier))")
+            
+        }
+        
+    }
+    
+    
+    
 }

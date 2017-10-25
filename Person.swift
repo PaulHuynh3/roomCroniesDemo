@@ -4,7 +4,6 @@
 //
 //  Created by Paul on 2017-10-20.
 //  Copyright © 2017 Paul. All rights reserved.
-//
 
 import UIKit
 import Parse
@@ -14,7 +13,7 @@ class Person: PFObject, PFSubclassing {
     static func parseClassName() -> String {
         return "Person"
     }
-    
+
     
     static func checkUserLoginState(completion:(Bool) -> Void) {
         completion(PFUser.current()?.isAuthenticated ?? false)
