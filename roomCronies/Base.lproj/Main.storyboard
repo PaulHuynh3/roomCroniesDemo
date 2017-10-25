@@ -21,13 +21,14 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="ipu-Ux-lPI">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="iphone-3" translatesAutoresizingMaskIntoConstraints="NO" id="ipu-Ux-lPI">
                                 <rect key="frame" x="0.0" y="64" width="375" height="603"/>
                             </imageView>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="109" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="6d0-p1-UIp">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <color key="sectionIndexBackgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="TaskViewCell" rowHeight="109" id="c0l-Mi-9r9" customClass="TaskViewCell" customModule="roomCronies" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="28" width="375" height="109"/>
@@ -163,6 +164,9 @@
             <point key="canvasLocation" x="117.59999999999999" y="97.601199400299862"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="iphone-3" width="219" height="384"/>
+    </resources>
     <inferredMetricsTieBreakers>
         <segue reference="Vba-1d-IgB"/>
     </inferredMetricsTieBreakers>
