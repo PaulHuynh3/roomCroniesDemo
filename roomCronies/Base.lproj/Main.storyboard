@@ -231,14 +231,15 @@
                                 <state key="normal" title="Sign Up"/>
                                 <connections>
                                     <action selector="signUpButtonTapped:" destination="Ygk-Bd-EhF" eventType="touchUpInside" id="XzW-PD-OXs"/>
-                                    <segue destination="BYZ-38-t0r" kind="show" identifier="TaskViewControllerSegue" id="tbZ-NT-yxn"/>
                                 </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                     <connections>
+                        <outlet property="passwordTextField" destination="PDt-9X-0cR" id="Tu1-ox-pzh"/>
                         <outlet property="usernameTextField" destination="6Ih-JB-oDw" id="n49-W7-Cjq"/>
+                        <segue destination="BYZ-38-t0r" kind="show" identifier="TaskViewControllerSegue" id="tZp-Kx-uj3"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Dy5-pI-Z7G" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -266,6 +267,6 @@
     </scenes>
     <inferredMetricsTieBreakers>
         <segue reference="Vba-1d-IgB"/>
-        <segue reference="98Q-oU-gbY"/>
+        <segue reference="tZp-Kx-uj3"/>
     </inferredMetricsTieBreakers>
 </document>

@@ -53,10 +53,7 @@ class LoginViewController: UIViewController {
                 return
             }
             self.segue()
-            
-            
         }
-        
 }
 
 
