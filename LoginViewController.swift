@@ -40,23 +40,25 @@ class LoginViewController: UIViewController {
     
     
     //MARK: User Authorization
-    func checkFields(){
-        if userNameTextField.text == nil || passwordTextField.text == nil{
+    func checkFields() {
+        if userNameTextField.text == "" || passwordTextField.text == "" {
             print("Username and Password cannot be empty. Please enter and try again!")
             return
         }
-        
     }
 
-    //MARK: IBActions
     
+    //MARK: IBActions
+    //will fix this tomorrow.
     @IBAction func loginButtonTapped(_ sender: UIButton) {
-//        if checkFields() {
-//
-//        }
+        if userNameTextField.text == "" || passwordTextField.text == "" {
+            print("Username and Password fields cannot be empty. Please enter and try again!")
+            return
+        } else {
+        
+        
     guard let username = userNameTextField.text,
-          let password = passwordTextField.text,
-          let roomIdentification = roomIdentificationTextField.text else {
+          let password = passwordTextField.text else {
             print("Username and Password fields cannot be empty. Please enter and try again!")
             return
         }
@@ -72,7 +74,8 @@ class LoginViewController: UIViewController {
         }
         
     }
-
+        
+}
     
     
     
