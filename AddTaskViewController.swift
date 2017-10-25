@@ -86,6 +86,10 @@ class AddTaskViewController: UIViewController {
         
         var data = [ "title": "Some Title",
                      "alert": message]
+
+        let query: PFQuery = PFUser.query()!
+        
+        query.whereKey("Room", equalTo: defaults.objectForKey("") as String)
         
         var push: PFPush = PFPush()
         push.setData(data)

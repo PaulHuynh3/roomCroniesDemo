@@ -24,8 +24,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         //        paulCreateTask()
         //        paulCreateExpense()
         //        fetchPerson()
+        testPush()
+        testPush2()
+        testPush3()
+        
         registerForPushNotifications()
-
+        
         return true
     }
     
@@ -218,12 +222,67 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     func application(_ application: UIApplication,
                      didFailToRegisterForRemoteNotificationsWithError error: Error) {
-        print("Failed to register: \(error)")
+        if (error as NSError).code == 3010 {
+            print("Push notifications are not supported in the iOS Simulator.")
+        } else {
+            print("application:didFailToRegisterForRemoteNotificationsWithError: %@", error)
+        }
     }
     
     private func application(application: UIApplication, didReceiveRemoteNotification userInfo: [NSObject : AnyObject]) {
         PFPush.handle(userInfo)
     }
+    
+    
+    //MARK: - test push notification
+    func testPush() {
+        let message = "Alert !!"
+        let id = "tszgSwA7KM"
+        
+        var data = [ "title": "Some Title",
+                     "alert": message]
+        
+        var userQuery: PFQuery = PFUser.query()!
+        userQuery.whereKey("objectId", equalTo: id)
+        var query: PFQuery = PFInstallation.query()!
+        query.whereKey("currentUser", matchesQuery: userQuery)
+        
+        var push: PFPush = PFPush()
+        push.setQuery(query as? PFQuery<PFInstallation>)
+        push.setData(data)
+        push.sendInBackground()
+        
+    }
+    
+    func testPush2() {
+        let data = [
+            "badge" : "Increment",
+            "alert" : "Some message",
+            ]
+        let request = [
+            "someKey" : MASTER_KEY,
+            "data" : data
+            ] as [String : Any]
+        PFCloud.callFunction(inBackground: "iosPush", withParameters: request as [NSObject : AnyObject])
+        
+    }
+    
+    func testPush3() {
+        
+        let data: NSDictionary = ["title":"Alert",
+                                  "alert":"TEST"]
+        
+        let query: PFQuery = PFUser.query()!
+        
+        //query.whereKey("", equalTo: defaults.objectForKey("") as String)
+        
+        var push: PFPush = PFPush()
+        push.setData(data as? [AnyHashable : Any])
+        push.setQuery(query as? PFQuery<PFInstallation>)
+        
+        push.sendInBackground()
+    }
+    
     
 }
 
