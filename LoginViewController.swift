@@ -27,11 +27,7 @@ class LoginViewController: UIViewController {
         super.viewDidAppear(true)
 //        checkLoginState()
         
-        //let backgroundImage = UIImage(named: "login-background.jpg")
-        
-        //let imageView = UIImageView(image: backgroundImage)
-        
-        //self.view.backgroundColor = UIColor(patternImage: backgroundImage!)
+        navigationController?.isNavigationBarHidden = true
         
         let backgroundImage = UIImageView(frame: UIScreen.main.bounds)
         backgroundImage.image = UIImage(named: "login-background.jpg")
