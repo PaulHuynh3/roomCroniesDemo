@@ -67,13 +67,12 @@ class AddTaskViewController: UIViewController {
         //the roomObject passed from the segue.
         task.room = roomObject!
         
+        //relationship created with the currentUser
         guard  let currentUser = PFUser.current() else {
             // take to login screen
             navigationController?.popToRootViewController(animated: true)
             return
         }
-        
-        //relationship created with the currentUser
         task.createdBy = currentUser
         
         task.saveInBackground { (success, error) in
