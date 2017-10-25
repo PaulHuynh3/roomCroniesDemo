@@ -27,6 +27,10 @@ class LoginViewController: UIViewController {
         super.viewDidAppear(true)
 //        checkLoginState()
         
+        let backgroundImage = UIImage(named: "login-background.jpg")
+        
+        let imageView = UIImageView(image: backgroundImage)
+        
     }
     
     private func checkLoginState() {
