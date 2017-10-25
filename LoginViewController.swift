@@ -19,6 +19,7 @@ class LoginViewController: UIViewController {
     private func segue(){
         performSegue(withIdentifier: "TaskViewControllerSegue", sender: nil)
     }
+    //prior to merge
     
     //MARK:Life Cycle
     
