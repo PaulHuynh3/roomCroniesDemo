@@ -20,21 +20,12 @@ class Room: PFObject{
     @NSManaged var tasks : [Task]
     
     
-    //when the room is iniatilize in vc it will create the persons.
-//    override init() {
-//        super.init()
-//        let paul = Person(name: "Paul", email: "paul@gmail.com", password: "password", roomName:self.objectId)
-//        let jaison = Person(name: "Jaison", email: "jai@gmail.com", password:"password", roomName:self.objectId)
-//
-//    }
-    
     
     convenience init(roomName:String) {
         self.init()
         
         //initlize stored properties.
         self.roomName = roomName
-//        self.members = members
         
     }
     

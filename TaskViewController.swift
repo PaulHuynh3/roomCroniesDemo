@@ -10,9 +10,10 @@ import UIKit
 import Parse
 
 class TaskViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, AddTaskDelegate {
-// created an instance of this property this way will create your property before viewdidload
-//    lazy var myRoom = Room(roomName: "car")
-//this tells you to create an initializer without putting "?" on room because its created before view did load.
+    // created an instance of this property this way will create your property before viewdidload
+    //    lazy var myRoom = Room(roomName: "car")
+    
+    //this tells you to create an initializer without putting "?" on room because its created before view did load.
     var myRoom : Room?
     
     @IBOutlet weak var tableView: UITableView!
@@ -24,8 +25,13 @@ class TaskViewController: UIViewController, UITableViewDataSource, UITableViewDe
         fetchRoom()
         
         //create an instance of a room in viewdidload so it will stay the same except everytime the user clicks start... This should be when the user creates the login page
-//        myRoom = Room(roomName: "StoryBook")
+        //        myRoom = Room(roomName: "StoryBook")
         
+    }
+    //should refresh tableview if something was deleted from the cloud.
+    //will fix soon.
+    override func viewWillAppear(_ animated: Bool) {
+        self.tableView.reloadData()
     }
     
     
@@ -120,7 +126,7 @@ class TaskViewController: UIViewController, UITableViewDataSource, UITableViewDe
     
     func fetchRoom() {
         let query = PFQuery(className: "Room")
-
+        
         //findObjectsInBackground already made a network request so we dont need to call it with a completion handler.
         
         query.findObjectsInBackground { (rooms:[PFObject]?, error: Error?) in
@@ -153,10 +159,6 @@ class TaskViewController: UIViewController, UITableViewDataSource, UITableViewDe
         //equalTo have to be accessed by the myRoom property because its an object. If its not an object parse will let you access using strings
         taskQuery.whereKey("room", equalTo: self.myRoom)
         
-        
-        //temp way to fetch room.
-//        taskQuery.whereKey("room", equalTo: PFObject(withoutDataWithClassName:"Room", objectId: "ogro8r3MMC"))
-        
         taskQuery.findObjectsInBackground { (task:[PFObject]?, error: Error?) in
             
             //error handling
@@ -165,38 +167,11 @@ class TaskViewController: UIViewController, UITableViewDataSource, UITableViewDe
                 return
             }
             
-            //currently adding all PFObjects no matter if they are associated with the room.
-            //add a condition to make it only add specific ones.
-            if (self.myRoom != nil) {
-                self.tasks.append(contentsOf: task as! [Task])
-            }
+            self.tasks.append(contentsOf: task as! [Task])
             self.tableView.reloadData()
         }
         
     }
-    
-    
-    
-    //    func fetchAllTask() {
-    //        let query = PFQuery(className: "Task")
-    //
-    //        //findObjectsInBackground already made a network request so we dont need to call it with a completion handler.
-    //
-    //        query.findObjectsInBackground { (task:[PFObject]?, error: Error?) in
-    //
-    //            //error handling
-    //            if let error = error {
-    //                print(#line, error.localizedDescription)
-    //                return
-    //            }
-    //
-    //            self.tasks.append(contentsOf: task as! [Task])
-    //            self.tableView.reloadData()
-    //
-    //        }
-    //
-    //    }
-
     
     
     

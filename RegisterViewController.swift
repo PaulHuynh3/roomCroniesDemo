@@ -35,7 +35,7 @@ class RegisterViewController: UIViewController {
         
         Person.signup(with: username, and: password) { (success:Bool?, error:Error?) in
     
-            guard success == true else{
+            guard success == true else {
                 print("Problems creating User!")
                 return
             }

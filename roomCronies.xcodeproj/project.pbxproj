@@ -22,7 +22,6 @@
 		DAF3FA0A1F9A99120095B7A4 /* TaskViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAF3FA091F9A99120095B7A4 /* TaskViewController.swift */; };
 		DAF3FA0C1F9A99780095B7A4 /* AddTaskViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAF3FA0B1F9A99780095B7A4 /* AddTaskViewController.swift */; };
 		DAF3FA0E1F9A9CFD0095B7A4 /* TaskViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAF3FA0D1F9A9CFD0095B7A4 /* TaskViewCell.swift */; };
-		DAFEEE5A1F9D857800BAB132 /* RoomCroniesModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAFEEE591F9D857800BAB132 /* RoomCroniesModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -47,7 +46,6 @@
 		DAF3FA091F9A99120095B7A4 /* TaskViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TaskViewController.swift; sourceTree = "<group>"; };
 		DAF3FA0B1F9A99780095B7A4 /* AddTaskViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddTaskViewController.swift; sourceTree = "<group>"; };
 		DAF3FA0D1F9A9CFD0095B7A4 /* TaskViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TaskViewCell.swift; sourceTree = "<group>"; };
-		DAFEEE591F9D857800BAB132 /* RoomCroniesModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RoomCroniesModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -82,7 +80,6 @@
 		DA0F0FE01F9928190057F23E /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				DAFEEE591F9D857800BAB132 /* RoomCroniesModel.swift */,
 				DAF3FA011F9A27270095B7A4 /* Person.swift */,
 				DAF3FA031F9A5BA60095B7A4 /* Room.swift */,
 				DAF3FA051F9A5DA60095B7A4 /* Task.swift */,
@@ -301,7 +298,6 @@
 				DA7AB7AD1F99219D00E816C9 /* AppDelegate.swift in Sources */,
 				DAF3FA061F9A5DA60095B7A4 /* Task.swift in Sources */,
 				DAF3FA0E1F9A9CFD0095B7A4 /* TaskViewCell.swift in Sources */,
-				DAFEEE5A1F9D857800BAB132 /* RoomCroniesModel.swift in Sources */,
 				DAF3FA041F9A5BA60095B7A4 /* Room.swift in Sources */,
 				DA42202A1F9FF7F0009FB67F /* LoginViewController.swift in Sources */,
 			);

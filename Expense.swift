@@ -28,7 +28,6 @@ class Expense: PFObject {
         self.completeDate = completeDate
     }
     
-
 }
 
 
