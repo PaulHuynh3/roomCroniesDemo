@@ -13,9 +13,9 @@ class Room: PFObject{
     
     @NSManaged var roomName: String
     //may use this variable
-    @NSManaged var owner: Person
+    @NSManaged var roomCreator: PFUser
     //many person in one room:   Person object: roomName: Room <--->> members: [Person]
-    @NSManaged var members: [Person]
+    @NSManaged var members: [PFUser]
     //many task in one room: Task object: room: Room <--->> tasks: [Task]
     @NSManaged var tasks : [Task]
     

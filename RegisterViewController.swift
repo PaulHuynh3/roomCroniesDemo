@@ -19,6 +19,11 @@ class RegisterViewController: UIViewController {
     
     @IBOutlet weak var existingRoomID: UITextField!
     
+    var createRoom: Room?
+    
+    override func viewDidLoad() {
+
+    }
     
     //MARK: IBAction
     
@@ -50,11 +55,18 @@ class RegisterViewController: UIViewController {
         guard let taskViewController = segue.destination as? TaskViewController else {
             fatalError("unexpected destination:\(segue.destination)")
         }
-        //everytime this is pass through the segue it will be a different room
-        let newRoom = Room(roomName: "apartment")
-        taskViewController.myRoom = newRoom
+        //creates a new room
+        createRoom = Room(roomName: existingRoomID.text!)
+        taskViewController.myRoom = createRoom
         
-        newRoom.saveInBackground { (success: Bool?, error: Error?) in
+        guard let user = PFUser.current() else{
+            print("Error creating current user.")
+            return
+        }
+        taskViewController.myRoom?.roomCreator = user
+        
+        
+        createRoom?.saveInBackground { (success: Bool?, error: Error?) in
             print(#line, success)
             print(#line, error?.localizedDescription ?? "No error saving")
         }

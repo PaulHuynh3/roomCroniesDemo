@@ -123,7 +123,6 @@ class TaskViewController: UIViewController, UITableViewDataSource, UITableViewDe
     
     
     //MARK: Fetch Parse
-    
     func fetchRoom() {
         let query = PFQuery(className: "Room")
         
@@ -140,7 +139,6 @@ class TaskViewController: UIViewController, UITableViewDataSource, UITableViewDe
             guard let rooms = rooms as? [Room] else { return }
             //fetch the first room.
             //In the future this will need to be configure for which room or rooms to fetch.
-            //rooms is an array but rooms.first gives the first element so its fine.
             self.myRoom = rooms.first
             
             //fetching all the task associated with the room.
