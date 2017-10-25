@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Parse
 
 class LoginViewController: UIViewController {
     
@@ -16,11 +17,11 @@ class LoginViewController: UIViewController {
     
     @IBOutlet weak var roomIdentificationTextField: UITextField!
     
-    private func segue(){
-        performSegue(withIdentifier: "TaskViewControllerSegue", sender: nil)
+    //MARK: Life Cycle
+    override func viewDidLoad() {
+        
     }
     
-    //MARK: Life Cycle
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(true)
         //        checkLoginState()
@@ -55,6 +56,9 @@ class LoginViewController: UIViewController {
         }
     }
     
+    private func segue(){
+        performSegue(withIdentifier: "TaskViewControllerSegue", sender: nil)
+    }
     
     
     // MARK: - Navigation
@@ -79,6 +83,8 @@ class LoginViewController: UIViewController {
         }
         
     }
+    
+    
     
     
     
