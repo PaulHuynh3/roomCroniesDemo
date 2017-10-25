@@ -9,42 +9,81 @@
 import UIKit
 
 class LoginViewController: UIViewController {
-
+    
     @IBOutlet weak var userNameTextField: UITextField!
     
     @IBOutlet weak var passwordTextField: UITextField!
     
+    @IBOutlet weak var roomIdentificationTextField: UITextField!
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
-
+    private func segue(){
+        performSegue(withIdentifier: "TaskViewControllerSegue", sender: nil)
+    }
+    
+    //MARK:Life Cycle
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(true)
+        
+        checkLoginState()
+        
+    }
+    
+    private func checkLoginState() {
+        Person.checkUserLoginState { (success: Bool) in
+            print(#line, success ? "": "not ", "auto logged in")
+            if success {
+                self.segue()
+            }
+        }
+    }
+    
+    
+    //MARK: User Authorization
+    func checkFields(){
+        if userNameTextField.text == nil || passwordTextField.text == nil{
+            print("Username and Password cannot be empty. Please enter and try again!")
+            return
+        }
+        
     }
 
     //MARK: IBActions
     
     @IBAction func loginButtonTapped(_ sender: UIButton) {
-        
+//        if checkFields() {
+//
+//        }
+    guard let username = userNameTextField.text,
+          let password = passwordTextField.text,
+          let roomIdentification = roomIdentificationTextField.text else {
+            print("Username and Password fields cannot be empty. Please enter and try again!")
+            return
+        }
+        Person.login(with: username, and: password) { (success: Bool, error: Error?) in
+            
+            guard error == nil, success == true else {
+                print(#line, "not logged in")
+                return
+            }
+            self.segue()
+            
+            
+        }
         
     }
-    
-    
-    //maybe i dont need this.
-    @IBAction func registerButtonTapped(_ sender: UIButton) {
-        
-        
-    }
-    
 
     
-
+    
+    
     /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
+     // MARK: - Navigation
+     
+     // In a storyboard-based application, you will often want to do a little preparation before navigation
+     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+     // Get the new view controller using segue.destinationViewController.
+     // Pass the selected object to the new view controller.
+     }
+     */
+    
 }

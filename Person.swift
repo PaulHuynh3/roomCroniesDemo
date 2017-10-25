@@ -23,8 +23,21 @@ class Person: PFObject, PFSubclassing {
     @NSManaged var taskDoer: [Task]
     
     
+    static func checkUserLoginState(completion:(Bool) -> Void) {
+        completion(PFUser.current()?.isAuthenticated ?? false)
+    }
     
-    func signup(with userName: String, and password: String, completion: @escaping (Bool, Error?)-> Void) {
+    static func login(with userName: String, and password: String, completion:@escaping (Bool, Error?)-> Void) {
+        PFUser.logInWithUsername(inBackground: userName, password: password) { user, error in
+            guard let _ = user else {
+                completion(false, error)
+                return
+            }
+            completion(true, nil)
+        }
+    }
+    
+    static func signup(with userName: String, and password: String, completion: @escaping (Bool, Error?)-> Void) {
         let user = PFUser()
         user.username = userName
         user.password = password
