@@ -66,7 +66,7 @@
                             <constraint firstAttribute="trailing" secondItem="ipu-Ux-lPI" secondAttribute="trailing" id="xSq-wP-Nby"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" id="EQt-hI-AjG">
+                    <navigationItem key="navigationItem" title="Your Tasks" id="EQt-hI-AjG">
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="LIu-cK-gz3">
                             <connections>
                                 <segue destination="kec-Il-1J7" kind="presentation" identifier="AddTaskSegue" id="Vba-1d-IgB"/>
@@ -197,7 +197,7 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
-                    <navigationItem key="navigationItem" id="bEe-Pv-DIE"/>
+                    <navigationItem key="navigationItem" title="Welcome" id="bEe-Pv-DIE"/>
                     <connections>
                         <outlet property="passwordTextField" destination="wmY-tT-Nq4" id="145-Ul-YaR"/>
                         <outlet property="roomIdentificationTextField" destination="9Me-GG-o6K" id="BmJ-DW-K6i"/>
@@ -288,6 +288,6 @@
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="Vba-1d-IgB"/>
-        <segue reference="tZp-Kx-uj3"/>
+        <segue reference="98Q-oU-gbY"/>
     </inferredMetricsTieBreakers>
 </document>
