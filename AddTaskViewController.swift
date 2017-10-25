@@ -67,13 +67,18 @@ class AddTaskViewController: UIViewController {
         //the roomObject passed from the segue.
 
         task.room = roomObject!
+        guard  let currentUser = PFUser.current() else {
+            // take to login screen
+            return
+        }
         
+        //relationship created with the currentUser
+        task.createdBy = currentUser
         
         task.saveInBackground { (success, error) in
             print(#line, success)
             print(#line, error?.localizedDescription ?? "No error saving")
         }
-        
         
         taskDelegate?.addTaskObject(task: task)
         
