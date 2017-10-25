@@ -80,6 +80,21 @@ class AddTaskViewController: UIViewController {
         //presented modally.
         dismiss(animated: true, completion: nil)
         
+        //QUERY THE ROOM AND FIND THE ARRAY OF USERS
+        //ITERATE THROUGH EACH USER AND SEND NOTIFICATION USING THEIR DEVICE TOKEN
+        let message: NSString = taskNameTextField.text! as NSString
+        
+        var data = [ "title": "Some Title",
+                     "alert": message]
+
+        let query: PFQuery = PFUser.query()!
+        
+        //query.whereKey("Room", equalTo: defaults.objectForKey("") as String)
+        
+        var push: PFPush = PFPush()
+        push.setData(data)
+        push.sendInBackground()
+        
     }
     
     

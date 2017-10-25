@@ -18,12 +18,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         
         configureParse()
-//        createRoom()
-//        createJaison()
-//        createPaul()
-//        paulCreateTask()
-//        paulCreateExpense()
-//        fetchPerson()
+        //        createRoom()
+        //        createJaison()
+        //        createPaul()
+        //        paulCreateTask()
+        //        paulCreateExpense()
+        //        fetchPerson()
+        testPush()
+        testPush2()
+        testPush3()
+        
         registerForPushNotifications()
         
         return true
@@ -33,7 +37,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     private func configureParse() {
         
         let configuration = ParseClientConfiguration {
-            $0.applicationId = "com.Paul.Room"
+            $0.applicationId = "com.Paul.Room" //changed bundleID to PaulJaison, NOT YET
             $0.clientKey = MASTER_KEY
             $0.server = "http://roomcronies.herokuapp.com/parse"
         }
@@ -63,9 +67,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         paul["userName"] = "Paul"
         paul["userPassword"] = "password"
         paul["userEmail"] = "paul.huynh3@gmail.com"
-    
         
-        paul["roomName"] = PFObject.init(withoutDataWithClassName:"Room", objectId: "AZqNFRt8BA")
+        
+        paul["roomName"] = PFObject.init(withoutDataWithClassName:"Room", objectId: "ogro8r3MMC")
         
         paul.saveInBackground { (success, error) in
             
@@ -89,9 +93,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         
         //establish the relationship.
-        jaison["roomName"] = PFObject.init(withoutDataWithClassName:"Room", objectId: "AZqNFRt8BA")
+        jaison["roomName"] = PFObject.init(withoutDataWithClassName:"Room", objectId: "ogro8r3MMC")
         
-
+        
         jaison.saveInBackground{ (success, error) in
             if let error = error {
                 print (#line, error)
@@ -128,7 +132,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     private func paulCreateExpense() {
-    
+        
         let hydroExpense = PFObject(className: "Expense")
         hydroExpense["expenseName"] = "Hydro bill"
         hydroExpense["isPaid"] = false
@@ -136,7 +140,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         hydroExpense["dateCompleted"] = "N/A"
         hydroExpense["expenseOwer"] = "Jaison"
         
-      
+        
         
         //establish the relationship.
         hydroExpense["expenseCreator"] = PFObject.init(withoutDataWithClassName:"Person", objectId:"0htDcFZSKp")
@@ -180,7 +184,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
         
     }
-
+    
     //MARK: - adding push notifications
     func registerForPushNotifications() {
         UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .sound, .badge]) {
@@ -218,13 +222,80 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     func application(_ application: UIApplication,
                      didFailToRegisterForRemoteNotificationsWithError error: Error) {
-        print("Failed to register: \(error)")
+        if (error as NSError).code == 3010 {
+            print("Push notifications are not supported in the iOS Simulator.")
+        } else {
+            print("application:didFailToRegisterForRemoteNotificationsWithError: %@", error)
+        }
     }
     
     private func application(application: UIApplication, didReceiveRemoteNotification userInfo: [NSObject : AnyObject]) {
         PFPush.handle(userInfo)
+    }
+    
+    
+    //MARK: - test push notification
+    func testPush() {
+        let message = "Alert !!"
+        let id = "tszgSwA7KM"
+        
+        var data = [ "title": "Some Title",
+                     "alert": message]
+        
+        var userQuery: PFQuery = PFUser.query()!
+        userQuery.whereKey("objectId", equalTo: id)
+        var query: PFQuery = PFInstallation.query()!
+        query.whereKey("currentUser", matchesQuery: userQuery)
+        
+        var push: PFPush = PFPush()
+        push.setQuery(query as? PFQuery<PFInstallation>)
+        push.setData(data)
+        push.sendInBackground()
+        
+    }
+    
+    func testPush2() {
+        let data = [
+            "badge" : "Increment",
+            "alert" : "Some message",
+            ]
+        let request = [
+            "someKey" : MASTER_KEY,
+            "data" : data
+            ] as [String : Any]
+        PFCloud.callFunction(inBackground: "iosPush", withParameters: request as [NSObject : AnyObject])
+        
+    }
+    
+    func testPush3() {
+        
+        let data: NSDictionary = ["title":"Alert",
+                                  "alert":"TEST"]
+        
+        let query: PFQuery = PFUser.query()!
+        
+        //query.whereKey("", equalTo: defaults.objectForKey("") as String)
+        
+        var push: PFPush = PFPush()
+        push.setData(data as? [AnyHashable : Any])
+        push.setQuery(query as? PFQuery<PFInstallation>)
+        
+        push.sendInBackground()
+    }
+    
+    
 }
 
+extension AppDelegate: UNUserNotificationCenterDelegate {
+    
+    func userNotificationCenter(_ center: UNUserNotificationCenter,
+                                willPresent notification: UNNotification,
+                                withCompletionHandler completionHandler:
+        @escaping (UNNotificationPresentationOptions) -> Void) {
+        PFPush.handle(notification.request.content.userInfo)
+        completionHandler(.alert)
+    }
+    
 }
 
 
@@ -232,13 +303,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 
 
-    //    private func deleteObject() {
-    //        fetchPersonCompletion{ (person) in
-    //            person.deleteInBackground(block: { (success, _) in
-    //                print(#line, "Ian dies!")
-    //            })
-    //        }
-    //    }
+//    private func deleteObject() {
+//        fetchPersonCompletion{ (person) in
+//            person.deleteInBackground(block: { (success, _) in
+//                print(#line, "Ian dies!")
+//            })
+//        }
+//    }
 
 
 
