@@ -58,14 +58,19 @@ class TaskViewController: UIViewController, UITableViewDataSource, UITableViewDe
         let task = tasks[indexPath.row]
         
         cell.setupCell(task: task)
-        cell.contentView.backgroundColor = UIColor.clear;
+        //cell.contentView.backgroundColor = UIColor.clear;
         cell.backgroundColor = UIColor(white: 1.0, alpha: 0.5)
+        cell.layer.cornerRadius = 20
+        cell.layer.masksToBounds = true
+        
         
         
         
         return cell
         
     }
+    
+    
     
     
     //MARK: Navigation
