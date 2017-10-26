@@ -17,9 +17,7 @@ class RegisterNewRoomViewController: UIViewController {
     
     @IBOutlet weak var existingRoomTextField: UITextField!
     
-    
-    
-    
+
     var createRoom: Room?
     var listOfRoom: [Room]?
     
@@ -80,14 +78,6 @@ class RegisterNewRoomViewController: UIViewController {
             print("Existing Room does not exist. Please try again.")
             return
         }
-        
-        //check if existingRoom is empty
-        //        guard let existingRoom = existingRoomTextField.text else {
-        //            print(#line, "Please enter existing room or new room name")
-        //            return
-        //        }
-        let existingRoom = existingRoomTextField.text
-        
         
         Person.signup(with: username, and: password) { (success:Bool?, error:Error?) in
             

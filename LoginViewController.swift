@@ -83,6 +83,10 @@ class LoginViewController: UIViewController {
             guard let registerController = segue.destination as? RegisterViewController else {
                 fatalError("unexpected destination:\(segue.destination)")
             }
+        case "createNewRoomSegue":
+            guard let createNewRoomController = segue.destination as? RegisterNewRoomViewController else {
+                fatalError("Unexpected destination:\(segue.destination)")
+            }
             
         default:
             fatalError("unexpected segue identifier \(String(describing: segue.identifier))")

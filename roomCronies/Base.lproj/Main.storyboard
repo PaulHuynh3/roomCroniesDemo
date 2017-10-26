@@ -254,9 +254,9 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bhi-06-E95">
-                                <rect key="frame" x="152" y="446" width="46" height="30"/>
+                                <rect key="frame" x="113" y="446" width="124" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Button"/>
+                                <state key="normal" title="Create New Room"/>
                                 <connections>
                                     <segue destination="Ixv-aW-OZ3" kind="show" identifier="createNewRoomSegue" id="vDb-PZ-NQ4"/>
                                 </connections>
@@ -374,6 +374,6 @@
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="1od-P2-kcF"/>
-        <segue reference="xdD-y4-fc8"/>
+        <segue reference="98Q-oU-gbY"/>
     </inferredMetricsTieBreakers>
 </document>
