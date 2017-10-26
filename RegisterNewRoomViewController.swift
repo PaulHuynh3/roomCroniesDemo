@@ -21,7 +21,6 @@ class RegisterNewRoomViewController: UIViewController {
     var createRoom: Room?
     var listOfRoom: [Room]?
     
-    //MARK: View Did Load
     override func viewDidLoad() {
         super.viewDidLoad()
         fetchExistingRoom()
@@ -30,7 +29,6 @@ class RegisterNewRoomViewController: UIViewController {
     }
     
     //MARK: IBAction
-    
     @IBAction func signUpButtonTapped(_ sender: UIButton) {
         
         guard let username = usernameTextField.text,
@@ -46,6 +44,8 @@ class RegisterNewRoomViewController: UIViewController {
                 print(#line, "Please enter the existing room")
                 return
         }
+        
+        
         
         //query to see if there is an existing room.
         let roomQuery = Room.query()

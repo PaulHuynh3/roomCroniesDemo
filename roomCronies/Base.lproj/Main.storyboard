@@ -13,7 +13,7 @@
         <!--Create new room-->
         <scene sceneID="rOC-nq-q3H">
             <objects>
-                <viewController title="Create new room" id="Ixv-aW-OZ3" customClass="CreateRoomViewController" sceneMemberID="viewController">
+                <viewController title="Create new room" id="Ixv-aW-OZ3" customClass="RegisterNewRoomViewController" customModule="roomCronies" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="qlN-ZW-izh"/>
                         <viewControllerLayoutGuide type="bottom" id="ZFH-1g-CKC"/>
@@ -36,7 +36,7 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
-                            <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="New/Existing Room" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="0OP-NI-fU0">
+                            <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Existing Room" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="0OP-NI-fU0">
                                 <rect key="frame" x="30" y="239" width="314" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <nil key="textColor"/>
@@ -258,7 +258,7 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Create New Room"/>
                                 <connections>
-                                    <segue destination="Ixv-aW-OZ3" kind="show" identifier="createNewRoomSegue" id="vDb-PZ-NQ4"/>
+                                    <segue destination="Ixv-aW-OZ3" kind="show" identifier="createNewRoomSegue" id="jM7-RU-RbY"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -374,6 +374,6 @@
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="1od-P2-kcF"/>
-        <segue reference="98Q-oU-gbY"/>
+        <segue reference="xdD-y4-fc8"/>
     </inferredMetricsTieBreakers>
 </document>

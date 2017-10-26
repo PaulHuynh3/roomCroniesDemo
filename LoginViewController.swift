@@ -73,6 +73,7 @@ class LoginViewController: UIViewController {
         super.prepare(for: segue , sender: sender)
         
         switch (segue.identifier ?? "") {
+            
         case "TaskViewControllerSegue":
             guard let taskViewController = segue.destination as? TaskViewController else {
                 fatalError("unexpected destination:\(segue.destination)")
@@ -85,7 +86,7 @@ class LoginViewController: UIViewController {
             }
         case "createNewRoomSegue":
             guard let createNewRoomController = segue.destination as? RegisterNewRoomViewController else {
-                fatalError("Unexpected destination:\(segue.destination)")
+                 fatalError("unexpected destination:\(segue.destination)")
             }
             
         default:
