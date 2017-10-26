@@ -32,6 +32,7 @@ class RegisterViewController: UIViewController {
         navigationController?.isNavigationBarHidden = false
         //self.navigationController?.navigationBar.isTranslucent = false
     }
+
     
     //MARK: IBAction
     @IBAction func signUpButtonTapped(_ sender: UIButton) {
@@ -44,7 +45,7 @@ class RegisterViewController: UIViewController {
                 return
         }
         
-        guard let newRoomCheck = roomTextField.text!
+        guard let newRoomCheck = roomTextField.text
             else {
                 print(#line, "Please enter existing room or new room name")
                 return

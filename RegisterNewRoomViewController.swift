@@ -10,10 +10,16 @@ import UIKit
 import Parse
 
 class RegisterNewRoomViewController: UIViewController {
-
+    
+    @IBOutlet weak var usernameTextField: UITextField!
+    
+    @IBOutlet weak var passwordTextField: UITextField!
+    
+    @IBOutlet weak var existingRoomTextField: UITextField!
     
     
- 
+    
+    
     var createRoom: Room?
     var listOfRoom: [Room]?
     
@@ -23,11 +29,10 @@ class RegisterNewRoomViewController: UIViewController {
         fetchExistingRoom()
         //create an instance of the room so its store in memory so you can use its properties.. createroom.roomName etc because the optional chaining.
         createRoom = Room()
-        navigationController?.isNavigationBarHidden = false
-        //self.navigationController?.navigationBar.isTranslucent = false
     }
     
     //MARK: IBAction
+    
     @IBAction func signUpButtonTapped(_ sender: UIButton) {
         
         guard let username = usernameTextField.text,
@@ -38,17 +43,15 @@ class RegisterNewRoomViewController: UIViewController {
                 return
         }
         
-        //check if newRoomTF is empty
-        //        guard let newRoomCheck = newRoomTextField.text
-        //            else {
-        //                print(#line, "Please enter existing room or new room name")
-        //                return
-        //        }
+        guard let existingRoomCheck = existingRoomTextField.text
+            else {
+                print(#line, "Please enter the existing room")
+                return
+        }
         
-        
-        //since this is an optional createRoom I need to create an instance of it in viewdidload
+        //query to see if there is an existing room.
         let roomQuery = Room.query()
-        roomQuery?.whereKey("roomName", equalTo: newRoomTextField.text!)
+        roomQuery?.whereKey("roomName", equalTo: existingRoomTextField.text!)
         roomQuery?.findObjectsInBackground(block: { (results, error) in
             if let results = results as? [Room],
                 let foundRoom = results.first {
@@ -61,7 +64,7 @@ class RegisterNewRoomViewController: UIViewController {
                 
             }
         })
-        createRoom?.roomName = newRoomTextField.text!
+        createRoom?.roomName = existingRoomTextField.text!
         
         //put this in a function
         let roomExists = listOfRoom?.contains(where: { (room) -> Bool in
@@ -73,8 +76,8 @@ class RegisterNewRoomViewController: UIViewController {
             }
         })
         
-        if roomExists == true {
-            print("Room Name Already Exists! Please try again!")
+        if roomExists == false {
+            print("Existing Room does not exist. Please try again.")
             return
         }
         
@@ -86,15 +89,13 @@ class RegisterNewRoomViewController: UIViewController {
         let existingRoom = existingRoomTextField.text
         
         
-        
-        
         Person.signup(with: username, and: password) { (success:Bool?, error:Error?) in
             
             guard success == true else {
                 print("Problems creating User!")
                 return
             }
-            self.performSegue(withIdentifier: "TaskViewControllerSegue", sender: nil)
+            self.performSegue(withIdentifier:"TaskViewControllerSegue", sender: nil)
         }
     }
     
@@ -106,8 +107,8 @@ class RegisterNewRoomViewController: UIViewController {
         guard let taskViewController = segue.destination as? TaskViewController else {
             fatalError("unexpected destination:\(segue.destination)")
         }
-        //creates a new room
-        createRoom = Room(roomName: newRoomTextField.text!)
+        //join existing room.
+        createRoom = Room(roomName: existingRoomTextField.text!)
         
         taskViewController.myRoom = createRoom
         
@@ -153,7 +154,7 @@ class RegisterNewRoomViewController: UIViewController {
     
     
     
-
-
-
+    
+    
+    
 }
