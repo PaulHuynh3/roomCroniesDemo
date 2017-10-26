@@ -14,9 +14,7 @@ class LoginViewController: UIViewController {
     @IBOutlet weak var userNameTextField: UITextField!
     
     @IBOutlet weak var passwordTextField: UITextField!
-    
-    @IBOutlet weak var roomIdentificationTextField: UITextField!
-    
+        
     //MARK: Life Cycle
     override func viewDidLoad() {
         
@@ -25,8 +23,7 @@ class LoginViewController: UIViewController {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(true)
 
-
-//        checkLoginState()
+        checkLoginState()
         
         navigationController?.isNavigationBarHidden = true
         
@@ -76,6 +73,7 @@ class LoginViewController: UIViewController {
         super.prepare(for: segue , sender: sender)
         
         switch (segue.identifier ?? "") {
+            
         case "TaskViewControllerSegue":
             guard let taskViewController = segue.destination as? TaskViewController else {
                 fatalError("unexpected destination:\(segue.destination)")
@@ -85,6 +83,10 @@ class LoginViewController: UIViewController {
         case "userRegisterSegue":
             guard let registerController = segue.destination as? RegisterViewController else {
                 fatalError("unexpected destination:\(segue.destination)")
+            }
+        case "createNewRoomSegue":
+            guard let createNewRoomController = segue.destination as? RegisterNewRoomViewController else {
+                 fatalError("unexpected destination:\(segue.destination)")
             }
             
         default:
@@ -97,11 +99,6 @@ class LoginViewController: UIViewController {
     
     //MARK: Fetch Parse
     
-//    func fetchExistingRooms() {
-//
-//
-//
-//    }
     
     
     

@@ -1,38 +1,32 @@
 //
-//  RegisterViewController.swift
+//  RegisterNewRoomViewController.swift
 //  roomCronies
 //
-//  Created by Paul on 2017-10-24.
+//  Created by Paul on 2017-10-26.
 //  Copyright © 2017 Paul. All rights reserved.
 //
 
 import UIKit
 import Parse
 
-class RegisterViewController: UIViewController {
-    
-    //MARK: IBOulets
+class RegisterNewRoomViewController: UIViewController {
     
     @IBOutlet weak var usernameTextField: UITextField!
     
     @IBOutlet weak var passwordTextField: UITextField!
     
-    @IBOutlet weak var roomTextField: UITextField!
+    @IBOutlet weak var existingRoomTextField: UITextField!
     
-    
+
     var createRoom: Room?
     var listOfRoom: [Room]?
     
-    //MARK: View Did Load
     override func viewDidLoad() {
         super.viewDidLoad()
         fetchExistingRoom()
         //create an instance of the room so its store in memory so you can use its properties.. createroom.roomName etc because the optional chaining.
         createRoom = Room()
-        navigationController?.isNavigationBarHidden = false
-        //self.navigationController?.navigationBar.isTranslucent = false
     }
-
     
     //MARK: IBAction
     @IBAction func signUpButtonTapped(_ sender: UIButton) {
@@ -45,15 +39,30 @@ class RegisterViewController: UIViewController {
                 return
         }
         
-        guard let newRoomCheck = roomTextField.text
+        guard let existingRoomCheck = existingRoomTextField.text
             else {
-                print(#line, "Please enter existing room or new room name")
+                print(#line, "Please enter the existing room")
                 return
         }
         
         
-        //since this is an optional createRoom I need to create an instance of it in viewdidload
-        createRoom?.roomName = newRoomCheck
+        
+        //query to see if there is an existing room.
+        let roomQuery = Room.query()
+        roomQuery?.whereKey("roomName", equalTo: existingRoomTextField.text!)
+        roomQuery?.findObjectsInBackground(block: { (results, error) in
+            if let results = results as? [Room],
+                let foundRoom = results.first {
+                // Use the room that you found from the database
+                
+                
+            } else {
+                // Create a new room
+                
+                
+            }
+        })
+        createRoom?.roomName = existingRoomTextField.text!
         
         //put this in a function
         let roomExists = listOfRoom?.contains(where: { (room) -> Bool in
@@ -65,11 +74,10 @@ class RegisterViewController: UIViewController {
             }
         })
         
-        if roomExists == true {
-            print("Room Name Already Exists! Please try again!")
+        if roomExists == false {
+            print("Existing Room does not exist. Please try again.")
             return
         }
-        
         
         Person.signup(with: username, and: password) { (success:Bool?, error:Error?) in
             
@@ -77,7 +85,7 @@ class RegisterViewController: UIViewController {
                 print("Problems creating User!")
                 return
             }
-            self.performSegue(withIdentifier: "TaskViewControllerSegue", sender: nil)
+            self.performSegue(withIdentifier:"TaskViewControllerSegue", sender: nil)
         }
     }
     
@@ -89,12 +97,12 @@ class RegisterViewController: UIViewController {
         guard let taskViewController = segue.destination as? TaskViewController else {
             fatalError("unexpected destination:\(segue.destination)")
         }
-        //creates a new room
-        createRoom = Room(roomName: roomTextField.text!)
+        //join existing room.
+        createRoom = Room(roomName: existingRoomTextField.text!)
         
         taskViewController.myRoom = createRoom
         
-        //create user with 
+        //create user with
         guard let user = PFUser.current() else {
             print("Error creating current user.")
             return
@@ -136,8 +144,7 @@ class RegisterViewController: UIViewController {
     
     
     
+    
+    
+    
 }
-
-
-
-

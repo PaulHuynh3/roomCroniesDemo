@@ -5,11 +5,66 @@
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13173"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13174"/>
         <capability name="Navigation items with more than one left or right bar item" minToolsVersion="7.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
+        <!--Create new room-->
+        <scene sceneID="rOC-nq-q3H">
+            <objects>
+                <viewController title="Create new room" id="Ixv-aW-OZ3" customClass="RegisterNewRoomViewController" customModule="roomCronies" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="qlN-ZW-izh"/>
+                        <viewControllerLayoutGuide type="bottom" id="ZFH-1g-CKC"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="o6y-6I-Z5q">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Username" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="DKp-xR-8g3">
+                                <rect key="frame" x="30" y="72" width="314" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <nil key="textColor"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Password" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="fhJ-hh-bO3">
+                                <rect key="frame" x="30" y="157" width="314" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <nil key="textColor"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Existing Room" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="0OP-NI-fU0">
+                                <rect key="frame" x="30" y="239" width="314" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <nil key="textColor"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="41C-Sc-IMu">
+                                <rect key="frame" x="121" y="474" width="86" height="44"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Sign Up"/>
+                                <connections>
+                                    <action selector="signUpButtonTapped:" destination="Ixv-aW-OZ3" eventType="touchUpInside" id="AhG-me-ymH"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <connections>
+                        <outlet property="existingRoomTextField" destination="0OP-NI-fU0" id="5D4-sN-r0S"/>
+                        <outlet property="passwordTextField" destination="fhJ-hh-bO3" id="x6S-7b-uYX"/>
+                        <outlet property="usernameTextField" destination="DKp-xR-8g3" id="mwW-qV-QpJ"/>
+                        <segue destination="BYZ-38-t0r" kind="show" identifier="TaskViewControllerSegue" id="xdD-y4-fc8"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="U5d-Rd-H03" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-4" y="-402"/>
+        </scene>
         <!--Task VC-->
         <scene sceneID="tne-QT-ifu">
             <objects>
@@ -74,7 +129,11 @@
                                     <segue destination="kec-Il-1J7" kind="presentation" identifier="AddTaskSegue" id="Vba-1d-IgB"/>
                                 </connections>
                             </barButtonItem>
-                            <barButtonItem title="Log Out" id="xm5-io-vlu"/>
+                            <barButtonItem title="Log Out" id="xm5-io-vlu">
+                                <connections>
+                                    <action selector="logoutTapped:" destination="BYZ-38-t0r" id="8fI-hD-36o"/>
+                                </connections>
+                            </barButtonItem>
                         </rightBarButtonItems>
                     </navigationItem>
                     <connections>
@@ -83,7 +142,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1198" y="122"/>
+            <point key="canvasLocation" x="1244" y="122"/>
         </scene>
         <!--Add Task VC-->
         <scene sceneID="nQW-GT-W8n">
@@ -186,19 +245,20 @@
                                     <segue destination="Ygk-Bd-EhF" kind="show" identifier="userRegisterSegue" id="9hD-Dc-IZg"/>
                                 </connections>
                             </button>
-                            <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Room Identification" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="9Me-GG-o6K">
-                                <rect key="frame" x="53" y="215" width="282" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <nil key="textColor"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits"/>
-                            </textField>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pxd-jm-CgJ">
                                 <rect key="frame" x="53" y="294" width="70" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Login"/>
                                 <connections>
                                     <action selector="loginButtonTapped:" destination="g8F-iV-f6O" eventType="touchUpInside" id="nyo-kj-pSz"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bhi-06-E95">
+                                <rect key="frame" x="113" y="446" width="124" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Create New Room"/>
+                                <connections>
+                                    <segue destination="Ixv-aW-OZ3" kind="show" identifier="createNewRoomSegue" id="jM7-RU-RbY"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -213,7 +273,6 @@
                     <navigationItem key="navigationItem" title="Welcome" id="bEe-Pv-DIE"/>
                     <connections>
                         <outlet property="passwordTextField" destination="wmY-tT-Nq4" id="145-Ul-YaR"/>
-                        <outlet property="roomIdentificationTextField" destination="9Me-GG-o6K" id="BmJ-DW-K6i"/>
                         <outlet property="userNameTextField" destination="ewC-pD-ydo" id="kFo-mE-q5o"/>
                         <segue destination="BYZ-38-t0r" kind="show" identifier="TaskViewControllerSegue" id="98Q-oU-gbY"/>
                     </connections>
@@ -249,15 +308,29 @@
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3xc-9P-QJQ">
-                                <rect key="frame" x="107" y="296" width="132" height="30"/>
+                                <rect key="frame" x="107" y="548" width="132" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Sign Up"/>
                                 <connections>
                                     <action selector="signUpButtonTapped:" destination="Ygk-Bd-EhF" eventType="touchUpInside" id="XzW-PD-OXs"/>
                                 </connections>
                             </button>
-                            <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Existing Room ID (Optional)" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="gUe-Mz-Qfc">
-                                <rect key="frame" x="13" y="224" width="314" height="30"/>
+                            <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Create New Room" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="3hg-QL-HPf">
+                                <rect key="frame" x="13" y="233" width="314" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <nil key="textColor"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Create New Room" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="r2s-Ok-gEF">
+                                <rect key="frame" x="16" y="233" width="314" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <nil key="textColor"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="New/Existing Room" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="2oa-Zb-pah">
+                                <rect key="frame" x="16" y="233" width="314" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <nil key="textColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
@@ -267,8 +340,8 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                     <connections>
-                        <outlet property="existingRoomID" destination="gUe-Mz-Qfc" id="Qk4-w2-gMQ"/>
                         <outlet property="passwordTextField" destination="PDt-9X-0cR" id="Tu1-ox-pzh"/>
+                        <outlet property="roomTextField" destination="2oa-Zb-pah" id="esR-2u-dhM"/>
                         <outlet property="usernameTextField" destination="6Ih-JB-oDw" id="n49-W7-Cjq"/>
                         <segue destination="BYZ-38-t0r" kind="show" identifier="TaskViewControllerSegue" id="tZp-Kx-uj3"/>
                     </connections>
@@ -301,6 +374,6 @@
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="1od-P2-kcF"/>
-        <segue reference="tZp-Kx-uj3"/>
+        <segue reference="xdD-y4-fc8"/>
     </inferredMetricsTieBreakers>
 </document>
