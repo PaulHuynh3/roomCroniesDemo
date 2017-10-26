@@ -17,9 +17,7 @@ class RegisterViewController: UIViewController {
     
     @IBOutlet weak var passwordTextField: UITextField!
     
-    @IBOutlet weak var existingRoomTextField: UITextField!
-    
-    @IBOutlet weak var newRoomTextField: UITextField!
+    @IBOutlet weak var roomTextField: UITextField!
     
     
     var createRoom: Room?
@@ -29,7 +27,7 @@ class RegisterViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         fetchExistingRoom()
-        //create an instance of the room set it so i can use its properties.. createroom.roomName etc
+        //create an instance of the room so its store in memory so you can use its properties.. createroom.roomName etc because the optional chaining.
         createRoom = Room()
         navigationController?.isNavigationBarHidden = false
         //self.navigationController?.navigationBar.isTranslucent = false
@@ -46,15 +44,30 @@ class RegisterViewController: UIViewController {
                 return
         }
         
-        guard let roomCheck = newRoomTextField.text
-            else {
-                print(#line, "Room name can not be blank")
-                return
-        }
+        //check if newRoomTF is empty
+//        guard let newRoomCheck = newRoomTextField.text
+//            else {
+//                print(#line, "Please enter existing room or new room name")
+//                return
+//        }
         
         
         //since this is an optional createRoom I need to create an instance of it in viewdidload
-        createRoom?.roomName = roomCheck
+        let roomQuery = Room.query()
+        roomQuery?.whereKey("roomName", equalTo: newRoomTextField.text!)
+        roomQuery?.findObjectsInBackground(block: { (results, error) in
+            if let results = results as? [Room],
+                let foundRoom = results.first {
+                // Use the room that you found from the database
+                
+                
+            } else {
+                // Create a new room
+                
+                
+            }
+        })
+        createRoom?.roomName = newRoomTextField.text!
         
         //put this in a function
         let roomExists = listOfRoom?.contains(where: { (room) -> Bool in
@@ -70,6 +83,14 @@ class RegisterViewController: UIViewController {
             print("Room Name Already Exists! Please try again!")
             return
         }
+        
+        //check if existingRoom is empty
+//        guard let existingRoom = existingRoomTextField.text else {
+//            print(#line, "Please enter existing room or new room name")
+//            return
+//        }
+        let existingRoom = existingRoomTextField.text
+        
         
         
         
@@ -93,6 +114,7 @@ class RegisterViewController: UIViewController {
         }
         //creates a new room
         createRoom = Room(roomName: newRoomTextField.text!)
+        
         taskViewController.myRoom = createRoom
         
         //create user with 
@@ -134,6 +156,32 @@ class RegisterViewController: UIViewController {
     }
     
     
+    //this code can be use later if we have create a room and sign up in a seperate view.
+//    func checkExistingRoom () {
+//        createRoom?.roomName = newRoomTextField.text!
+//
+//        //put this in a function
+//        let roomExists = listOfRoom?.contains(where: { (room) -> Bool in
+//
+//            if createRoom?.roomName == room.roomName{
+//                return true
+//            } else {
+//                return false
+//            }
+//        })
+//
+//        if roomExists == true {
+//            print("Room Name Already Exists! Please try again!")
+//            return
+//        }
+//
+//        //check if existingRoom is empty
+//        //        guard let existingRoom = existingRoomTextField.text else {
+//        //            print(#line, "Please enter existing room or new room name")
+//        //            return
+//        //        }
+//        let existingRoom = existingRoomTextField.text
+//    }
     
     
     
