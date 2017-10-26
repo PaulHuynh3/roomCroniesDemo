@@ -14,9 +14,7 @@ class LoginViewController: UIViewController {
     @IBOutlet weak var userNameTextField: UITextField!
     
     @IBOutlet weak var passwordTextField: UITextField!
-    
-    @IBOutlet weak var roomIdentificationTextField: UITextField!
-    
+        
     //MARK: Life Cycle
     override func viewDidLoad() {
         
@@ -96,11 +94,6 @@ class LoginViewController: UIViewController {
     
     //MARK: Fetch Parse
     
-//    func fetchExistingRooms() {
-//
-//
-//
-//    }
     
     
     

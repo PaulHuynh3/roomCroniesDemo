@@ -17,7 +17,10 @@ class RegisterViewController: UIViewController {
     
     @IBOutlet weak var passwordTextField: UITextField!
     
-    @IBOutlet weak var existingRoomID: UITextField!
+    @IBOutlet weak var existingRoomTextField: UITextField!
+    
+    @IBOutlet weak var newRoomTextField: UITextField!
+    
     
     var createRoom: Room?
 
@@ -34,10 +37,8 @@ class RegisterViewController: UIViewController {
         
         guard let username = usernameTextField.text,
             let password = passwordTextField.text,
-            let roomID = existingRoomID.text,
             username.isEmpty == false,
-            password.isEmpty == false,
-            roomID.isEmpty == false else {
+            password.isEmpty == false else {
                 
                 print("Username and Password fields cannot be empty.")
                 return
@@ -78,6 +79,15 @@ class RegisterViewController: UIViewController {
         }
         
     }
+    
+    
+//Fetch Parse
+    
+    func fetchExistingRoom () {
+    
+    
+    }
+    
     
 }
 
