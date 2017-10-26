@@ -254,9 +254,9 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bhi-06-E95">
-                                <rect key="frame" x="113" y="446" width="124" height="30"/>
+                                <rect key="frame" x="110" y="446" width="130" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Create New Room"/>
+                                <state key="normal" title="Join Existing Room"/>
                                 <connections>
                                     <segue destination="Ixv-aW-OZ3" kind="show" identifier="createNewRoomSegue" id="jM7-RU-RbY"/>
                                 </connections>
