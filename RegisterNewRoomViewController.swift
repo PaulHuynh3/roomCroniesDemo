@@ -23,6 +23,7 @@ class RegisterNewRoomViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        navigationController?.isNavigationBarHidden = false
         fetchExistingRoom()
         //create an instance of the room so its store in memory so you can use its properties.. createroom.roomName etc because the optional chaining.
         existingRoom = Room()
