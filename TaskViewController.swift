@@ -15,6 +15,7 @@ class TaskViewController: UIViewController, UITableViewDataSource, UITableViewDe
     
     //this tells you to create an initializer without putting "?" on room because its created before view did load.
     var myRoom : Room?
+//    var CurrentUser : PFUser?
     
     @IBOutlet weak var tableView: UITableView!
     
@@ -156,6 +157,8 @@ class TaskViewController: UIViewController, UITableViewDataSource, UITableViewDe
     //MARK: Fetch Parse
     func fetchRoom() {
         let query = PFQuery(className: "Room")
+        //make it so members of the room will see what task is created in that room.
+        query.whereKey("members", equalTo: PFUser.current()!)
         
         //findObjectsInBackground already made a network request so we dont need to call it with a completion handler.
         
@@ -202,10 +205,7 @@ class TaskViewController: UIViewController, UITableViewDataSource, UITableViewDe
         }
         
     }
-    
-    
-    
-    
+  
 }
 
 
