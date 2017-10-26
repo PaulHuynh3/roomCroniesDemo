@@ -84,9 +84,21 @@ class RegisterViewController: UIViewController {
         
     }
     
+//Check if roomName exists.
+    
+    func checkRoomName (isRoom: Bool) {
+        
+        let roomExists = listOfRoom?.contains(where: { (room) -> Bool in
+            return room == createRoom
+        })
+
+        //the return will only make it exit this function we need a parameter to make it exit the function itself.
+        
+        
+    }
+    
     
 //Fetch Parse
-    
     func fetchExistingRoom () {
         let query = PFQuery(className: "Room")
         
@@ -102,11 +114,9 @@ class RegisterViewController: UIViewController {
             }
             
             self.listOfRoom = rooms
-            
         }
         
     }
-    
     
     
     
