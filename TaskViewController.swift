@@ -10,6 +10,13 @@ import UIKit
 import Parse
 
 class TaskViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, AddTaskDelegate {
+    
+    //MARK: IBAction
+    @IBAction func logoutTapped(_ sender: UIBarButtonItem) {
+        PFUser.logOut()
+        navigationController?.popToRootViewController(animated: true)
+    }
+    
     // created an instance of this property this way will create your property before viewdidload
     //    lazy var myRoom = Room(roomName: "car")
     
@@ -157,7 +164,8 @@ class TaskViewController: UIViewController, UITableViewDataSource, UITableViewDe
     //MARK: Fetch Parse
     func fetchRoom() {
         let query = PFQuery(className: "Room")
-        //make it so members of the room will see what task is created in that room.
+        
+        //only members of that room will see the tasks.
         query.whereKey("members", equalTo: PFUser.current()!)
         
         //findObjectsInBackground already made a network request so we dont need to call it with a completion handler.
@@ -171,9 +179,8 @@ class TaskViewController: UIViewController, UITableViewDataSource, UITableViewDe
             }
             
             guard let rooms = rooms as? [Room] else { return }
-            //fetch the first room.
+            //fetch the first room the user is in.
             //In the future this will need to be configure for which room or rooms to fetch.
-            
             self.myRoom = rooms.first
             
             //fetching all the task associated with the room.
@@ -209,11 +216,5 @@ class TaskViewController: UIViewController, UITableViewDataSource, UITableViewDe
 }
 
 
-//MARK: IBAction
-extension TaskViewController {
-    @IBAction func logoutTapped(_ sender: UIBarButtonItem) {
-        PFUser.logOut()
-        navigationController?.popToRootViewController(animated: true)
-    }
-}
+
 

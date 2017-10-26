@@ -74,7 +74,11 @@
                                     <segue destination="kec-Il-1J7" kind="presentation" identifier="AddTaskSegue" id="Vba-1d-IgB"/>
                                 </connections>
                             </barButtonItem>
-                            <barButtonItem title="Log Out" id="xm5-io-vlu"/>
+                            <barButtonItem title="Log Out" id="xm5-io-vlu">
+                                <connections>
+                                    <action selector="logoutTapped:" destination="BYZ-38-t0r" id="8fI-hD-36o"/>
+                                </connections>
+                            </barButtonItem>
                         </rightBarButtonItems>
                     </navigationItem>
                     <connections>

@@ -25,8 +25,7 @@ class LoginViewController: UIViewController {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(true)
 
-
-//        checkLoginState()
+        checkLoginState()
         
         navigationController?.isNavigationBarHidden = true
         
