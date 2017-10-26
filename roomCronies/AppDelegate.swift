@@ -305,7 +305,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     func testPush5() {
-        PFCloud.callFunction(inBackground: "iosPushTest", withParameters: ["text" : "Testing", "query":""])
+        PFCloud.callFunction(inBackground: "iosPushTest", withParameters: ["text" : "Testing"])
     }
     
     
