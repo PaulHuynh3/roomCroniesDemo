@@ -31,8 +31,10 @@ class RegisterViewController: UIViewController {
         
         guard let username = usernameTextField.text,
             let password = passwordTextField.text,
+            let roomID = existingRoomID.text,
             username.isEmpty == false,
-            password.isEmpty == false else {
+            password.isEmpty == false,
+            roomID.isEmpty == false else {
                 
                 print("Username and Password fields cannot be empty.")
                 return
@@ -59,12 +61,13 @@ class RegisterViewController: UIViewController {
         createRoom = Room(roomName: existingRoomID.text!)
         taskViewController.myRoom = createRoom
         
+        //create user with 
         guard let user = PFUser.current() else{
             print("Error creating current user.")
             return
         }
         taskViewController.myRoom?.roomCreator = user
-        
+        taskViewController.myRoom?.members.append(user)
         
         createRoom?.saveInBackground { (success: Bool?, error: Error?) in
             print(#line, success)

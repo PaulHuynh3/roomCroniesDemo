@@ -139,6 +139,7 @@ class TaskViewController: UIViewController, UITableViewDataSource, UITableViewDe
             guard let rooms = rooms as? [Room] else { return }
             //fetch the first room.
             //In the future this will need to be configure for which room or rooms to fetch.
+            
             self.myRoom = rooms.first
             
             //fetching all the task associated with the room.

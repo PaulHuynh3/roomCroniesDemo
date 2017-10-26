@@ -87,11 +87,11 @@ class LoginViewController: UIViewController {
     
     //MARK: Fetch Parse
     
-    func fetchExistingRooms() {
-        
-        
-        
-    }
+//    func fetchExistingRooms() {
+//
+//
+//
+//    }
     
     
     
