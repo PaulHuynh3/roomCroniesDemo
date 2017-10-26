@@ -24,7 +24,17 @@ class LoginViewController: UIViewController {
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(true)
-        //        checkLoginState()
+
+
+//        checkLoginState()
+        
+        navigationController?.isNavigationBarHidden = true
+        
+        let backgroundImage = UIImageView(frame: UIScreen.main.bounds)
+        backgroundImage.image = UIImage(named: "login-background.jpg")
+        backgroundImage.contentMode =  UIViewContentMode.scaleAspectFill
+        self.view.insertSubview(backgroundImage, at: 0)
+
     }
     
     private func checkLoginState() {

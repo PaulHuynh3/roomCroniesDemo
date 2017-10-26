@@ -5,7 +5,8 @@
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13174"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13173"/>
+        <capability name="Navigation items with more than one left or right bar item" minToolsVersion="7.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -21,10 +22,14 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="iphone-3" translatesAutoresizingMaskIntoConstraints="NO" id="ipu-Ux-lPI">
+                                <rect key="frame" x="0.0" y="64" width="375" height="603"/>
+                            </imageView>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="109" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="6d0-p1-UIp">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <color key="sectionIndexBackgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="TaskViewCell" rowHeight="109" id="c0l-Mi-9r9" customClass="TaskViewCell" customModule="roomCronies" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="28" width="375" height="109"/>
@@ -55,13 +60,22 @@
                             </tableView>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="ipu-Ux-lPI" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="E9e-Na-rRD"/>
+                            <constraint firstItem="ipu-Ux-lPI" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" id="hLt-be-sF2"/>
+                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="ipu-Ux-lPI" secondAttribute="bottom" id="n96-s5-bBf"/>
+                            <constraint firstAttribute="trailing" secondItem="ipu-Ux-lPI" secondAttribute="trailing" id="xSq-wP-Nby"/>
+                        </constraints>
                     </view>
-                    <navigationItem key="navigationItem" id="EQt-hI-AjG">
-                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="LIu-cK-gz3">
-                            <connections>
-                                <segue destination="kec-Il-1J7" kind="presentation" identifier="AddTaskSegue" id="Vba-1d-IgB"/>
-                            </connections>
-                        </barButtonItem>
+                    <navigationItem key="navigationItem" title="Your Tasks" id="EQt-hI-AjG">
+                        <rightBarButtonItems>
+                            <barButtonItem systemItem="add" id="LIu-cK-gz3">
+                                <connections>
+                                    <segue destination="kec-Il-1J7" kind="presentation" identifier="AddTaskSegue" id="Vba-1d-IgB"/>
+                                </connections>
+                            </barButtonItem>
+                            <barButtonItem title="Log Out" id="xm5-io-vlu"/>
+                        </rightBarButtonItems>
                     </navigationItem>
                     <connections>
                         <outlet property="tableView" destination="6d0-p1-UIp" id="vel-LF-XWJ"/>
@@ -147,6 +161,9 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Cvk-uD-eGZ">
+                                <rect key="frame" x="0.0" y="64" width="375" height="603"/>
+                            </imageView>
                             <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Username" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="ewC-pD-ydo">
                                 <rect key="frame" x="16" y="84" width="319" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -159,7 +176,7 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <nil key="textColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits"/>
+                                <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
                             </textField>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="E6E-CE-THj">
                                 <rect key="frame" x="183" y="294" width="57" height="30"/>
@@ -186,8 +203,14 @@
                             </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="trailing" secondItem="Cvk-uD-eGZ" secondAttribute="trailing" id="2dR-Sy-CYs"/>
+                            <constraint firstItem="Cvk-uD-eGZ" firstAttribute="top" secondItem="iIr-nO-7Gr" secondAttribute="bottom" id="FDT-N7-1dV"/>
+                            <constraint firstItem="iKT-rn-WJA" firstAttribute="top" secondItem="Cvk-uD-eGZ" secondAttribute="bottom" id="hQX-Jl-hDK"/>
+                            <constraint firstItem="Cvk-uD-eGZ" firstAttribute="leading" secondItem="Jvm-PX-68L" secondAttribute="leading" id="vHt-7r-94j"/>
+                        </constraints>
                     </view>
-                    <navigationItem key="navigationItem" id="bEe-Pv-DIE"/>
+                    <navigationItem key="navigationItem" title="Welcome" id="bEe-Pv-DIE"/>
                     <connections>
                         <outlet property="passwordTextField" destination="wmY-tT-Nq4" id="145-Ul-YaR"/>
                         <outlet property="roomIdentificationTextField" destination="9Me-GG-o6K" id="BmJ-DW-K6i"/>
@@ -273,8 +296,11 @@
             <point key="canvasLocation" x="-2188" y="122"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="iphone-3" width="219" height="384"/>
+    </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="Vba-1d-IgB"/>
+        <segue reference="1od-P2-kcF"/>
         <segue reference="tZp-Kx-uj3"/>
     </inferredMetricsTieBreakers>
 </document>

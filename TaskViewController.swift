@@ -25,8 +25,13 @@ class TaskViewController: UIViewController, UITableViewDataSource, UITableViewDe
         fetchRoom()
         
         //create an instance of a room in viewdidload so it will stay the same except everytime the user clicks start... This should be when the user creates the login page
-        //        myRoom = Room(roomName: "StoryBook")
-        
+
+//        myRoom = Room(roomName: "StoryBook")
+        navigationController?.isNavigationBarHidden = false
+        let backgroundImage = UIImage(named: "iphone-3.jpg")
+        let imageView = UIImageView(image: backgroundImage)
+        self.tableView.backgroundView = imageView
+
     }
     //should refresh tableview if something was deleted from the cloud.
     //will fix soon.
@@ -39,11 +44,11 @@ class TaskViewController: UIViewController, UITableViewDataSource, UITableViewDe
     //MARK: Tableview Datasource
     public func numberOfSections(in tableView: UITableView) -> Int {
         
-        return 1
+        return self.tasks.count
     }
     
     public func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int{
-        return tasks.count
+        return 1
         
     }
     
@@ -58,15 +63,41 @@ class TaskViewController: UIViewController, UITableViewDataSource, UITableViewDe
             
         }
         
-        let task = tasks[indexPath.row]
+        let task = tasks[indexPath.section]
         
         cell.setupCell(task: task)
+        //cell.contentView.backgroundColor = UIColor.clear;
+        cell.backgroundColor = UIColor(white: 1.0, alpha: 0.5)
+        cell.layer.cornerRadius = 20
+        cell.layer.masksToBounds = true
+        
+        
         
         
         return cell
         
     }
     
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        let headerView = UIView()
+        headerView.backgroundColor = UIColor.clear
+        return headerView
+    }
+    
+    func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
+        let footerView = UIView()
+        footerView.backgroundColor = UIColor.clear
+        return footerView
+    }
+    
+    // Set the spacing between sections
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return 5
+    }
+    
+    func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+        return 5
+    }
     
     //MARK: Navigation
     

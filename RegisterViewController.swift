@@ -20,13 +20,16 @@ class RegisterViewController: UIViewController {
     @IBOutlet weak var existingRoomID: UITextField!
     
     var createRoom: Room?
-    
-    override func viewDidLoad() {
 
+    //MARK: View Did Load
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        navigationController?.isNavigationBarHidden = false
+        //self.navigationController?.navigationBar.isTranslucent = false
     }
     
     //MARK: IBAction
-    
     @IBAction func signUpButtonTapped(_ sender: UIButton) {
         
         guard let username = usernameTextField.text,
