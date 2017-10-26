@@ -218,6 +218,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         let installation = PFInstallation.current()
         installation?.setDeviceTokenFrom(deviceToken)
+        installation?["user"] = PFUser.current()
         installation?.saveInBackground()
     }
     
@@ -236,74 +237,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     
     //MARK: - test push notification
-    func testPush() {
-        let message = "Alert !!"
-        let id = "tszgSwA7KM"
-        
-        var data = ["alert": message,
-                    "clientKey": MASTER_KEY]
-        
-        var userQuery: PFQuery = PFUser.query()!
-        userQuery.whereKey("objectId", equalTo: id)
-        var query: PFQuery = PFInstallation.query()!
-        query.whereKey("currentUser", matchesQuery: userQuery)
-        
-        var push: PFPush = PFPush()
-        push.setQuery(query as? PFQuery<PFInstallation>)
-        push.setData(data)
-//        push.sendInBackground()
-        
-        
-        push.sendInBackground { (success, error) in
-            print(error?.localizedDescription)
-        }
-        
-    }
-    
-    func testPush2() {
-        let data = [
-            "badge" : "Increment",
-            "alert" : "Some message",
-            ]
-        let request = [
-            "someKey" : MASTER_KEY,
-            "masterKey": MASTER_KEY,
-            "data" : data
-            ] as [String : Any]
-        PFCloud.callFunction(inBackground: "iosPush", withParameters: request as [NSObject : AnyObject])
-        
-    }
-    
-    func testPush3() {
-        
-        let data: NSDictionary = ["title":"Alert",
-                                  "alert":"TEST"]
-        
-        let query: PFQuery = PFUser.query()!
-        
-        //query.whereKey("", equalTo: defaults.objectForKey("") as String)
-        
-        var push: PFPush = PFPush()
-        push.setData(data as? [AnyHashable : Any])
-        push.setQuery(query as? PFQuery<PFInstallation>)
-        
-//        push.sendInBackground()
-        
-        push.sendInBackground { (success, error) in
-            print(error?.localizedDescription)
-        }
-    }
-    
-    func testPush4() {
-        let pushQuery = PFInstallation.query()!
-        pushQuery.whereKey("user", equalTo: "ssqcWS98xJ")
-        
-        let push = PFPush()
-        push.setQuery(pushQuery as! PFQuery<PFInstallation>)
-        push.setMessage("New Message from \(PFUser.current()!.username!)")
-        push.sendInBackground()
-    }
-    
     func testPush5() {
         PFCloud.callFunction(inBackground: "iosPushTest", withParameters: ["text" : "Testing"])
     }
