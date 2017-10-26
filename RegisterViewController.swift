@@ -24,11 +24,13 @@ class RegisterViewController: UIViewController {
     
     var createRoom: Room?
     var listOfRoom: [Room]?
-
+    
     //MARK: View Did Load
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        fetchExistingRoom()
+        //create an instance of the room set it so i can use its properties.. createroom.roomName etc
+        createRoom = Room()
         navigationController?.isNavigationBarHidden = false
         //self.navigationController?.navigationBar.isTranslucent = false
     }
@@ -40,10 +42,36 @@ class RegisterViewController: UIViewController {
             let password = passwordTextField.text,
             username.isEmpty == false,
             password.isEmpty == false else {
-                
                 print("Username and Password fields cannot be empty.")
                 return
         }
+        
+        guard let roomCheck = newRoomTextField.text
+            else {
+                print(#line, "Room name can not be blank")
+                return
+        }
+        
+        
+        //since this is an optional createRoom I need to create an instance of it in viewdidload
+        createRoom?.roomName = roomCheck
+        
+        //put this in a function
+        let roomExists = listOfRoom?.contains(where: { (room) -> Bool in
+            
+            if createRoom?.roomName == room.roomName{
+                return true
+            } else {
+                return false
+            }
+        })
+        
+        if roomExists == true {
+            print("Room Name Already Exists! Please try again!")
+            return
+        }
+        
+        
         
         Person.signup(with: username, and: password) { (success:Bool?, error:Error?) in
             
@@ -54,7 +82,7 @@ class RegisterViewController: UIViewController {
             self.performSegue(withIdentifier: "TaskViewControllerSegue", sender: nil)
         }
     }
-
+    
     
     // MARK: - Navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -64,7 +92,7 @@ class RegisterViewController: UIViewController {
             fatalError("unexpected destination:\(segue.destination)")
         }
         //creates a new room
-        createRoom = Room(roomName: existingRoomTextField.text!)
+        createRoom = Room(roomName: newRoomTextField.text!)
         taskViewController.myRoom = createRoom
         
         //create user with 
@@ -75,7 +103,7 @@ class RegisterViewController: UIViewController {
         
         taskViewController.myRoom?.roomCreator = user
         taskViewController.myRoom?.members.append(user)
-
+        
         
         createRoom?.saveInBackground { (success: Bool?, error: Error?) in
             print(#line, success)
@@ -84,21 +112,8 @@ class RegisterViewController: UIViewController {
         
     }
     
-//Check if roomName exists.
     
-    func checkRoomName (isRoom: Bool) {
-        
-        let roomExists = listOfRoom?.contains(where: { (room) -> Bool in
-            return room == createRoom
-        })
-
-        //the return will only make it exit this function we need a parameter to make it exit the function itself.
-        
-        
-    }
-    
-    
-//Fetch Parse
+    //Fetch Parse
     func fetchExistingRoom () {
         let query = PFQuery(className: "Room")
         
