@@ -39,7 +39,6 @@ class Task: PFObject {
         self.createdBy = createdBy
     }
     
-    
 }
 
 
