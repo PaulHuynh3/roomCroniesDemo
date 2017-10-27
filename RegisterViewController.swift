@@ -20,7 +20,7 @@ class RegisterViewController: UIViewController {
     @IBOutlet weak var roomTextField: UITextField!
     
     
-    var createRoom: Room?
+//    var createRoom: Room?
     var listOfRoom: [Room]?
     
     //MARK: View Did Load
@@ -30,7 +30,7 @@ class RegisterViewController: UIViewController {
         navigationController?.isNavigationBarHidden = false
         //self.navigationController?.navigationBar.isTranslucent = false
     }
-
+    
     
     //MARK: IBAction
     @IBAction func signUpButtonTapped(_ sender: UIButton) {
@@ -55,7 +55,7 @@ class RegisterViewController: UIViewController {
         let roomExists = listOfRoom?.contains(where: { (room) -> Bool in
             
             newRoomCheck == room.roomName
-          
+            
         })
         
         if roomExists == true {
@@ -67,42 +67,49 @@ class RegisterViewController: UIViewController {
         
         Person.signup(with: username, and: password) { (success:Bool?, error:Error?) in
             
+            if let error = error {
+                print(#line, error.localizedDescription)
+            }
+            
             guard success == true else {
                 print("Problems creating User!")
                 return
             }
             
             //creates a new room
-            self.createRoom = Room(roomName: self.roomTextField.text!)
+            let createRoom = Room(roomName: self.roomTextField.text!)
             
             //create user with
             guard let user = PFUser.current() else {
                 return
             }
-            self.createRoom?.roomCreator = user
-            self.createRoom?.members = [user]
+            createRoom.roomCreator = user
+            createRoom.members = [user]
             
-            self.createRoom?.saveInBackground { (success: Bool?, error: Error?) in
-                print(#line, success)
-                print(#line, error?.localizedDescription ?? "No error saving")
+            createRoom.saveInBackground { (success: Bool?, error: Error?) in
+                if let error = error {
+                    print(#line, error.localizedDescription)
+                }
+                guard success == true else {
+                    print(#line, "not success")
+                    return
+                }
+                self.performSegue(withIdentifier: "TaskViewControllerSegue", sender: nil)
             }
-            
-            
-            self.performSegue(withIdentifier: "TaskViewControllerSegue", sender: nil)
         }
     }
     
     
     // MARK: - Navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        super.prepare(for: segue , sender: sender)
-        
-        guard let taskViewController = segue.destination as? TaskViewController else {
-            fatalError("unexpected destination:\(segue.destination)")
-        }
-        //pass new room taskvc.
-        taskViewController.myRoom = createRoom
-    }
+//    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+////        super.prepare(for: segue , sender: sender)
+//        
+//        guard let taskViewController = segue.destination as? TaskViewController else {
+//            fatalError("unexpected destination:\(segue.destination)")
+//        }
+//        //pass new room taskvc.
+////        taskViewController.myRoom = createRoom
+//    }
     
     
     //Fetch Parse

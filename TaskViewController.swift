@@ -20,8 +20,15 @@ class TaskViewController: UIViewController, UITableViewDataSource, UITableViewDe
     //    lazy var myRoom = Room(roomName: "car")
     
     //this tells you to create an initializer without putting "?" on room because its created before view did load.
-    var myRoom : Room?
-    var tasks:[Task] = []
+    var myRoom : Room? = nil {
+        didSet {
+            fetchTaskByRoom()
+//            guard let newTasks = myRoom?.tasks else { return }
+//            tasks = newTasks
+//            tableView.reloadData()
+        }
+    }
+    var tasks: [Task] = []
     
     @IBOutlet weak var tableView: UITableView!
     
@@ -29,13 +36,15 @@ class TaskViewController: UIViewController, UITableViewDataSource, UITableViewDe
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        fetchTaskByRoom()
+        DataManager.getRoom(completion: {[unowned self] (room) in
+            self.myRoom = room
+        })
         navigationController?.isNavigationBarHidden = false
         let backgroundImage = UIImage(named: "iphone-3.jpg")
         let imageView = UIImageView(image: backgroundImage)
         self.tableView.backgroundView = imageView
     }
+    
     
     //MARK: Tableview Datasource
     public func numberOfSections(in tableView: UITableView) -> Int {
@@ -144,6 +153,36 @@ class TaskViewController: UIViewController, UITableViewDataSource, UITableViewDe
         
     }
     
+//    func fetchRoom() {
+//        let query = PFQuery(className: "Room")
+//        
+////        query.whereKey("members", equalTo: PFUser.current())
+//        
+//        query.findObjectsInBackground { (rooms: [PFObject]?, error: Error?) in
+//            
+//            if let error = error {
+//                print(#line, error.localizedDescription)
+//                return
+//            }
+//            guard let rooms = rooms else {return }
+//            
+//            let checkRoom = rooms.contains(where: { (room) -> Bool in
+////                room as? Room == self.myRoom ? true : false
+////
+////                if checkRoom == true {
+////                    self.myRoom = room as? Room
+////                }
+//                guard let roomName = room["roomName"] as? String else { return }
+//                if roomName == self.myRoom?.roomName {
+//                    return true
+//                }
+//            })
+//
+//
+//        }
+//        
+//    }
+    
     
     //MARK: Fetch Parse
     //fetch task depending on Room
@@ -157,13 +196,8 @@ class TaskViewController: UIViewController, UITableViewDataSource, UITableViewDe
         }
         
         taskQuery.whereKey("room", equalTo: myRoom)
-        
-        guard let currentUser = PFUser.current() else{
-            navigationController?.popToRootViewController(animated: true)
-            return
-        }
                 
-        taskQuery.findObjectsInBackground { (tasks:[PFObject]?, error: Error?) in
+        taskQuery.findObjectsInBackground { (result: [PFObject]?, error: Error?) in
             
             //error handling
             if let error = error {
@@ -172,10 +206,10 @@ class TaskViewController: UIViewController, UITableViewDataSource, UITableViewDe
             }
             
             //return the statement before it actually fetches
-            guard let tasks = tasks else { return }
+            guard let result = result as? [Task] else { return }
             
             //dont append tasks. just set it to equal the array to display all the tasks.
-            self.tasks = tasks as! [Task]
+            self.tasks = result
             self.tableView.reloadData()
         }
         
