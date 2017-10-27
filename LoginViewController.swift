@@ -80,7 +80,6 @@ class LoginViewController: UIViewController {
                 fatalError("unexpected destination:\(segue.destination)")
             }
             
-            
         case "userRegisterSegue":
             guard let registerController = segue.destination as? RegisterViewController else {
                 fatalError("unexpected destination:\(segue.destination)")

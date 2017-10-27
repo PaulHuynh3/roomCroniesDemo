@@ -65,7 +65,6 @@ class TaskViewController: UIViewController, UITableViewDataSource, UITableViewDe
         cell.backgroundColor = UIColor(white: 1.0, alpha: 0.5)
         cell.layer.cornerRadius = 20
         cell.layer.masksToBounds = true
-
         
         return cell
         
@@ -137,7 +136,6 @@ class TaskViewController: UIViewController, UITableViewDataSource, UITableViewDe
     }
     
     
-    
     //MARK: Task Delegate
     func addTaskObject(task: Task) {
         
@@ -160,6 +158,11 @@ class TaskViewController: UIViewController, UITableViewDataSource, UITableViewDe
         
         taskQuery.whereKey("room", equalTo: myRoom)
         
+        guard let currentUser = PFUser.current() else{
+            navigationController?.popToRootViewController(animated: true)
+            return
+        }
+                
         taskQuery.findObjectsInBackground { (tasks:[PFObject]?, error: Error?) in
             
             //error handling
@@ -171,7 +174,7 @@ class TaskViewController: UIViewController, UITableViewDataSource, UITableViewDe
             //return the statement before it actually fetches
             guard let tasks = tasks else { return }
             
-            //dont append it here.. just set the array to display all the tasks.
+            //dont append tasks. just set it to equal the array to display all the tasks.
             self.tasks = tasks as! [Task]
             self.tableView.reloadData()
         }
