@@ -57,7 +57,8 @@ class RegisterNewRoomViewController: UIViewController {
                 DataManager.signup(with: username, and: password) { (success:Bool?, error:Error?) in
                     
                     guard success == true else {
-                        print("Problems creating User!")
+                       let error = R.error(with: "Problems Creating User")
+                        self.showErrorView(error)
                         return
                     }
                     guard let user = PFUser.current() else {
