@@ -41,13 +41,15 @@ class RegisterViewController: UIViewController {
             let password = passwordTextField.text,
             username.isEmpty == false,
             password.isEmpty == false else {
-                print("Username and Password fields cannot be empty.")
+                let error = R.error(with: "Username and Password fields cannot be empty.")
+                showErrorView(error)
                 return
         }
         
         guard let newRoomCheck = roomTextField.text
             else {
-                print(#line, "Please enter room name")
+                let error = R.error(with: "Please enter room name")
+                showErrorView(error)
                 return
         }
         
@@ -63,7 +65,8 @@ class RegisterViewController: UIViewController {
         })
         
         if roomExists == true {
-            print("Room Name Already Exists! Please try again!")
+            let error = R.error(with: "Room Name Already Exists! Please try again!")
+            showErrorView(error)
             return
         }
         
@@ -96,7 +99,6 @@ class RegisterViewController: UIViewController {
         
         //create user with 
         guard let user = PFUser.current() else {
-            print("Error creating current user.")
             return
         }
         

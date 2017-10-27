@@ -32,13 +32,15 @@ class RegisterNewRoomViewController: UIViewController {
             let password = passwordTextField.text,
             username.isEmpty == false,
             password.isEmpty == false else {
-                print("Username and Password fields cannot be empty.")
+                let error = R.error(with: "Username and Password fields cannot be empty.")
+                showErrorView(error)
                 return
         }
         
         guard let existingRoomCheck = existingRoomTextField.text
             else {
-                print(#line, "Existing room can not be blank!")
+                let error = R.error(with: "Existing room can not be blank!")
+                showErrorView(error)
                 return
         }
         
@@ -74,7 +76,8 @@ class RegisterNewRoomViewController: UIViewController {
                     }
                 }
             } else {
-                print("Existing Room does not exist. Please try again.")
+                let error = R.error(with: "Existing room does not exist. Please try again")
+                self.showErrorView(error)
             }
         })
     }
