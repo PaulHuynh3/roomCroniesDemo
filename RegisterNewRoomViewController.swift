@@ -18,15 +18,13 @@ class RegisterNewRoomViewController: UIViewController {
     @IBOutlet weak var existingRoomTextField: UITextField!
     
 
-    var existingRoom: Room?
     var listOfRoom: [Room]?
+    var joinExistingRoom: Room?
     
     override func viewDidLoad() {
         super.viewDidLoad()
         navigationController?.isNavigationBarHidden = false
         fetchExistingRoom()
-        //create an instance of the room so its store in memory so you can use its properties.. createroom.roomName etc because the optional chaining.
-        existingRoom = Room()
     }
     
     //MARK: IBAction
@@ -46,45 +44,41 @@ class RegisterNewRoomViewController: UIViewController {
                 return
         }
         
-        
         //query to see if there is an existing room.
         let roomQuery = Room.query()
         roomQuery?.whereKey("roomName", equalTo: existingRoomTextField.text!)
         roomQuery?.findObjectsInBackground(block: { (results, error) in
             if let results = results as? [Room],
                 let foundRoom = results.first {
-                // Use the room that you found from the database
-                self.existingRoomTextField.text = foundRoom.roomName
                 
-            }
-        })
-        
-        
-        //if room does not exist
-        existingRoom?.roomName = existingRoomTextField.text!
-        //put this in a function later.
-        let roomExists = listOfRoom?.contains(where: { (room) -> Bool in
-            
-            if existingRoom?.roomName == room.roomName{
-                return true
+                // Use the room found from the database
+                self.joinExistingRoom = foundRoom
+                
+                Person.signup(with: username, and: password) { (success:Bool?, error:Error?) in
+                    
+                    guard success == true else {
+                        print("Problems creating User!")
+                        return
+                    }
+                    guard let user = PFUser.current() else {
+                        print("Error creating current user.")
+                        return
+                    }
+                    
+                    self.joinExistingRoom?.members.append(user)
+                    
+                    self.joinExistingRoom?.saveInBackground { (success: Bool?, error: Error?) in
+                        print(#line, success)
+                        print(#line, error?.localizedDescription ?? "No error saving")
+                        if success ?? false {
+                            self.performSegue(withIdentifier:"TaskViewControllerSegue", sender: nil)
+                        }
+                    }
+                }
             } else {
-                return false
+                print("Existing Room does not exist. Please try again.")
             }
         })
-        
-        if roomExists == false {
-            print("Existing Room does not exist. Please try again.")
-            return
-        }
-        
-        Person.signup(with: username, and: password) { (success:Bool?, error:Error?) in
-            
-            guard success == true else {
-                print("Problems creating User!")
-                return
-            }
-            self.performSegue(withIdentifier:"TaskViewControllerSegue", sender: nil)
-        }
     }
     
     
@@ -96,24 +90,7 @@ class RegisterNewRoomViewController: UIViewController {
             fatalError("unexpected destination:\(segue.destination)")
         }
         //join existing room.
-        existingRoom = Room(roomName: existingRoomTextField.text!)
-        
-        taskViewController.myRoom = existingRoom
-        
-        //create user with
-        guard let user = PFUser.current() else {
-            print("Error creating current user.")
-            return
-        }
-        
-        taskViewController.myRoom?.roomCreator = user
-        taskViewController.myRoom?.members.append(user)
-        
-        
-        existingRoom?.saveInBackground { (success: Bool?, error: Error?) in
-            print(#line, success)
-            print(#line, error?.localizedDescription ?? "No error saving")
-        }
+        taskViewController.myRoom = joinExistingRoom
         
     }
     
