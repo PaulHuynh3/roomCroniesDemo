@@ -38,9 +38,9 @@ class TaskViewController: UIViewController, UITableViewDataSource, UITableViewDe
     }
     //should refresh tableview if something was deleted from the cloud.
     //will fix soon.
-    override func viewWillAppear(_ animated: Bool) {
-        self.tableView.reloadData()
-    }
+//    override func viewWillAppear(_ animated: Bool) {
+//        self.tableView.reloadData()
+//    }
     
     
     
@@ -63,19 +63,16 @@ class TaskViewController: UIViewController, UITableViewDataSource, UITableViewDe
         guard let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath) as? TaskViewCell else {
             
             fatalError("The dequeued cell is not TaskViewCell")
-            
         }
         
-        let task = tasks[indexPath.section]
+        let createTask = tasks[indexPath.row]
         
-        cell.setupCell(task: task)
+        cell.setupCell(task: createTask)
         //cell.contentView.backgroundColor = UIColor.clear;
         cell.backgroundColor = UIColor(white: 1.0, alpha: 0.5)
         cell.layer.cornerRadius = 20
         cell.layer.masksToBounds = true
-        
-        
-        
+
         
         return cell
         
