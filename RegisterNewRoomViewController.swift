@@ -17,15 +17,12 @@ class RegisterNewRoomViewController: UIViewController {
     
     @IBOutlet weak var existingRoomTextField: UITextField!
     
-
-    var createRoom: Room?
-    var listOfRoom: [Room]?
+    
+    var joinExistingRoom: Room?
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        fetchExistingRoom()
-        //create an instance of the room so its store in memory so you can use its properties.. createroom.roomName etc because the optional chaining.
-        createRoom = Room()
+        navigationController?.isNavigationBarHidden = false
     }
     
     //MARK: IBAction
@@ -35,17 +32,17 @@ class RegisterNewRoomViewController: UIViewController {
             let password = passwordTextField.text,
             username.isEmpty == false,
             password.isEmpty == false else {
-                print("Username and Password fields cannot be empty.")
+                let error = R.error(with: "Username and Password fields cannot be empty.")
+                showErrorView(error)
                 return
         }
         
         guard let existingRoomCheck = existingRoomTextField.text
             else {
-                print(#line, "Please enter the existing room")
+                let error = R.error(with: "Existing room can not be blank!")
+                showErrorView(error)
                 return
         }
-        
-        
         
         //query to see if there is an existing room.
         let roomQuery = Room.query()
@@ -53,40 +50,36 @@ class RegisterNewRoomViewController: UIViewController {
         roomQuery?.findObjectsInBackground(block: { (results, error) in
             if let results = results as? [Room],
                 let foundRoom = results.first {
-                // Use the room that you found from the database
                 
+                // Use the room found from the database
+                self.joinExistingRoom = foundRoom
                 
+                Person.signup(with: username, and: password) { (success:Bool?, error:Error?) in
+                    
+                    guard success == true else {
+                        print("Problems creating User!")
+                        return
+                    }
+                    guard let user = PFUser.current() else {
+                        print("Error creating current user.")
+                        return
+                    }
+                    
+                    self.joinExistingRoom?.members.append(user)
+                    
+                    self.joinExistingRoom?.saveInBackground { (success: Bool?, error: Error?) in
+                        print(#line, success)
+                        print(#line, error?.localizedDescription ?? "No error saving")
+                        if success ?? false {
+                            self.performSegue(withIdentifier:"TaskViewControllerSegue", sender: nil)
+                        }
+                    }
+                }
             } else {
-                // Create a new room
-                
-                
+                let error = R.error(with: "Existing room does not exist. Please try again")
+                self.showErrorView(error)
             }
         })
-        createRoom?.roomName = existingRoomTextField.text!
-        
-        //put this in a function
-        let roomExists = listOfRoom?.contains(where: { (room) -> Bool in
-            
-            if createRoom?.roomName == room.roomName{
-                return true
-            } else {
-                return false
-            }
-        })
-        
-        if roomExists == false {
-            print("Existing Room does not exist. Please try again.")
-            return
-        }
-        
-        Person.signup(with: username, and: password) { (success:Bool?, error:Error?) in
-            
-            guard success == true else {
-                print("Problems creating User!")
-                return
-            }
-            self.performSegue(withIdentifier:"TaskViewControllerSegue", sender: nil)
-        }
     }
     
     
@@ -98,47 +91,12 @@ class RegisterNewRoomViewController: UIViewController {
             fatalError("unexpected destination:\(segue.destination)")
         }
         //join existing room.
-        createRoom = Room(roomName: existingRoomTextField.text!)
-        
-        taskViewController.myRoom = createRoom
-        
-        //create user with
-        guard let user = PFUser.current() else {
-            print("Error creating current user.")
-            return
-        }
-        
-        taskViewController.myRoom?.roomCreator = user
-        taskViewController.myRoom?.members.append(user)
-        
-        
-        createRoom?.saveInBackground { (success: Bool?, error: Error?) in
-            print(#line, success)
-            print(#line, error?.localizedDescription ?? "No error saving")
-        }
+        taskViewController.myRoom = joinExistingRoom
         
     }
     
     
-    //Fetch Parse
-    func fetchExistingRoom () {
-        let query = PFQuery(className: "Room")
-        
-        query.findObjectsInBackground { (rooms:[PFObject]?, error: Error?) in
-            
-            if let error = error{
-                print(#line, error.localizedDescription)
-                return
-            }
-            
-            guard let rooms = rooms as? [Room] else {
-                return
-            }
-            
-            self.listOfRoom = rooms
-        }
-        
-    }
+    
     
     
     

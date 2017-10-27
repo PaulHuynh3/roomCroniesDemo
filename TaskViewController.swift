@@ -22,7 +22,6 @@ class TaskViewController: UIViewController, UITableViewDataSource, UITableViewDe
     
     //this tells you to create an initializer without putting "?" on room because its created before view did load.
     var myRoom : Room?
-//    var CurrentUser : PFUser?
     
     @IBOutlet weak var tableView: UITableView!
     
@@ -31,10 +30,6 @@ class TaskViewController: UIViewController, UITableViewDataSource, UITableViewDe
     override func viewDidLoad() {
         super.viewDidLoad()
         fetchRoom()
-        
-        //create an instance of a room in viewdidload so it will stay the same except everytime the user clicks start... This should be when the user creates the login page
-
-//        myRoom = Room(roomName: "StoryBook")
         navigationController?.isNavigationBarHidden = false
         let backgroundImage = UIImage(named: "iphone-3.jpg")
         let imageView = UIImageView(image: backgroundImage)
@@ -43,9 +38,9 @@ class TaskViewController: UIViewController, UITableViewDataSource, UITableViewDe
     }
     //should refresh tableview if something was deleted from the cloud.
     //will fix soon.
-    override func viewWillAppear(_ animated: Bool) {
-        self.tableView.reloadData()
-    }
+//    override func viewWillAppear(_ animated: Bool) {
+//        self.tableView.reloadData()
+//    }
     
     
     
@@ -68,19 +63,16 @@ class TaskViewController: UIViewController, UITableViewDataSource, UITableViewDe
         guard let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath) as? TaskViewCell else {
             
             fatalError("The dequeued cell is not TaskViewCell")
-            
         }
         
-        let task = tasks[indexPath.section]
+        let createTask = tasks[indexPath.row]
         
-        cell.setupCell(task: task)
+        cell.setupCell(task: createTask)
         //cell.contentView.backgroundColor = UIColor.clear;
         cell.backgroundColor = UIColor(white: 1.0, alpha: 0.5)
         cell.layer.cornerRadius = 20
         cell.layer.masksToBounds = true
-        
-        
-        
+
         
         return cell
         
@@ -122,7 +114,6 @@ class TaskViewController: UIViewController, UITableViewDataSource, UITableViewDe
             //pass the roomObject to addTask
             //assigning the property to the room object created in viewdidload.
             addTaskVC.roomObject = myRoom
-            
             
             //set to be the task delegate
             addTaskVC.taskDelegate = self

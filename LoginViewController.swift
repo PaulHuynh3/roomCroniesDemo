@@ -50,7 +50,8 @@ class LoginViewController: UIViewController {
             let password = passwordTextField.text,
             username.isEmpty == false,
             password.isEmpty == false else {
-                print("Username and Password fields cannot be empty. Please enter and try again!")
+             let error = R.error(with: "Username and Password fields cannot be empty. Please enter and try again!")
+                showErrorView(error)
                 return
         }
         Person.login(with: username, and: password) { (success: Bool, error: Error?) in
@@ -97,7 +98,8 @@ class LoginViewController: UIViewController {
     }
     
     
-    //MARK: Fetch Parse
+    
+  
     
     
     
