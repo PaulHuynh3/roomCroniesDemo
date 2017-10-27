@@ -18,13 +18,11 @@ class RegisterNewRoomViewController: UIViewController {
     @IBOutlet weak var existingRoomTextField: UITextField!
     
 
-    var listOfRoom: [Room]?
     var joinExistingRoom: Room?
     
     override func viewDidLoad() {
         super.viewDidLoad()
         navigationController?.isNavigationBarHidden = false
-        fetchExistingRoom()
     }
     
     //MARK: IBAction
@@ -95,25 +93,7 @@ class RegisterNewRoomViewController: UIViewController {
     }
     
     
-    //Fetch Parse
-    func fetchExistingRoom () {
-        let query = PFQuery(className: "Room")
-        
-        query.findObjectsInBackground { (rooms:[PFObject]?, error: Error?) in
-            
-            if let error = error{
-                print(#line, error.localizedDescription)
-                return
-            }
-            
-            guard let rooms = rooms as? [Room] else {
-                return
-            }
-            
-            self.listOfRoom = rooms
-        }
-        
-    }
+
     
     
     

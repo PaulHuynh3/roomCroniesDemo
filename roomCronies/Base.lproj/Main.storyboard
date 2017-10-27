@@ -10,10 +10,10 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Create new room-->
+        <!--Join Existing Room-->
         <scene sceneID="rOC-nq-q3H">
             <objects>
-                <viewController title="Create new room" id="Ixv-aW-OZ3" customClass="RegisterNewRoomViewController" customModule="roomCronies" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController title="Join Existing Room" id="Ixv-aW-OZ3" customClass="RegisterNewRoomViewController" customModule="roomCronies" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="qlN-ZW-izh"/>
                         <viewControllerLayoutGuide type="bottom" id="ZFH-1g-CKC"/>
@@ -374,6 +374,6 @@
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="1od-P2-kcF"/>
-        <segue reference="98Q-oU-gbY"/>
+        <segue reference="xdD-y4-fc8"/>
     </inferredMetricsTieBreakers>
 </document>
