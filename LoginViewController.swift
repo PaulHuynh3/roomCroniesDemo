@@ -35,7 +35,7 @@ class LoginViewController: UIViewController {
     }
     
     private func checkLoginState() {
-        Person.checkUserLoginState { (success: Bool) in
+        DataManager.checkUserLoginState { (success: Bool) in
             print(#line, success ? "": "not ", "auto logged in")
             if success {
                 self.segue()
@@ -54,7 +54,7 @@ class LoginViewController: UIViewController {
                 showErrorView(error)
                 return
         }
-        Person.login(with: username, and: password) { (success: Bool, error: Error?) in
+        DataManager.login(with: username, and: password) { (success: Bool, error: Error?) in
             
             guard error == nil, success == true else {
                 print(#line, "not logged in")
@@ -79,7 +79,7 @@ class LoginViewController: UIViewController {
      // Use the room found from the database
      self.joinExistingRoom = foundRoom
      
-     Person.signup(with: username, and: password) { (success:Bool?, error:Error?) in
+     DataManager.signup(with: username, and: password) { (success:Bool?, error:Error?) in
      
      guard success == true else {
      print("Problems creating User!")

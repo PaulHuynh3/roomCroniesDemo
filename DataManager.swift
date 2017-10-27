@@ -9,7 +9,7 @@
 import Foundation
 import Parse
 
-class DataManager {
+class DataManager  {
     static func getRoom(completion:@escaping (Room)->()) {
         guard let currentUser = PFUser.current() else { return }
         let roomQuery = Room.query()
@@ -30,4 +30,31 @@ class DataManager {
             completion(room)
         })
     }
+    
+    static func checkUserLoginState(completion:(Bool) -> Void) {
+        completion(PFUser.current()?.isAuthenticated ?? false)
+    }
+    
+    static func login(with userName: String, and password: String, completion:@escaping (Bool, Error?)-> Void) {
+        PFUser.logInWithUsername(inBackground: userName, password: password) { user, error in
+            guard let _ = user else {
+                completion(false, error)
+                return
+            }
+            completion(true, nil)
+        }
+    }
+    
+    static func signup(with userName: String, and password: String, completion: @escaping (Bool, Error?)-> Void) {
+        let user = PFUser()
+        user.username = userName
+        user.password = password
+        user.signUpInBackground { success, error in
+            completion(success, error)
+        }
+    }
+    
+    
+    
+    
 }

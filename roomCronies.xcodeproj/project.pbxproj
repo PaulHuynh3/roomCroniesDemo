@@ -19,7 +19,6 @@
 		DA7AB7B21F99219D00E816C9 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DA7AB7B01F99219D00E816C9 /* Main.storyboard */; };
 		DA7AB7B71F99219D00E816C9 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DA7AB7B51F99219D00E816C9 /* LaunchScreen.storyboard */; };
 		DAF0D1DA1FA28CEF007DD485 /* RegisterNewRoomViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAF0D1D91FA28CEF007DD485 /* RegisterNewRoomViewController.swift */; };
-		DAF3FA021F9A27270095B7A4 /* Person.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAF3FA011F9A27270095B7A4 /* Person.swift */; };
 		DAF3FA041F9A5BA60095B7A4 /* Room.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAF3FA031F9A5BA60095B7A4 /* Room.swift */; };
 		DAF3FA061F9A5DA60095B7A4 /* Task.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAF3FA051F9A5DA60095B7A4 /* Task.swift */; };
 		DAF3FA081F9A62690095B7A4 /* Expense.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAF3FA071F9A62690095B7A4 /* Expense.swift */; };
@@ -47,7 +46,6 @@
 		DA7AB7B61F99219D00E816C9 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		DA7AB7B81F99219D00E816C9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		DAF0D1D91FA28CEF007DD485 /* RegisterNewRoomViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterNewRoomViewController.swift; sourceTree = "<group>"; };
-		DAF3FA011F9A27270095B7A4 /* Person.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Person.swift; sourceTree = "<group>"; };
 		DAF3FA031F9A5BA60095B7A4 /* Room.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Room.swift; sourceTree = "<group>"; };
 		DAF3FA051F9A5DA60095B7A4 /* Task.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Task.swift; sourceTree = "<group>"; };
 		DAF3FA071F9A62690095B7A4 /* Expense.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Expense.swift; sourceTree = "<group>"; };
@@ -88,7 +86,6 @@
 		DA0F0FE01F9928190057F23E /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				DAF3FA011F9A27270095B7A4 /* Person.swift */,
 				DAF3FA031F9A5BA60095B7A4 /* Room.swift */,
 				DAF3FA051F9A5DA60095B7A4 /* Task.swift */,
 				DAF3FA071F9A62690095B7A4 /* Expense.swift */,
@@ -316,7 +313,6 @@
 				DAF3FA0C1F9A99780095B7A4 /* AddTaskViewController.swift in Sources */,
 				DA42202C1F9FFDF4009FB67F /* RegisterViewController.swift in Sources */,
 				DAF3FA0A1F9A99120095B7A4 /* TaskViewController.swift in Sources */,
-				DAF3FA021F9A27270095B7A4 /* Person.swift in Sources */,
 				DA7AB7AD1F99219D00E816C9 /* AppDelegate.swift in Sources */,
 				DA350E181FA2C791001C653A /* R.swift in Sources */,
 				DAF3FA061F9A5DA60095B7A4 /* Task.swift in Sources */,

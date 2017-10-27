@@ -54,7 +54,7 @@ class RegisterNewRoomViewController: UIViewController {
                 // Use the room found from the database
                 self.joinExistingRoom = foundRoom
                 
-                Person.signup(with: username, and: password) { (success:Bool?, error:Error?) in
+                DataManager.signup(with: username, and: password) { (success:Bool?, error:Error?) in
                     
                     guard success == true else {
                         print("Problems creating User!")
