@@ -17,7 +17,7 @@ class RegisterNewRoomViewController: UIViewController {
     
     @IBOutlet weak var existingRoomTextField: UITextField!
     
-
+    
     var joinExistingRoom: Room?
     
     override func viewDidLoad() {
@@ -96,7 +96,7 @@ class RegisterNewRoomViewController: UIViewController {
     }
     
     
-
+    
     
     
     
