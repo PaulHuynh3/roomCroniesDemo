@@ -77,6 +77,8 @@ class RegisterViewController: UIViewController {
                 print("Problems creating User!")
                 return
             }
+            
+            
             self.performSegue(withIdentifier: "TaskViewControllerSegue", sender: nil)
         }
     }
@@ -90,10 +92,6 @@ class RegisterViewController: UIViewController {
             fatalError("unexpected destination:\(segue.destination)")
         }
         
-        //Pass the room object through the segue.
-        taskViewController.myRoom = createRoom
-        
-        
         //creates a new room
         createRoom = Room(roomName: roomTextField.text!)
         
@@ -101,9 +99,8 @@ class RegisterViewController: UIViewController {
         guard let user = PFUser.current() else {
             return
         }
-        
-        taskViewController.myRoom?.roomCreator = user
-        taskViewController.myRoom?.members.append(user)
+        createRoom?.roomCreator = user
+        createRoom?.members = [user]
         
         createRoom?.saveInBackground { (success: Bool?, error: Error?) in
             print(#line, success)

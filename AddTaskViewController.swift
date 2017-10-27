@@ -29,7 +29,7 @@ class AddTaskViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        task = Task()
         if let task = task{
             
             taskNameTextField.text = task.taskName
@@ -46,26 +46,23 @@ class AddTaskViewController: UIViewController {
     
     @IBAction func saveButtonTapped(_ sender: UIBarButtonItem) {
         
-        let task = Task()
-        
-        
         if let name = taskNameTextField.text {
-            task.taskName = name
+            task?.taskName = name
             
         }
         
         if let description = taskDescriptionTextField.text {
-            task.taskDescription = description
+            task?.taskDescription = description
         }
         
         
         if let priorityNumber = Int(taskPriorityTextField.text!) {
             
-            task.priority = priorityNumber
+            task?.priority = priorityNumber
         }
         
         //the roomObject passed from the segue.
-        task.room = roomObject!
+        task?.room = roomObject!
         
         //relationship created with the currentUser
         guard  let currentUser = PFUser.current() else {
@@ -73,14 +70,14 @@ class AddTaskViewController: UIViewController {
             navigationController?.popToRootViewController(animated: true)
             return
         }
-        task.createdBy = currentUser
+        task?.createdBy = currentUser
         
-        task.saveInBackground { (success, error) in
+        task?.saveInBackground { (success, error) in
             print(#line, success)
             print(#line, error?.localizedDescription ?? "No error saving")
         }
         
-        taskDelegate?.addTaskObject(task: task)
+        taskDelegate?.addTaskObject(task: task!)
         
         //presented modally.
         dismiss(animated: true, completion: nil)

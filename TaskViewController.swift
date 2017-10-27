@@ -159,6 +159,7 @@ class TaskViewController: UIViewController, UITableViewDataSource, UITableViewDe
         //only members of that room will see the tasks.
         query.whereKey("members", equalTo: PFUser.current()!)
         
+        
         //findObjectsInBackground already made a network request so we dont need to call it with a completion handler.
         
         query.findObjectsInBackground { (rooms:[PFObject]?, error: Error?) in
