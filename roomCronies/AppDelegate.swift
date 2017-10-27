@@ -25,7 +25,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         //        paulCreateTask()
         //        paulCreateExpense()
         //        fetchPerson()
-        fetchMembers()
+//        fetchMembers()
         //testPush()
 //        testPush2()
 //        testPush3()
