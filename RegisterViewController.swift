@@ -94,7 +94,7 @@ class RegisterViewController: UIViewController {
                     print(#line, "not success")
                     return
                 }
-                //this has to be within the asynchronous 
+                //this has to be within the asynchronous call or else it will crash
                 self.performSegue(withIdentifier: "TaskViewControllerSegue", sender: nil)
             }
         }
