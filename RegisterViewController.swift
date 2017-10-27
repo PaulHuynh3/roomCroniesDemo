@@ -27,8 +27,6 @@ class RegisterViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         fetchExistingRoom()
-        //create an instance of the room so its store in memory so you can use its properties.. createroom.roomName etc because the optional chaining.
-        createRoom = Room()
         navigationController?.isNavigationBarHidden = false
         //self.navigationController?.navigationBar.isTranslucent = false
     }
@@ -53,14 +51,10 @@ class RegisterViewController: UIViewController {
                 return
         }
         
-        
-        //since this is an optional createRoom I need to create an instance of it in viewdidload
-        createRoom?.roomName = newRoomCheck
-        
         //put this in a function
         let roomExists = listOfRoom?.contains(where: { (room) -> Bool in
             
-        createRoom?.roomName == room.roomName ? true : false
+            newRoomCheck == room.roomName
           
         })
         
