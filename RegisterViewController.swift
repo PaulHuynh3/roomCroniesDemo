@@ -106,8 +106,8 @@ class RegisterViewController: UIViewController {
         guard let taskViewController = segue.destination as? TaskViewController else {
             fatalError("unexpected destination:\(segue.destination)")
         }
+        //pass new room taskvc.
         taskViewController.myRoom = createRoom
-
     }
     
     

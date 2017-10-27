@@ -29,7 +29,8 @@ class TaskViewController: UIViewController, UITableViewDataSource, UITableViewDe
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        fetchRoom()
+        
+        
         navigationController?.isNavigationBarHidden = false
         let backgroundImage = UIImage(named: "iphone-3.jpg")
         let imageView = UIImageView(image: backgroundImage)
