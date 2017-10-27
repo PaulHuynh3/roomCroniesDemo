@@ -71,6 +71,7 @@ class RegisterNewRoomViewController: UIViewController {
                         print(#line, success)
                         print(#line, error?.localizedDescription ?? "No error saving")
                         if success ?? false {
+                            //this has to be in the block (asynchronous call)
                             self.performSegue(withIdentifier:"TaskViewControllerSegue", sender: nil)
                         }
                     }

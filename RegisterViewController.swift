@@ -85,7 +85,7 @@ class RegisterViewController: UIViewController {
             }
             createRoom.roomCreator = user
             createRoom.members = [user]
-            
+            //asynchronous call
             createRoom.saveInBackground { (success: Bool?, error: Error?) in
                 if let error = error {
                     print(#line, error.localizedDescription)
@@ -94,6 +94,7 @@ class RegisterViewController: UIViewController {
                     print(#line, "not success")
                     return
                 }
+                //this has to be within the asynchronous 
                 self.performSegue(withIdentifier: "TaskViewControllerSegue", sender: nil)
             }
         }

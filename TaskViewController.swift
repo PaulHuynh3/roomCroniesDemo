@@ -22,10 +22,8 @@ class TaskViewController: UIViewController, UITableViewDataSource, UITableViewDe
     //this tells you to create an initializer without putting "?" on room because its created before view did load.
     var myRoom : Room? = nil {
         didSet {
+            //when login viewdidload may load before it gets set.
             fetchTaskByRoom()
-//            guard let newTasks = myRoom?.tasks else { return }
-//            tasks = newTasks
-//            tableView.reloadData()
         }
     }
     var tasks: [Task] = []
@@ -36,6 +34,7 @@ class TaskViewController: UIViewController, UITableViewDataSource, UITableViewDe
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        //fetches the room related to the user.
         DataManager.getRoom(completion: {[unowned self] (room) in
             self.myRoom = room
         })
@@ -214,6 +213,8 @@ class TaskViewController: UIViewController, UITableViewDataSource, UITableViewDe
         }
         
     }
+    
+    
     
     
     
