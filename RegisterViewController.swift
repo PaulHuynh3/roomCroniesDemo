@@ -78,6 +78,21 @@ class RegisterViewController: UIViewController {
                 return
             }
             
+            //creates a new room
+            self.createRoom = Room(roomName: self.roomTextField.text!)
+            
+            //create user with
+            guard let user = PFUser.current() else {
+                return
+            }
+            self.createRoom?.roomCreator = user
+            self.createRoom?.members = [user]
+            
+            self.createRoom?.saveInBackground { (success: Bool?, error: Error?) in
+                print(#line, success)
+                print(#line, error?.localizedDescription ?? "No error saving")
+            }
+            
             
             self.performSegue(withIdentifier: "TaskViewControllerSegue", sender: nil)
         }
@@ -91,22 +106,8 @@ class RegisterViewController: UIViewController {
         guard let taskViewController = segue.destination as? TaskViewController else {
             fatalError("unexpected destination:\(segue.destination)")
         }
-        
-        //creates a new room
-        createRoom = Room(roomName: roomTextField.text!)
-        
-        //create user with 
-        guard let user = PFUser.current() else {
-            return
-        }
-        createRoom?.roomCreator = user
-        createRoom?.members = [user]
-        
-        createRoom?.saveInBackground { (success: Bool?, error: Error?) in
-            print(#line, success)
-            print(#line, error?.localizedDescription ?? "No error saving")
-        }
-        
+        taskViewController.myRoom = createRoom
+
     }
     
     
