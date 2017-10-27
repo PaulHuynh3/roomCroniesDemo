@@ -47,7 +47,7 @@ class RegisterViewController: UIViewController {
         
         guard let newRoomCheck = roomTextField.text
             else {
-                print(#line, "Please enter existing room or new room name")
+                print(#line, "Please enter room name")
                 return
         }
         
@@ -58,11 +58,8 @@ class RegisterViewController: UIViewController {
         //put this in a function
         let roomExists = listOfRoom?.contains(where: { (room) -> Bool in
             
-            if createRoom?.roomName == room.roomName{
-                return true
-            } else {
-                return false
-            }
+        createRoom?.roomName == room.roomName ? true : false
+            
         })
         
         if roomExists == true {
@@ -89,10 +86,13 @@ class RegisterViewController: UIViewController {
         guard let taskViewController = segue.destination as? TaskViewController else {
             fatalError("unexpected destination:\(segue.destination)")
         }
+        
+        //Pass the room object through the segue.
+        taskViewController.myRoom = createRoom
+        
+        
         //creates a new room
         createRoom = Room(roomName: roomTextField.text!)
-        
-        taskViewController.myRoom = createRoom
         
         //create user with 
         guard let user = PFUser.current() else {
@@ -102,7 +102,6 @@ class RegisterViewController: UIViewController {
         
         taskViewController.myRoom?.roomCreator = user
         taskViewController.myRoom?.members.append(user)
-        
         
         createRoom?.saveInBackground { (success: Bool?, error: Error?) in
             print(#line, success)

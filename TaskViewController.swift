@@ -22,7 +22,6 @@ class TaskViewController: UIViewController, UITableViewDataSource, UITableViewDe
     
     //this tells you to create an initializer without putting "?" on room because its created before view did load.
     var myRoom : Room?
-//    var CurrentUser : PFUser?
     
     @IBOutlet weak var tableView: UITableView!
     
@@ -31,10 +30,6 @@ class TaskViewController: UIViewController, UITableViewDataSource, UITableViewDe
     override func viewDidLoad() {
         super.viewDidLoad()
         fetchRoom()
-        
-        //create an instance of a room in viewdidload so it will stay the same except everytime the user clicks start... This should be when the user creates the login page
-
-//        myRoom = Room(roomName: "StoryBook")
         navigationController?.isNavigationBarHidden = false
         let backgroundImage = UIImage(named: "iphone-3.jpg")
         let imageView = UIImageView(image: backgroundImage)

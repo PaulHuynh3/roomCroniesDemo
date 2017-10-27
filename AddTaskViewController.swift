@@ -126,18 +126,4 @@ class AddTaskViewController: UIViewController {
     
     
     
-    //says that this task is created by current user.
-    //        task.room = PFUser.current()
-    
-    
-    // does the query
-    //        let taskQuery = PFQuery(className:"Task")
-    //        if let user = PFUser.current(){
-    //
-    //            taskQuery.whereKey("roomOne", equalTo:user)
-    //        }
-    
-    
-    
-    
 }
