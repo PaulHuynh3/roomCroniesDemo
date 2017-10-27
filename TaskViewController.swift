@@ -133,7 +133,7 @@ class TaskViewController: UIViewController, UITableViewDataSource, UITableViewDe
                 
             }
             
-            let selectedTask = tasks[indexPath.row]
+            let selectedTask = tasks[indexPath.section]
             detailedTaskVc.task = selectedTask
             
         default:
