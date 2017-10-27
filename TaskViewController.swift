@@ -21,27 +21,21 @@ class TaskViewController: UIViewController, UITableViewDataSource, UITableViewDe
     
     //this tells you to create an initializer without putting "?" on room because its created before view did load.
     var myRoom : Room?
+    var tasks:[Task] = []
     
     @IBOutlet weak var tableView: UITableView!
     
-    var tasks:[Task] = []
+  
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         fetchTaskByRoom()
         navigationController?.isNavigationBarHidden = false
         let backgroundImage = UIImage(named: "iphone-3.jpg")
         let imageView = UIImageView(image: backgroundImage)
         self.tableView.backgroundView = imageView
-
     }
-    //should refresh tableview if something was deleted from the cloud.
-    //will fix soon.
-//    override func viewWillAppear(_ animated: Bool) {
-//        self.tableView.reloadData()
-//    }
-    
-    
     
     //MARK: Tableview Datasource
     public func numberOfSections(in tableView: UITableView) -> Int {
@@ -64,7 +58,7 @@ class TaskViewController: UIViewController, UITableViewDataSource, UITableViewDe
             fatalError("The dequeued cell is not TaskViewCell")
         }
         
-        let createTask = tasks[indexPath.row]
+        let createTask = tasks[indexPath.section]
         
         cell.setupCell(task: createTask)
         //cell.contentView.backgroundColor = UIColor.clear;
@@ -111,7 +105,9 @@ class TaskViewController: UIViewController, UITableViewDataSource, UITableViewDe
                 fatalError("unexpected destination:\(segue.destination)")
             }
             //pass the roomObject to addTask
-            //assigning the property to the room object created in viewdidload.
+            guard let myRoom = myRoom else {
+                return
+            }
             addTaskVC.roomObject = myRoom
             
             //set to be the task delegate
@@ -132,7 +128,7 @@ class TaskViewController: UIViewController, UITableViewDataSource, UITableViewDe
                 
             }
             
-            let selectedTask = tasks[indexPath.row]
+            let selectedTask = tasks[indexPath.section]
             detailedTaskVc.task = selectedTask
             
         default:
@@ -157,11 +153,14 @@ class TaskViewController: UIViewController, UITableViewDataSource, UITableViewDe
         let taskQuery = PFQuery(className: "Task")
         taskQuery.order(byAscending: "taskName")
         
-        //fetch room by its variable.
-        //equalTo have to be accessed by the myRoom property because its an object. If its not an object parse will let you access using strings
-        taskQuery.whereKey("room", equalTo: self.myRoom)
+        //fetch room by its variable.        
+        guard let myRoom = self.myRoom else {
+            return
+        }
         
-        taskQuery.findObjectsInBackground { (task:[PFObject]?, error: Error?) in
+        taskQuery.whereKey("room", equalTo: myRoom)
+        
+        taskQuery.findObjectsInBackground { (tasks:[PFObject]?, error: Error?) in
             
             //error handling
             if let error = error {
@@ -169,11 +168,19 @@ class TaskViewController: UIViewController, UITableViewDataSource, UITableViewDe
                 return
             }
             
-            self.tasks.append(contentsOf: task as! [Task])
+            //return the statement before it actually fetches
+            guard let tasks = tasks else { return }
+            
+            //dont append it here.. just set the array to display all the tasks.
+            self.tasks = tasks as! [Task]
             self.tableView.reloadData()
         }
         
     }
+    
+    
+    
+    
   
 }
 
