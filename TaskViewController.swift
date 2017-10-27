@@ -10,7 +10,6 @@ import UIKit
 import Parse
 
 class TaskViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, AddTaskDelegate {
-    
     //MARK: IBAction
     @IBAction func logoutTapped(_ sender: UIBarButtonItem) {
         PFUser.logOut()
@@ -29,7 +28,7 @@ class TaskViewController: UIViewController, UITableViewDataSource, UITableViewDe
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        fetchRoom()
+        fetchTaskByRoom()
         navigationController?.isNavigationBarHidden = false
         let backgroundImage = UIImage(named: "iphone-3.jpg")
         let imageView = UIImageView(image: backgroundImage)
@@ -153,35 +152,7 @@ class TaskViewController: UIViewController, UITableViewDataSource, UITableViewDe
     
     
     //MARK: Fetch Parse
-    func fetchRoom() {
-        let query = PFQuery(className: "Room")
-        
-        //only members of that room will see the tasks.
-        query.whereKey("members", equalTo: PFUser.current()!)
-        
-        //findObjectsInBackground already made a network request so we dont need to call it with a completion handler.
-        
-        query.findObjectsInBackground { (rooms:[PFObject]?, error: Error?) in
-            
-            //error handling
-            if let error = error {
-                print(#line, error.localizedDescription)
-                return
-            }
-            
-            guard let rooms = rooms as? [Room] else { return }
-            //fetch the first room the user is in.
-            //In the future this will need to be configure for which room or rooms to fetch.
-            self.myRoom = rooms.first
-            
-            //fetching all the task associated with the room.
-            self.fetchTaskByRoom()
-            
-        }
-        
-    }
-    
-    //fetch specific task created by specific room ID
+    //fetch task depending on Room
     func fetchTaskByRoom() {
         let taskQuery = PFQuery(className: "Task")
         taskQuery.order(byAscending: "taskName")
