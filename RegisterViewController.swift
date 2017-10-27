@@ -59,7 +59,7 @@ class RegisterViewController: UIViewController {
         let roomExists = listOfRoom?.contains(where: { (room) -> Bool in
             
         createRoom?.roomName == room.roomName ? true : false
-            
+          
         })
         
         if roomExists == true {

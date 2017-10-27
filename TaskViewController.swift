@@ -118,7 +118,6 @@ class TaskViewController: UIViewController, UITableViewDataSource, UITableViewDe
             //assigning the property to the room object created in viewdidload.
             addTaskVC.roomObject = myRoom
             
-            
             //set to be the task delegate
             addTaskVC.taskDelegate = self
             
