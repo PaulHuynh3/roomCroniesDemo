@@ -30,7 +30,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 //        testPush2()
 //        testPush3()
 //        testPush4()
-//        testPush5()
+        testPush5()
     
         return true
     }
