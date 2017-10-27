@@ -65,7 +65,7 @@ class TaskViewController: UIViewController, UITableViewDataSource, UITableViewDe
             fatalError("The dequeued cell is not TaskViewCell")
         }
         
-        let createTask = tasks[indexPath.row]
+        let createTask = tasks[indexPath.section]
         
         cell.setupCell(task: createTask)
         //cell.contentView.backgroundColor = UIColor.clear;
