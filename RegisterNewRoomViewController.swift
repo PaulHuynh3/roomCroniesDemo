@@ -92,6 +92,11 @@ class RegisterNewRoomViewController: UIViewController {
         }
         //join existing room.
         taskViewController.myRoom = joinExistingRoom
+        let currentInstallation = PFInstallation.current()
+        currentInstallation?.remove(forKey: "channels")
+        currentInstallation?.addUniqueObject("\(String(describing: existingRoomTextField.text!))", forKey: "channels")
+        currentInstallation?.saveInBackground()
+        
         
     }
     
