@@ -65,10 +65,10 @@
             </objects>
             <point key="canvasLocation" x="-4" y="-402"/>
         </scene>
-        <!--Task VC-->
+        <!--Room VC-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController title="Task VC" id="BYZ-38-t0r" customClass="TaskViewController" customModule="roomCronies" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController title="Room VC" id="BYZ-38-t0r" customClass="RoomViewController" customModule="roomCronies" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="y3c-jy-aDJ"/>
                         <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
@@ -107,7 +107,7 @@
                                             </subviews>
                                         </tableViewCellContentView>
                                         <connections>
-                                            <outlet property="taskLabel" destination="gco-lG-7mJ" id="kTj-TF-t5E"/>
+                                            <outlet property="taskLabel" destination="gco-lG-7mJ" id="AEp-pY-xqo"/>
                                             <segue destination="kec-Il-1J7" kind="show" identifier="ShowDetailTask" id="1od-P2-kcF"/>
                                         </connections>
                                     </tableViewCell>

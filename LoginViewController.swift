@@ -81,7 +81,7 @@ class LoginViewController: UIViewController {
         switch (segue.identifier ?? "") {
             //dont need to pass anything through segue. taskVC does a query for existing user and fetches the tasks.
         case "TaskViewControllerSegue":
-            guard let _ = segue.destination as? TaskViewController else {
+            guard let _ = segue.destination as? RoomViewController else {
                 print(#line, "unexpected destination:\(segue.destination)")
                 return
             }

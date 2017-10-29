@@ -89,7 +89,7 @@ class ExistingRoomViewController: UIViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         super.prepare(for: segue , sender: sender)
         
-        guard let taskViewController = segue.destination as? TaskViewController else {
+        guard let taskViewController = segue.destination as? RoomViewController else {
             fatalError("unexpected destination:\(segue.destination)")
         }
         //join existing room.

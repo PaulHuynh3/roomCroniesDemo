@@ -9,7 +9,7 @@
 import UIKit
 import Parse
 
-class TaskViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, AddTaskDelegate {
+class RoomViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, AddTaskDelegate {
     //MARK: IBAction
     @IBAction func logoutTapped(_ sender: UIBarButtonItem) {
         PFUser.logOut()
