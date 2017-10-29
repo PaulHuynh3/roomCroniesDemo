@@ -23,7 +23,7 @@ class LoginViewController: UIViewController {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(true)
 
-//        checkLoginState()
+        checkLoginState()
         
         navigationController?.isNavigationBarHidden = true
         
@@ -56,6 +56,11 @@ class LoginViewController: UIViewController {
         }
         DataManager.login(with: username, and: password) { (success: Bool, error: Error?) in
             
+            if let error = error {
+              let error = R.error(with: error.localizedDescription)
+                self.showErrorView(error)
+            }
+            
             guard error == nil, success == true else {
                 print(#line, "not logged in")
                 return
@@ -69,79 +74,17 @@ class LoginViewController: UIViewController {
         performSegue(withIdentifier: "TaskViewControllerSegue", sender: nil)
     }
     
-    /*
-     let roomQuery = Room.query()
-     roomQuery?.whereKey("roomName", equalTo: existingRoomTextField.text!)
-     roomQuery?.findObjectsInBackground(block: { (results, error) in
-     if let results = results as? [Room],
-     let foundRoom = results.first {
-     
-     // Use the room found from the database
-     self.joinExistingRoom = foundRoom
-     
-     DataManager.signup(with: username, and: password) { (success:Bool?, error:Error?) in
-     
-     guard success == true else {
-     print("Problems creating User!")
-     return
-     }
-     guard let user = PFUser.current() else {
-     print("Error creating current user.")
-     return
-     }
-     
-     self.joinExistingRoom?.members.append(user)
-     
-     self.joinExistingRoom?.saveInBackground { (success: Bool?, error: Error?) in
-     print(#line, success)
-     print(#line, error?.localizedDescription ?? "No error saving")
-     if success ?? false {
-     self.performSegue(withIdentifier:"TaskViewControllerSegue", sender: nil)
-     }
-     }
-     }
-     } else {
-     let error = R.error(with: "Existing room does not exist. Please try again")
-     self.showErrorView(error)
-     }
-     })
-     }
- 
- */
-    
-//    func getRoom(completion:@escaping (Room)->()) {
-//        let roomQuery = Room.query()
-//        guard let currentUser = PFUser.current() else { return }
-//        roomQuery?.whereKey("members", equalTo: currentUser)
-//        
-//        roomQuery?.findObjectsInBackground(block: { (objects, error) in
-//            if let error = error {
-//                print(#line, error.localizedDescription)
-//                return
-//            }
-//            guard let objects = objects else { return }
-//            guard let room = objects.first as? Room else {
-//                print(#line, "problems")
-//                fatalError()
-//            }
-//            print(#line, room.roomName)
-//            completion(room)
-//        })
-//    }
-    
-    
     // MARK: - Navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         super.prepare(for: segue , sender: sender)
         
         switch (segue.identifier ?? "") {
-            
+            //dont need to pass anything through segue. taskVC does a query for existing user and fetches the tasks.
         case "TaskViewControllerSegue":
             guard let _ = segue.destination as? TaskViewController else {
                 print(#line, "unexpected destination:\(segue.destination)")
                 return
             }
-            
             
         case "userRegisterSegue":
             guard let registerController = segue.destination as? RegisterViewController else {

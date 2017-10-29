@@ -16,9 +16,6 @@ class TaskViewController: UIViewController, UITableViewDataSource, UITableViewDe
         navigationController?.popToRootViewController(animated: true)
     }
     
-    // created an instance of this property this way will create your property before viewdidload
-    //    lazy var myRoom = Room(roomName: "car")
-    
     //this tells you to create an initializer without putting "?" on room because its created before view did load.
     var myRoom : Room? = nil {
         didSet {
@@ -202,7 +199,7 @@ class TaskViewController: UIViewController, UITableViewDataSource, UITableViewDe
                 return
             }
             
-            //return the statement before it actually fetches
+            //return the statement before it actually fetches (if there is no task it will just return)
             guard let result = result as? [Task] else { return }
             
             //dont append tasks. just set it to equal the array to display all the tasks.
