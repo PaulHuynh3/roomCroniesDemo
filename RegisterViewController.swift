@@ -19,11 +19,8 @@ class RegisterViewController: UIViewController {
     
     @IBOutlet weak var roomTextField: UITextField!
     
-    
-//    var createRoom: Room?
     var listOfRoom: [Room]?
     
-    //MARK: View Did Load
     override func viewDidLoad() {
         super.viewDidLoad()
         fetchExistingRoom()
@@ -77,10 +74,10 @@ class RegisterViewController: UIViewController {
                 return
             }
             
-            //creates a new room
+            //creates a new room dont need to pass the room through segue b/c roomVC perform query for room associated with user logging in.
             let createRoom = Room(roomName: self.roomTextField.text!)
             
-            //create user with
+            
             guard let user = PFUser.current() else {
                 return
             }
@@ -101,17 +98,6 @@ class RegisterViewController: UIViewController {
         }
     }
     
-    
-    // MARK: - Navigation
-//    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-////        super.prepare(for: segue , sender: sender)
-//        
-//        guard let taskViewController = segue.destination as? TaskViewController else {
-//            fatalError("unexpected destination:\(segue.destination)")
-//        }
-//        //pass new room taskvc.
-////        taskViewController.myRoom = createRoom
-//    }
     
     
     //Fetch Parse
