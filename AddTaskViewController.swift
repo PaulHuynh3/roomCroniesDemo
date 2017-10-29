@@ -29,15 +29,9 @@ class AddTaskViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        task = Task()
         if let task = task {
-            
             taskNameTextField.text = task.taskName
             taskDescriptionTextField.text = task.taskDescription
-            
-            if var priority = Int(taskPriorityTextField.text!){
-                priority = task.priority
-            }
             
         }
         
@@ -45,6 +39,7 @@ class AddTaskViewController: UIViewController {
     
     
     @IBAction func saveButtonTapped(_ sender: UIBarButtonItem) {
+        task = Task()
         
         if let name = taskNameTextField.text {
             task?.taskName = name
