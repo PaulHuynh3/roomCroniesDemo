@@ -20,7 +20,7 @@ class Room: PFObject{
     @NSManaged var tasks : [Task]
     
     
-    convenience init(roomName:String) {
+    convenience init(roomName: String) {
         self.init()
         
         //initlize stored properties.

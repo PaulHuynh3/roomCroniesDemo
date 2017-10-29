@@ -15,11 +15,11 @@ class Expense: PFObject {
     @NSManaged var expenseName: String
     @NSManaged var isPaid: Bool
     @NSManaged var completeDate: Date
-    @NSManaged var expenseCreator: Person
-    @NSManaged var expenseOwer: [Person]
+    @NSManaged var expenseCreator: PFUser
+    @NSManaged var expenseOwer: [PFUser]
     
     
-    convenience init(expenseCreator:Person, expenseName:String, isPaid:Bool, completeDate:Date) {
+    convenience init(expenseCreator:PFUser, expenseName:String, isPaid:Bool, completeDate:Date) {
         self.init()
         
         self.expenseCreator = expenseCreator

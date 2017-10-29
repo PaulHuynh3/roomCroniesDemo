@@ -9,33 +9,36 @@
 import UIKit
 import Parse
 
-class TaskViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, AddTaskDelegate {
+class RoomViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, AddTaskDelegate {
     //MARK: IBAction
     @IBAction func logoutTapped(_ sender: UIBarButtonItem) {
         PFUser.logOut()
         navigationController?.popToRootViewController(animated: true)
     }
     
-    // created an instance of this property this way will create your property before viewdidload
-    //    lazy var myRoom = Room(roomName: "car")
-    
     //this tells you to create an initializer without putting "?" on room because its created before view did load.
-    var myRoom : Room?
-    var tasks:[Task] = []
+    var myRoom : Room? = nil {
+        didSet {
+            //when login viewdidload may load before it gets set.
+            fetchTaskByRoom()
+        }
+    }
+    var tasks: [Task] = []
     
     @IBOutlet weak var tableView: UITableView!
     
-  
-    
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        fetchTaskByRoom()
+        //fetches the room related to the user.
+        DataManager.getRoom(completion: {[unowned self] (room) in
+            self.myRoom = room
+        })
         navigationController?.isNavigationBarHidden = false
         let backgroundImage = UIImage(named: "iphone-3.jpg")
         let imageView = UIImageView(image: backgroundImage)
         self.tableView.backgroundView = imageView
     }
+    
     
     //MARK: Tableview Datasource
     public func numberOfSections(in tableView: UITableView) -> Int {
@@ -51,11 +54,11 @@ class TaskViewController: UIViewController, UITableViewDataSource, UITableViewDe
     
     public func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell{
         
-        let cellIdentifier = "TaskViewCell"
+        let cellIdentifier = "RoomViewCell"
         
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath) as? TaskViewCell else {
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath) as? RoomViewCell else {
             
-            fatalError("The dequeued cell is not TaskViewCell")
+            fatalError("The dequeued cell is not RoomViewCell")
         }
         
         let createTask = tasks[indexPath.section]
@@ -103,6 +106,7 @@ class TaskViewController: UIViewController, UITableViewDataSource, UITableViewDe
             guard let addTaskVC = segue.destination as? AddTaskViewController else{
                 fatalError("unexpected destination:\(segue.destination)")
             }
+            
             //pass the roomObject to addTask
             guard let myRoom = myRoom else {
                 return
@@ -119,10 +123,10 @@ class TaskViewController: UIViewController, UITableViewDataSource, UITableViewDe
             guard let detailedTaskVc = segue.destination as? AddTaskViewController else {
                 fatalError("unexpected destination:\(segue.destination)")
             }
-            guard let taskViewCell = sender as? TaskViewCell else {
+            guard let roomViewCell = sender as? RoomViewCell else {
                 fatalError("unexpected sender:\((String)(describing: sender))")
             }
-            guard let indexPath = tableView.indexPath(for: taskViewCell) else {
+            guard let indexPath = tableView.indexPath(for: roomViewCell) else {
                 fatalError("The selected cell is not being displayed by the table")
                 
             }
@@ -144,7 +148,7 @@ class TaskViewController: UIViewController, UITableViewDataSource, UITableViewDe
         
     }
     
-    
+
     //MARK: Fetch Parse
     //fetch task depending on Room
     func fetchTaskByRoom() {
@@ -157,13 +161,8 @@ class TaskViewController: UIViewController, UITableViewDataSource, UITableViewDe
         }
         
         taskQuery.whereKey("room", equalTo: myRoom)
-        
-        guard let currentUser = PFUser.current() else{
-            navigationController?.popToRootViewController(animated: true)
-            return
-        }
                 
-        taskQuery.findObjectsInBackground { (tasks:[PFObject]?, error: Error?) in
+        taskQuery.findObjectsInBackground { (result: [PFObject]?, error: Error?) in
             
             //error handling
             if let error = error {
@@ -171,15 +170,17 @@ class TaskViewController: UIViewController, UITableViewDataSource, UITableViewDe
                 return
             }
             
-            //return the statement before it actually fetches
-            guard let tasks = tasks else { return }
+            //return the statement before it actually fetches (if there is no task it will just return)
+            guard let result = result as? [Task] else { return }
             
             //dont append tasks. just set it to equal the array to display all the tasks.
-            self.tasks = tasks as! [Task]
+            self.tasks = result
             self.tableView.reloadData()
         }
         
     }
+    
+    
     
     
     

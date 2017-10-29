@@ -29,22 +29,17 @@ class AddTaskViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        task = Task()
-        if let task = task{
-            
+        if let task = task {
             taskNameTextField.text = task.taskName
             taskDescriptionTextField.text = task.taskDescription
             
-            if var priority = Int(taskPriorityTextField.text!){
-                priority = task.priority
-                
-            }
         }
         
     }
     
     
     @IBAction func saveButtonTapped(_ sender: UIBarButtonItem) {
+        task = Task()
         
         if let name = taskNameTextField.text {
             task?.taskName = name
@@ -63,7 +58,7 @@ class AddTaskViewController: UIViewController {
         
 
         //the roomObject passed from the segue.
-        //this crashes because the pfuser doesnt have the room object?
+        //when task is added it belongs to that room.
         task?.room = roomObject!
         
         //relationship created with the currentUser

@@ -35,7 +35,7 @@ class LoginViewController: UIViewController {
     }
     
     private func checkLoginState() {
-        Person.checkUserLoginState { (success: Bool) in
+        DataManager.checkUserLoginState { (success: Bool) in
             print(#line, success ? "": "not ", "auto logged in")
             if success {
                 self.segue()
@@ -54,7 +54,12 @@ class LoginViewController: UIViewController {
                 showErrorView(error)
                 return
         }
-        Person.login(with: username, and: password) { (success: Bool, error: Error?) in
+        DataManager.login(with: username, and: password) { (success: Bool, error: Error?) in
+            
+            if let error = error {
+              let error = R.error(with: error.localizedDescription)
+                self.showErrorView(error)
+            }
             
             guard error == nil, success == true else {
                 print(#line, "not logged in")
@@ -65,19 +70,20 @@ class LoginViewController: UIViewController {
     }
     
     private func segue(){
+        // TaskViewControllerSegue
         performSegue(withIdentifier: "TaskViewControllerSegue", sender: nil)
     }
-    
     
     // MARK: - Navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         super.prepare(for: segue , sender: sender)
         
         switch (segue.identifier ?? "") {
-            
+            //dont need to pass anything through segue. taskVC does a query for existing user and fetches the tasks.
         case "TaskViewControllerSegue":
-            guard let taskViewController = segue.destination as? TaskViewController else {
-                fatalError("unexpected destination:\(segue.destination)")
+            guard let _ = segue.destination as? RoomViewController else {
+                print(#line, "unexpected destination:\(segue.destination)")
+                return
             }
             
         case "userRegisterSegue":
@@ -85,7 +91,7 @@ class LoginViewController: UIViewController {
                 fatalError("unexpected destination:\(segue.destination)")
             }
         case "createNewRoomSegue":
-            guard let createNewRoomController = segue.destination as? RegisterNewRoomViewController else {
+            guard let createNewRoomController = segue.destination as? ExistingRoomViewController else {
                  fatalError("unexpected destination:\(segue.destination)")
             }
             

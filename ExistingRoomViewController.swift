@@ -9,7 +9,7 @@
 import UIKit
 import Parse
 
-class RegisterNewRoomViewController: UIViewController {
+class ExistingRoomViewController: UIViewController {
     
     @IBOutlet weak var usernameTextField: UITextField!
     
@@ -54,14 +54,14 @@ class RegisterNewRoomViewController: UIViewController {
                 // Use the room found from the database
                 self.joinExistingRoom = foundRoom
                 
-                Person.signup(with: username, and: password) { (success:Bool?, error:Error?) in
+                DataManager.signup(with: username, and: password) { (success:Bool?, error:Error?) in
                     
                     guard success == true else {
-                        print("Problems creating User!")
+                        let error = R.error(with: (error?.localizedDescription)!)
+                        self.showErrorView(error)
                         return
                     }
                     guard let user = PFUser.current() else {
-                        print("Error creating current user.")
                         return
                     }
                     
@@ -71,6 +71,7 @@ class RegisterNewRoomViewController: UIViewController {
                         print(#line, success)
                         print(#line, error?.localizedDescription ?? "No error saving")
                         if success ?? false {
+                            //this has to be in the block (asynchronous call)
                             self.performSegue(withIdentifier:"TaskViewControllerSegue", sender: nil)
                         }
                     }
@@ -84,21 +85,18 @@ class RegisterNewRoomViewController: UIViewController {
     
     
     // MARK: - Navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        super.prepare(for: segue , sender: sender)
-        
-        guard let taskViewController = segue.destination as? TaskViewController else {
-            fatalError("unexpected destination:\(segue.destination)")
-        }
-        //join existing room.
-        taskViewController.myRoom = joinExistingRoom
-        let currentInstallation = PFInstallation.current()
-        currentInstallation?.remove(forKey: "channels")
-        currentInstallation?.addUniqueObject("\(String(describing: existingRoomTextField.text!))", forKey: "channels")
-        currentInstallation?.saveInBackground()
-        
-        
-    }
+    //user will join existing room. roomVC already does this so i dont need to pass anything through segue.
+//    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+//        super.prepare(for: segue , sender: sender)
+//
+//        guard let taskViewController = segue.destination as? RoomViewController else {
+//            fatalError("unexpected destination:\(segue.destination)")
+//        }
+//        //join existing room.
+//        taskViewController.myRoom = joinExistingRoom
+//
+//    }
+
     
     
     
@@ -111,3 +109,4 @@ class RegisterNewRoomViewController: UIViewController {
     
     
 }
+
