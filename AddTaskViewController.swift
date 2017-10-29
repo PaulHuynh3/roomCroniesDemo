@@ -62,7 +62,7 @@ class AddTaskViewController: UIViewController {
         }
         
         //the roomObject passed from the segue.
-        //this crashes because the pfuser doesnt have the room object?
+        //when task is added it belongs to that room.
         task?.room = roomObject!
         
         //relationship created with the currentUser
