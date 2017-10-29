@@ -14,17 +14,21 @@ protocol AddTaskDelegate {
     func addTaskObject(task:Task)
 }
 
-class AddTaskViewController: UIViewController {
+class AddTaskViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource {
     
     var taskDelegate: AddTaskDelegate?
     
     //this value will either be an existing task or to create a new task
     var task: Task?
     var roomObject: Room?
+    var typeOfTask = ["Expense","Non-Expense"]
     
     @IBOutlet weak var taskNameTextField: UITextField!
     @IBOutlet weak var taskDescriptionTextField: UITextField!
-    @IBOutlet weak var taskPriorityTextField: UITextField!
+    @IBOutlet weak var sliderLabel: UILabel!
+    @IBOutlet weak var prioritySlider: UISlider!
+    @IBOutlet weak var taskTypePicker: UIPickerView!
+    
     
     
     override func viewDidLoad() {
@@ -36,6 +40,34 @@ class AddTaskViewController: UIViewController {
         }
         
     }
+    
+    //MARK: PickerView Datasource:
+    
+    func numberOfComponents(in pickerView: UIPickerView) -> Int {
+        return 1
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
+        return typeOfTask[row]
+        
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+        return typeOfTask.count
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+        
+    }
+    
+    
+    //Mark: Action
+    
+    
+    @IBAction func prioritySlider(_ sender: UISlider) {
+        
+    }
+    
     
     
     @IBAction func saveButtonTapped(_ sender: UIBarButtonItem) {
@@ -50,11 +82,6 @@ class AddTaskViewController: UIViewController {
             task?.taskDescription = description
         }
         
-        
-        if let priorityNumber = Int(taskPriorityTextField.text!) {
-            
-            task?.priority = priorityNumber
-        }
         
         //the roomObject passed from the segue.
         //when task is added it belongs to that room.
@@ -116,6 +143,8 @@ class AddTaskViewController: UIViewController {
         
     }
     
+    
+
     
     
 }
