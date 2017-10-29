@@ -32,6 +32,7 @@ class DataManager  {
         })
     }
     
+    //automatically log user in
     static func checkUserLoginState(completion:(Bool) -> Void) {
         completion(PFUser.current()?.isAuthenticated ?? false)
     }

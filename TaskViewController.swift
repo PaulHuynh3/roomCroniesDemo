@@ -147,37 +147,7 @@ class TaskViewController: UIViewController, UITableViewDataSource, UITableViewDe
         
     }
     
-//    func fetchRoom() {
-//        let query = PFQuery(className: "Room")
-//        
-////        query.whereKey("members", equalTo: PFUser.current())
-//        
-//        query.findObjectsInBackground { (rooms: [PFObject]?, error: Error?) in
-//            
-//            if let error = error {
-//                print(#line, error.localizedDescription)
-//                return
-//            }
-//            guard let rooms = rooms else {return }
-//            
-//            let checkRoom = rooms.contains(where: { (room) -> Bool in
-////                room as? Room == self.myRoom ? true : false
-////
-////                if checkRoom == true {
-////                    self.myRoom = room as? Room
-////                }
-//                guard let roomName = room["roomName"] as? String else { return }
-//                if roomName == self.myRoom?.roomName {
-//                    return true
-//                }
-//            })
-//
-//
-//        }
-//        
-//    }
-    
-    
+
     //MARK: Fetch Parse
     //fetch task depending on Room
     func fetchTaskByRoom() {
