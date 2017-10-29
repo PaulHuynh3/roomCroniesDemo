@@ -10,6 +10,7 @@ import Foundation
 import Parse
 
 class DataManager  {
+    //retrieve the room or create a room that is related to the current user
     static func getRoom(completion:@escaping (Room)->()) {
         guard let currentUser = PFUser.current() else { return }
         let roomQuery = Room.query()

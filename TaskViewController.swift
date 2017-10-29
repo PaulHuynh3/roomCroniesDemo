@@ -30,8 +30,6 @@ class TaskViewController: UIViewController, UITableViewDataSource, UITableViewDe
     
     @IBOutlet weak var tableView: UITableView!
     
-  
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         //fetches the room related to the user.
