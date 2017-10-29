@@ -32,6 +32,8 @@ class RoomViewController: UIViewController, UITableViewDataSource, UITableViewDe
         //fetches the room related to the user.
         DataManager.getRoom(completion: {[unowned self] (room) in
             self.myRoom = room
+            
+            
         })
         navigationController?.isNavigationBarHidden = false
         let backgroundImage = UIImage(named: "iphone-3.jpg")

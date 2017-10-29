@@ -28,6 +28,13 @@ class DataManager  {
                 fatalError()
             }
             print(#line, room.roomName)
+            
+            //associates room to device token - to help sort who gets push notifications
+            let currentInstallation = PFInstallation.current()
+            currentInstallation?.remove(forKey: "channels")
+            currentInstallation?.addUniqueObject("\(room.roomName)", forKey: "channels")
+            currentInstallation?.saveInBackground()
+            
             completion(room)
         })
     }
