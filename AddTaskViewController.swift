@@ -30,15 +30,15 @@ class AddTaskViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         task = Task()
-        if let task = task{
+        if let task = task {
             
             taskNameTextField.text = task.taskName
             taskDescriptionTextField.text = task.taskDescription
             
             if var priority = Int(taskPriorityTextField.text!){
                 priority = task.priority
-                
             }
+            
         }
         
     }

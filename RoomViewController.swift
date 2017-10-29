@@ -54,11 +54,11 @@ class RoomViewController: UIViewController, UITableViewDataSource, UITableViewDe
     
     public func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell{
         
-        let cellIdentifier = "TaskViewCell"
+        let cellIdentifier = "RoomViewCell"
         
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath) as? TaskViewCell else {
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath) as? RoomViewCell else {
             
-            fatalError("The dequeued cell is not TaskViewCell")
+            fatalError("The dequeued cell is not RoomViewCell")
         }
         
         let createTask = tasks[indexPath.section]
@@ -122,10 +122,10 @@ class RoomViewController: UIViewController, UITableViewDataSource, UITableViewDe
             guard let detailedTaskVc = segue.destination as? AddTaskViewController else {
                 fatalError("unexpected destination:\(segue.destination)")
             }
-            guard let taskViewCell = sender as? TaskViewCell else {
+            guard let roomViewCell = sender as? RoomViewCell else {
                 fatalError("unexpected sender:\((String)(describing: sender))")
             }
-            guard let indexPath = tableView.indexPath(for: taskViewCell) else {
+            guard let indexPath = tableView.indexPath(for: roomViewCell) else {
                 fatalError("The selected cell is not being displayed by the table")
                 
             }
