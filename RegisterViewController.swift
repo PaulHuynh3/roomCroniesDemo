@@ -68,7 +68,8 @@ class RegisterViewController: UIViewController {
         DataManager.signup(with: username, and: password) { (success:Bool?, error:Error?) in
             
             if let error = error {
-                print(#line, error.localizedDescription)
+                let error = R.error(with: error.localizedDescription)
+                self.showErrorView(error)
             }
             
             guard success == true else {

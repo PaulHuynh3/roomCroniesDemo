@@ -143,13 +143,12 @@ class LoginViewController: UIViewController {
             }
             
             
-            
         case "userRegisterSegue":
             guard let registerController = segue.destination as? RegisterViewController else {
                 fatalError("unexpected destination:\(segue.destination)")
             }
         case "createNewRoomSegue":
-            guard let createNewRoomController = segue.destination as? RegisterNewRoomViewController else {
+            guard let createNewRoomController = segue.destination as? ExistingRoomViewController else {
                  fatalError("unexpected destination:\(segue.destination)")
             }
             

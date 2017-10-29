@@ -9,7 +9,7 @@
 import UIKit
 import Parse
 
-class RegisterNewRoomViewController: UIViewController {
+class ExistingRoomViewController: UIViewController {
     
     @IBOutlet weak var usernameTextField: UITextField!
     
@@ -57,7 +57,7 @@ class RegisterNewRoomViewController: UIViewController {
                 DataManager.signup(with: username, and: password) { (success:Bool?, error:Error?) in
                     
                     guard success == true else {
-                       let error = R.error(with: "Problems Creating User")
+                        let error = R.error(with: (error?.localizedDescription)!)
                         self.showErrorView(error)
                         return
                     }
@@ -108,3 +108,4 @@ class RegisterNewRoomViewController: UIViewController {
     
     
 }
+
