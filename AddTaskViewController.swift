@@ -51,10 +51,10 @@ class AddTaskViewController: UIViewController {
         }
         
         
-        if let priorityNumber = Int(taskPriorityTextField.text!) {
-            
-            task?.priority = priorityNumber
-        }
+//        if let priorityNumber = Int(taskPriorityTextField.text!) {
+//            
+//            task?.priority = priorityNumber
+//        }
         
 
         //the roomObject passed from the segue.
@@ -84,8 +84,7 @@ class AddTaskViewController: UIViewController {
         //QUERY THE ROOM AND FIND THE ARRAY OF USERS
         //ITERATE THROUGH EACH USER AND SEND NOTIFICATION USING THEIR DEVICE TOKEN
         
-        
-        PFCloud.callFunction(inBackground: "iosPushTest", withParameters: ["text" : "\(PFUser.current()!.username!) added a new task: \(String(describing: taskNameTextField.text!))", "roomName": "room5"])
+        PFCloud.callFunction(inBackground: "iosPushTest", withParameters: ["text" : "\(PFUser.current()!.username!) added a new task: \(String(describing: taskNameTextField.text!))"])
         
     }
     

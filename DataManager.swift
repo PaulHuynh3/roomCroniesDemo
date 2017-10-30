@@ -29,11 +29,11 @@ class DataManager  {
             }
             print(#line, room.roomName)
             
-            //associates room to device token - to help sort who gets push notifications
-            let currentInstallation = PFInstallation.current()
-            currentInstallation?.remove(forKey: "channels")
-            currentInstallation?.addUniqueObject("\(room.roomName)", forKey: "channels")
-            currentInstallation?.saveInBackground()
+            //PUSH NOTIFICATIONS - adding user to installation
+            guard let user = PFUser.current() else { return }
+            guard let installation = PFInstallation.current() else { return }
+            installation["user"] = user
+            installation.saveInBackground()
             
             completion(room)
         })
