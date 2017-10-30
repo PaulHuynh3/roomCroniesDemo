@@ -86,6 +86,10 @@ class RoomViewController: UIViewController {
     }
     
     
+    @IBAction func taskCompleteToggled(_ sender: UISwitch) {
+        
+        
+    }
     
     
     
