@@ -21,19 +21,20 @@ class AddTaskViewController: UIViewController {
     //this value will either be an existing task or to create a new task
     var task: Task?
     var roomObject: Room?
-    var typeOfTask = ["Expense","Non-Expense"]
-    var selectedPickerRow: String?
+    var pickerTask = ["Expense","Non-Expense"]
+    var selectedPickerExpense: String?
     
     @IBOutlet weak var taskNameTextField: UITextField!
     @IBOutlet weak var taskDescriptionTextField: UITextField!
     @IBOutlet weak var sliderLabel: UILabel!
     @IBOutlet weak var prioritySlider: UISlider!
-    @IBOutlet weak var taskTypePicker: UIPickerView!
     @IBOutlet weak var expenseTextField: UITextField!
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        createExpensePicker()
+        createToolBar()
         if let task = task {
             taskNameTextField.text = task.taskName
             taskDescriptionTextField.text = task.taskDescription
@@ -60,7 +61,7 @@ class AddTaskViewController: UIViewController {
               let room = roomObject,
               let currentUser = PFUser.current(),
               let priorityLabel = sliderLabel.text,
-              let expensePicker = selectedPickerRow else {
+              let expensePicker = selectedPickerExpense else {
                 return
         }
         task = Task(room: room, taskName: name, description: taskDescription, priority: priorityLabel, taskExpense:expensePicker , createdBy: currentUser)
@@ -118,23 +119,47 @@ class AddTaskViewController: UIViewController {
 
 extension AddTaskViewController: UIPickerViewDelegate, UIPickerViewDataSource{
     
+    func createExpensePicker() {
+        let expensePicker = UIPickerView()
+        expensePicker.delegate = self
+        //adding picker to the textfield view.
+        expenseTextField.inputView = expensePicker
+    }
+    
+    func createToolBar() {
+        let toolBar = UIToolbar()
+        toolBar.sizeToFit()
+        
+        let doneButton = UIBarButtonItem(title: "Done", style: .plain, target: self, action: #selector(AddTaskViewController.dismissKeyboard))
+        
+        toolBar.setItems([doneButton], animated: false)
+        toolBar.isUserInteractionEnabled = true
+        //picker's accessoryview
+        expenseTextField.inputAccessoryView = toolBar
+    }
+    
+    @objc func dismissKeyboard(){
+        view.endEditing(true)
+    }
+    
     
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
         return 1
     }
     
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-        return typeOfTask[row]
+        return pickerTask[row]
         
     }
     
     func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-        return typeOfTask.count
+        return pickerTask.count
     }
     
     //pickerview delegate
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-        selectedPickerRow = typeOfTask[row]
+        selectedPickerExpense = pickerTask[row]
+        expenseTextField.text = selectedPickerExpense
     }
     
     
