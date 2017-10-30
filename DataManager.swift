@@ -28,6 +28,13 @@ class DataManager  {
                 fatalError()
             }
             print(#line, room.roomName)
+            
+            //PUSH NOTIFICATIONS - adding user to installation
+            guard let user = PFUser.current() else { return }
+            guard let installation = PFInstallation.current() else { return }
+            installation["user"] = user
+            installation.saveInBackground()
+            
             completion(room)
         })
     }

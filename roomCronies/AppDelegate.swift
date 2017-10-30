@@ -25,6 +25,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         //        paulCreateTask()
         //        paulCreateExpense()
         //        fetchPerson()
+//        fetchMembers()
         //testPush()
 //        testPush2()
 //        testPush3()
@@ -184,6 +185,22 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             
         }
         
+    }
+    
+    private func fetchMembers() {
+        let predicate = NSPredicate(format: "roomName == 'room1'")
+        let query = PFQuery(className: "Room", predicate: predicate)
+        query.findObjectsInBackground { (rooms: [PFObject]?, error: Error?) in
+            if let error = error {
+                print(#line, error.localizedDescription)
+                return
+            }
+            guard let rooms = rooms else {
+                return
+            }
+            
+            print(rooms)
+        }
     }
     
     //MARK: - adding push notifications

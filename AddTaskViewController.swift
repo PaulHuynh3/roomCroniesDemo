@@ -80,27 +80,6 @@ class AddTaskViewController: UIViewController {
         //QUERY THE ROOM AND FIND THE ARRAY OF USERS
         //ITERATE THROUGH EACH USER AND SEND NOTIFICATION USING THEIR DEVICE TOKEN
         
-        let text = "\(PFUser.current()!.username!) added a new task: \(String(describing: taskNameTextField.text!))";
-        let data = [
-            "badge" : "Increment",
-            "alert" : text,
-            ]
-        let request: [String : Any] = [
-            "someKey" : PFUser.current()!.objectId!,
-            "data" : data
-        ]
-        print(PFUser.current()!.objectId!)
-        print("sending push notification...")
-        PFCloud.callFunction(inBackground: "iosPushTest2", withParameters: request as [NSObject : AnyObject], block: { (results:AnyObject?, error:NSError?) in
-            print("push \(String(describing: results!))")
-            if error == nil {
-                print (results!)
-            }
-            else {
-                print (error!)
-            }
-            } as? PFIdResultBlock)
-        
         PFCloud.callFunction(inBackground: "iosPushTest", withParameters: ["text" : "\(PFUser.current()!.username!) added a new task: \(String(describing: taskNameTextField.text!))"])
         
     }
