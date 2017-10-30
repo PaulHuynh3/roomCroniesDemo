@@ -27,7 +27,6 @@ class Expense: PFObject {
         self.isPaid = isPaid
         self.completeDate = completeDate
     }
-    
 }
 
 

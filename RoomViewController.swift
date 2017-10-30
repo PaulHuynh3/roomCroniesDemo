@@ -85,13 +85,22 @@ class RoomViewController: UIViewController {
         navigationController?.popToRootViewController(animated: true)
     }
     
+
     
     @IBAction func taskCompleteToggled(_ sender: UISwitch) {
         
+        let task = Task()
         
+        //need to indicate the selected cell for indexpath or it will save as a new object.
+        
+        task.doneBy = PFUser.current()
+        
+        
+        task.saveInBackground { (success:Bool, error:Error?) in
+            print(#line, success)
+            print(#line, error?.localizedDescription ?? "error in saving")
+        }
     }
-    
-    
     
 
     //MARK: Fetch Parse
@@ -160,6 +169,7 @@ extension RoomViewController: UITableViewDelegate, UITableViewDataSource{
         return cell
         
     }
+
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let headerView = UIView()
