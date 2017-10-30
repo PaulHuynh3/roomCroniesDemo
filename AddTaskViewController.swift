@@ -33,29 +33,26 @@ class AddTaskViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        //UIPicker
         createExpensePicker()
         createToolBar()
-        
+        //Detail View
         if let task = task {
             taskNameTextField.text = task.taskName
             taskDescriptionTextField.text = task.taskDescription
             sliderLabel.text = task.priority
             expenseTextField.text = task.taskExpense
-            
         }
         
     }
     
     
-    
     //Mark: Action
-    
     @IBAction func prioritySlider(_ sender: UISlider) {
         let x = Int(prioritySlider.value)
         sliderLabel.text = String(format: "%d",x)
         
     }
-    
     
     @IBAction func saveButtonTapped(_ sender: UIBarButtonItem) {
         guard let name = taskNameTextField.text,
@@ -119,7 +116,8 @@ class AddTaskViewController: UIViewController {
 
 }
 
-extension AddTaskViewController: UIPickerViewDelegate, UIPickerViewDataSource{
+
+extension AddTaskViewController: UIPickerViewDelegate, UIPickerViewDataSource {
     
     func createExpensePicker() {
         let expensePicker = UIPickerView()
