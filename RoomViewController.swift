@@ -18,6 +18,7 @@ class RoomViewController: UIViewController {
         }
     }
     var tasks: [Task] = []
+    //might get rid of this.
     var selectedIndexPath: IndexPath?
     
     @IBOutlet weak var tableView: UITableView!
@@ -92,14 +93,10 @@ class RoomViewController: UIViewController {
         
         let task = Task()
         
-//        guard let roomViewCell = sender as? RoomViewCell else {
-//            fatalError("unexpected sender:\((String)(describing: sender))")
-//        }
-//        guard let indexPath = tableView.indexPath(for: roomViewCell) else {
-//            fatalError("The selected cell is not being displayed by the table")
-//        }
+        //set button tags for each of the selected button.
         
-//        let selectedTask = tasks[indexPath.section]
+        
+        //query for existinh tasks if the list of task matches the task being checked by the user. Add "doneBy" and move the task into a "completed" tableview
         
         //need to indicate the selected cell for indexpath or it will save as a new object.
         if selectedIndexPath?.row != nil {
@@ -113,6 +110,7 @@ class RoomViewController: UIViewController {
         }
     }
     
+    //might not need this function
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
         selectedIndexPath = indexPath
