@@ -23,6 +23,7 @@ class RoomViewController: UIViewController {
     
     @IBOutlet weak var tableView: UITableView!
     
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         //fetches the room related to the user.
@@ -90,23 +91,37 @@ class RoomViewController: UIViewController {
     
     
     @IBAction func taskCompleteToggled(_ sender: UISwitch) {
-        
-        let task = Task()
-//
-//        //set button tags for each of the selected button.
-//        let buttonPosition: CGPoint = sender.convert(CGPointZero, to: self.tableView)
-//        let indexPath = self.tableView.indexPathForRow(at: buttonPosition)
-//
+        var currentTask: Task
 //        //query for existinh tasks if the list of task matches the task being checked by the user. Add "doneBy" and move the task into a "completed" tableview
-//
-//        //need to indicate the selected cell for indexpath or it will save as a new object.
-            task.doneBy = PFUser.current()
         
+        let query = PFQuery(className: "Task")
         
-            task.saveInBackground { (success:Bool, error:Error?) in
-                print(#line, success)
-                print(#line, error?.localizedDescription ?? "error in saving")
+        guard let myRoom = self.myRoom else {
+            return
+        }
+          query.whereKey("Room", equalTo: myRoom)
+        
+            query.findObjectsInBackground { (result: [PFObject]?, error: Error?) in
+            
+            //error handling
+            if let error = error {
+                print(#line, error.localizedDescription)
+                return
             }
+            
+            //return the statement before it actually fetches (if there is no task it will just return)
+            guard let result = result as? [Task] else { return }
+                
+                currentTask = result.first!
+                currentTask.doneBy = PFUser.current()
+                currentTask.isCompleted = true
+                
+                currentTask.saveInBackground { (success:Bool, error:Error?) in
+                    print(#line, success)
+                    print(#line, error?.localizedDescription ?? "error in saving")
+                }
+                
+        }
         
     }
     
@@ -174,7 +189,8 @@ extension RoomViewController: UITableViewDelegate, UITableViewDataSource{
         }
         
         let createTask = tasks[indexPath.section]
-        
+        //set the switch as not complete
+        cell.switchComplete.isOn = createTask.isCompleted
         
         cell.setupCell(task: createTask)
         //cell.contentView.backgroundColor = UIColor.clear;
@@ -209,6 +225,7 @@ extension RoomViewController: UITableViewDelegate, UITableViewDataSource{
     }
     
 }
+
 
 extension RoomViewController: AddTaskDelegate{
     

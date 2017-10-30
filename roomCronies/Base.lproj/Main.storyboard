@@ -100,21 +100,22 @@
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="ktm-VV-JjQ">
-                                                    <rect key="frame" x="294" y="8" width="49" height="31"/>
-                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                    <connections>
-                                                        <action selector="taskCompleteToggled:" destination="BYZ-38-t0r" eventType="valueChanged" id="0WN-g5-k37"/>
-                                                    </connections>
-                                                </switch>
                                                 <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="br3-b3-0AS" customClass="CheckBox" customModule="roomCronies" customModuleProvider="target">
                                                     <rect key="frame" x="296" y="47" width="35" height="35"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <state key="normal" title="Button" image="task-reject.svg"/>
                                                 </button>
+                                                <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="ktm-VV-JjQ">
+                                                    <rect key="frame" x="296" y="8" width="49" height="31"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <connections>
+                                                        <action selector="taskCompleteToggled:" destination="BYZ-38-t0r" eventType="valueChanged" id="0WN-g5-k37"/>
+                                                    </connections>
+                                                </switch>
                                             </subviews>
                                         </tableViewCellContentView>
                                         <connections>
+                                            <outlet property="switchComplete" destination="ktm-VV-JjQ" id="WDN-6d-8HJ"/>
                                             <outlet property="taskLabel" destination="gco-lG-7mJ" id="4LK-sc-pXo"/>
                                             <segue destination="kec-Il-1J7" kind="show" identifier="ShowDetailTask" id="1od-P2-kcF"/>
                                         </connections>

@@ -62,11 +62,11 @@ class AddTaskViewController: UIViewController {
               let room = roomObject,
               let currentUser = PFUser.current(),
               let priorityLabel = sliderLabel.text,
-              let expensePicker = selectedPickerExpense
-                                                    else {
+              let expensePicker = selectedPickerExpense,
+              let isComplete = isCompleted else {
                 return
         }
-        task = Task(room: room, taskName: name, description: taskDescription, priority: priorityLabel, taskExpense:expensePicker, isCompleted:isCompleted! ,createdBy: currentUser)
+        task = Task(room: room, taskName: name, description: taskDescription, priority: priorityLabel, taskExpense:expensePicker, isCompleted:isComplete, createdBy: currentUser)
         
         
         task?.saveInBackground { (success, error) in
