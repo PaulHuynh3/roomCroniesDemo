@@ -18,6 +18,7 @@ class RoomViewController: UIViewController {
         }
     }
     var tasks: [Task] = []
+    var selectedIndexPath: IndexPath?
     
     @IBOutlet weak var tableView: UITableView!
     
@@ -89,23 +90,34 @@ class RoomViewController: UIViewController {
         
         let task = Task()
         
+        guard let roomViewCell = sender as? RoomViewCell else {
+            fatalError("unexpected sender:\((String)(describing: sender))")
+        }
+        guard let indexPath = tableView.indexPath(for: roomViewCell) else {
+            fatalError("The selected cell is not being displayed by the table")
+        }
+        
+        let selectedTask = tasks[indexPath.section]
+        
         //need to indicate the selected cell for indexpath or it will save as a new object.
-        
-        task.doneBy = PFUser.current()
-        
-        
-        task.saveInBackground { (success:Bool, error:Error?) in
-            print(#line, success)
-            print(#line, error?.localizedDescription ?? "error in saving")
+        if (selectedIndexPath?.section)! == selectedTask {
+            task.doneBy = PFUser.current()
+            
+            
+            task.saveInBackground { (success:Bool, error:Error?) in
+                print(#line, success)
+                print(#line, error?.localizedDescription ?? "error in saving")
+            }
         }
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
-        let selectedRow = indexPath.row
+        selectedIndexPath = indexPath
+        print(#line, selectedIndexPath)
     }
     
-
+    
     //MARK: Fetch Parse
     func fetchTaskByRoom() {
         let taskQuery = PFQuery(className: "Task")
@@ -117,7 +129,7 @@ class RoomViewController: UIViewController {
         }
         
         taskQuery.whereKey("room", equalTo: myRoom)
-                
+        
         taskQuery.findObjectsInBackground { (result: [PFObject]?, error: Error?) in
             
             //error handling
@@ -135,7 +147,7 @@ class RoomViewController: UIViewController {
         }
         
     }
-
+    
 }
 
 extension RoomViewController: UITableViewDelegate, UITableViewDataSource{
@@ -163,6 +175,7 @@ extension RoomViewController: UITableViewDelegate, UITableViewDataSource{
         
         let createTask = tasks[indexPath.section]
         
+        
         cell.setupCell(task: createTask)
         //cell.contentView.backgroundColor = UIColor.clear;
         cell.backgroundColor = UIColor(white: 1.0, alpha: 0.5)
@@ -172,7 +185,7 @@ extension RoomViewController: UITableViewDelegate, UITableViewDataSource{
         return cell
         
     }
-
+    
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let headerView = UIView()
