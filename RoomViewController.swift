@@ -33,7 +33,6 @@ class RoomViewController: UIViewController {
         self.tableView.backgroundView = imageView
     }
     
-    
     //MARK: Navigation
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -85,7 +84,6 @@ class RoomViewController: UIViewController {
         navigationController?.popToRootViewController(animated: true)
     }
     
-
     
     @IBAction func taskCompleteToggled(_ sender: UISwitch) {
         
@@ -100,6 +98,11 @@ class RoomViewController: UIViewController {
             print(#line, success)
             print(#line, error?.localizedDescription ?? "error in saving")
         }
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
+        let selectedRow = indexPath.row
     }
     
 

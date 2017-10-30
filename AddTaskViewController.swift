@@ -46,7 +46,6 @@ class AddTaskViewController: UIViewController {
         
     }
     
-    
     //Mark: Action
     @IBAction func prioritySlider(_ sender: UISlider) {
         let x = Int(prioritySlider.value)
