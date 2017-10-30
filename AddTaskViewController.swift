@@ -172,8 +172,6 @@ extension AddTaskViewController: UIPickerViewDelegate, UIPickerViewDataSource{
     }
     
     
-    
-    
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
         return 1
     }
