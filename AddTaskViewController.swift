@@ -37,7 +37,8 @@ class AddTaskViewController: UIViewController, UIPickerViewDelegate, UIPickerVie
         if let task = task {
             taskNameTextField.text = task.taskName
             taskDescriptionTextField.text = task.taskDescription
-            prioritySlider.value = Float(task.priority)
+            sliderLabel.text = task.priority
+            
             
         }
         
@@ -74,38 +75,15 @@ class AddTaskViewController: UIViewController, UIPickerViewDelegate, UIPickerVie
     
     
     @IBAction func saveButtonTapped(_ sender: UIBarButtonItem) {
-        task = Task()
-        
-        
-
         guard let name = taskNameTextField.text,
               let taskDescription = taskDescriptionTextField.text,
-              let room = roomObject else {
+              let room = roomObject,
+              let currentUser = PFUser.current(),
+              let priorityLabel = sliderLabel.text else {
                 return
         }
-            task = Task(room: room, taskName: name, description: taskDescription, isExpense: <#T##Bool#>, priority: <#T##Int#>, createdBy: <#T##PFUser#>)
-            
-//        if let name = taskNameTextField.text {
-//            task?.taskName = name
-//
-//        }
-//
-//        if let description = taskDescriptionTextField.text {
-//            task?.taskDescription = description
-//        }
+        task = Task(room: room, taskName: name, description: taskDescription, priority: priorityLabel, createdBy: currentUser)
         
-        
-        //the roomObject passed from the segue.
-        //when task is added it belongs to that room.
-        task?.room = roomObject!
-        
-        //relationship created with the currentUser
-        guard  let currentUser = PFUser.current() else {
-            // take to login screen
-            navigationController?.popToRootViewController(animated: true)
-            return
-        }
-        task?.createdBy = currentUser
         
         task?.saveInBackground { (success, error) in
             print(#line, success)
