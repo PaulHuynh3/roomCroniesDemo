@@ -90,17 +90,17 @@ class RoomViewController: UIViewController {
         
         let task = Task()
         
-        guard let roomViewCell = sender as? RoomViewCell else {
-            fatalError("unexpected sender:\((String)(describing: sender))")
-        }
-        guard let indexPath = tableView.indexPath(for: roomViewCell) else {
-            fatalError("The selected cell is not being displayed by the table")
-        }
+//        guard let roomViewCell = sender as? RoomViewCell else {
+//            fatalError("unexpected sender:\((String)(describing: sender))")
+//        }
+//        guard let indexPath = tableView.indexPath(for: roomViewCell) else {
+//            fatalError("The selected cell is not being displayed by the table")
+//        }
         
-        let selectedTask = tasks[indexPath.section]
+//        let selectedTask = tasks[indexPath.section]
         
         //need to indicate the selected cell for indexpath or it will save as a new object.
-        if (selectedIndexPath?.section)! == selectedTask {
+        if selectedIndexPath?.row != nil {
             task.doneBy = PFUser.current()
             
             
