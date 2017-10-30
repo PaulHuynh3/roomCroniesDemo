@@ -10,13 +10,7 @@ import UIKit
 import Parse
 
 class RoomViewController: UIViewController {
-    //MARK: IBAction
-    @IBAction func logoutTapped(_ sender: UIBarButtonItem) {
-        PFUser.logOut()
-        navigationController?.popToRootViewController(animated: true)
-    }
-    
-    //this tells you to create an initializer without putting "?" on room because its created before view did load.
+    //created before viewdidload therefore requires "?"
     var myRoom : Room? = nil {
         didSet {
             //when login viewdidload may load before it gets set.
@@ -39,8 +33,6 @@ class RoomViewController: UIViewController {
         self.tableView.backgroundView = imageView
     }
     
-    
-  
     
     //MARK: Navigation
     
@@ -87,15 +79,23 @@ class RoomViewController: UIViewController {
         }
     }
     
+    //MARK: IBAction
+    @IBAction func logoutTapped(_ sender: UIBarButtonItem) {
+        PFUser.logOut()
+        navigationController?.popToRootViewController(animated: true)
+    }
+    
+    
+    
+    
     
 
     //MARK: Fetch Parse
-    //fetch task depending on Room
     func fetchTaskByRoom() {
         let taskQuery = PFQuery(className: "Task")
         taskQuery.order(byAscending: "taskName")
         
-        //fetch room by its variable.        
+        //fetch room by its set variable above.
         guard let myRoom = self.myRoom else {
             return
         }
