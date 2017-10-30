@@ -22,6 +22,7 @@ class AddTaskViewController: UIViewController, UIPickerViewDelegate, UIPickerVie
     var task: Task?
     var roomObject: Room?
     var typeOfTask = ["Expense","Non-Expense"]
+    var selectedPickerRow: String?
     
     @IBOutlet weak var taskNameTextField: UITextField!
     @IBOutlet weak var taskDescriptionTextField: UITextField!
@@ -36,6 +37,7 @@ class AddTaskViewController: UIViewController, UIPickerViewDelegate, UIPickerVie
         if let task = task {
             taskNameTextField.text = task.taskName
             taskDescriptionTextField.text = task.taskDescription
+            prioritySlider.value = Float(task.priority)
             
         }
         
@@ -56,31 +58,41 @@ class AddTaskViewController: UIViewController, UIPickerViewDelegate, UIPickerVie
         return typeOfTask.count
     }
     
+    //pickerview delegate
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-        
+        selectedPickerRow = typeOfTask[row]
     }
     
     
     //Mark: Action
     
-    
     @IBAction func prioritySlider(_ sender: UISlider) {
+        let x = Int(prioritySlider.value)
+        sliderLabel.text = String(format: "%d",x)
         
     }
-    
     
     
     @IBAction func saveButtonTapped(_ sender: UIBarButtonItem) {
         task = Task()
         
-        if let name = taskNameTextField.text {
-            task?.taskName = name
-            
-        }
         
-        if let description = taskDescriptionTextField.text {
-            task?.taskDescription = description
+
+        guard let name = taskNameTextField.text,
+              let taskDescription = taskDescriptionTextField.text,
+              let room = roomObject else {
+                return
         }
+            task = Task(room: room, taskName: name, description: taskDescription, isExpense: <#T##Bool#>, priority: <#T##Int#>, createdBy: <#T##PFUser#>)
+            
+//        if let name = taskNameTextField.text {
+//            task?.taskName = name
+//
+//        }
+//
+//        if let description = taskDescriptionTextField.text {
+//            task?.taskDescription = description
+//        }
         
         
         //the roomObject passed from the segue.
