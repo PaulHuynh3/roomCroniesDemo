@@ -9,7 +9,7 @@
 import UIKit
 import Parse
 
-class RoomViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, AddTaskDelegate {
+class RoomViewController: UIViewController {
     //MARK: IBAction
     @IBAction func logoutTapped(_ sender: UIBarButtonItem) {
         PFUser.logOut()
@@ -39,6 +39,90 @@ class RoomViewController: UIViewController, UITableViewDataSource, UITableViewDe
         self.tableView.backgroundView = imageView
     }
     
+    
+  
+    
+    //MARK: Navigation
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        
+        super.prepare(for: segue, sender: sender)
+        
+        switch (segue.identifier ?? "") {
+        case "AddTaskSegue":
+            
+            guard let addTaskVC = segue.destination as? AddTaskViewController else{
+                fatalError("unexpected destination:\(segue.destination)")
+            }
+            
+            //pass the roomObject to addTask
+            guard let myRoom = myRoom else {
+                return
+            }
+            addTaskVC.roomObject = myRoom
+            
+            //set to be the task delegate
+            addTaskVC.taskDelegate = self
+            
+            print("Adding a new task")
+            
+        case "ShowDetailTask":
+            
+            guard let detailedTaskVc = segue.destination as? AddTaskViewController else {
+                fatalError("unexpected destination:\(segue.destination)")
+            }
+            guard let roomViewCell = sender as? RoomViewCell else {
+                fatalError("unexpected sender:\((String)(describing: sender))")
+            }
+            guard let indexPath = tableView.indexPath(for: roomViewCell) else {
+                fatalError("The selected cell is not being displayed by the table")
+                
+            }
+            
+            let selectedTask = tasks[indexPath.section]
+            detailedTaskVc.task = selectedTask
+            
+        default:
+            fatalError("unexpected segue identifier \(String(describing: segue.identifier))")
+        }
+    }
+    
+    
+
+    //MARK: Fetch Parse
+    //fetch task depending on Room
+    func fetchTaskByRoom() {
+        let taskQuery = PFQuery(className: "Task")
+        taskQuery.order(byAscending: "taskName")
+        
+        //fetch room by its variable.        
+        guard let myRoom = self.myRoom else {
+            return
+        }
+        
+        taskQuery.whereKey("room", equalTo: myRoom)
+                
+        taskQuery.findObjectsInBackground { (result: [PFObject]?, error: Error?) in
+            
+            //error handling
+            if let error = error {
+                print(#line, error.localizedDescription)
+                return
+            }
+            
+            //return the statement before it actually fetches (if there is no task it will just return)
+            guard let result = result as? [Task] else { return }
+            
+            //dont append tasks. just set it to equal the array to display all the tasks.
+            self.tasks = result
+            self.tableView.reloadData()
+        }
+        
+    }
+
+}
+
+extension RoomViewController: UITableViewDelegate, UITableViewDataSource{
     
     //MARK: Tableview Datasource
     public func numberOfSections(in tableView: UITableView) -> Int {
@@ -94,53 +178,10 @@ class RoomViewController: UIViewController, UITableViewDataSource, UITableViewDe
         return 5
     }
     
-    //MARK: Navigation
+}
+
+extension RoomViewController: AddTaskDelegate{
     
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        
-        super.prepare(for: segue, sender: sender)
-        
-        switch (segue.identifier ?? "") {
-        case "AddTaskSegue":
-            
-            guard let addTaskVC = segue.destination as? AddTaskViewController else{
-                fatalError("unexpected destination:\(segue.destination)")
-            }
-            
-            //pass the roomObject to addTask
-            guard let myRoom = myRoom else {
-                return
-            }
-            addTaskVC.roomObject = myRoom
-            
-            //set to be the task delegate
-            addTaskVC.taskDelegate = self
-            
-            print("Adding a new task")
-            
-        case "ShowDetailTask":
-            
-            guard let detailedTaskVc = segue.destination as? AddTaskViewController else {
-                fatalError("unexpected destination:\(segue.destination)")
-            }
-            guard let roomViewCell = sender as? RoomViewCell else {
-                fatalError("unexpected sender:\((String)(describing: sender))")
-            }
-            guard let indexPath = tableView.indexPath(for: roomViewCell) else {
-                fatalError("The selected cell is not being displayed by the table")
-                
-            }
-            
-            let selectedTask = tasks[indexPath.section]
-            detailedTaskVc.task = selectedTask
-            
-        default:
-            fatalError("unexpected segue identifier \(String(describing: segue.identifier))")
-        }
-    }
-    
-    
-    //MARK: Task Delegate
     func addTaskObject(task: Task) {
         
         tasks.append(task)
@@ -148,46 +189,5 @@ class RoomViewController: UIViewController, UITableViewDataSource, UITableViewDe
         
     }
     
-
-    //MARK: Fetch Parse
-    //fetch task depending on Room
-    func fetchTaskByRoom() {
-        let taskQuery = PFQuery(className: "Task")
-        taskQuery.order(byAscending: "taskName")
-        
-        //fetch room by its variable.        
-        guard let myRoom = self.myRoom else {
-            return
-        }
-        
-        taskQuery.whereKey("room", equalTo: myRoom)
-                
-        taskQuery.findObjectsInBackground { (result: [PFObject]?, error: Error?) in
-            
-            //error handling
-            if let error = error {
-                print(#line, error.localizedDescription)
-                return
-            }
-            
-            //return the statement before it actually fetches (if there is no task it will just return)
-            guard let result = result as? [Task] else { return }
-            
-            //dont append tasks. just set it to equal the array to display all the tasks.
-            self.tasks = result
-            self.tableView.reloadData()
-        }
-        
-    }
-    
-    
-    
-    
-    
-    
-  
 }
-
-
-
 
