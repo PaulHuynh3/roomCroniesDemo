@@ -35,10 +35,12 @@ class AddTaskViewController: UIViewController {
         super.viewDidLoad()
         createExpensePicker()
         createToolBar()
+        
         if let task = task {
             taskNameTextField.text = task.taskName
             taskDescriptionTextField.text = task.taskDescription
             sliderLabel.text = task.priority
+            expenseTextField.text = task.taskExpense
             
         }
         
@@ -124,11 +126,18 @@ extension AddTaskViewController: UIPickerViewDelegate, UIPickerViewDataSource{
         expensePicker.delegate = self
         //adding picker to the textfield view.
         expenseTextField.inputView = expensePicker
+        
+        //customizations
+        expensePicker.backgroundColor = .black
     }
     
     func createToolBar() {
         let toolBar = UIToolbar()
         toolBar.sizeToFit()
+        
+        //customizations
+        toolBar.barTintColor = .black
+        toolBar.tintColor = .white
         
         let doneButton = UIBarButtonItem(title: "Done", style: .plain, target: self, action: #selector(AddTaskViewController.dismissKeyboard))
         
@@ -141,6 +150,28 @@ extension AddTaskViewController: UIPickerViewDelegate, UIPickerViewDataSource{
     @objc func dismissKeyboard(){
         view.endEditing(true)
     }
+    
+    //customize picker label.
+    func pickerView(_ pickerView: UIPickerView, viewForRow row: Int, forComponent component: Int, reusing view: UIView?) -> UIView {
+        
+        var label: UILabel
+        
+        if let view = view as? UILabel {
+            label = view
+        } else {
+            label = UILabel()
+        }
+        
+        label.textColor = .white
+        label.textAlignment = .center
+        label.font = UIFont(name: "Menlo-Regular", size: 12)
+        
+        label.text = pickerTask[row]
+        
+        return label
+    }
+    
+    
     
     
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
@@ -156,7 +187,7 @@ extension AddTaskViewController: UIPickerViewDelegate, UIPickerViewDataSource{
         return pickerTask.count
     }
     
-    //pickerview delegate
+    //pickerview delegate for user's selected input.
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
         selectedPickerExpense = pickerTask[row]
         expenseTextField.text = selectedPickerExpense
