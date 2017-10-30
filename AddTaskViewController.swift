@@ -23,6 +23,9 @@ class AddTaskViewController: UIViewController {
     var roomObject: Room?
     var pickerTask = ["Expense","Non-Expense"]
     var selectedPickerExpense: String?
+    //pass this in segue and connect it to the uiswitch.
+    var isCompleted:Bool? = false
+    
     
     @IBOutlet weak var taskNameTextField: UITextField!
     @IBOutlet weak var taskDescriptionTextField: UITextField!
@@ -59,10 +62,11 @@ class AddTaskViewController: UIViewController {
               let room = roomObject,
               let currentUser = PFUser.current(),
               let priorityLabel = sliderLabel.text,
-              let expensePicker = selectedPickerExpense else {
+              let expensePicker = selectedPickerExpense
+                                                    else {
                 return
         }
-        task = Task(room: room, taskName: name, description: taskDescription, priority: priorityLabel, taskExpense:expensePicker , createdBy: currentUser)
+        task = Task(room: room, taskName: name, description: taskDescription, priority: priorityLabel, taskExpense:expensePicker, isCompleted:isCompleted! ,createdBy: currentUser)
         
         
         task?.saveInBackground { (success, error) in

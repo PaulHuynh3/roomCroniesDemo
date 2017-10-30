@@ -92,22 +92,22 @@ class RoomViewController: UIViewController {
     @IBAction func taskCompleteToggled(_ sender: UISwitch) {
         
         let task = Task()
-        
-        //set button tags for each of the selected button.
-        
-        
-        //query for existinh tasks if the list of task matches the task being checked by the user. Add "doneBy" and move the task into a "completed" tableview
-        
-        //need to indicate the selected cell for indexpath or it will save as a new object.
-        if selectedIndexPath?.row != nil {
+//
+//        //set button tags for each of the selected button.
+//        let buttonPosition: CGPoint = sender.convert(CGPointZero, to: self.tableView)
+//        let indexPath = self.tableView.indexPathForRow(at: buttonPosition)
+//
+//        //query for existinh tasks if the list of task matches the task being checked by the user. Add "doneBy" and move the task into a "completed" tableview
+//
+//        //need to indicate the selected cell for indexpath or it will save as a new object.
             task.doneBy = PFUser.current()
-            
-            
+        
+        
             task.saveInBackground { (success:Bool, error:Error?) in
                 print(#line, success)
                 print(#line, error?.localizedDescription ?? "error in saving")
             }
-        }
+        
     }
     
     //might not need this function

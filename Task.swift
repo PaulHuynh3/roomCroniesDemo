@@ -21,16 +21,19 @@ class Task: PFObject {
     //when user checks off a task. it will be.. doneBy.currentUser..
     @NSManaged var doneBy: PFUser?
 
+    @NSManaged var isCompleted: Bool
+    
     //use the built in property objectId to access specific object
     
     
-    convenience init(room: Room, taskName:String, description:String, priority:String, taskExpense:String, createdBy: PFUser) {
+    convenience init(room: Room, taskName:String, description:String, priority:String, taskExpense:String, isCompleted:Bool, createdBy: PFUser) {
         self.init()
         self.room = room
         self.taskName = taskName
         self.taskDescription = description
         self.taskExpense = taskExpense
         self.priority = priority
+        self.isCompleted = isCompleted
         self.createdBy = createdBy
     }
     
