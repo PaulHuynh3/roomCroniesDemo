@@ -14,7 +14,7 @@ protocol AddTaskDelegate {
     func addTaskObject(task:Task)
 }
 
-class AddTaskViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource {
+class AddTaskViewController: UIViewController {
     
     var taskDelegate: AddTaskDelegate?
     
@@ -29,7 +29,7 @@ class AddTaskViewController: UIViewController, UIPickerViewDelegate, UIPickerVie
     @IBOutlet weak var sliderLabel: UILabel!
     @IBOutlet weak var prioritySlider: UISlider!
     @IBOutlet weak var taskTypePicker: UIPickerView!
-    
+    @IBOutlet weak var expenseTextField: UITextField!
     
     
     override func viewDidLoad() {
@@ -39,30 +39,10 @@ class AddTaskViewController: UIViewController, UIPickerViewDelegate, UIPickerVie
             taskDescriptionTextField.text = task.taskDescription
             sliderLabel.text = task.priority
             
-            
         }
         
     }
     
-    //MARK: PickerView Datasource:
-    
-    func numberOfComponents(in pickerView: UIPickerView) -> Int {
-        return 1
-    }
-    
-    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-        return typeOfTask[row]
-        
-    }
-    
-    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-        return typeOfTask.count
-    }
-    
-    //pickerview delegate
-    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-        selectedPickerRow = typeOfTask[row]
-    }
     
     
     //Mark: Action
@@ -79,10 +59,11 @@ class AddTaskViewController: UIViewController, UIPickerViewDelegate, UIPickerVie
               let taskDescription = taskDescriptionTextField.text,
               let room = roomObject,
               let currentUser = PFUser.current(),
-              let priorityLabel = sliderLabel.text else {
+              let priorityLabel = sliderLabel.text,
+              let expensePicker = selectedPickerRow else {
                 return
         }
-        task = Task(room: room, taskName: name, description: taskDescription, priority: priorityLabel, createdBy: currentUser)
+        task = Task(room: room, taskName: name, description: taskDescription, priority: priorityLabel, taskExpense:expensePicker , createdBy: currentUser)
         
         
         task?.saveInBackground { (success, error) in
@@ -132,9 +113,30 @@ class AddTaskViewController: UIViewController, UIPickerViewDelegate, UIPickerVie
         dismiss(animated: true, completion: nil)
         
     }
-    
-    
 
+}
+
+extension AddTaskViewController: UIPickerViewDelegate, UIPickerViewDataSource{
+    
+    
+    func numberOfComponents(in pickerView: UIPickerView) -> Int {
+        return 1
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
+        return typeOfTask[row]
+        
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+        return typeOfTask.count
+    }
+    
+    //pickerview delegate
+    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+        selectedPickerRow = typeOfTask[row]
+    }
     
     
 }
+

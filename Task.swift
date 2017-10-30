@@ -12,7 +12,7 @@ import Parse
 class Task: PFObject {
     @NSManaged var taskName : String
     @NSManaged var taskDescription: String
-    @NSManaged var isExpense: Bool
+    @NSManaged var taskExpense: String
     @NSManaged var priority: String
     //many task in one room: room: Room <--->> tasks: [Task]  (Room object)
     @NSManaged var room: Room
@@ -24,12 +24,12 @@ class Task: PFObject {
     //use the built in property objectId to access specific object
     
     
-    convenience init(room: Room, taskName:String, description:String, priority:String, createdBy: PFUser) {
+    convenience init(room: Room, taskName:String, description:String, priority:String, taskExpense:String, createdBy: PFUser) {
         self.init()
         self.room = room
         self.taskName = taskName
         self.taskDescription = description
-//        self.isExpense = isExpense
+        self.taskExpense = taskExpense
         self.priority = priority
         self.createdBy = createdBy
     }
