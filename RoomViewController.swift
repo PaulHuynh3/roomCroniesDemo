@@ -99,6 +99,8 @@ class RoomViewController: UIViewController {
     
     
     //MARK: Fetch Parse
+    
+    //may get rid of this soon
     func fetchAllTaskByRoom() {
         let taskQuery = PFQuery(className: "Task")
         taskQuery.order(byAscending: "taskName")
@@ -130,13 +132,14 @@ class RoomViewController: UIViewController {
     
     
     //fetch only expenses!
-    func fetchExpenseTask() {
+    func fetchIncompleteExpenseTask() {
         
     let query = PFQuery(className:"Task")
         
         guard let myRoom = self.myRoom else{return}
         
         query.whereKey("room", equalTo: myRoom)
+        query.whereKey("isCompleted", equalTo: false)
         query.whereKey("taskExpense", equalTo:"Expense")
         
         query.findObjectsInBackground { (results: [PFObject]?, error: Error?) in
@@ -154,7 +157,7 @@ class RoomViewController: UIViewController {
         
     }
     
-    //fetch all room's completed task and expense.
+    //fetch all room's completed task and expense and add this to tab bar completed.
     func fetchCompletedTask() {
         
         let query = PFQuery(className: "Task")
@@ -178,6 +181,35 @@ class RoomViewController: UIViewController {
         }
         
     }
+    
+    //use this filter it with expense and non-expense items.
+    func fetchIncompleteNonExpenseTask() {
+        
+        let query = PFQuery(className: "Task")
+        
+        guard let myRoom = self.myRoom else{return}
+        
+        query.whereKey("room", equalTo: myRoom)
+        query.whereKey("isCompleted", equalTo: false)
+        query.whereKey("taskExpense", equalTo: "Non-Expense")
+        
+        query.findObjectsInBackground { (results: [PFObject]?, error: Error?) in
+            
+            if let error = error {
+                print(#line, error.localizedDescription)
+            }
+            
+            guard let results = results as? [Task] else {return}
+            
+            self.tasks = results
+            self.tableView.reloadData()
+            
+        }
+        
+    }
+    
+    //PSEUDO Code: In RoomViewController have 3 tab bars: task, expense, completed. For the task use fetchIncompleteNonExpenseTask()... expense tab use: fetchIncompleteExpenseTask... and the completed task we will fetch for all task regardless.
+    //When user toggles the switch to mark a task as complete we need a way to refresh their tableview.. as reloaddata doesnt work. If we put the parse query function inside viewWillAppear it will refresh if the user navigates from their screen.
     
    
     
@@ -218,8 +250,8 @@ extension RoomViewController: UITableViewDelegate, UITableViewDataSource{
         cell.layer.masksToBounds = true
         
         return cell
-        
     }
+    
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let headerView = UIView()
