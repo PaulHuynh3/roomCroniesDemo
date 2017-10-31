@@ -11,15 +11,22 @@ import Parse
 
 
 class TaskViewCell: UITableViewCell {
-
+    //task property being set by the roomviewcontroller row forindexpath
     var task : Task?
+    
     @IBOutlet weak var taskLabel: UILabel!
     @IBOutlet weak var switchComplete: UISwitch!
     
+    
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
+    }
     
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        if let task = task {
+            switchComplete.isOn = task.isCompleted
+        }
     }
     
     
