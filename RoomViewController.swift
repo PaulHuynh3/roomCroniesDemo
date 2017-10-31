@@ -225,7 +225,7 @@ class RoomViewController: UIViewController {
     
 }
 
-extension RoomViewController: UITableViewDelegate, UITableViewDataSource{
+extension RoomViewController: UITableViewDelegate, UITableViewDataSource {
     
     //MARK: Tableview Datasource
     public func numberOfSections(in tableView: UITableView) -> Int {
@@ -267,17 +267,23 @@ extension RoomViewController: UITableViewDelegate, UITableViewDataSource{
         
         if editingStyle == .delete {
             // Delete the row from the data source
-            tasks.remove(at: indexPath.section)
+            self.tasks.remove(at: indexPath.section)
+            self.tableView.deleteSections([indexPath.section], with: .fade)
             
-            
-            
-            tableView.deleteRows(at: [indexPath], with: .fade)
-            
-        } else if editingStyle == .insert {
-            // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
         }
         
     }
+    /*
+     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
+     if editingStyle == .delete {
+     print("Deleted")
+     
+     self.catNames.remove(at: indexPath.row)
+     self.tableView.deleteRows(at: [indexPath], with: .automatic)
+     }
+     }
+     */
+    
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let headerView = UIView()
