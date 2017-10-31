@@ -67,10 +67,10 @@ class RoomViewController: UIViewController {
             guard let detailedTaskVc = segue.destination as? AddTaskViewController else {
                 fatalError("unexpected destination:\(segue.destination)")
             }
-            guard let roomViewCell = sender as? RoomViewCell else {
+            guard let taskViewCell = sender as? TaskViewCell else {
                 fatalError("unexpected sender:\((String)(describing: sender))")
             }
-            guard let indexPath = tableView.indexPath(for: roomViewCell) else {
+            guard let indexPath = tableView.indexPath(for: taskViewCell) else {
                 fatalError("The selected cell is not being displayed by the table")
                 
             }
@@ -146,20 +146,18 @@ extension RoomViewController: UITableViewDelegate, UITableViewDataSource{
     
     public func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell{
         
-        let cellIdentifier = "RoomViewCell"
+        let cellIdentifier = "TaskViewCell"
         
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath) as? RoomViewCell else {
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath) as? TaskViewCell else {
             
-            fatalError("The dequeued cell is not RoomViewCell")
+            fatalError("The dequeued cell is not TaskViewCell")
         }
         
         let createTask = tasks[indexPath.section]
-        //set the switch as not complete
-        cell.switchComplete.isOn = createTask.isCompleted
         //cell contains the entire task list.. access a task in that list.
-        cell.task = tasks[indexPath.row]
+        //identfying the entire task for uiswitch.
+        cell.task = tasks[indexPath.section]
        
-        
         cell.setupCell(task: createTask)
         //cell.contentView.backgroundColor = UIColor.clear;
         cell.backgroundColor = UIColor(white: 1.0, alpha: 0.5)
@@ -169,7 +167,6 @@ extension RoomViewController: UITableViewDelegate, UITableViewDataSource{
         return cell
         
     }
-    
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let headerView = UIView()

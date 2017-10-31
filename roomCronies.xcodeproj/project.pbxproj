@@ -25,7 +25,7 @@
 		DAF3FA081F9A62690095B7A4 /* Expense.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAF3FA071F9A62690095B7A4 /* Expense.swift */; };
 		DAF3FA0A1F9A99120095B7A4 /* RoomViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAF3FA091F9A99120095B7A4 /* RoomViewController.swift */; };
 		DAF3FA0C1F9A99780095B7A4 /* AddTaskViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAF3FA0B1F9A99780095B7A4 /* AddTaskViewController.swift */; };
-		DAF3FA0E1F9A9CFD0095B7A4 /* RoomViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAF3FA0D1F9A9CFD0095B7A4 /* RoomViewCell.swift */; };
+		DAF3FA0E1F9A9CFD0095B7A4 /* TaskViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAF3FA0D1F9A9CFD0095B7A4 /* TaskViewCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -53,7 +53,7 @@
 		DAF3FA071F9A62690095B7A4 /* Expense.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Expense.swift; sourceTree = "<group>"; };
 		DAF3FA091F9A99120095B7A4 /* RoomViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RoomViewController.swift; sourceTree = "<group>"; };
 		DAF3FA0B1F9A99780095B7A4 /* AddTaskViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddTaskViewController.swift; sourceTree = "<group>"; };
-		DAF3FA0D1F9A9CFD0095B7A4 /* RoomViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RoomViewCell.swift; sourceTree = "<group>"; };
+		DAF3FA0D1F9A9CFD0095B7A4 /* TaskViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TaskViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -112,7 +112,7 @@
 				DA42202B1F9FFDF4009FB67F /* RegisterViewController.swift */,
 				DA195E141FA5605700100F08 /* ExistingRoomViewController.swift */,
 				DAF3FA091F9A99120095B7A4 /* RoomViewController.swift */,
-				DAF3FA0D1F9A9CFD0095B7A4 /* RoomViewCell.swift */,
+				DAF3FA0D1F9A9CFD0095B7A4 /* TaskViewCell.swift */,
 				DAF3FA0B1F9A99780095B7A4 /* AddTaskViewController.swift */,
 			);
 			name = Controller;
@@ -320,7 +320,7 @@
 				DA195E151FA5605700100F08 /* ExistingRoomViewController.swift in Sources */,
 				DAF3FA061F9A5DA60095B7A4 /* Task.swift in Sources */,
 				DA350E161FA2C61D001C653A /* UIViewControllerExtension.swift in Sources */,
-				DAF3FA0E1F9A9CFD0095B7A4 /* RoomViewCell.swift in Sources */,
+				DAF3FA0E1F9A9CFD0095B7A4 /* TaskViewCell.swift in Sources */,
 				DAF3FA041F9A5BA60095B7A4 /* Room.swift in Sources */,
 				DA42202A1F9FF7F0009FB67F /* LoginViewController.swift in Sources */,
 				8897DDC91FA7A24A00982BDD /* CheckBox.swift in Sources */,
