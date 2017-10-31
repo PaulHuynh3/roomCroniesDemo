@@ -109,7 +109,7 @@
                                                     <rect key="frame" x="296" y="8" width="49" height="31"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <connections>
-                                                        <action selector="taskCompleteToggled:" destination="BYZ-38-t0r" eventType="valueChanged" id="0WN-g5-k37"/>
+                                                        <action selector="switchToggled:" destination="c0l-Mi-9r9" eventType="valueChanged" id="ZcM-Zy-kVB"/>
                                                     </connections>
                                                 </switch>
                                             </subviews>

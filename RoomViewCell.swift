@@ -7,19 +7,31 @@
 //
 
 import UIKit
+import Parse
+
 
 class RoomViewCell: UITableViewCell {
 
+    var task : Task?
     @IBOutlet weak var taskLabel: UILabel!
-    
     @IBOutlet weak var switchComplete: UISwitch!
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
+    
     }
     
     
-
+    //The cell already contains all the task objects because of the task.. to identify it at indexpath everything needs to be done thru the cell.
+    //the correct way to do this would be to add a delegate and protocol in the cell. 
+    
+    @IBAction func switchToggled(_ sender: UISwitch) {
+        task?.isCompleted = sender.isOn
+        task?.doneBy = PFUser.current()
+        task?.saveInBackground()
+    }
+    
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
 

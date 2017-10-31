@@ -90,41 +90,6 @@ class RoomViewController: UIViewController {
     }
     
     
-    @IBAction func taskCompleteToggled(_ sender: UISwitch) {
-        var currentTask: Task
-//        //query for existinh tasks if the list of task matches the task being checked by the user. Add "doneBy" and move the task into a "completed" tableview
-        
-        let query = PFQuery(className: "Task")
-        
-        guard let myRoom = self.myRoom else {
-            return
-        }
-          query.whereKey("Room", equalTo: myRoom)
-        
-            query.findObjectsInBackground { (result: [PFObject]?, error: Error?) in
-            
-            //error handling
-            if let error = error {
-                print(#line, error.localizedDescription)
-                return
-            }
-            
-            //return the statement before it actually fetches (if there is no task it will just return)
-            guard let result = result as? [Task] else { return }
-                
-                currentTask = result.first!
-                currentTask.doneBy = PFUser.current()
-                currentTask.isCompleted = true
-                
-                currentTask.saveInBackground { (success:Bool, error:Error?) in
-                    print(#line, success)
-                    print(#line, error?.localizedDescription ?? "error in saving")
-                }
-                
-        }
-        
-    }
-    
     //might not need this function
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
@@ -191,6 +156,9 @@ extension RoomViewController: UITableViewDelegate, UITableViewDataSource{
         let createTask = tasks[indexPath.section]
         //set the switch as not complete
         cell.switchComplete.isOn = createTask.isCompleted
+        //cell contains the entire task list.. access a task in that list.
+        cell.task = tasks[indexPath.row]
+       
         
         cell.setupCell(task: createTask)
         //cell.contentView.backgroundColor = UIColor.clear;
