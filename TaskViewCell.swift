@@ -22,6 +22,7 @@ class TaskViewCell: UITableViewCell {
         super.awakeFromNib()
     }
     
+    //stays on if user selects it.
     override func layoutSubviews() {
         super.layoutSubviews()
         if let task = task {
@@ -38,6 +39,7 @@ class TaskViewCell: UITableViewCell {
         
         task?.saveInBackground()
     }
+    
     
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
