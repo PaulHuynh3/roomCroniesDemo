@@ -15,7 +15,8 @@ class RoomViewController: UIViewController {
         didSet {
             //when login viewdidload may load before it gets set.
 //            fetchAllTaskByRoom()
-            fetchExpenseTask()
+//            fetchExpenseTask()
+            fetchCompletedTask()
         }
     }
     var tasks: [Task] = []
@@ -154,6 +155,34 @@ class RoomViewController: UIViewController {
         }
         
     }
+    
+    //fetch all room's completed task and expense.
+    func fetchCompletedTask() {
+        
+        let query = PFQuery(className: "Task")
+        
+        guard let myRoom = self.myRoom else{return}
+        
+        query.whereKey("room", equalTo: myRoom)
+        query.whereKey("isCompleted", equalTo: true)
+        
+        query.findObjectsInBackground { (results: [PFObject]?, error: Error?) in
+            
+            if let error = error {
+                print(#line, error.localizedDescription)
+            }
+            
+            guard let results = results as? [Task] else {return}
+            
+            self.tasks = results
+            self.tableView.reloadData()
+            
+        }
+        
+    }
+    
+    //fetch all room's
+//    func
     
 }
 
