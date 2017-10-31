@@ -13,10 +13,8 @@ class RoomViewController: UIViewController {
     //created before viewdidload therefore requires "?"
     var myRoom : Room? = nil {
         didSet {
-            //when login viewdidload may load before it gets set.
-//            fetchAllTaskByRoom()
-//            fetchExpenseTask()
-            fetchCompletedTask()
+            //viewdidload may load before it gets set.
+            fetchAllTaskByRoom()
         }
     }
     var tasks: [Task] = []
@@ -181,8 +179,7 @@ class RoomViewController: UIViewController {
         
     }
     
-    //fetch all room's
-//    func
+   
     
 }
 
@@ -210,8 +207,8 @@ extension RoomViewController: UITableViewDelegate, UITableViewDataSource{
         }
         
         let createTask = tasks[indexPath.section]
-        //cell contains the entire task list.. access a task in that list.
-        //identfying the entire task for uiswitch.
+        //access a task in the task list.. this is used for anything in the indexpath.. including the uiswitch
+        //this sets the task property in cell.
         cell.task = tasks[indexPath.section]
        
         cell.setupCell(task: createTask)
