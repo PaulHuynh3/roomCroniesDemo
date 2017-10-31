@@ -47,7 +47,7 @@ class RoomViewController: UIViewController {
         refreshControl.addTarget(self, action:#selector(RoomViewController.refresh(sender:)), for: UIControlEvents.valueChanged)
         tableView.addSubview(refreshControl)
     }
-    //action to end refreshing
+    //Refresh with the existing incomplete expense.
     func refresh(sender:AnyObject) {
         fetchIncompleteExpenseTask()
         refreshControl.endRefreshing()
@@ -55,7 +55,6 @@ class RoomViewController: UIViewController {
     
     
     //MARK: Navigation
-    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         
         super.prepare(for: segue, sender: sender)
