@@ -25,9 +25,6 @@ class Task: PFObject {
     //For UISwitch to keep it on/off
     @NSManaged var isCompleted: Bool
     
-    //use the built in property objectId to access specific object
-    
-    
     convenience init(room: Room, taskName:String, description:String, priority:String, taskExpense:String, isCompleted:Bool, createdBy: PFUser) {
         self.init()
         self.room = room

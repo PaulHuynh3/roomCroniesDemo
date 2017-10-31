@@ -22,7 +22,7 @@ class RoomViewController: UIViewController {
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var segmentedControl: UISegmentedControl!
     
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         //fetches the room related to the user.
@@ -50,7 +50,7 @@ class RoomViewController: UIViewController {
     }
     //Refresh with the existing incomplete expense.
     func refresh(sender:AnyObject) {
-//        fetchIncompleteExpenseTask()
+        //        fetchIncompleteExpenseTask()
         refreshControl.beginRefreshing()
         refreshControl.endRefreshing()
     }
@@ -77,7 +77,7 @@ class RoomViewController: UIViewController {
         }
     }
     
-
+    
     //MARK: Navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         
@@ -209,9 +209,6 @@ class RoomViewController: UIViewController {
         
     }
     
-    //PSEUDO Code: In RoomViewController have 3 tab bars: task, expense, completed. For the task use fetchIncompleteNonExpenseTask()... expense tab use: fetchIncompleteExpenseTask... and the completed task we will fetch for all task regardless.
-    //When user toggles the switch to mark a task as complete we need a way to refresh their tableview.. as reloaddata doesnt work. If we put the parse query function inside viewWillAppear it will refresh if the user navigates from their screen.
-    
 }
 
 
@@ -257,7 +254,7 @@ extension RoomViewController: UITableViewDelegate, UITableViewDataSource{
         
         
     }
-
+    
     
     
     
