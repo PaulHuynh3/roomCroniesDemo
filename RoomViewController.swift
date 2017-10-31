@@ -14,7 +14,8 @@ class RoomViewController: UIViewController {
     var myRoom : Room? = nil {
         didSet {
             //when login viewdidload may load before it gets set.
-            fetchTaskByRoom()
+//            fetchAllTaskByRoom()
+            fetchExpenseTask()
         }
     }
     var tasks: [Task] = []
@@ -99,7 +100,7 @@ class RoomViewController: UIViewController {
     
     
     //MARK: Fetch Parse
-    func fetchTaskByRoom() {
+    func fetchAllTaskByRoom() {
         let taskQuery = PFQuery(className: "Task")
         taskQuery.order(byAscending: "taskName")
         
@@ -124,6 +125,32 @@ class RoomViewController: UIViewController {
             //dont append tasks. just set it to equal the array to display all the tasks.
             self.tasks = result
             self.tableView.reloadData()
+        }
+        
+    }
+    
+    
+    //fetch only expenses!
+    func fetchExpenseTask() {
+        
+    let query = PFQuery(className:"Task")
+        
+        guard let myRoom = self.myRoom else{return}
+        
+        query.whereKey("room", equalTo: myRoom)
+        query.whereKey("taskExpense", equalTo:"Expense")
+        
+        query.findObjectsInBackground { (results: [PFObject]?, error: Error?) in
+            
+            if let error = error {
+                print(#line, error.localizedDescription)
+            }
+            
+            guard let results = results as? [Task] else {return}
+            
+            self.tasks = results
+            self.tableView.reloadData()
+            
         }
         
     }
@@ -190,6 +217,7 @@ extension RoomViewController: UITableViewDelegate, UITableViewDataSource{
     }
     
 }
+
 
 
 extension RoomViewController: AddTaskDelegate{
