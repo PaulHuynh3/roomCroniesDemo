@@ -20,12 +20,10 @@ class RoomViewController: UIViewController {
     }
     var tasks: [Task] = []
     var refreshControl: UIRefreshControl!
-    
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var segmentedControl: UISegmentedControl!
     
-    
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
         //fetches the room related to the user.
@@ -55,7 +53,33 @@ class RoomViewController: UIViewController {
         refreshControl.endRefreshing()
     }
     
+    //MARK: Segmented Control
     
+    @IBAction func indexChanged(_ sender: UISegmentedControl) {
+        switch segmentedControl.selectedSegmentIndex {
+        case 0:
+            
+            print("Show task")
+            self.fetchIncompleteNonExpenseTask()
+            
+        case 1:
+            print("Show expense task")
+            self.fetchIncompleteExpenseTask()
+            
+        case 2:
+            print("show completed task and expense")
+            self.fetchCompletedTask()
+            
+        default:
+            break
+        }
+        
+        
+        
+    }
+    
+    
+
     //MARK: Navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         
