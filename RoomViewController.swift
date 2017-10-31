@@ -14,11 +14,12 @@ class RoomViewController: UIViewController {
     var myRoom : Room? = nil {
         didSet {
             //viewdidload may load before it gets set.
-            fetchAllTaskByRoom()
+            //            fetchAllTaskByRoom()
+            fetchIncompleteExpenseTask()
         }
     }
     var tasks: [Task] = []
-    
+    var refreshControl: UIRefreshControl!
     
     @IBOutlet weak var tableView: UITableView!
     
@@ -28,14 +29,30 @@ class RoomViewController: UIViewController {
         //fetches the room related to the user.
         DataManager.getRoom(completion: {[unowned self] (room) in
             self.myRoom = room
-            
-            
         })
+        refreshUserScreen()
+        
+        //put in a function
         navigationController?.isNavigationBarHidden = false
         let backgroundImage = UIImage(named: "iphone-3.jpg")
         let imageView = UIImageView(image: backgroundImage)
         self.tableView.backgroundView = imageView
     }
+    
+    //MARK: Refresh Screen
+    func refreshUserScreen(){
+        
+        refreshControl = UIRefreshControl()
+        refreshControl.attributedTitle = NSAttributedString(string: "Pull to refresh")
+        refreshControl.addTarget(self, action:#selector(RoomViewController.refresh(sender:)), for: UIControlEvents.valueChanged)
+        tableView.addSubview(refreshControl)
+    }
+    //action to end refreshing
+    func refresh(sender:AnyObject) {
+        fetchIncompleteExpenseTask()
+        refreshControl.endRefreshing()
+    }
+    
     
     //MARK: Navigation
     
@@ -126,7 +143,7 @@ class RoomViewController: UIViewController {
     //fetch only expenses!
     func fetchIncompleteExpenseTask() {
         
-    let query = PFQuery(className:"Task")
+        let query = PFQuery(className:"Task")
         
         guard let myRoom = self.myRoom else{return}
         
@@ -233,7 +250,7 @@ extension RoomViewController: UITableViewDelegate, UITableViewDataSource{
         //access a task in the task list.. this is used for anything in the indexpath.. including the uiswitch
         //this sets the task property in cell.
         cell.task = tasks[indexPath.section]
-       
+        
         cell.setupCell(task: createTask)
         //cell.contentView.backgroundColor = UIColor.clear;
         cell.backgroundColor = UIColor(white: 1.0, alpha: 0.5)
