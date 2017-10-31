@@ -45,7 +45,6 @@ class RoomViewController: UIViewController {
         refreshControl.backgroundColor = UIColor.orange
         refreshControl.tintColor = UIColor.white
         refreshControl.attributedTitle = NSAttributedString(string: "Pull to refresh")
-        print("SELECTED INDEX!!!!\(segmentedControl.selectedSegmentIndex)")
         refreshControl.addTarget(self, action:#selector(RoomViewController.refresh(sender:)), for: UIControlEvents.valueChanged)
         tableView.addSubview(refreshControl)
     }
