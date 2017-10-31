@@ -75,9 +75,6 @@ class RoomViewController: UIViewController {
             print("Segmented Control error. Button not selected")
             break
         }
-        
-        
-        
     }
     
 
@@ -134,37 +131,6 @@ class RoomViewController: UIViewController {
     
     
     //MARK: Fetch Parse
-    
-    //may get rid of this soon
-    func fetchAllTaskByRoom() {
-        let taskQuery = PFQuery(className: "Task")
-        taskQuery.order(byAscending: "taskName")
-        
-        //fetch room by its set variable above.
-        guard let myRoom = self.myRoom else {
-            return
-        }
-        
-        taskQuery.whereKey("room", equalTo: myRoom)
-        
-        taskQuery.findObjectsInBackground { (result: [PFObject]?, error: Error?) in
-            
-            //error handling
-            if let error = error {
-                print(#line, error.localizedDescription)
-                return
-            }
-            
-            //return the statement before it actually fetches (if there is no task it will just return)
-            guard let result = result as? [Task] else { return }
-            
-            //dont append tasks. just set it to equal the array to display all the tasks.
-            self.tasks = result
-            self.tableView.reloadData()
-        }
-        
-    }
-    
     
     //fetch only expenses!
     func fetchIncompleteExpenseTask() {
