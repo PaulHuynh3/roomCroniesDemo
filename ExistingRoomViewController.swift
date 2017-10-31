@@ -82,20 +82,7 @@ class ExistingRoomViewController: UIViewController {
             }
         })
     }
-    
-    
-    // MARK: - Navigation
-    //user will join existing room. roomVC already does this so i dont need to pass anything through segue.
-//    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-//        super.prepare(for: segue , sender: sender)
-//
-//        guard let taskViewController = segue.destination as? RoomViewController else {
-//            fatalError("unexpected destination:\(segue.destination)")
-//        }
-//        //join existing room.
-//        taskViewController.myRoom = joinExistingRoom
-//
-//    }
+
 
     
     

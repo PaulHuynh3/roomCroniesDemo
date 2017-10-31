@@ -45,6 +45,7 @@ class AddTaskViewController: UIViewController {
             taskDescriptionTextField.text = task.taskDescription
             sliderLabel.text = task.priority
             expenseTextField.text = task.taskExpense
+            prioritySlider.value = Float(task.priortyScale)
         }
         
     }
@@ -67,6 +68,9 @@ class AddTaskViewController: UIViewController {
                 return
         }
         task = Task(room: room, taskName: name, description: taskDescription, priority: priorityLabel, taskExpense:expensePicker, isCompleted:isComplete, createdBy: currentUser)
+        
+        //priorityscale can only be set when there is an instance b/c of the optional chain.. cant set task.priortyScale under priority slider action.
+        task?.priortyScale = Int(prioritySlider.value)
         
         
         task?.saveInBackground { (success, error) in

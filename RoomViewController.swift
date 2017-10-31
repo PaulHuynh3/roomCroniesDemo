@@ -13,8 +13,8 @@ class RoomViewController: UIViewController {
     //created before viewdidload therefore requires "?"
     var myRoom : Room? = nil {
         didSet {
-            //when login viewdidload may load before it gets set.
-            fetchTaskByRoom()
+            //viewdidload may load before it gets set.
+            fetchAllTaskByRoom()
         }
     }
     var tasks: [Task] = []
@@ -99,7 +99,9 @@ class RoomViewController: UIViewController {
     
     
     //MARK: Fetch Parse
-    func fetchTaskByRoom() {
+    
+    //may get rid of this soon
+    func fetchAllTaskByRoom() {
         let taskQuery = PFQuery(className: "Task")
         taskQuery.order(byAscending: "taskName")
         
@@ -128,6 +130,89 @@ class RoomViewController: UIViewController {
         
     }
     
+    
+    //fetch only expenses!
+    func fetchIncompleteExpenseTask() {
+        
+    let query = PFQuery(className:"Task")
+        
+        guard let myRoom = self.myRoom else{return}
+        
+        query.whereKey("room", equalTo: myRoom)
+        query.whereKey("isCompleted", equalTo: false)
+        query.whereKey("taskExpense", equalTo:"Expense")
+        
+        query.findObjectsInBackground { (results: [PFObject]?, error: Error?) in
+            
+            if let error = error {
+                print(#line, error.localizedDescription)
+            }
+            
+            guard let results = results as? [Task] else {return}
+            
+            self.tasks = results
+            self.tableView.reloadData()
+            
+        }
+        
+    }
+    
+    //fetch all room's completed task and expense and add this to tab bar completed.
+    func fetchCompletedTask() {
+        
+        let query = PFQuery(className: "Task")
+        
+        guard let myRoom = self.myRoom else{return}
+        
+        query.whereKey("room", equalTo: myRoom)
+        query.whereKey("isCompleted", equalTo: true)
+        
+        query.findObjectsInBackground { (results: [PFObject]?, error: Error?) in
+            
+            if let error = error {
+                print(#line, error.localizedDescription)
+            }
+            
+            guard let results = results as? [Task] else {return}
+            
+            self.tasks = results
+            self.tableView.reloadData()
+            
+        }
+        
+    }
+    
+    //use this filter it with expense and non-expense items.
+    func fetchIncompleteNonExpenseTask() {
+        
+        let query = PFQuery(className: "Task")
+        
+        guard let myRoom = self.myRoom else{return}
+        
+        query.whereKey("room", equalTo: myRoom)
+        query.whereKey("isCompleted", equalTo: false)
+        query.whereKey("taskExpense", equalTo: "Non-Expense")
+        
+        query.findObjectsInBackground { (results: [PFObject]?, error: Error?) in
+            
+            if let error = error {
+                print(#line, error.localizedDescription)
+            }
+            
+            guard let results = results as? [Task] else {return}
+            
+            self.tasks = results
+            self.tableView.reloadData()
+            
+        }
+        
+    }
+    
+    //PSEUDO Code: In RoomViewController have 3 tab bars: task, expense, completed. For the task use fetchIncompleteNonExpenseTask()... expense tab use: fetchIncompleteExpenseTask... and the completed task we will fetch for all task regardless.
+    //When user toggles the switch to mark a task as complete we need a way to refresh their tableview.. as reloaddata doesnt work. If we put the parse query function inside viewWillAppear it will refresh if the user navigates from their screen.
+    
+   
+    
 }
 
 extension RoomViewController: UITableViewDelegate, UITableViewDataSource{
@@ -154,8 +239,8 @@ extension RoomViewController: UITableViewDelegate, UITableViewDataSource{
         }
         
         let createTask = tasks[indexPath.section]
-        //cell contains the entire task list.. access a task in that list.
-        //identfying the entire task for uiswitch.
+        //access a task in the task list.. this is used for anything in the indexpath.. including the uiswitch
+        //this sets the task property in cell.
         cell.task = tasks[indexPath.section]
        
         cell.setupCell(task: createTask)
@@ -165,8 +250,8 @@ extension RoomViewController: UITableViewDelegate, UITableViewDataSource{
         cell.layer.masksToBounds = true
         
         return cell
-        
     }
+    
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let headerView = UIView()
@@ -190,6 +275,7 @@ extension RoomViewController: UITableViewDelegate, UITableViewDataSource{
     }
     
 }
+
 
 
 extension RoomViewController: AddTaskDelegate{
