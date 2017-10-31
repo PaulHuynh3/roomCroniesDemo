@@ -259,7 +259,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     //MARK: - test push notification
     func testPush5() {
-        //PFCloud.callFunction(inBackground: "iosPushTest", withParameters: ["text" : "Initialized with \(PFUser.current()!.username? ?? <#default value#>)" ])
+        PFCloud.callFunction(inBackground: "iosPushTest", withParameters: ["text" : "Initialized" ])
     }
     
     

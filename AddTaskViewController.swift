@@ -96,9 +96,11 @@ class AddTaskViewController: UIViewController {
             ]
         let request: [String : Any] = [
             "someKey" : PFUser.current()!.deviceToken,
+            //"someKey" : PFUser.current()!.objectId!,
             "data" : data
         ]
         print(PFUser.current()!.objectId!)
+        print(PFUser.current()!.deviceToken)
         print("sending push notification...")
         PFCloud.callFunction(inBackground: "pushToFollowers", withParameters: request as [NSObject : AnyObject], block: { (results:AnyObject?, error:NSError?) in
             print("push \(String(describing: results!))")
@@ -112,6 +114,8 @@ class AddTaskViewController: UIViewController {
         
         
         //PFCloud.callFunction(inBackground: "iosPushTest", withParameters: ["text" : "\(PFUser.current()!.username!) added a new task: \(String(describing: taskNameTextField.text!))"])
+        
+        PFCloud.callFunction(inBackground: "pushsample", withParameters: ["text" : "\(PFUser.current()!.username!) added a new task: \(String(describing: taskNameTextField.text!))"])
         
     }
     
