@@ -1,10 +1,10 @@
 //
-//  TaskViewController.swift
+//  RoomViewController.swift
 //  roomCronies
 //
 //  Created by Paul on 2017-10-20.
 //  Copyright © 2017 Paul. All rights reserved.
-//
+
 
 import UIKit
 import Parse
@@ -18,8 +18,7 @@ class RoomViewController: UIViewController {
         }
     }
     var tasks: [Task] = []
-    //might get rid of this.
-    var selectedIndexPath: IndexPath?
+    
     
     @IBOutlet weak var tableView: UITableView!
     
@@ -89,13 +88,6 @@ class RoomViewController: UIViewController {
         navigationController?.popToRootViewController(animated: true)
     }
     
-    
-    //might not need this function
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        
-        selectedIndexPath = indexPath
-        print(#line, selectedIndexPath)
-    }
     
     
     //MARK: Fetch Parse
@@ -211,9 +203,8 @@ class RoomViewController: UIViewController {
     //PSEUDO Code: In RoomViewController have 3 tab bars: task, expense, completed. For the task use fetchIncompleteNonExpenseTask()... expense tab use: fetchIncompleteExpenseTask... and the completed task we will fetch for all task regardless.
     //When user toggles the switch to mark a task as complete we need a way to refresh their tableview.. as reloaddata doesnt work. If we put the parse query function inside viewWillAppear it will refresh if the user navigates from their screen.
     
-   
-    
 }
+
 
 extension RoomViewController: UITableViewDelegate, UITableViewDataSource{
     
