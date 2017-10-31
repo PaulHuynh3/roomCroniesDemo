@@ -45,14 +45,29 @@ class RoomViewController: UIViewController {
         refreshControl.backgroundColor = UIColor.orange
         refreshControl.tintColor = UIColor.white
         refreshControl.attributedTitle = NSAttributedString(string: "Pull to refresh")
+        print("SELECTED INDEX!!!!\(segmentedControl.selectedSegmentIndex)")
         refreshControl.addTarget(self, action:#selector(RoomViewController.refresh(sender:)), for: UIControlEvents.valueChanged)
         tableView.addSubview(refreshControl)
     }
-    //Refresh with the existing incomplete expense.
-    func refresh(sender:AnyObject) {
-        //        fetchIncompleteExpenseTask()
-        refreshControl.beginRefreshing()
-        refreshControl.endRefreshing()
+
+    func refresh(sender:UIRefreshControl) {
+        switch segmentedControl.selectedSegmentIndex {
+        case 0:
+            self.fetchIncompleteNonExpenseTask()
+            refreshControl.endRefreshing()
+            
+        case 1:
+            self.fetchIncompleteExpenseTask()
+            refreshControl.endRefreshing()
+
+        case 2:
+            self.fetchCompletedTask()
+            refreshControl.endRefreshing()
+
+        default:
+            break
+        }
+        
     }
     
     //MARK: Segmented Control.
@@ -253,7 +268,9 @@ extension RoomViewController: UITableViewDelegate, UITableViewDataSource{
         
         if editingStyle == .delete {
             // Delete the row from the data source
-            tasks.remove(at: indexPath.row)
+            tasks.remove(at: indexPath.section)
+            
+            
             
             tableView.deleteRows(at: [indexPath], with: .fade)
             
