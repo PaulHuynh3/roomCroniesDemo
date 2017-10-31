@@ -259,6 +259,14 @@ extension RoomViewController: UITableViewDelegate, UITableViewDataSource{
         return cell
     }
     
+    //delete functionality
+    public func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
+        
+        
+    }
+
+    
+    
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let headerView = UIView()
