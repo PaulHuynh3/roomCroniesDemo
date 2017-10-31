@@ -22,6 +22,8 @@ class RoomViewController: UIViewController {
     var refreshControl: UIRefreshControl!
     
     @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var segmentedControl: UISegmentedControl!
+    
     
     
     override func viewDidLoad() {

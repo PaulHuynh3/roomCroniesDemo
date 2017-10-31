@@ -236,6 +236,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let installation = PFInstallation.current()
         installation?.setDeviceTokenFrom(deviceToken)
         installation?.saveInBackground()
+        
+        guard let userInstallation = PFUser.current() else { return }
+        userInstallation.deviceToken = token
+        userInstallation.saveInBackground()
+        
     }
     
     func application(_ application: UIApplication,
@@ -254,7 +259,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     //MARK: - test push notification
     func testPush5() {
-        PFCloud.callFunction(inBackground: "iosPushTest", withParameters: ["text" : "Testing"])
+        //PFCloud.callFunction(inBackground: "iosPushTest", withParameters: ["text" : "Initialized with \(PFUser.current()!.username? ?? <#default value#>)" ])
     }
     
     

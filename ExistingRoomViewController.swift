@@ -66,6 +66,8 @@ class ExistingRoomViewController: UIViewController {
                     }
                     
                     self.joinExistingRoom?.members.append(user)
+                    self.joinExistingRoom?.users.add(user)
+                    // self.joinExistingRoom?.users.query()
                     
                     self.joinExistingRoom?.saveInBackground { (success: Bool?, error: Error?) in
                         print(#line, success)
@@ -75,6 +77,10 @@ class ExistingRoomViewController: UIViewController {
                             self.performSegue(withIdentifier:"TaskViewControllerSegue", sender: nil)
                         }
                     }
+                    
+                    
+                    
+
                 }
             } else {
                 let error = R.error(with: "Existing room does not exist. Please try again")

@@ -83,6 +83,8 @@ class RegisterViewController: UIViewController {
             }
             createRoom.roomCreator = user
             createRoom.members = [user]
+            createRoom.users.add(user)
+            
             
             //PUSH NOTIFICATIONS - adding user to installation
             guard let installation = PFInstallation.current() else { return }

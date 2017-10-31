@@ -19,13 +19,17 @@ class Room: PFObject{
     //many task in one room: Task object: room: Room <--->> tasks: [Task]
     @NSManaged var tasks : [Task]
     
+    var users : PFRelation <PFObject> {
+        return relation(forKey: "users")
+    }
+    
+    
     
     convenience init(roomName: String) {
         self.init()
         
         //initlize stored properties.
         self.roomName = roomName
-        
     }
     
     
