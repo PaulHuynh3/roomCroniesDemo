@@ -14,8 +14,7 @@ class RoomViewController: UIViewController {
     var myRoom : Room? = nil {
         didSet {
             //viewdidload may load before it gets set.
-            //            fetchAllTaskByRoom()
-            fetchIncompleteExpenseTask()
+            fetchIncompleteNonExpenseTask()
         }
     }
     var tasks: [Task] = []
@@ -43,18 +42,20 @@ class RoomViewController: UIViewController {
     func refreshUserScreen(){
         
         refreshControl = UIRefreshControl()
+        refreshControl.backgroundColor = UIColor.orange
+        refreshControl.tintColor = UIColor.white
         refreshControl.attributedTitle = NSAttributedString(string: "Pull to refresh")
         refreshControl.addTarget(self, action:#selector(RoomViewController.refresh(sender:)), for: UIControlEvents.valueChanged)
         tableView.addSubview(refreshControl)
     }
     //Refresh with the existing incomplete expense.
     func refresh(sender:AnyObject) {
-        fetchIncompleteExpenseTask()
+//        fetchIncompleteExpenseTask()
+        refreshControl.beginRefreshing()
         refreshControl.endRefreshing()
     }
     
-    //MARK: Segmented Control
-    
+    //MARK: Segmented Control.
     @IBAction func indexChanged(_ sender: UISegmentedControl) {
         switch segmentedControl.selectedSegmentIndex {
         case 0:
@@ -71,13 +72,13 @@ class RoomViewController: UIViewController {
             self.fetchCompletedTask()
             
         default:
+            print("Segmented Control error. Button not selected")
             break
         }
         
         
         
     }
-    
     
 
     //MARK: Navigation
