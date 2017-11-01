@@ -21,7 +21,7 @@ class AddTaskViewController: UIViewController {
     //this value will either be an existing task or to create a new task
     var task: Task?
     var roomObject: Room?
-    var pickerTask = ["Expense","Non-Expense"]
+    var pickerTask = ["","Expense","Non-Expense"]
     var selectedPickerExpense: String?
     //pass this in segue and connect it to the uiswitch.
     var isCompleted:Bool? = false
