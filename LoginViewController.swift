@@ -15,7 +15,8 @@ class LoginViewController: UIViewController {
     
     @IBOutlet weak var passwordTextField: UITextField!
     
-    @IBOutlet weak var backView: UIView!
+    @IBOutlet weak var titleLabel: UILabel!
+    
     
     //MARK: Life Cycle
     override func viewDidLoad() {
@@ -32,6 +33,15 @@ class LoginViewController: UIViewController {
         let backGroundColour = UIColor(red: 70, green: 132, blue: 153)
         let backGroundColour2 = UIColor(red: 153, green: 91, blue: 70)
         self.view.addGradientWithColor(topColor: backGroundColour, bottomColor: backGroundColour2)
+        
+        
+        UIView.animate(withDuration: 1, delay: 0, options: [.curveEaseOut],
+                       animations: {
+                        self.titleLabel.center.y -= self.view.bounds.height - 250
+                        self.view.layoutIfNeeded()
+        }, completion: nil)
+        
+        
         
     }
     
