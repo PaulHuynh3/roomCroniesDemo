@@ -56,14 +56,16 @@ class AddTaskViewController: UIViewController {
         sliderLabel.text = String(format: "%d",x)
     }
     
-    @IBAction func saveButtonTapped(_ sender: UIBarButtonItem) {
+    
+    @IBAction func saveButtonTapped(_ sender: UIButton) {
+        
         guard let name = taskNameTextField.text,
-              let taskDescription = taskDescriptionTextField.text,
-              let room = roomObject,
-              let currentUser = PFUser.current(),
-              let priorityLabel = sliderLabel.text,
-              let expensePicker = selectedPickerExpense,
-              let isComplete = isCompleted else {
+            let taskDescription = taskDescriptionTextField.text,
+            let room = roomObject,
+            let currentUser = PFUser.current(),
+            let priorityLabel = sliderLabel.text,
+            let expensePicker = selectedPickerExpense,
+            let isComplete = isCompleted else {
                 return
         }
         task = Task(room: room, taskName: name, description: taskDescription, priority: priorityLabel, taskExpense:expensePicker, isCompleted:isComplete, createdBy: currentUser)
@@ -87,32 +89,32 @@ class AddTaskViewController: UIViewController {
         //QUERY THE ROOM AND FIND THE ARRAY OF USERS
         //ITERATE THROUGH EACH USER AND SEND NOTIFICATION USING THEIR DEVICE TOKEN
         
-     
-//        let text = "\(PFUser.current()!.username!) added a new task: \(String(describing: taskNameTextField.text!))";
-//        let data = [
-//            "badge" : "Increment",
-//            "alert" : text,
-//            ]
-//        let request: [String : Any] = [
-//            //"someKey" : PFUser.current()!.deviceToken,
-//            "someKey" : PFUser.current()!.objectId!,
-//            "data" : data
-//        ]
-//        print(PFUser.current()!.objectId!)
-//        print(PFUser.current()!.deviceToken)
-//
-//        print(#line, PFInstallation.current()?.channels ?? "No CHANNELS")
-//
-//        print("sending push notification...")
-//        PFCloud.callFunction(inBackground: "pushToFollowers", withParameters: request as [NSObject : AnyObject], block: { (results:AnyObject?, error:NSError?) in
-//            print("push \(String(describing: results!))")
-//            if error == nil {
-//                print (results!)
-//            }
-//            else {
-//                print (error!)
-//            }
-//            } as? PFIdResultBlock)
+        
+        //        let text = "\(PFUser.current()!.username!) added a new task: \(String(describing: taskNameTextField.text!))";
+        //        let data = [
+        //            "badge" : "Increment",
+        //            "alert" : text,
+        //            ]
+        //        let request: [String : Any] = [
+        //            //"someKey" : PFUser.current()!.deviceToken,
+        //            "someKey" : PFUser.current()!.objectId!,
+        //            "data" : data
+        //        ]
+        //        print(PFUser.current()!.objectId!)
+        //        print(PFUser.current()!.deviceToken)
+        //
+        //        print(#line, PFInstallation.current()?.channels ?? "No CHANNELS")
+        //
+        //        print("sending push notification...")
+        //        PFCloud.callFunction(inBackground: "pushToFollowers", withParameters: request as [NSObject : AnyObject], block: { (results:AnyObject?, error:NSError?) in
+        //            print("push \(String(describing: results!))")
+        //            if error == nil {
+        //                print (results!)
+        //            }
+        //            else {
+        //                print (error!)
+        //            }
+        //            } as? PFIdResultBlock)
         
         
         
@@ -121,22 +123,96 @@ class AddTaskViewController: UIViewController {
         
         //PFCloud.callFunction(inBackground: "pushsample", withParameters: ["text" : "\(PFUser.current()!.username!) added a new task: \(String(describing: taskNameTextField.text!))"])
         
-//        let push = PFPush()
-//        push.setChannel("room2")
-//        push.setMessage("TEST")
-//        push.sendInBackground()
+        //        let push = PFPush()
+        //        push.setChannel("room2")
+        //        push.setMessage("TEST")
+        //        push.sendInBackground()
+        
         
         
         
     }
     
+//    @IBAction func saveButtonTap(_ sender: UIBarButtonItem) {
+//        guard let name = taskNameTextField.text,
+//              let taskDescription = taskDescriptionTextField.text,
+//              let room = roomObject,
+//              let currentUser = PFUser.current(),
+//              let priorityLabel = sliderLabel.text,
+//              let expensePicker = selectedPickerExpense,
+//              let isComplete = isCompleted else {
+//                return
+//        }
+//        task = Task(room: room, taskName: name, description: taskDescription, priority: priorityLabel, taskExpense:expensePicker, isCompleted:isComplete, createdBy: currentUser)
+//
+//        //priorityscale can only be set when there is an instance b/c of the optional chain.. cant set task.priortyScale under priority slider action.
+//        task?.priortyScale = Int(prioritySlider.value)
+//
+//
+//        task?.saveInBackground { (success, error) in
+//            print(#line, success)
+//            print(#line, error?.localizedDescription ?? "No error saving")
+//        }
+//
+//        taskDelegate?.addTaskObject(task: task!)
+//
+//        //presented modally.
+//        dismiss(animated: true, completion: nil)
+//
+//
+//        //MARK: push notifications
+//        //QUERY THE ROOM AND FIND THE ARRAY OF USERS
+//        //ITERATE THROUGH EACH USER AND SEND NOTIFICATION USING THEIR DEVICE TOKEN
+//
+//
+////        let text = "\(PFUser.current()!.username!) added a new task: \(String(describing: taskNameTextField.text!))";
+////        let data = [
+////            "badge" : "Increment",
+////            "alert" : text,
+////            ]
+////        let request: [String : Any] = [
+////            //"someKey" : PFUser.current()!.deviceToken,
+////            "someKey" : PFUser.current()!.objectId!,
+////            "data" : data
+////        ]
+////        print(PFUser.current()!.objectId!)
+////        print(PFUser.current()!.deviceToken)
+////
+////        print(#line, PFInstallation.current()?.channels ?? "No CHANNELS")
+////
+////        print("sending push notification...")
+////        PFCloud.callFunction(inBackground: "pushToFollowers", withParameters: request as [NSObject : AnyObject], block: { (results:AnyObject?, error:NSError?) in
+////            print("push \(String(describing: results!))")
+////            if error == nil {
+////                print (results!)
+////            }
+////            else {
+////                print (error!)
+////            }
+////            } as? PFIdResultBlock)
+//
+//
+//
+//
+//        PFCloud.callFunction(inBackground: "iosPushTest", withParameters: ["text" : "\(PFUser.current()!.username!) added a new task: \(String(describing: taskNameTextField.text!))", "channels": [PFInstallation.current()?.channels]])
+//
+//        //PFCloud.callFunction(inBackground: "pushsample", withParameters: ["text" : "\(PFUser.current()!.username!) added a new task: \(String(describing: taskNameTextField.text!))"])
+//
+////        let push = PFPush()
+////        push.setChannel("room2")
+////        push.setMessage("TEST")
+////        push.sendInBackground()
+//
+//
+//
+//    }
     
-    @IBAction func cancelButtonTapped(_ sender: UIBarButtonItem) {
+    @IBAction func cancelButtonTapped(_ sender: UIButton) {
         
-        //presented modally.
         dismiss(animated: true, completion: nil)
-        
+
     }
+    
     
     
     //editing detailed view
