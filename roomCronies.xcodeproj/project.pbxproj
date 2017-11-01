@@ -12,6 +12,7 @@
 		88161C481F9EAD6500D8CD20 /* Media.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 88161C471F9EAD6500D8CD20 /* Media.xcassets */; };
 		884C34761FA7EBC20078B285 /* PFUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 884C34751FA7EBC20078B285 /* PFUser.swift */; };
 		8897DDC91FA7A24A00982BDD /* CheckBox.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8897DDC81FA7A24900982BDD /* CheckBox.swift */; };
+		88DF7FBF1FA9A977007B8AA8 /* Gradient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88DF7FBE1FA9A977007B8AA8 /* Gradient.swift */; };
 		DA195E151FA5605700100F08 /* ExistingRoomViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA195E141FA5605700100F08 /* ExistingRoomViewController.swift */; };
 		DA26E8961FA3D94E00080DBD /* DataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA26E8951FA3D94E00080DBD /* DataManager.swift */; };
 		DA350E161FA2C61D001C653A /* UIViewControllerExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA350E151FA2C61D001C653A /* UIViewControllerExtension.swift */; };
@@ -38,6 +39,7 @@
 		88161C471F9EAD6500D8CD20 /* Media.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Media.xcassets; sourceTree = "<group>"; };
 		884C34751FA7EBC20078B285 /* PFUser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PFUser.swift; sourceTree = "<group>"; };
 		8897DDC81FA7A24900982BDD /* CheckBox.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckBox.swift; sourceTree = "<group>"; };
+		88DF7FBE1FA9A977007B8AA8 /* Gradient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Gradient.swift; sourceTree = "<group>"; };
 		DA0F0FDD1F9926250057F23E /* roomCronies-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "roomCronies-Bridging-Header.h"; sourceTree = "<group>"; };
 		DA195E141FA5605700100F08 /* ExistingRoomViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExistingRoomViewController.swift; sourceTree = "<group>"; };
 		DA26E8951FA3D94E00080DBD /* DataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataManager.swift; sourceTree = "<group>"; };
@@ -104,6 +106,7 @@
 			children = (
 				DA7AB7B01F99219D00E816C9 /* Main.storyboard */,
 				8897DDC81FA7A24900982BDD /* CheckBox.swift */,
+				88DF7FBE1FA9A977007B8AA8 /* Gradient.swift */,
 			);
 			name = View;
 			sourceTree = "<group>";
@@ -316,6 +319,7 @@
 				DA26E8961FA3D94E00080DBD /* DataManager.swift in Sources */,
 				88161C451F9E8B0700D8CD20 /* Secret.swift in Sources */,
 				DAF3FA0C1F9A99780095B7A4 /* AddTaskViewController.swift in Sources */,
+				88DF7FBF1FA9A977007B8AA8 /* Gradient.swift in Sources */,
 				DA42202C1F9FFDF4009FB67F /* RegisterViewController.swift in Sources */,
 				DAF3FA0A1F9A99120095B7A4 /* RoomViewController.swift in Sources */,
 				DA7AB7AD1F99219D00E816C9 /* AppDelegate.swift in Sources */,
