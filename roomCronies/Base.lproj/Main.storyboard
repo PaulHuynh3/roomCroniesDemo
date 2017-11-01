@@ -141,6 +141,22 @@
                                     <action selector="indexChanged:" destination="BYZ-38-t0r" eventType="valueChanged" id="1Jc-PL-Yjs"/>
                                 </connections>
                             </segmentedControl>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RLq-6E-ROb">
+                                <rect key="frame" x="318" y="20" width="46" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="ADD"/>
+                                <connections>
+                                    <segue destination="kec-Il-1J7" kind="presentation" identifier="AddTaskSegue" id="9RC-qg-ZgR"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kAZ-gq-WgR">
+                                <rect key="frame" x="0.0" y="20" width="46" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="LogOut"/>
+                                <connections>
+                                    <action selector="logoutTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Wnh-AR-lgT"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
@@ -158,11 +174,7 @@
                     </view>
                     <navigationItem key="navigationItem" title="Your Tasks" id="EQt-hI-AjG">
                         <rightBarButtonItems>
-                            <barButtonItem systemItem="add" id="LIu-cK-gz3">
-                                <connections>
-                                    <segue destination="kec-Il-1J7" kind="presentation" identifier="AddTaskSegue" id="Vba-1d-IgB"/>
-                                </connections>
-                            </barButtonItem>
+                            <barButtonItem systemItem="add" id="LIu-cK-gz3"/>
                             <barButtonItem title="Log Out" id="xm5-io-vlu">
                                 <connections>
                                     <action selector="logoutTapped:" destination="BYZ-38-t0r" id="8fI-hD-36o"/>
@@ -432,7 +444,7 @@
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="N5m-JV-xV2"/>
-        <segue reference="Vba-1d-IgB"/>
+        <segue reference="9RC-qg-ZgR"/>
         <segue reference="98Q-oU-gbY"/>
     </inferredMetricsTieBreakers>
 </document>

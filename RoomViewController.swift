@@ -137,10 +137,11 @@ class RoomViewController: UIViewController {
     }
     
     //MARK: IBAction
-    @IBAction func logoutTapped(_ sender: UIBarButtonItem) {
+    
+    @IBAction func logoutTapped(_ sender: UIButton) {
         PFUser.logOut()
-        navigationController?.popToRootViewController(animated: true)
     }
+    
     
     
     
