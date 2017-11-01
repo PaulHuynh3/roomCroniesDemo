@@ -137,6 +137,11 @@ class AddTaskViewController: UIViewController {
         dismiss(animated: true, completion: nil)
         
     }
+    
+    
+    //editing detailed view
+    
+    
 
 }
 
