@@ -84,13 +84,16 @@ class RegisterViewController: UIViewController {
             createRoom.roomCreator = user
             createRoom.members = [user]
             createRoom.users.add(user)
-            
-            
+
             //PUSH NOTIFICATIONS - adding user to installation
             guard let installation = PFInstallation.current() else { return }
             installation["user"] = user
             installation.saveInBackground()
             
+            let currentInstallation = PFInstallation.current()
+            currentInstallation?.remove(forKey: "channels")
+            currentInstallation?.addUniqueObject("\(String(describing: self.roomTextField.text!))", forKey: "channels")
+            currentInstallation?.saveInBackground()
             
             //asynchronous call
             createRoom.saveInBackground { (success: Bool?, error: Error?) in

@@ -67,6 +67,13 @@ class ExistingRoomViewController: UIViewController {
                     
                     self.joinExistingRoom?.members.append(user)
                     self.joinExistingRoom?.users.add(user)
+                    
+                    let currentInstallation = PFInstallation.current()
+                    currentInstallation?.remove(forKey: "channels")
+                    currentInstallation?.addUniqueObject("\(String(describing: self.existingRoomTextField.text!))", forKey: "channels")
+                    currentInstallation?.saveInBackground()
+                    
+                    
                     // self.joinExistingRoom?.users.query()
                     
                     self.joinExistingRoom?.saveInBackground { (success: Bool?, error: Error?) in
