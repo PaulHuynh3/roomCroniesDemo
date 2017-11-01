@@ -18,7 +18,7 @@ class ExistingRoomViewController: UIViewController {
     @IBOutlet weak var existingRoomTextField: UITextField!
     
     
-    var joinExistingRoom: Room?
+    var existingRoom: Room?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -52,7 +52,7 @@ class ExistingRoomViewController: UIViewController {
                 let foundRoom = results.first {
                 
                 // Use the room found from the database
-                self.joinExistingRoom = foundRoom
+                self.existingRoom = foundRoom
                 
                 DataManager.signup(with: username, and: password) { (success:Bool?, error:Error?) in
                     
@@ -65,8 +65,8 @@ class ExistingRoomViewController: UIViewController {
                         return
                     }
                     
-                    self.joinExistingRoom?.members.append(user)
-                    self.joinExistingRoom?.users.add(user)
+                    self.existingRoom?.members.append(user)
+                    self.existingRoom?.users.add(user)
                     
                     let currentInstallation = PFInstallation.current()
                     currentInstallation?.remove(forKey: "channels")
@@ -76,7 +76,7 @@ class ExistingRoomViewController: UIViewController {
                     
                     // self.joinExistingRoom?.users.query()
                     
-                    self.joinExistingRoom?.saveInBackground { (success: Bool?, error: Error?) in
+                    self.existingRoom?.saveInBackground { (success: Bool?, error: Error?) in
                         print(#line, success)
                         print(#line, error?.localizedDescription ?? "No error saving")
                         if success ?? false {
