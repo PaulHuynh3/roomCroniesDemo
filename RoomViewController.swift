@@ -146,7 +146,6 @@ class RoomViewController: UIViewController {
     
     //MARK: Fetch Parse
     
-    //fetch only expenses!
     func fetchIncompleteExpenseTask() {
         
         let query = PFQuery(className:"Task")
@@ -192,9 +191,7 @@ class RoomViewController: UIViewController {
             
             self.tasks = results
             self.tableView.reloadData()
-            
         }
-        
     }
     
     //use this filter it with expense and non-expense items.
@@ -266,23 +263,28 @@ extension RoomViewController: UITableViewDelegate, UITableViewDataSource {
     public func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
         
         if editingStyle == .delete {
-            // Delete the row from the data source
-            self.tasks.remove(at: indexPath.section)
-            self.tableView.deleteSections([indexPath.section], with: .fade)
             
+            //delete the task object from parse. The tasks are already being fetched
+            var taskCloud = PFObject(className: "Task")
+            taskCloud = tasks[indexPath.section] as PFObject
+            
+            taskCloud.deleteInBackground(block: { (success:Bool?, error:Error?) in
+                
+                if error == nil{
+                    
+                    // Delete the row locally from tableview
+                    self.tasks.remove(at: indexPath.section)
+                    self.tableView.deleteSections([indexPath.section], with: .fade)
+                    print("Delete Success")
+                } else {
+                    print("Failed to delete")
+                }
+                
+            })
+
         }
         
     }
-    /*
-     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
-     if editingStyle == .delete {
-     print("Deleted")
-     
-     self.catNames.remove(at: indexPath.row)
-     self.tableView.deleteRows(at: [indexPath], with: .automatic)
-     }
-     }
-     */
     
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
