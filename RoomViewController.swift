@@ -17,6 +17,8 @@ class RoomViewController: UIViewController {
             fetchIncompleteNonExpenseTask()
         }
     }
+    
+    let addTaskViewController : AddTaskViewController? = nil
     var tasks: [Task] = []
     var refreshControl: UIRefreshControl!
     @IBOutlet weak var tableView: UITableView!
@@ -36,6 +38,8 @@ class RoomViewController: UIViewController {
         let backgroundImage = UIImage(named: "iphone-3.jpg")
         let imageView = UIImageView(image: backgroundImage)
         self.tableView.backgroundView = imageView
+        
+        navigationItem.hidesBackButton = true
     }
     
     //MARK: Refresh Screen

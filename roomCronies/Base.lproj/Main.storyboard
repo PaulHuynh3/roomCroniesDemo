@@ -6,7 +6,6 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13173"/>
-        <capability name="Navigation items with more than one left or right bar item" minToolsVersion="7.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -93,14 +92,21 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Task" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gco-lG-7mJ">
-                                                    <rect key="frame" x="8" y="8" width="118" height="67"/>
+                                                    <rect key="frame" x="8" y="8" width="118" height="26"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Completed by: 🤷‍♀️ 🤷‍♂️ " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9ZY-f3-t5h">
+                                                    <rect key="frame" x="8" y="49" width="171" height="21"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="br3-b3-0AS" customClass="CheckBox" customModule="roomCronies" customModuleProvider="target">
-                                                    <rect key="frame" x="298" y="24" width="35" height="35"/>
+                                                    <rect key="frame" x="290" y="8" width="77" height="67"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <state key="normal" title="Button" image="task-reject.svg"/>
                                                     <connections>
@@ -149,18 +155,16 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Your Tasks" id="EQt-hI-AjG">
-                        <rightBarButtonItems>
-                            <barButtonItem systemItem="add" id="LIu-cK-gz3">
-                                <connections>
-                                    <segue destination="kec-Il-1J7" kind="presentation" identifier="AddTaskSegue" id="Vba-1d-IgB"/>
-                                </connections>
-                            </barButtonItem>
-                            <barButtonItem title="Log Out" id="xm5-io-vlu">
-                                <connections>
-                                    <action selector="logoutTapped:" destination="BYZ-38-t0r" id="8fI-hD-36o"/>
-                                </connections>
-                            </barButtonItem>
-                        </rightBarButtonItems>
+                        <barButtonItem key="leftBarButtonItem" systemItem="add" id="LIu-cK-gz3">
+                            <connections>
+                                <segue destination="kec-Il-1J7" kind="presentation" identifier="AddTaskSegue" id="Vba-1d-IgB"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" title="Log Out" id="xm5-io-vlu">
+                            <connections>
+                                <action selector="logoutTapped:" destination="BYZ-38-t0r" id="8fI-hD-36o"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                     <connections>
                         <outlet property="segmentedControl" destination="jhe-TT-vHM" id="fsj-dg-aCb"/>
