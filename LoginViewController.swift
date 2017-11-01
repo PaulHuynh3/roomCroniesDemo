@@ -28,9 +28,10 @@ class LoginViewController: UIViewController {
         checkLoginState()
         
         navigationController?.isNavigationBarHidden = true
-        let swiftColor = UIColor(red: 1, green: 165/255, blue: 233, alpha: 1)
-        //backView.addGradientWithColor(
-        backView.addGradientWithColor(topColor: swiftColor, bottomColor: .green)
+        
+        
+        let backGroundColour = UIColor(red: 0, green: 51, blue: 102)
+        backView.addGradientWithColor(topColor: .white, bottomColor: backGroundColour)
         
         
         
