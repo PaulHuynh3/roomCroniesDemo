@@ -54,7 +54,6 @@ class AddTaskViewController: UIViewController {
     @IBAction func prioritySlider(_ sender: UISlider) {
         let x = Int(prioritySlider.value)
         sliderLabel.text = String(format: "%d",x)
-        
     }
     
     @IBAction func saveButtonTapped(_ sender: UIBarButtonItem) {
