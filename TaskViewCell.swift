@@ -37,7 +37,9 @@ class TaskViewCell: UITableViewCell {
     //the correct way to do this would be to add a delegate and protocol in the cell.
     @IBAction func checkBoxTapped(_ sender: UIButton) {
         task?.isCompleted = sender.isEnabled
+        //saves a reference of the pfuser
         task?.doneBy = PFUser.current()
+        //ability to identify user by their name.
         task?.doneByUsername = PFUser.current()?.username
         
         task?.saveInBackground()
