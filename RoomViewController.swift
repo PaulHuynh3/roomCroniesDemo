@@ -95,7 +95,6 @@ class RoomViewController: UIViewController {
         }
     }
     
-    
     //MARK: Navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         
@@ -317,13 +316,14 @@ extension RoomViewController: UITableViewDelegate, UITableViewDataSource {
 
 
 extension RoomViewController: AddTaskDelegate{
-    
+
     func addTaskObject(task: Task) {
-        
-        tasks.append(task)
+//
+//        tasks.append(task)
+        refresh()
         self.tableView.reloadData()
-        
+//
     }
-    
+
 }
 
