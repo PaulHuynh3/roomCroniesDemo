@@ -103,6 +103,9 @@
                                                     <rect key="frame" x="296" y="47" width="35" height="35"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <state key="normal" title="Button" image="task-reject.svg"/>
+                                                    <connections>
+                                                        <action selector="checkBoxTapped:" destination="c0l-Mi-9r9" eventType="touchUpInside" id="9c0-fm-XH2"/>
+                                                    </connections>
                                                 </button>
                                                 <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="ktm-VV-JjQ">
                                                     <rect key="frame" x="296" y="8" width="49" height="31"/>
@@ -114,6 +117,7 @@
                                             </subviews>
                                         </tableViewCellContentView>
                                         <connections>
+                                            <outlet property="checkBoxComplete" destination="br3-b3-0AS" id="TDt-Dt-ftF"/>
                                             <outlet property="switchComplete" destination="ktm-VV-JjQ" id="WDN-6d-8HJ"/>
                                             <outlet property="taskLabel" destination="gco-lG-7mJ" id="4LK-sc-pXo"/>
                                             <segue destination="kec-Il-1J7" kind="show" identifier="ShowDetailTask" id="1od-P2-kcF"/>

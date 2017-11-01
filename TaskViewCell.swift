@@ -16,6 +16,7 @@ class TaskViewCell: UITableViewCell {
     
     @IBOutlet weak var taskLabel: UILabel!
     @IBOutlet weak var switchComplete: UISwitch!
+    @IBOutlet weak var checkBoxComplete: CheckBox!
     
     
     override func awakeFromNib() {
@@ -27,6 +28,7 @@ class TaskViewCell: UITableViewCell {
         super.layoutSubviews()
         if let task = task {
             switchComplete.isOn = task.isCompleted
+            checkBoxComplete.isChecked = task.isCompleted
         }
     }
     
@@ -41,11 +43,21 @@ class TaskViewCell: UITableViewCell {
     }
     
     
+    @IBAction func checkBoxTapped(_ sender: UIButton) {
+        task?.isCompleted = sender.isEnabled
+        task?.doneBy = PFUser.current()
+        
+        task?.saveInBackground()
+        
+    }
+    
+    
+    
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
 
     }
-    
+
     func setupCell(task:Task) {
         
         taskLabel.text = task.taskName
