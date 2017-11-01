@@ -43,7 +43,6 @@ class TaskViewCell: UITableViewCell {
         task?.doneByUsername = PFUser.current()?.username
         
         task?.saveInBackground()
-        
     }
     
         

@@ -49,11 +49,11 @@ class RoomViewController: UIViewController {
         refreshControl.backgroundColor = UIColor.clear
         refreshControl.tintColor = UIColor.white
         refreshControl.attributedTitle = NSAttributedString(string: "Pull to refresh")
-        refreshControl.addTarget(self, action:#selector(RoomViewController.refresh(sender:)), for: UIControlEvents.valueChanged)
+        refreshControl.addTarget(self, action:#selector(refresh), for: UIControlEvents.valueChanged)
         tableView.addSubview(refreshControl)
     }
 
-    func refresh(sender:UIRefreshControl) {
+    @objc func refresh() {
         switch segmentedControl.selectedSegmentIndex {
         case 0:
             self.fetchIncompleteNonExpenseTask()
