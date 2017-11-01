@@ -49,7 +49,7 @@ class TaskViewCell: UITableViewCell {
         task?.doneByUsername = PFUser.current()?.username
         
         task?.saveInBackground()
-        //delegate doesnt have to pass anything it just tells the view controller that the checkbox was tapped and its completed.
+        //delegate doesnt have to pass anything it just tells the view controller that the checkbox was tapped and its completed. In the RoomViewController it will have a delegate that receives the information.
         delegate?.taskCompleted()
     }
     
