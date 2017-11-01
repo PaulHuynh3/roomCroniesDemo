@@ -8,14 +8,13 @@
 
 import UIKit
 
-class Gradient: UIView {
-
-    /*
-    // Only override draw() if you perform custom drawing.
-    // An empty implementation adversely affects performance during animation.
-    override func draw(_ rect: CGRect) {
-        // Drawing code
+extension UIView {
+    func addGradientWithColor(color: UIColor) {
+        let gradient = CAGradientLayer()
+        gradient.frame = self.bounds
+        gradient.colors = [UIColor.clear.cgColor, color.cgColor]
+        
+        self.layer.insertSublayer(gradient, at: 0)
     }
-    */
-
 }
+
