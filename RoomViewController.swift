@@ -46,7 +46,7 @@ class RoomViewController: UIViewController {
     func refreshUserScreen(){
         
         refreshControl = UIRefreshControl()
-        refreshControl.backgroundColor = UIColor.orange
+        refreshControl.backgroundColor = UIColor.clear
         refreshControl.tintColor = UIColor.white
         refreshControl.attributedTitle = NSAttributedString(string: "Pull to refresh")
         refreshControl.addTarget(self, action:#selector(RoomViewController.refresh(sender:)), for: UIControlEvents.valueChanged)
