@@ -16,6 +16,8 @@ class TaskViewCell: UITableViewCell {
     
     @IBOutlet weak var taskLabel: UILabel!
     @IBOutlet weak var checkBoxComplete: CheckBox!
+    @IBOutlet weak var completedByLabel: UILabel!
+    
     
     
     override func awakeFromNib() {
@@ -36,6 +38,7 @@ class TaskViewCell: UITableViewCell {
     @IBAction func checkBoxTapped(_ sender: UIButton) {
         task?.isCompleted = sender.isEnabled
         task?.doneBy = PFUser.current()
+        task?.doneByUsername = PFUser.current()?.username
         
         task?.saveInBackground()
         
@@ -51,6 +54,11 @@ class TaskViewCell: UITableViewCell {
         
         taskLabel.text = task.taskName
         
+        if task.doneByUsername == nil {
+            completedByLabel.text = "Completed by: 🤷‍♀️ 🤷‍♂️"
+        } else {
+        completedByLabel.text = "Completed by"(task.doneByUsername)
+        }
     }
     
     

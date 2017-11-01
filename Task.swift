@@ -22,6 +22,7 @@ class Task: PFObject {
     @NSManaged var createdBy: PFUser
     //when user checks off a task. it will be.. doneBy.currentUser..
     @NSManaged var doneBy: PFUser?
+    @NSManaged var doneByUsername : String?
     //For UISwitch to keep it on/off
     @NSManaged var isCompleted: Bool
     

@@ -5,7 +5,7 @@
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13173"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13174"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -117,6 +117,7 @@
                                         </tableViewCellContentView>
                                         <connections>
                                             <outlet property="checkBoxComplete" destination="br3-b3-0AS" id="TDt-Dt-ftF"/>
+                                            <outlet property="completedByLabel" destination="9ZY-f3-t5h" id="U4E-8m-kxB"/>
                                             <outlet property="taskLabel" destination="gco-lG-7mJ" id="4LK-sc-pXo"/>
                                             <segue destination="kec-Il-1J7" kind="show" identifier="ShowDetailTask" id="1od-P2-kcF"/>
                                         </connections>
