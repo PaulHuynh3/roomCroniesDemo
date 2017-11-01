@@ -36,8 +36,9 @@ class DataManager  {
             installation.saveInBackground()
             
             let currentInstallation = PFInstallation.current()
-            currentInstallation?.remove(forKey: "channels")
-            currentInstallation?.addUniqueObject("\(room.roomName)", forKey: "channels")
+//            currentInstallation?.remove(forKey: "channels")
+//            currentInstallation?.addUniqueObject("\(room.roomName)", forKey: "channels")
+            currentInstallation?.channels = [room.roomName]
             currentInstallation?.saveInBackground()
             
 

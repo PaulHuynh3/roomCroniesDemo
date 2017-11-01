@@ -89,33 +89,45 @@ class AddTaskViewController: UIViewController {
         //ITERATE THROUGH EACH USER AND SEND NOTIFICATION USING THEIR DEVICE TOKEN
         
      
-        let text = "\(PFUser.current()!.username!) added a new task: \(String(describing: taskNameTextField.text!))";
-        let data = [
-            "badge" : "Increment",
-            "alert" : text,
-            ]
-        let request: [String : Any] = [
-            "someKey" : PFUser.current()!.deviceToken,
-            //"someKey" : PFUser.current()!.objectId!,
-            "data" : data
-        ]
-        print(PFUser.current()!.objectId!)
-        print(PFUser.current()!.deviceToken)
-        print("sending push notification...")
-        PFCloud.callFunction(inBackground: "pushToFollowers", withParameters: request as [NSObject : AnyObject], block: { (results:AnyObject?, error:NSError?) in
-            print("push \(String(describing: results!))")
-            if error == nil {
-                print (results!)
-            }
-            else {
-                print (error!)
-            }
-            } as? PFIdResultBlock)
+//        let text = "\(PFUser.current()!.username!) added a new task: \(String(describing: taskNameTextField.text!))";
+//        let data = [
+//            "badge" : "Increment",
+//            "alert" : text,
+//            ]
+//        let request: [String : Any] = [
+//            //"someKey" : PFUser.current()!.deviceToken,
+//            "someKey" : PFUser.current()!.objectId!,
+//            "data" : data
+//        ]
+//        print(PFUser.current()!.objectId!)
+//        print(PFUser.current()!.deviceToken)
+//
+//        print(#line, PFInstallation.current()?.channels ?? "No CHANNELS")
+//
+//        print("sending push notification...")
+//        PFCloud.callFunction(inBackground: "pushToFollowers", withParameters: request as [NSObject : AnyObject], block: { (results:AnyObject?, error:NSError?) in
+//            print("push \(String(describing: results!))")
+//            if error == nil {
+//                print (results!)
+//            }
+//            else {
+//                print (error!)
+//            }
+//            } as? PFIdResultBlock)
         
         
-        //PFCloud.callFunction(inBackground: "iosPushTest", withParameters: ["text" : "\(PFUser.current()!.username!) added a new task: \(String(describing: taskNameTextField.text!))"])
         
-        PFCloud.callFunction(inBackground: "pushsample", withParameters: ["text" : "\(PFUser.current()!.username!) added a new task: \(String(describing: taskNameTextField.text!))"])
+        
+        PFCloud.callFunction(inBackground: "iosPushTest", withParameters: ["text" : "\(PFUser.current()!.username!) added a new task: \(String(describing: taskNameTextField.text!))", "channels": [PFInstallation.current()?.channels]])
+        
+        //PFCloud.callFunction(inBackground: "pushsample", withParameters: ["text" : "\(PFUser.current()!.username!) added a new task: \(String(describing: taskNameTextField.text!))"])
+        
+//        let push = PFPush()
+//        push.setChannel("room2")
+//        push.setMessage("TEST")
+//        push.sendInBackground()
+        
+        
         
     }
     
