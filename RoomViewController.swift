@@ -259,7 +259,7 @@ extension RoomViewController: UITableViewDelegate, UITableViewDataSource {
         return cell
     }
     
-    //delete functionality
+    //delete functionality for heroku and on tableview.
     public func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
         
         if editingStyle == .delete {
