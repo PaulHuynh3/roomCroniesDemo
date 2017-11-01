@@ -21,7 +21,7 @@ class AddTaskViewController: UIViewController {
     //this value will either be an existing task or to create a new task
     var task: Task?
     var roomObject: Room?
-    var pickerTask = ["Expense","Non-Expense"]
+    var pickerTask = ["","Expense","Non-Expense"]
     var selectedPickerExpense: String?
     //pass this in segue and connect it to the uiswitch.
     var isCompleted:Bool? = false
@@ -54,7 +54,6 @@ class AddTaskViewController: UIViewController {
     @IBAction func prioritySlider(_ sender: UISlider) {
         let x = Int(prioritySlider.value)
         sliderLabel.text = String(format: "%d",x)
-        
     }
     
     @IBAction func saveButtonTapped(_ sender: UIBarButtonItem) {

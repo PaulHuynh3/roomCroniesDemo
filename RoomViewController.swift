@@ -14,16 +14,13 @@ class RoomViewController: UIViewController {
     var myRoom : Room? = nil {
         didSet {
             //viewdidload may load before it gets set.
-            //            fetchAllTaskByRoom()
-            fetchIncompleteExpenseTask()
+            fetchIncompleteNonExpenseTask()
         }
     }
     var tasks: [Task] = []
     var refreshControl: UIRefreshControl!
-    
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var segmentedControl: UISegmentedControl!
-    
     
     
     override func viewDidLoad() {
@@ -45,14 +42,53 @@ class RoomViewController: UIViewController {
     func refreshUserScreen(){
         
         refreshControl = UIRefreshControl()
+        refreshControl.backgroundColor = UIColor.orange
+        refreshControl.tintColor = UIColor.white
         refreshControl.attributedTitle = NSAttributedString(string: "Pull to refresh")
         refreshControl.addTarget(self, action:#selector(RoomViewController.refresh(sender:)), for: UIControlEvents.valueChanged)
         tableView.addSubview(refreshControl)
     }
-    //Refresh with the existing incomplete expense.
-    func refresh(sender:AnyObject) {
-        fetchIncompleteExpenseTask()
-        refreshControl.endRefreshing()
+
+    func refresh(sender:UIRefreshControl) {
+        switch segmentedControl.selectedSegmentIndex {
+        case 0:
+            self.fetchIncompleteNonExpenseTask()
+            refreshControl.endRefreshing()
+            
+        case 1:
+            self.fetchIncompleteExpenseTask()
+            refreshControl.endRefreshing()
+
+        case 2:
+            self.fetchCompletedTask()
+            refreshControl.endRefreshing()
+
+        default:
+            break
+        }
+        
+    }
+    
+    //MARK: Segmented Control.
+    @IBAction func indexChanged(_ sender: UISegmentedControl) {
+        switch segmentedControl.selectedSegmentIndex {
+        case 0:
+            
+            print("Show task")
+            self.fetchIncompleteNonExpenseTask()
+            
+        case 1:
+            print("Show expense task")
+            self.fetchIncompleteExpenseTask()
+            
+        case 2:
+            print("show completed task and expense")
+            self.fetchCompletedTask()
+            
+        default:
+            print("Segmented Control error. Button not selected")
+            break
+        }
     }
     
     
@@ -110,38 +146,6 @@ class RoomViewController: UIViewController {
     
     //MARK: Fetch Parse
     
-    //may get rid of this soon
-    func fetchAllTaskByRoom() {
-        let taskQuery = PFQuery(className: "Task")
-        taskQuery.order(byAscending: "taskName")
-        
-        //fetch room by its set variable above.
-        guard let myRoom = self.myRoom else {
-            return
-        }
-        
-        taskQuery.whereKey("room", equalTo: myRoom)
-        
-        taskQuery.findObjectsInBackground { (result: [PFObject]?, error: Error?) in
-            
-            //error handling
-            if let error = error {
-                print(#line, error.localizedDescription)
-                return
-            }
-            
-            //return the statement before it actually fetches (if there is no task it will just return)
-            guard let result = result as? [Task] else { return }
-            
-            //dont append tasks. just set it to equal the array to display all the tasks.
-            self.tasks = result
-            self.tableView.reloadData()
-        }
-        
-    }
-    
-    
-    //fetch only expenses!
     func fetchIncompleteExpenseTask() {
         
         let query = PFQuery(className:"Task")
@@ -187,9 +191,7 @@ class RoomViewController: UIViewController {
             
             self.tasks = results
             self.tableView.reloadData()
-            
         }
-        
     }
     
     //use this filter it with expense and non-expense items.
@@ -218,13 +220,9 @@ class RoomViewController: UIViewController {
         
     }
     
-    //PSEUDO Code: In RoomViewController have 3 tab bars: task, expense, completed. For the task use fetchIncompleteNonExpenseTask()... expense tab use: fetchIncompleteExpenseTask... and the completed task we will fetch for all task regardless.
-    //When user toggles the switch to mark a task as complete we need a way to refresh their tableview.. as reloaddata doesnt work. If we put the parse query function inside viewWillAppear it will refresh if the user navigates from their screen.
-    
 }
 
-
-extension RoomViewController: UITableViewDelegate, UITableViewDataSource{
+extension RoomViewController: UITableViewDelegate, UITableViewDataSource {
     
     //MARK: Tableview Datasource
     public func numberOfSections(in tableView: UITableView) -> Int {
@@ -259,6 +257,33 @@ extension RoomViewController: UITableViewDelegate, UITableViewDataSource{
         cell.layer.masksToBounds = true
         
         return cell
+    }
+    
+    //delete functionality for heroku and on tableview.
+    public func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
+        
+        if editingStyle == .delete {
+            
+            //delete the task object from parse. The tasks are already being fetched
+            var taskCloud = PFObject(className: "Task")
+            taskCloud = tasks[indexPath.section] as PFObject
+            
+            taskCloud.deleteInBackground(block: { (success:Bool?, error:Error?) in
+                
+                if error == nil{
+                    
+                    // Delete the row locally from tableview
+                    self.tasks.remove(at: indexPath.section)
+                    self.tableView.deleteSections([indexPath.section], with: .fade)
+                    print("Delete Success")
+                } else {
+                    print("Failed to delete")
+                }
+                
+            })
+
+        }
+        
     }
     
     
