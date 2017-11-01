@@ -23,7 +23,7 @@ class AddTaskViewController: UIViewController {
     var roomObject: Room?
     var pickerTask = ["","Expense","Non-Expense"]
     var selectedPickerExpense: String?
-    //pass this in segue and connect it to the uiswitch.
+    //set it as incomplete. So we can query for incomplete tasks.
     var isCompleted:Bool? = false
     
     

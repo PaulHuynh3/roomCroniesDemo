@@ -15,7 +15,6 @@ class TaskViewCell: UITableViewCell {
     var task : Task?
     
     @IBOutlet weak var taskLabel: UILabel!
-    @IBOutlet weak var switchComplete: UISwitch!
     @IBOutlet weak var checkBoxComplete: CheckBox!
     
     
@@ -27,7 +26,6 @@ class TaskViewCell: UITableViewCell {
     override func layoutSubviews() {
         super.layoutSubviews()
         if let task = task {
-            switchComplete.isOn = task.isCompleted
             checkBoxComplete.isChecked = task.isCompleted
         }
     }
@@ -43,8 +41,7 @@ class TaskViewCell: UITableViewCell {
         
     }
     
-    
-    
+        
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
 

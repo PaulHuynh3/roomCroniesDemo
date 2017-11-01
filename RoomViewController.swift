@@ -246,7 +246,7 @@ extension RoomViewController: UITableViewDelegate, UITableViewDataSource {
         }
         
         let createTask = tasks[indexPath.section]
-        //access a task in the task list.. this is used for anything in the indexpath.. including the uiswitch
+        //access a task in the task list.. this is used for all TASK object's anything in the indexpath.. including the customize button. The task object is the whole and the properties are part of the object
         //this sets the task property in cell.
         cell.task = tasks[indexPath.section]
         
