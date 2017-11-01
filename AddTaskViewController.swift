@@ -9,14 +9,14 @@
 import UIKit
 import Parse
 
-protocol AddTaskDelegate {
+protocol AddTaskDelegate: class {
     
     func addTaskObject(task:Task)
 }
 
 class AddTaskViewController: UIViewController {
     
-    var taskDelegate: AddTaskDelegate?
+    weak var taskDelegate: AddTaskDelegate?
     
     //this value will either be an existing task or to create a new task
     var task: Task?

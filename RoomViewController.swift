@@ -247,6 +247,7 @@ extension RoomViewController: UITableViewDelegate, UITableViewDataSource {
             
             fatalError("The dequeued cell is not TaskViewCell")
         }
+        cell.delegate = self
         
         let createTask = tasks[indexPath.section]
         //access a task in the task list.. this is used for all TASK object's anything in the indexpath.. including the customize button. The task object is the whole and the properties are part of the object
@@ -314,15 +315,22 @@ extension RoomViewController: UITableViewDelegate, UITableViewDataSource {
 }
 
 
+// updates immediately when the button is checked.
+extension RoomViewController: TaskCompletedDelegate {
+    func taskCompleted() {
+        
+        refresh()
+        self.tableView.reloadData()
+    }
+}
 
 extension RoomViewController: AddTaskDelegate{
 
     func addTaskObject(task: Task) {
-//
-//        tasks.append(task)
+
+        //refresh contains the correct segmented control. fetching with parse from refresh.
         refresh()
         self.tableView.reloadData()
-//
     }
 
 }

@@ -9,6 +9,11 @@
 import UIKit
 import Parse
 
+//need to put delegate as a "class" so i can set the delegate as a "weak var"
+protocol TaskCompletedDelegate: class {
+    //function doesnt have to pass anything its used to notify that the button was pressed
+    func taskCompleted()
+}
 
 class TaskViewCell: UITableViewCell {
     //task property being set by the roomviewcontroller row forindexpath
@@ -17,6 +22,7 @@ class TaskViewCell: UITableViewCell {
     @IBOutlet weak var taskLabel: UILabel!
     @IBOutlet weak var checkBoxComplete: CheckBox!
     @IBOutlet weak var completedByLabel: UILabel!
+    weak var delegate: TaskCompletedDelegate?
     
     
     
@@ -43,6 +49,8 @@ class TaskViewCell: UITableViewCell {
         task?.doneByUsername = PFUser.current()?.username
         
         task?.saveInBackground()
+        //delegate doesnt have to pass anything it just tells the view controller that the checkbox was tapped and its completed.
+        delegate?.taskCompleted()
     }
     
         
