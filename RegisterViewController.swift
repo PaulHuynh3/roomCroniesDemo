@@ -25,7 +25,11 @@ class RegisterViewController: UIViewController {
         super.viewDidLoad()
         fetchExistingRoom()
         navigationController?.isNavigationBarHidden = false
-        //self.navigationController?.navigationBar.isTranslucent = false
+        
+        let backGroundColour = UIColor(red: 0, green: 51, blue: 102)
+        self.view.addGradientWithColor(topColor: backGroundColour, bottomColor: .white)
+        
+        
     }
     
     
