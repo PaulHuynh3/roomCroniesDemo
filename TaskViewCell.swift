@@ -35,14 +35,6 @@ class TaskViewCell: UITableViewCell {
     
     //The cell already contains all the task objects because of the task.. to identify it at indexpath everything needs to be done thru the cell.
     //the correct way to do this would be to add a delegate and protocol in the cell.
-    @IBAction func switchToggled(_ sender: UISwitch) {
-        task?.isCompleted = sender.isOn
-        task?.doneBy = PFUser.current()
-        
-        task?.saveInBackground()
-    }
-    
-    
     @IBAction func checkBoxTapped(_ sender: UIButton) {
         task?.isCompleted = sender.isEnabled
         task?.doneBy = PFUser.current()
