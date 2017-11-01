@@ -263,11 +263,6 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="fOK-BH-VQM">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                            </view>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bhi-06-E95">
                                 <rect key="frame" x="106" y="617" width="163" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -311,7 +306,6 @@
                     </view>
                     <navigationItem key="navigationItem" title="Welcome" id="bEe-Pv-DIE"/>
                     <connections>
-                        <outlet property="backView" destination="fOK-BH-VQM" id="kff-Hu-EvO"/>
                         <outlet property="passwordTextField" destination="wmY-tT-Nq4" id="145-Ul-YaR"/>
                         <outlet property="userNameTextField" destination="ewC-pD-ydo" id="kFo-mE-q5o"/>
                         <segue destination="BYZ-38-t0r" kind="show" identifier="TaskViewControllerSegue" id="98Q-oU-gbY"/>

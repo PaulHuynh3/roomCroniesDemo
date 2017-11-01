@@ -29,8 +29,8 @@ class LoginViewController: UIViewController {
         
         navigationController?.isNavigationBarHidden = true
         
-        let backGroundColour = UIColor(red: 0, green: 51, blue: 102)
-        backView.addGradientWithColor(topColor: .white, bottomColor: backGroundColour)
+        let backGroundColour = UIColor(red: 70, green: 132, blue: 153)
+        self.view.addGradientWithColor(topColor: .white, bottomColor: backGroundColour)
         
     }
     
