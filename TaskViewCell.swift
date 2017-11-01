@@ -52,6 +52,7 @@ class TaskViewCell: UITableViewCell {
 
     }
 
+    
     func setupCell(task:Task) {
         
         taskLabel.text = task.taskName
