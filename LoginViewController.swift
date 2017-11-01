@@ -14,7 +14,8 @@ class LoginViewController: UIViewController {
     @IBOutlet weak var userNameTextField: UITextField!
     
     @IBOutlet weak var passwordTextField: UITextField!
-        
+    
+    
     //MARK: Life Cycle
     override func viewDidLoad() {
         
@@ -27,11 +28,18 @@ class LoginViewController: UIViewController {
         
         navigationController?.isNavigationBarHidden = true
         
-        let backgroundImage = UIImageView(frame: UIScreen.main.bounds)
-        backgroundImage.image = UIImage(named: "login-background.jpg")
-        backgroundImage.contentMode =  UIViewContentMode.scaleAspectFill
-        self.view.insertSubview(backgroundImage, at: 0)
-
+        
+        
+//        self.view = UIView(frame: CGRect(x: 0, y: 0, width: 320, height: 50))
+//        let gradient = CAGradientLayer()
+//
+//        gradient.frame = self.view.bounds
+//        gradient.colors = [UIColor.white.cgColor, UIColor.black.cgColor]
+//
+//        //self.view.layer.insertSublayer(gradient, at: 0)
+//        self.view.layer.addSublayer(gradient)
+        
+        
     }
     
     private func checkLoginState() {
