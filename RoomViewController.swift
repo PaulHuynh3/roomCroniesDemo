@@ -158,6 +158,7 @@ class RoomViewController: UIViewController {
         query.whereKey("room", equalTo: myRoom)
         query.whereKey("isCompleted", equalTo: false)
         query.whereKey("taskExpense", equalTo:"Expense")
+        query.addDescendingOrder("priority")
         
         query.findObjectsInBackground { (results: [PFObject]?, error: Error?) in
             
@@ -207,6 +208,7 @@ class RoomViewController: UIViewController {
         query.whereKey("room", equalTo: myRoom)
         query.whereKey("isCompleted", equalTo: false)
         query.whereKey("taskExpense", equalTo: "Non-Expense")
+        query.addDescendingOrder("priority")
         
         query.findObjectsInBackground { (results: [PFObject]?, error: Error?) in
             
