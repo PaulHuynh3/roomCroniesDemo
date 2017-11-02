@@ -121,7 +121,7 @@ class RoomViewController: UIViewController {
             print("Adding a new task")
             
         case "ShowDetailTask":
-            
+      
             guard let detailedTaskVc = segue.destination as? AddTaskViewController else {
                 fatalError("unexpected destination:\(segue.destination)")
             }
@@ -132,7 +132,7 @@ class RoomViewController: UIViewController {
                 fatalError("The selected cell is not being displayed by the table")
                 
             }
-            
+                        
             let selectedTask = tasks[indexPath.section]
             detailedTaskVc.task = selectedTask
             
@@ -323,7 +323,8 @@ extension RoomViewController: UITableViewDelegate, UITableViewDataSource {
 // updates immediately when the button is checked.
 extension RoomViewController: TaskCompletedDelegate {
     func taskCompleted() {
-        //when button is checked in Cell this function will activate.
+        //when button is checked in CellView this function will activate.
+        //refresh contains refreshdata
         refresh()
         self.tableView.reloadData()
     }

@@ -27,8 +27,9 @@ class AddTaskViewController: UIViewController {
     //set it as incomplete. So we can query for incomplete tasks.
     var isCompleted:Bool? = false
     
+    @IBOutlet weak var addTaskNavigationBar: UINavigationBar!
+    
     @IBOutlet weak var taskNameTextField: UITextField!
-   
     @IBOutlet weak var taskDescriptionTextView: UITextView!
     
     @IBOutlet weak var priorityLevelView: UIView!
@@ -36,7 +37,8 @@ class AddTaskViewController: UIViewController {
     
       //Detail View will see this.
     override func viewDidLoad() {
-        super.viewDidLoad()
+        super.viewDidLoad()        
+        
         //textview layout
         taskDescriptionTextView.layer.borderColor = UIColor.black.cgColor
         taskDescriptionTextView.layer.borderWidth = 1.0
@@ -146,7 +148,8 @@ class AddTaskViewController: UIViewController {
         
         //presented modally.
         dismiss(animated: true, completion: nil)
-        
+        //presented with push
+        navigationController?.popViewController(animated: true)
     }
     
     //programatically change the colour of the shapes

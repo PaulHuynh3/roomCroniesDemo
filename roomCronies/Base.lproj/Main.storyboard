@@ -258,7 +258,7 @@
                             <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="4Cv-EW-F8r">
                                 <rect key="frame" x="0.0" y="20" width="375" height="64"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="64" id="n8w-jf-Zcf"/>
+                                    <constraint firstAttribute="height" constant="64" id="P2z-Ao-kqY"/>
                                 </constraints>
                                 <items>
                                     <navigationItem title="Add Task" id="niY-oS-HVB">
@@ -279,16 +279,17 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="LOq-fp-CgP" firstAttribute="top" secondItem="Azf-JA-oJn" secondAttribute="bottom" constant="150" id="1IT-wM-DwW"/>
-                            <constraint firstItem="4Cv-EW-F8r" firstAttribute="top" secondItem="Azf-JA-oJn" secondAttribute="bottom" id="FEh-6M-RYX"/>
                             <constraint firstItem="LOq-fp-CgP" firstAttribute="leading" secondItem="ucY-eJ-tyR" secondAttribute="leadingMargin" constant="10" id="Gme-nN-eG5"/>
-                            <constraint firstAttribute="trailing" secondItem="4Cv-EW-F8r" secondAttribute="trailing" id="HOy-pp-yVn"/>
-                            <constraint firstItem="4Cv-EW-F8r" firstAttribute="leading" secondItem="ucY-eJ-tyR" secondAttribute="leading" id="PQ3-Rl-vYG"/>
                             <constraint firstAttribute="trailingMargin" secondItem="LOq-fp-CgP" secondAttribute="trailing" constant="10" id="VKS-vI-84a"/>
+                            <constraint firstItem="4Cv-EW-F8r" firstAttribute="top" secondItem="Azf-JA-oJn" secondAttribute="bottom" id="l0s-CP-40a"/>
+                            <constraint firstAttribute="trailing" secondItem="4Cv-EW-F8r" secondAttribute="trailing" id="sQq-2c-khI"/>
+                            <constraint firstItem="4Cv-EW-F8r" firstAttribute="leading" secondItem="ucY-eJ-tyR" secondAttribute="leading" id="syu-V7-zSN"/>
                             <constraint firstItem="Wo2-nn-Qi1" firstAttribute="top" secondItem="LOq-fp-CgP" secondAttribute="bottom" constant="150" id="wB6-6D-WVb"/>
                         </constraints>
                     </view>
                     <extendedEdge key="edgesForExtendedLayout" bottom="YES"/>
                     <connections>
+                        <outlet property="addTaskNavigationBar" destination="4Cv-EW-F8r" id="ayV-X9-0Y3"/>
                         <outlet property="expenseTextField" destination="5Yk-zf-1Sy" id="00Z-lO-kTk"/>
                         <outlet property="priorityLevelView" destination="b74-fk-fca" id="W2l-Zo-Xrp"/>
                         <outlet property="taskDescriptionTextView" destination="zwD-9Z-Njm" id="yau-b9-DnW"/>
