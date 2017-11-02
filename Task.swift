@@ -25,7 +25,12 @@ class Task: PFObject {
     @NSManaged var isCompleted: Bool
     @NSManaged var priority: Int
     
-    convenience init(room: Room, taskName:String, description:String, taskExpense:String, isCompleted:Bool, createdBy: PFUser) {
+//    override init() {
+//        super.init()
+//        isCompleted = false
+//    }
+    
+    convenience init(room: Room, taskName:String, description:String, taskExpense:String, createdBy: PFUser, isCompleted:Bool = false) {
         self.init()
         self.room = room
         self.taskName = taskName

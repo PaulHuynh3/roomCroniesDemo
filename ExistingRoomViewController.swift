@@ -128,9 +128,6 @@ class ExistingRoomViewController: UIViewController {
                         }
                     }
                     
-                    
-                    
-
                 }
             } else {
                 let error = R.error(with: "Existing room does not exist. Please try again")

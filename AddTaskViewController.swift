@@ -16,12 +16,14 @@ protocol AddTaskDelegate: class {
 
 class AddTaskViewController: UIViewController, UITextViewDelegate {
     
+    var task: Task?
+    
     weak var taskDelegate: AddTaskDelegate?
     
     //this value will either be an existing task or to create a new task
-    var task: Task?
+    
     var roomObject: Room?
-    var pickerTask = ["","Expense","Task"]
+    var pickerTask = ["","Task","Expense"]
     var priorityColor = [UIColor.green, UIColor.yellow, UIColor.orange, UIColor.red]
     var selectedPickerExpense: String?
     //set it as incomplete. So we can query for incomplete tasks.
@@ -36,7 +38,7 @@ class AddTaskViewController: UIViewController, UITextViewDelegate {
     @IBOutlet weak var priorityLevelView: UIView!
     @IBOutlet weak var expenseTextField: UITextField!
     
-      //Detail View will see this.
+    //Detail View will see this.
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -49,22 +51,25 @@ class AddTaskViewController: UIViewController, UITextViewDelegate {
         taskNameTextField.underlined()
         expenseTextField.underlined()
         
-        taskNameTextField.attributedPlaceholder = NSAttributedString(string: "Enter a task or expense here...",
-                                                                     attributes: [NSAttributedStringKey.foregroundColor: UIColor.white])
+        taskNameTextField.attributedPlaceholder = task != nil ? NSAttributedString(string: "Enter a task or expense here...",
+                                                                                   attributes: [NSAttributedStringKey.foregroundColor: UIColor.white]) : NSAttributedString(string: "")
         
-        expenseTextField.attributedPlaceholder = NSAttributedString(string: "Is it an expense or task?",
-                                                                     attributes: [NSAttributedStringKey.foregroundColor: UIColor.white])
+        expenseTextField.attributedPlaceholder = task != nil ? NSAttributedString(string: "Is it an expense or task?",
+                                                                                  attributes: [NSAttributedStringKey.foregroundColor: UIColor.white]) : NSAttributedString(string: "")
         
         taskDescriptionTextView.delegate = self
-        placeholderLabel = UILabel()
-        placeholderLabel.text = "Enter your description..."
-        placeholderLabel.font = UIFont.italicSystemFont(ofSize: (taskDescriptionTextView.font?.pointSize)!)
-        placeholderLabel.sizeToFit()
-        taskDescriptionTextView.addSubview(placeholderLabel)
-        placeholderLabel.frame.origin = CGPoint(x: 5, y: (taskDescriptionTextView.font?.pointSize)! / 2)
-        placeholderLabel.textColor = UIColor.white
-        placeholderLabel.isHidden = !taskDescriptionTextView.text.isEmpty
-        textViewDidChange(taskDescriptionTextView)
+        
+        if task == nil {
+            placeholderLabel = UILabel()
+            placeholderLabel.text = "Enter your description..."
+            placeholderLabel.font = UIFont.italicSystemFont(ofSize: (taskDescriptionTextView.font?.pointSize)!)
+            placeholderLabel.sizeToFit()
+            taskDescriptionTextView.addSubview(placeholderLabel)
+            placeholderLabel.frame.origin = CGPoint(x: 5, y: (taskDescriptionTextView.font?.pointSize)! / 2)
+            placeholderLabel.textColor = UIColor.white
+            placeholderLabel.isHidden = !taskDescriptionTextView.text.isEmpty
+            //            textViewDidChange(taskDescriptionTextView)
+        }
         
         
         
@@ -73,7 +78,7 @@ class AddTaskViewController: UIViewController, UITextViewDelegate {
         self.addTaskNavigationBar.shadowImage = UIImage()
         self.addTaskNavigationBar.isTranslucent = true
         
-
+        
         UIGraphicsBeginImageContext(self.view.frame.size)
         UIImage(named: "blurred8")?.draw(in: self.view.bounds)
         
@@ -112,86 +117,103 @@ class AddTaskViewController: UIViewController, UITextViewDelegate {
     }
     
     func textViewDidChange(_ textView: UITextView) {
-        placeholderLabel.isHidden = !taskDescriptionTextView.text.isEmpty
+        guard let label = placeholderLabel else {return}
+        label.isHidden = true
     }
     
     
     //Mark: Action
     @IBAction func saveButtonTapped(_ sender: UIBarButtonItem) {
         guard let name = taskNameTextField.text,
-              let taskDescription = taskDescriptionTextView.text,
-              let room = roomObject,
-              let currentUser = PFUser.current(),
-              let priorityView = priorityLevelView.backgroundColor,
-              let expensePicker = selectedPickerExpense,
-              let isComplete = isCompleted,
-              name.isEmpty == false,
-              taskDescription.isEmpty == false else {
-                let error = R.error(with: "Please fill out all information")
+            let taskDescription = taskDescriptionTextView.text,
+            let room = roomObject,
+            let currentUser = PFUser.current(),
+            let priorityView = priorityLevelView.backgroundColor,
+            let expensePicker = selectedPickerExpense,
+            name.isEmpty == false,
+            taskDescription.isEmpty == false else {
+                let error = R.error(with: "Fill out all information! 😠")
                 showErrorView(error)
                 return
         }
-        task = Task(room: room, taskName: name, description: taskDescription, taskExpense:expensePicker, isCompleted:isComplete, createdBy: currentUser)
+        
+        /*
+ 
+         self.room = room
+         self.taskName = taskName
+         self.taskDescription = description
+         self.taskExpense = taskExpense
+         //        self.isCompleted = isCompleted
+         self.createdBy = createdBy
+ */
+        if task != nil {
+            task?.room = room
+            task?.taskName = name
+            task?.taskDescription = taskDescription
+            task?.taskExpense = expensePicker
+            task?.createdBy = currentUser
+        } else {
+            task = Task(room: room, taskName: name, description: taskDescription, taskExpense: expensePicker, createdBy: currentUser)
+        }
         
         
         
+
         //change the background color.
         guard let priority =  priorityColor.index(of: priorityView) else { return }
         task?.priority = priorityColor.startIndex.distance(to: priority)
         
-        task?.saveInBackground { (success, error) in
+        //unowned because we are using self.taskdelegate.
+        task?.saveInBackground {[unowned self] (success, error) in
             print(#line, success)
             print(#line, error?.localizedDescription ?? "No error saving")
+            PFCloud.callFunction(inBackground: "iosPushTest", withParameters: ["text" : "\(PFUser.current()!.username!) added a new task: \(String(describing: self.taskNameTextField.text!))", "channels": [PFInstallation.current()?.channels]])
+            self.taskDelegate?.addTaskObject(task: self.task!)
+            
+            //presented modally.
+            self.dismiss(animated: true, completion: nil)
         }
         
-        taskDelegate?.addTaskObject(task: task!)
         
-        //presented modally.
-        dismiss(animated: true, completion: nil)
         
         
         //MARK: push notifications
         //QUERY THE ROOM AND FIND THE ARRAY OF USERS
         //ITERATE THROUGH EACH USER AND SEND NOTIFICATION USING THEIR DEVICE TOKEN
         
-     
-//        let text = "\(PFUser.current()!.username!) added a new task: \(String(describing: taskNameTextField.text!))";
-//        let data = [
-//            "badge" : "Increment",
-//            "alert" : text,
-//            ]
-//        let request: [String : Any] = [
-//            //"someKey" : PFUser.current()!.deviceToken,
-//            "someKey" : PFUser.current()!.objectId!,
-//            "data" : data
-//        ]
-//        print(PFUser.current()!.objectId!)
-//        print(PFUser.current()!.deviceToken)
-//
-//        print(#line, PFInstallation.current()?.channels ?? "No CHANNELS")
-//
-//        print("sending push notification...")
-//        PFCloud.callFunction(inBackground: "pushToFollowers", withParameters: request as [NSObject : AnyObject], block: { (results:AnyObject?, error:NSError?) in
-//            print("push \(String(describing: results!))")
-//            if error == nil {
-//                print (results!)
-//            }
-//            else {
-//                print (error!)
-//            }
-//            } as? PFIdResultBlock)
         
-        
-        
-        
-        PFCloud.callFunction(inBackground: "iosPushTest", withParameters: ["text" : "\(PFUser.current()!.username!) added a new task: \(String(describing: taskNameTextField.text!))", "channels": [PFInstallation.current()?.channels]])
+        //        let text = "\(PFUser.current()!.username!) added a new task: \(String(describing: taskNameTextField.text!))";
+        //        let data = [
+        //            "badge" : "Increment",
+        //            "alert" : text,
+        //            ]
+        //        let request: [String : Any] = [
+        //            //"someKey" : PFUser.current()!.deviceToken,
+        //            "someKey" : PFUser.current()!.objectId!,
+        //            "data" : data
+        //        ]
+        //        print(PFUser.current()!.objectId!)
+        //        print(PFUser.current()!.deviceToken)
+        //
+        //        print(#line, PFInstallation.current()?.channels ?? "No CHANNELS")
+        //
+        //        print("sending push notification...")
+        //        PFCloud.callFunction(inBackground: "pushToFollowers", withParameters: request as [NSObject : AnyObject], block: { (results:AnyObject?, error:NSError?) in
+        //            print("push \(String(describing: results!))")
+        //            if error == nil {
+        //                print (results!)
+        //            }
+        //            else {
+        //                print (error!)
+        //            }
+        //            } as? PFIdResultBlock)
         
         //PFCloud.callFunction(inBackground: "pushsample", withParameters: ["text" : "\(PFUser.current()!.username!) added a new task: \(String(describing: taskNameTextField.text!))"])
         
-//        let push = PFPush()
-//        push.setChannel("room2")
-//        push.setMessage("TEST")
-//        push.sendInBackground()
+        //        let push = PFPush()
+        //        push.setChannel("room2")
+        //        push.setMessage("TEST")
+        //        push.sendInBackground()
     }
     
     
@@ -244,7 +266,7 @@ extension AddTaskViewController: UIPickerViewDelegate, UIPickerViewDataSource {
         expenseTextField.inputAccessoryView = toolBar
     }
     
-
+    
     
     //customize picker label.
     func pickerView(_ pickerView: UIPickerView, viewForRow row: Int, forComponent component: Int, reusing view: UIView?) -> UIView {

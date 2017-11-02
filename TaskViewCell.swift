@@ -42,8 +42,6 @@ class TaskViewCell: UITableViewCell {
     }
     
     
-    
-    
     //The cell already contains all the task objects because of the task.. to identify it at indexpath everything needs to be done thru the cell.
     //the correct way to do this would be to add a delegate and protocol in the cell.
     @IBAction func checkBoxTapped(_ sender: UIButton) {
@@ -55,9 +53,16 @@ class TaskViewCell: UITableViewCell {
         
         PFCloud.callFunction(inBackground: "iosPushTest", withParameters: ["text" : "\(PFUser.current()!.username!) completed the task: \(String(describing: taskLabel.text!))", "channels": [PFInstallation.current()?.channels]])
         
-        task?.saveInBackground()
-        //delegate doesnt have to pass anything it just tells the view controller that the checkbox was tapped and its completed. In the RoomViewController it will have a delegate that receives the information and will have function to run when it happens in roomviewcontroller.
-        delegate?.taskCompleted()
+        task?.saveInBackground(block: { (success, error) in
+        
+            print(#line, success)
+            print(#line, error?.localizedDescription ?? "No error saving")
+            
+            
+            //delegate doesnt have to pass anything it just tells the view controller that the checkbox was tapped and its completed. In the RoomViewController it will have a delegate that receives the information and will have function to run when it happens in roomviewcontroller.
+            self.delegate?.taskCompleted()
+            
+        })
     }
     
         
@@ -78,6 +83,7 @@ class TaskViewCell: UITableViewCell {
         }
         
          priorityView.backgroundColor = priorityColor[task.priority]
+        
     }
     
     
