@@ -32,6 +32,7 @@ class LoginViewController: UIViewController {
     //MARK: Life Cycle
     override func viewDidLoad() {
         navigationController?.isNavigationBarHidden = true
+
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -45,7 +46,8 @@ class LoginViewController: UIViewController {
         self.blurView.clipsToBounds = true
         
         checkLoginState()
-        navigationController?.isNavigationBarHidden = true
+        self.navigationController?.isNavigationBarHidden = true
+        
         
         let webViewBG = UIWebView(frame: self.view.frame)
         webViewBG.isUserInteractionEnabled = false
@@ -107,6 +109,14 @@ class LoginViewController: UIViewController {
 //            })
 //        }, completion: nil)
 
+        
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        
+        // Show the navigation bar on other view controllers
+        self.navigationController?.isNavigationBarHidden = false
         
     }
     
