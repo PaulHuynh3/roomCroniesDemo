@@ -23,6 +23,10 @@ class ExistingRoomViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         navigationController?.isNavigationBarHidden = false
+        self.navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
+        self.navigationController?.navigationBar.shadowImage = UIImage()
+        self.navigationController?.navigationBar.isTranslucent = true
+        
         
         let backGroundColour = UIColor(red: 70, green: 132, blue: 153)
         self.view.addGradientWithColor(topColor: backGroundColour, bottomColor: .white)
