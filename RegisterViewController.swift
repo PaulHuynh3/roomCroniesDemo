@@ -19,6 +19,10 @@ class RegisterViewController: UIViewController {
     
     @IBOutlet weak var roomTextField: UITextField!
     
+    @IBOutlet weak var signUpPicture: UIImageView!
+    
+    @IBOutlet weak var blurView: UIVisualEffectView!
+    
     var listOfRoom: [Room]?
     
     var imageArray: [UIImage] = [
@@ -54,6 +58,13 @@ class RegisterViewController: UIViewController {
         
         roomTextField.attributedPlaceholder = NSAttributedString(string: "Create New Room",
                                                                      attributes: [NSAttributedStringKey.foregroundColor: UIColor.white])
+        
+        self.signUpPicture.animationImages = imageArray;
+        self.signUpPicture.animationDuration = 3.0
+        self.signUpPicture.startAnimating()
+        
+        self.blurView.layer.cornerRadius = 35
+        self.blurView.clipsToBounds = true
         
         self.hideKeyboardWhenTappedAround()
         

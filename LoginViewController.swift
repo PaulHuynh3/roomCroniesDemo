@@ -32,7 +32,7 @@ class LoginViewController: UIViewController {
     //MARK: Life Cycle
     override func viewDidLoad() {
         navigationController?.isNavigationBarHidden = true
-
+        
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -167,6 +167,9 @@ class LoginViewController: UIViewController {
         let backItem = UIBarButtonItem()
         backItem.title = ""
         navigationItem.backBarButtonItem = backItem
+        
+        navigationItem.title = ""
+        
         
         self.navigationController?.navigationBar.tintColor = UIColor.white
         
