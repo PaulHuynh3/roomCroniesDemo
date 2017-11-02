@@ -21,7 +21,7 @@ class AddTaskViewController: UIViewController, UITextViewDelegate {
     //this value will either be an existing task or to create a new task
     var task: Task?
     var roomObject: Room?
-    var pickerTask = ["","Expense","Task"]
+    var pickerTask = ["","Task","Expense"]
     var priorityColor = [UIColor.green, UIColor.yellow, UIColor.orange, UIColor.red]
     var selectedPickerExpense: String?
     //set it as incomplete. So we can query for incomplete tasks.
@@ -183,12 +183,7 @@ class AddTaskViewController: UIViewController, UITextViewDelegate {
 //                print (error!)
 //            }
 //            } as? PFIdResultBlock)
-        
-        
-        
-        
-        
-        
+
         //PFCloud.callFunction(inBackground: "pushsample", withParameters: ["text" : "\(PFUser.current()!.username!) added a new task: \(String(describing: taskNameTextField.text!))"])
         
 //        let push = PFPush()
