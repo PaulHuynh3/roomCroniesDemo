@@ -36,7 +36,9 @@ class LoginViewController: UIViewController {
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(true)
-
+        
+        self.hideKeyboardWhenTappedAround() 
+        
         self.view.bringSubview(toFront: loginPicture)
         
         self.blurView.layer.cornerRadius = 35
@@ -60,6 +62,10 @@ class LoginViewController: UIViewController {
         self.loginPicture.animationImages = imageArray;
         self.loginPicture.animationDuration = 3.0
         self.loginPicture.startAnimating()
+        
+        
+        
+        
         
 //        UIView.animateKeyframes(withDuration: 4.0, delay: 0.0, options: [.repeat, .calculationModeCubic], animations: {
 //            UIView.addKeyframe(withRelativeStartTime: 0.0, relativeDuration: 0.5, animations: {
@@ -95,7 +101,6 @@ class LoginViewController: UIViewController {
 
         
     }
-    
     
     private func checkLoginState() {
         DataManager.checkUserLoginState { (success: Bool) in
@@ -168,13 +173,18 @@ class LoginViewController: UIViewController {
         }
         
     }
+ 
+}
+
+// Put this piece of code anywhere you like
+extension UIViewController {
+    func hideKeyboardWhenTappedAround() {
+        let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(UIViewController.dismissKeyboard))
+        tap.cancelsTouchesInView = false
+        view.addGestureRecognizer(tap)
+    }
     
-    
-    
-  
-    
-    
-    
-    
-    
+    @objc func dismissKeyboard() {
+        view.endEditing(true)
+    }
 }

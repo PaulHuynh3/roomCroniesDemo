@@ -175,9 +175,7 @@ extension AddTaskViewController: UIPickerViewDelegate, UIPickerViewDataSource {
         expenseTextField.inputAccessoryView = toolBar
     }
     
-    @objc func dismissKeyboard(){
-        view.endEditing(true)
-    }
+
     
     //customize picker label.
     func pickerView(_ pickerView: UIPickerView, viewForRow row: Int, forComponent component: Int, reusing view: UIView?) -> UIView {
