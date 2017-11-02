@@ -150,7 +150,7 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Completed by: 🤷‍♀️ 🤷‍♂️ " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9ZY-f3-t5h">
-                                                    <rect key="frame" x="8" y="49" width="171" height="21"/>
+                                                    <rect key="frame" x="8" y="49" width="266" height="21"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
@@ -207,7 +207,7 @@
                             <constraint firstAttribute="trailing" secondItem="ipu-Ux-lPI" secondAttribute="trailing" id="xSq-wP-Nby"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title="Your Tasks" id="EQt-hI-AjG">
+                    <navigationItem key="navigationItem" id="EQt-hI-AjG">
                         <barButtonItem key="leftBarButtonItem" systemItem="add" id="LIu-cK-gz3">
                             <connections>
                                 <segue destination="kec-Il-1J7" kind="presentation" identifier="AddTaskSegue" id="Vba-1d-IgB"/>
@@ -240,24 +240,6 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <navigationBar contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="4Cv-EW-F8r">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
-                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
-                                <items>
-                                    <navigationItem title="Add Task" id="niY-oS-HVB">
-                                        <barButtonItem key="leftBarButtonItem" title="Cancel" id="D3J-pI-E2P">
-                                            <connections>
-                                                <action selector="cancelButtonTapped:" destination="kec-Il-1J7" id="ay1-jc-LPr"/>
-                                            </connections>
-                                        </barButtonItem>
-                                        <barButtonItem key="rightBarButtonItem" title="Save" id="tqN-jU-qvH">
-                                            <connections>
-                                                <action selector="saveButtonTapped:" destination="kec-Il-1J7" id="Qzk-Y5-njS"/>
-                                            </connections>
-                                        </barButtonItem>
-                                    </navigationItem>
-                                </items>
-                            </navigationBar>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="equalSpacing" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="LOq-fp-CgP">
                                 <rect key="frame" x="26" y="170" width="323" height="347"/>
                                 <subviews>
@@ -265,22 +247,29 @@
                                         <rect key="frame" x="20" y="0.0" width="283" height="30"/>
                                         <nil key="textColor"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                        <textInputTraits key="textInputTraits"/>
+                                        <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" smartDashesType="no" smartInsertDeleteType="no" smartQuotesType="no"/>
                                     </textField>
-                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Task Description" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="5Xa-99-Avw">
-                                        <rect key="frame" x="20" y="66" width="283" height="30"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Description:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="R0r-Gz-PzP">
+                                        <rect key="frame" x="130" y="49" width="63.5" height="13.5"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="11"/>
                                         <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="zwD-9Z-Njm">
+                                        <rect key="frame" x="84" y="81.5" width="155" height="65"/>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <color key="tintColor" cocoaTouchSystemColor="darkTextColor"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                        <textInputTraits key="textInputTraits"/>
-                                    </textField>
+                                        <textInputTraits key="textInputTraits" autocapitalizationType="sentences" autocorrectionType="no" spellCheckingType="no" smartDashesType="no" smartInsertDeleteType="no" smartQuotesType="no"/>
+                                    </textView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Priority Level:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Zon-g5-sad">
-                                        <rect key="frame" x="125.5" y="132" width="72" height="13.5"/>
+                                        <rect key="frame" x="125.5" y="165.5" width="72" height="13.5"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="11"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="b74-fk-fca">
-                                        <rect key="frame" x="111.5" y="181" width="100" height="100"/>
+                                        <rect key="frame" x="111.5" y="198" width="100" height="100"/>
                                         <color key="backgroundColor" red="0.0" green="1" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                         <gestureRecognizers/>
                                         <constraints>
@@ -296,24 +285,53 @@
                                     </textField>
                                 </subviews>
                                 <constraints>
-                                    <constraint firstItem="5Xa-99-Avw" firstAttribute="leading" secondItem="LOq-fp-CgP" secondAttribute="leading" constant="20" id="DW5-JJ-Q9H"/>
+                                    <constraint firstItem="zwD-9Z-Njm" firstAttribute="top" secondItem="R0r-Gz-PzP" secondAttribute="bottom" constant="19" id="4z0-XC-0Az"/>
+                                    <constraint firstItem="Zon-g5-sad" firstAttribute="top" secondItem="zwD-9Z-Njm" secondAttribute="bottom" constant="19" id="DL2-Dr-8aD"/>
+                                    <constraint firstItem="R0r-Gz-PzP" firstAttribute="top" secondItem="XIq-FN-PvO" secondAttribute="bottom" constant="19" id="FD5-zA-NVl"/>
+                                    <constraint firstItem="zwD-9Z-Njm" firstAttribute="leading" secondItem="LOq-fp-CgP" secondAttribute="leading" constant="84" id="IFd-ix-d8i"/>
                                     <constraint firstItem="5Yk-zf-1Sy" firstAttribute="leading" secondItem="LOq-fp-CgP" secondAttribute="leading" constant="20" id="PVP-3g-BrQ"/>
                                     <constraint firstItem="XIq-FN-PvO" firstAttribute="leading" secondItem="LOq-fp-CgP" secondAttribute="leading" constant="20" id="aH9-Aj-VKg"/>
+                                    <constraint firstAttribute="trailing" secondItem="zwD-9Z-Njm" secondAttribute="trailing" constant="84" id="axi-7B-F3V"/>
                                 </constraints>
                             </stackView>
+                            <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="4Cv-EW-F8r">
+                                <rect key="frame" x="0.0" y="20" width="375" height="64"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="64" id="P2z-Ao-kqY"/>
+                                </constraints>
+                                <items>
+                                    <navigationItem title="Add Task" id="niY-oS-HVB">
+                                        <barButtonItem key="leftBarButtonItem" title="Cancel" id="D3J-pI-E2P">
+                                            <connections>
+                                                <action selector="cancelButtonTapped:" destination="kec-Il-1J7" id="ay1-jc-LPr"/>
+                                            </connections>
+                                        </barButtonItem>
+                                        <barButtonItem key="rightBarButtonItem" title="Save" id="tqN-jU-qvH">
+                                            <connections>
+                                                <action selector="saveButtonTapped:" destination="kec-Il-1J7" id="Qzk-Y5-njS"/>
+                                            </connections>
+                                        </barButtonItem>
+                                    </navigationItem>
+                                </items>
+                            </navigationBar>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="LOq-fp-CgP" firstAttribute="top" secondItem="Azf-JA-oJn" secondAttribute="bottom" constant="150" id="1IT-wM-DwW"/>
                             <constraint firstItem="LOq-fp-CgP" firstAttribute="leading" secondItem="ucY-eJ-tyR" secondAttribute="leadingMargin" constant="10" id="Gme-nN-eG5"/>
                             <constraint firstAttribute="trailingMargin" secondItem="LOq-fp-CgP" secondAttribute="trailing" constant="10" id="VKS-vI-84a"/>
+                            <constraint firstItem="4Cv-EW-F8r" firstAttribute="top" secondItem="Azf-JA-oJn" secondAttribute="bottom" id="l0s-CP-40a"/>
+                            <constraint firstAttribute="trailing" secondItem="4Cv-EW-F8r" secondAttribute="trailing" id="sQq-2c-khI"/>
+                            <constraint firstItem="4Cv-EW-F8r" firstAttribute="leading" secondItem="ucY-eJ-tyR" secondAttribute="leading" id="syu-V7-zSN"/>
                             <constraint firstItem="Wo2-nn-Qi1" firstAttribute="top" secondItem="LOq-fp-CgP" secondAttribute="bottom" constant="150" id="wB6-6D-WVb"/>
                         </constraints>
                     </view>
+                    <extendedEdge key="edgesForExtendedLayout" bottom="YES"/>
                     <connections>
+                        <outlet property="addTaskNavigationBar" destination="4Cv-EW-F8r" id="ayV-X9-0Y3"/>
                         <outlet property="expenseTextField" destination="5Yk-zf-1Sy" id="00Z-lO-kTk"/>
                         <outlet property="priorityLevelView" destination="b74-fk-fca" id="W2l-Zo-Xrp"/>
-                        <outlet property="taskDescriptionTextField" destination="5Xa-99-Avw" id="q5e-3x-aM9"/>
+                        <outlet property="taskDescriptionTextView" destination="zwD-9Z-Njm" id="yau-b9-DnW"/>
                         <outlet property="taskNameTextField" destination="XIq-FN-PvO" id="iKe-X7-r1N"/>
                     </connections>
                 </viewController>

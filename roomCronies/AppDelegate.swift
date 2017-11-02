@@ -279,9 +279,6 @@ extension AppDelegate: UNUserNotificationCenterDelegate {
 
 
 
-
-
-
 //    private func deleteObject() {
 //        fetchPersonCompletion{ (person) in
 //            person.deleteInBackground(block: { (success, _) in

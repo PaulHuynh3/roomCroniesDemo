@@ -21,23 +21,34 @@ class AddTaskViewController: UIViewController {
     //this value will either be an existing task or to create a new task
     var task: Task?
     var roomObject: Room?
-    var pickerTask = ["","Expense","Non-Expense"]
+    var pickerTask = ["","Expense","Task"]
     var priorityColor = [UIColor.green, UIColor.yellow, UIColor.orange, UIColor.red]
     var selectedPickerExpense: String?
     //set it as incomplete. So we can query for incomplete tasks.
     var isCompleted:Bool? = false
     
+    @IBOutlet weak var addTaskNavigationBar: UINavigationBar!
+    
     @IBOutlet weak var taskNameTextField: UITextField!
-    @IBOutlet weak var taskDescriptionTextField: UITextField!
+    @IBOutlet weak var taskDescriptionTextView: UITextView!
+    
     @IBOutlet weak var priorityLevelView: UIView!
     @IBOutlet weak var expenseTextField: UITextField!
     
       //Detail View will see this.
     override func viewDidLoad() {
-        super.viewDidLoad()
+        super.viewDidLoad()        
+        
+        //textview layout
+        taskDescriptionTextView.layer.borderColor = UIColor.black.cgColor
+        taskDescriptionTextView.layer.borderWidth = 1.0
+        
+        //priority layout
+        priorityLevelView.backgroundColor = UIColor.green
+        priorityLevelView.layer.cornerRadius = priorityLevelView.bounds.size.width/2
+        
         //programatically add the tap gesture.
         //set the firstcolour as green so when the function loops its able to find it.
-        priorityLevelView.backgroundColor = UIColor.green
         let tap = UITapGestureRecognizer(target: self, action: #selector(handleTap))
         priorityLevelView.addGestureRecognizer(tap)
         
@@ -47,7 +58,7 @@ class AddTaskViewController: UIViewController {
         
         if let task = task {
             taskNameTextField.text = task.taskName
-            taskDescriptionTextField.text = task.taskDescription
+            taskDescriptionTextView.text = task.taskDescription
             expenseTextField.text = task.taskExpense
             priorityLevelView.backgroundColor = priorityColor[task.priority]
         }
@@ -57,15 +68,21 @@ class AddTaskViewController: UIViewController {
     //Mark: Action
     @IBAction func saveButtonTapped(_ sender: UIBarButtonItem) {
         guard let name = taskNameTextField.text,
-              let taskDescription = taskDescriptionTextField.text,
+              let taskDescription = taskDescriptionTextView.text,
               let room = roomObject,
               let currentUser = PFUser.current(),
               let priorityView = priorityLevelView.backgroundColor,
               let expensePicker = selectedPickerExpense,
-              let isComplete = isCompleted else {
+              let isComplete = isCompleted,
+              name.isEmpty == false,
+              taskDescription.isEmpty == false else {
+                let error = R.error(with: "Please fill out all information")
+                showErrorView(error)
                 return
         }
         task = Task(room: room, taskName: name, description: taskDescription, taskExpense:expensePicker, isCompleted:isComplete, createdBy: currentUser)
+        
+        
         
         //change the background color.
         guard let priority =  priorityColor.index(of: priorityView) else { return }
@@ -131,7 +148,8 @@ class AddTaskViewController: UIViewController {
         
         //presented modally.
         dismiss(animated: true, completion: nil)
-        
+        //presented with push
+        navigationController?.popViewController(animated: true)
     }
     
     //programatically change the colour of the shapes

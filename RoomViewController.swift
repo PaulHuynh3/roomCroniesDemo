@@ -24,12 +24,14 @@ class RoomViewController: UIViewController {
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var segmentedControl: UISegmentedControl!
     
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         //fetches the room related to the user.
         DataManager.getRoom(completion: {[unowned self] (room) in
             self.myRoom = room
+            
+            //can use the room after its set.
+            self.navigationController?.navigationBar.topItem?.title = self.myRoom?.roomName
         })
         refreshUserScreen()
         
@@ -121,7 +123,7 @@ class RoomViewController: UIViewController {
             print("Adding a new task")
             
         case "ShowDetailTask":
-            
+      
             guard let detailedTaskVc = segue.destination as? AddTaskViewController else {
                 fatalError("unexpected destination:\(segue.destination)")
             }
@@ -132,7 +134,7 @@ class RoomViewController: UIViewController {
                 fatalError("The selected cell is not being displayed by the table")
                 
             }
-            
+                        
             let selectedTask = tasks[indexPath.section]
             detailedTaskVc.task = selectedTask
             
@@ -186,6 +188,7 @@ class RoomViewController: UIViewController {
         
         query.whereKey("room", equalTo: myRoom)
         query.whereKey("isCompleted", equalTo: true)
+        query.addAscendingOrder("doneByUsername")
         
         query.findObjectsInBackground { (results: [PFObject]?, error: Error?) in
             
@@ -209,7 +212,7 @@ class RoomViewController: UIViewController {
         
         query.whereKey("room", equalTo: myRoom)
         query.whereKey("isCompleted", equalTo: false)
-        query.whereKey("taskExpense", equalTo: "Non-Expense")
+        query.whereKey("taskExpense", equalTo: "Task")
         query.addDescendingOrder("priority")
         
         query.findObjectsInBackground { (results: [PFObject]?, error: Error?) in
@@ -322,7 +325,8 @@ extension RoomViewController: UITableViewDelegate, UITableViewDataSource {
 // updates immediately when the button is checked.
 extension RoomViewController: TaskCompletedDelegate {
     func taskCompleted() {
-        //when button is checked in Cell this function will activate.
+        //when button is checked in CellView this function will activate.
+        //refresh contains refreshdata
         refresh()
         self.tableView.reloadData()
     }
