@@ -28,8 +28,10 @@ class ExistingRoomViewController: UIViewController {
         self.navigationController?.navigationBar.isTranslucent = true
         
         
-        let backGroundColour = UIColor(red: 70, green: 132, blue: 153)
-        self.view.addGradientWithColor(topColor: backGroundColour, bottomColor: .white)
+//        let backGroundColour = UIColor(red: 70, green: 132, blue: 153)
+//        self.view.addGradientWithColor(topColor: backGroundColour, bottomColor: .white)
+
+        self.view.backgroundColor = UIColor(patternImage: UIImage(named: "blurred1")!)
         
         self.hideKeyboardWhenTappedAround() 
     }

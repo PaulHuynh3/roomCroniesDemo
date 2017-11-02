@@ -16,10 +16,10 @@
         </array>
     </customFonts>
     <scenes>
-        <!--Join Existing Room-->
+        <!--Join an Existing Room-->
         <scene sceneID="rOC-nq-q3H">
             <objects>
-                <viewController title="Join Existing Room" id="Ixv-aW-OZ3" customClass="ExistingRoomViewController" customModule="roomCronies" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController title="Join an Existing Room" id="Ixv-aW-OZ3" customClass="ExistingRoomViewController" customModule="roomCronies" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="qlN-ZW-izh"/>
                         <viewControllerLayoutGuide type="bottom" id="ZFH-1g-CKC"/>
@@ -299,7 +299,7 @@
                                 <color key="backgroundColor" red="0.83770042659999999" green="0.80123296200000005" blue="0.80405448170000005" alpha="0.73445526539999995" colorSpace="custom" customColorSpace="sRGB"/>
                                 <fontDescription key="fontDescription" name="Helvetica-Bold" family="Helvetica" pointSize="17"/>
                                 <state key="normal" title="Join an Existing Room">
-                                    <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
@@ -329,7 +329,7 @@
                                 <color key="backgroundColor" red="0.83770042657852173" green="0.80123296201300787" blue="0.8040544816609283" alpha="0.73445526541095896" colorSpace="custom" customColorSpace="sRGB"/>
                                 <fontDescription key="fontDescription" name="Helvetica-Bold" family="Helvetica" pointSize="17"/>
                                 <state key="normal" title="Login">
-                                    <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
@@ -344,8 +344,8 @@
                                 <rect key="frame" x="28" y="435" width="319" height="32"/>
                                 <color key="backgroundColor" red="0.83770042659999999" green="0.80123296200000005" blue="0.80405448170000005" alpha="0.73445526539999995" colorSpace="custom" customColorSpace="sRGB"/>
                                 <fontDescription key="fontDescription" name="Helvetica-Bold" family="Helvetica" pointSize="17"/>
-                                <state key="normal" title="Register">
-                                    <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                                <state key="normal" title="Sign Up">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
@@ -369,7 +369,7 @@
                                                 <constraint firstAttribute="width" constant="222" id="p3f-Bf-8Bl"/>
                                             </constraints>
                                             <fontDescription key="fontDescription" name="Helvetica-Bold" family="Helvetica" pointSize="26"/>
-                                            <nil key="textColor"/>
+                                            <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="loginpic1.png" translatesAutoresizingMaskIntoConstraints="NO" id="Cgx-B1-5tl">
@@ -480,9 +480,10 @@
                                 <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
                             </textField>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3xc-9P-QJQ">
-                                <rect key="frame" x="121" y="535" width="132" height="30"/>
+                                <rect key="frame" x="30" y="535" width="314" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" red="0.80000000000000004" green="0.67843137254901964" blue="0.63529411764705879" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="backgroundColor" red="0.83770042659999999" green="0.80123296200000005" blue="0.80405448170000005" alpha="0.73445526539999995" colorSpace="custom" customColorSpace="sRGB"/>
+                                <fontDescription key="fontDescription" name="Helvetica-Bold" family="Helvetica" pointSize="17"/>
                                 <state key="normal" title="Sign Up">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
@@ -507,7 +508,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Dy5-pI-Z7G" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-4" y="576"/>
+            <point key="canvasLocation" x="-4" y="575.26236881559225"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="XqS-e1-I1i">
@@ -535,6 +536,6 @@
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="Vba-1d-IgB"/>
-        <segue reference="tZp-Kx-uj3"/>
+        <segue reference="xdD-y4-fc8"/>
     </inferredMetricsTieBreakers>
 </document>
