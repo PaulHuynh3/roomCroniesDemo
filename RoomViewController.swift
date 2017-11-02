@@ -318,7 +318,7 @@ extension RoomViewController: UITableViewDelegate, UITableViewDataSource {
 // updates immediately when the button is checked.
 extension RoomViewController: TaskCompletedDelegate {
     func taskCompleted() {
-        
+        //when button is checked in Cell this function will activate.
         refresh()
         self.tableView.reloadData()
     }

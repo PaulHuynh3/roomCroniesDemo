@@ -6,6 +6,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13174"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -207,40 +208,52 @@
                                     </navigationItem>
                                 </items>
                             </navigationBar>
-                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="equalSpacing" translatesAutoresizingMaskIntoConstraints="NO" id="LOq-fp-CgP">
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="equalSpacing" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="LOq-fp-CgP">
                                 <rect key="frame" x="26" y="170" width="323" height="347"/>
                                 <subviews>
                                     <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Task Name" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="XIq-FN-PvO">
-                                        <rect key="frame" x="0.0" y="0.0" width="323" height="30"/>
+                                        <rect key="frame" x="20" y="0.0" width="283" height="30"/>
                                         <nil key="textColor"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits"/>
                                     </textField>
                                     <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Task Description" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="5Xa-99-Avw">
-                                        <rect key="frame" x="0.0" y="81.5" width="323" height="30"/>
+                                        <rect key="frame" x="20" y="66" width="283" height="30"/>
                                         <nil key="textColor"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits"/>
                                     </textField>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="1" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ecs-jS-kDf">
-                                        <rect key="frame" x="0.0" y="163.5" width="323" height="20.5"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Priority Level:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Zon-g5-sad">
+                                        <rect key="frame" x="125.5" y="132" width="72" height="13.5"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="11"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="1" minValue="1" maxValue="5" translatesAutoresizingMaskIntoConstraints="NO" id="vot-pg-SsG">
-                                        <rect key="frame" x="-2" y="235.5" width="327" height="31"/>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="b74-fk-fca">
+                                        <rect key="frame" x="111.5" y="181" width="100" height="100"/>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <gestureRecognizers/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="100" id="RNq-7t-dj3"/>
+                                            <constraint firstAttribute="width" secondItem="b74-fk-fca" secondAttribute="height" id="Z0F-L1-At0"/>
+                                        </constraints>
                                         <connections>
-                                            <action selector="prioritySlider:" destination="kec-Il-1J7" eventType="valueChanged" id="BGf-cZ-STH"/>
+                                            <outletCollection property="gestureRecognizers" destination="p6d-Yy-YG2" appends="YES" id="Zne-qi-jgH"/>
+                                            <outletCollection property="gestureRecognizers" destination="p6d-Yy-YG2" appends="YES" id="Ojh-RY-9D4"/>
                                         </connections>
-                                    </slider>
+                                    </view>
                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Expense?" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="5Yk-zf-1Sy">
-                                        <rect key="frame" x="0.0" y="317" width="323" height="30"/>
+                                        <rect key="frame" x="20" y="317" width="283" height="30"/>
                                         <nil key="textColor"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits"/>
                                     </textField>
                                 </subviews>
+                                <constraints>
+                                    <constraint firstItem="5Xa-99-Avw" firstAttribute="leading" secondItem="LOq-fp-CgP" secondAttribute="leading" constant="20" id="DW5-JJ-Q9H"/>
+                                    <constraint firstItem="5Yk-zf-1Sy" firstAttribute="leading" secondItem="LOq-fp-CgP" secondAttribute="leading" constant="20" id="PVP-3g-BrQ"/>
+                                    <constraint firstItem="XIq-FN-PvO" firstAttribute="leading" secondItem="LOq-fp-CgP" secondAttribute="leading" constant="20" id="aH9-Aj-VKg"/>
+                                </constraints>
                             </stackView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -253,13 +266,13 @@
                     </view>
                     <connections>
                         <outlet property="expenseTextField" destination="5Yk-zf-1Sy" id="00Z-lO-kTk"/>
-                        <outlet property="prioritySlider" destination="vot-pg-SsG" id="W5e-UF-BDo"/>
-                        <outlet property="sliderLabel" destination="ecs-jS-kDf" id="i4d-8g-xRv"/>
+                        <outlet property="priorityLevelView" destination="b74-fk-fca" id="W2l-Zo-Xrp"/>
                         <outlet property="taskDescriptionTextField" destination="5Xa-99-Avw" id="q5e-3x-aM9"/>
                         <outlet property="taskNameTextField" destination="XIq-FN-PvO" id="iKe-X7-r1N"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Csk-xB-Dar" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <tapGestureRecognizer id="p6d-Yy-YG2"/>
             </objects>
             <point key="canvasLocation" x="2429.5999999999999" y="121.88905547226388"/>
         </scene>

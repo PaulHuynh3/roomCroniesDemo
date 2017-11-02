@@ -22,15 +22,15 @@ class AddTaskViewController: UIViewController {
     var task: Task?
     var roomObject: Room?
     var pickerTask = ["","Expense","Non-Expense"]
+    var priorityColor = [UIColor.green, UIColor.yellow, UIColor.orange, UIColor.red]
     var selectedPickerExpense: String?
     //set it as incomplete. So we can query for incomplete tasks.
     var isCompleted:Bool? = false
-    
+
     
     @IBOutlet weak var taskNameTextField: UITextField!
     @IBOutlet weak var taskDescriptionTextField: UITextField!
-    @IBOutlet weak var sliderLabel: UILabel!
-    @IBOutlet weak var prioritySlider: UISlider!
+    @IBOutlet weak var priorityLevelView: UIView!
     @IBOutlet weak var expenseTextField: UITextField!
     
     
@@ -43,33 +43,28 @@ class AddTaskViewController: UIViewController {
         if let task = task {
             taskNameTextField.text = task.taskName
             taskDescriptionTextField.text = task.taskDescription
-            sliderLabel.text = task.priority
             expenseTextField.text = task.taskExpense
-            prioritySlider.value = Float(task.priortyScale)
+            priorityLevelView.inputView = task.priority
         }
+        
         
     }
     
     //Mark: Action
-    @IBAction func prioritySlider(_ sender: UISlider) {
-        let x = Int(prioritySlider.value)
-        sliderLabel.text = String(format: "%d",x)
-    }
-    
     @IBAction func saveButtonTapped(_ sender: UIBarButtonItem) {
         guard let name = taskNameTextField.text,
               let taskDescription = taskDescriptionTextField.text,
               let room = roomObject,
               let currentUser = PFUser.current(),
-              let priorityLabel = sliderLabel.text,
               let expensePicker = selectedPickerExpense,
               let isComplete = isCompleted else {
                 return
         }
-        task = Task(room: room, taskName: name, description: taskDescription, priority: priorityLabel, taskExpense:expensePicker, isCompleted:isComplete, createdBy: currentUser)
+        task = Task(room: room, taskName: name, description: taskDescription, taskExpense:expensePicker, isCompleted:isComplete, createdBy: currentUser)
         
-        //priorityscale can only be set when there is an instance b/c of the optional chain.. cant set task.priortyScale under priority slider action.
-        task?.priortyScale = Int(prioritySlider.value)
+        
+        
+        task?.priority = priorityLevelView
         
         
         task?.saveInBackground { (success, error) in
