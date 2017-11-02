@@ -44,6 +44,17 @@ class AddTaskViewController: UIViewController {
         self.addTaskNavigationBar.shadowImage = UIImage()
         self.addTaskNavigationBar.isTranslucent = true
         
+
+        UIGraphicsBeginImageContext(self.view.frame.size)
+        UIImage(named: "blurred8")?.draw(in: self.view.bounds)
+        
+        if let image = UIGraphicsGetImageFromCurrentImageContext(){
+            UIGraphicsEndImageContext()
+            self.view.backgroundColor = UIColor(patternImage: image)
+        }else{
+            UIGraphicsEndImageContext()
+            debugPrint("Image not available")
+        }
         
         //textview layout
         taskDescriptionTextView.layer.borderColor = UIColor.black.cgColor
