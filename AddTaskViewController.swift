@@ -139,6 +139,7 @@ class AddTaskViewController: UIViewController, UITextViewDelegate {
         guard let priority =  priorityColor.index(of: priorityView) else { return }
         task?.priority = priorityColor.startIndex.distance(to: priority)
         
+        //unowned because we are using self.taskdelegate.
         task?.saveInBackground {[unowned self] (success, error) in
             print(#line, success)
             print(#line, error?.localizedDescription ?? "No error saving")
