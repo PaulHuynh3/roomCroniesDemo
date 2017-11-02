@@ -71,10 +71,16 @@ class AddTaskViewController: UIViewController {
               let currentUser = PFUser.current(),
               let priorityView = priorityLevelView.backgroundColor,
               let expensePicker = selectedPickerExpense,
-              let isComplete = isCompleted else {
+              let isComplete = isCompleted,
+              name.isEmpty == false,
+              taskDescription.isEmpty == false else {
+                let error = R.error(with: "Please fill out all information")
+                showErrorView(error)
                 return
         }
         task = Task(room: room, taskName: name, description: taskDescription, taskExpense:expensePicker, isCompleted:isComplete, createdBy: currentUser)
+        
+        
         
         //change the background color.
         guard let priority =  priorityColor.index(of: priorityView) else { return }
