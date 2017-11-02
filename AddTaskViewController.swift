@@ -37,9 +37,16 @@ class AddTaskViewController: UIViewController {
       //Detail View will see this.
     override func viewDidLoad() {
         super.viewDidLoad()
+        //textview layout
+        taskDescriptionTextView.layer.borderColor = UIColor.black.cgColor
+        taskDescriptionTextView.layer.borderWidth = 1.0
+        
+        //priority layout
+        priorityLevelView.backgroundColor = UIColor.green
+        priorityLevelView.layer.cornerRadius = priorityLevelView.bounds.size.width/2
+        
         //programatically add the tap gesture.
         //set the firstcolour as green so when the function loops its able to find it.
-        priorityLevelView.backgroundColor = UIColor.green
         let tap = UITapGestureRecognizer(target: self, action: #selector(handleTap))
         priorityLevelView.addGestureRecognizer(tap)
         
