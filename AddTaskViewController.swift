@@ -21,7 +21,7 @@ class AddTaskViewController: UIViewController {
     //this value will either be an existing task or to create a new task
     var task: Task?
     var roomObject: Room?
-    var pickerTask = ["","Expense","Non-Expense"]
+    var pickerTask = ["","Expense","Task"]
     var priorityColor = [UIColor.green, UIColor.yellow, UIColor.orange, UIColor.red]
     var selectedPickerExpense: String?
     //set it as incomplete. So we can query for incomplete tasks.

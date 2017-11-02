@@ -265,9 +265,12 @@
                                 </subviews>
                                 <constraints>
                                     <constraint firstItem="zwD-9Z-Njm" firstAttribute="top" secondItem="R0r-Gz-PzP" secondAttribute="bottom" constant="19" id="4z0-XC-0Az"/>
+                                    <constraint firstItem="Zon-g5-sad" firstAttribute="top" secondItem="zwD-9Z-Njm" secondAttribute="bottom" constant="19" id="DL2-Dr-8aD"/>
                                     <constraint firstItem="R0r-Gz-PzP" firstAttribute="top" secondItem="XIq-FN-PvO" secondAttribute="bottom" constant="19" id="FD5-zA-NVl"/>
+                                    <constraint firstItem="zwD-9Z-Njm" firstAttribute="leading" secondItem="LOq-fp-CgP" secondAttribute="leading" constant="84" id="IFd-ix-d8i"/>
                                     <constraint firstItem="5Yk-zf-1Sy" firstAttribute="leading" secondItem="LOq-fp-CgP" secondAttribute="leading" constant="20" id="PVP-3g-BrQ"/>
                                     <constraint firstItem="XIq-FN-PvO" firstAttribute="leading" secondItem="LOq-fp-CgP" secondAttribute="leading" constant="20" id="aH9-Aj-VKg"/>
+                                    <constraint firstAttribute="trailing" secondItem="zwD-9Z-Njm" secondAttribute="trailing" constant="84" id="axi-7B-F3V"/>
                                 </constraints>
                             </stackView>
                         </subviews>
