@@ -18,18 +18,20 @@ protocol TaskCompletedDelegate: class {
 class TaskViewCell: UITableViewCell {
     //task property being set by the roomviewcontroller row forindexpath
     var task : Task?
+    var priorityColor = [UIColor.green, UIColor.yellow, UIColor.orange, UIColor.red]
     
     @IBOutlet weak var taskLabel: UILabel!
     @IBOutlet weak var checkBoxComplete: CheckBox!
     @IBOutlet weak var completedByLabel: UILabel!
+    @IBOutlet weak var priorityView: UIView!
+    
     weak var delegate: TaskCompletedDelegate?
-    
-    
     
     
     override func awakeFromNib() {
         super.awakeFromNib()
     }
+    
     
     //stays on if user selects it.
     override func layoutSubviews() {
@@ -72,6 +74,8 @@ class TaskViewCell: UITableViewCell {
         } else {
             completedByLabel.text = "Completed by: " + task.doneByUsername!
         }
+        
+         priorityView.backgroundColor = priorityColor[task.priority]
     }
     
     
