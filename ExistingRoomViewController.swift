@@ -17,16 +17,55 @@ class ExistingRoomViewController: UIViewController {
     
     @IBOutlet weak var existingRoomTextField: UITextField!
     
+    @IBOutlet weak var existingRoomPicture: UIImageView!
+    
+    @IBOutlet weak var blurView: UIVisualEffectView!
     
     var joinExistingRoom: Room?
+    
+    var imageArray: [UIImage] = [
+        UIImage(named: "joinexisting1.png")!,
+        UIImage(named: "joinexisting2.png")!,
+        UIImage(named: "joinexisting3.png")!,
+        UIImage(named: "joinexisting4.png")!
+    ]
     
     override func viewDidLoad() {
         super.viewDidLoad()
         navigationController?.isNavigationBarHidden = false
+        self.navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
+        self.navigationController?.navigationBar.shadowImage = UIImage()
+        self.navigationController?.navigationBar.isTranslucent = true
         
-        let backGroundColour = UIColor(red: 70, green: 132, blue: 153)
-        self.view.addGradientWithColor(topColor: backGroundColour, bottomColor: .white)
         
+//        let backGroundColour = UIColor(red: 70, green: 132, blue: 153)
+//        self.view.addGradientWithColor(topColor: backGroundColour, bottomColor: .white)
+
+        self.view.backgroundColor = UIColor(patternImage: UIImage(named: "blurred1")!)
+        
+        usernameTextField.underlined()
+        passwordTextField.underlined()
+        existingRoomTextField.underlined()
+        
+        
+        usernameTextField.attributedPlaceholder = NSAttributedString(string: "Create a new username",
+                                                                     attributes: [NSAttributedStringKey.foregroundColor: UIColor.white])
+        
+        passwordTextField.attributedPlaceholder = NSAttributedString(string: "Create a new password",
+                                                                     attributes: [NSAttributedStringKey.foregroundColor: UIColor.white])
+        
+        existingRoomTextField.attributedPlaceholder = NSAttributedString(string: "Join an existing Room",
+                                                                 attributes: [NSAttributedStringKey.foregroundColor: UIColor.white])
+        
+        self.existingRoomPicture.animationImages = imageArray;
+        self.existingRoomPicture.animationDuration = 3.0
+        self.existingRoomPicture.startAnimating()
+        
+        self.blurView.layer.cornerRadius = 35
+        self.blurView.clipsToBounds = true
+        
+        
+        self.hideKeyboardWhenTappedAround() 
     }
     
     //MARK: IBAction

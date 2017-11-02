@@ -30,19 +30,23 @@ class LoginViewController: UIViewController {
     
     //MARK: Life Cycle
     override func viewDidLoad() {
+        navigationController?.isNavigationBarHidden = true
         
     }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(true)
-
+        
+        self.hideKeyboardWhenTappedAround() 
+        
         self.view.bringSubview(toFront: loginPicture)
         
         self.blurView.layer.cornerRadius = 35
         self.blurView.clipsToBounds = true
         
         checkLoginState()
-        navigationController?.isNavigationBarHidden = true
+        self.navigationController?.isNavigationBarHidden = true
+        
         
         let webViewBG = UIWebView(frame: self.view.frame)
         webViewBG.isUserInteractionEnabled = false
@@ -59,6 +63,18 @@ class LoginViewController: UIViewController {
         self.loginPicture.animationImages = imageArray;
         self.loginPicture.animationDuration = 3.0
         self.loginPicture.startAnimating()
+        
+        
+        userNameTextField.underlined()
+        passwordTextField.underlined()
+        
+        userNameTextField.attributedPlaceholder = NSAttributedString(string: "Username",
+                                                               attributes: [NSAttributedStringKey.foregroundColor: UIColor.white])
+        
+        passwordTextField.attributedPlaceholder = NSAttributedString(string: "Password",
+                                                                     attributes: [NSAttributedStringKey.foregroundColor: UIColor.white])
+        
+        
         
 //        UIView.animateKeyframes(withDuration: 4.0, delay: 0.0, options: [.repeat, .calculationModeCubic], animations: {
 //            UIView.addKeyframe(withRelativeStartTime: 0.0, relativeDuration: 0.5, animations: {
@@ -95,6 +111,13 @@ class LoginViewController: UIViewController {
         
     }
     
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        
+        // Show the navigation bar on other view controllers
+        self.navigationController?.isNavigationBarHidden = false
+        
+    }
     
     private func checkLoginState() {
         DataManager.checkUserLoginState { (success: Bool) in
@@ -140,6 +163,18 @@ class LoginViewController: UIViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         super.prepare(for: segue , sender: sender)
         
+        let backItem = UIBarButtonItem()
+        backItem.title = ""
+        navigationItem.backBarButtonItem = backItem
+        
+        
+        
+        
+        self.navigationController?.navigationBar.tintColor = UIColor.white
+        
+        let titleDict: NSDictionary = [NSAttributedStringKey.foregroundColor: UIColor.white]
+        self.navigationController?.navigationBar.titleTextAttributes = titleDict as? [NSAttributedStringKey : Any]
+        
         switch (segue.identifier ?? "") {
             //dont need to pass anything through segue. taskVC does a query for existing user and fetches the tasks.
         case "TaskViewControllerSegue":
@@ -163,13 +198,18 @@ class LoginViewController: UIViewController {
         }
         
     }
+ 
+}
+
+// Put this piece of code anywhere you like
+extension UIViewController {
+    func hideKeyboardWhenTappedAround() {
+        let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(UIViewController.dismissKeyboard))
+        tap.cancelsTouchesInView = false
+        view.addGestureRecognizer(tap)
+    }
     
-    
-    
-  
-    
-    
-    
-    
-    
+    @objc func dismissKeyboard() {
+        view.endEditing(true)
+    }
 }

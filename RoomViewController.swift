@@ -42,6 +42,8 @@ class RoomViewController: UIViewController {
         self.tableView.backgroundView = imageView
         
         navigationItem.hidesBackButton = true
+        
+        self.hideKeyboardWhenTappedAround() 
     }
     
     //MARK: Refresh Screen

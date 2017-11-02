@@ -19,7 +19,17 @@ class RegisterViewController: UIViewController {
     
     @IBOutlet weak var roomTextField: UITextField!
     
+    @IBOutlet weak var signUpPicture: UIImageView!
+    
+    @IBOutlet weak var blurView: UIVisualEffectView!
+    
     var listOfRoom: [Room]?
+    
+    var imageArray: [UIImage] = [
+        UIImage(named: "signup1.png")!,
+        UIImage(named: "signup2.png")!,
+        UIImage(named: "signup3.png")!        
+    ]
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -29,10 +39,38 @@ class RegisterViewController: UIViewController {
         self.navigationController?.navigationBar.shadowImage = UIImage()
         self.navigationController?.navigationBar.isTranslucent = true
         
-        let backGroundColour = UIColor(red: 70, green: 132, blue: 153)
-        let backGroundColour2 = UIColor(red: 153, green: 91, blue: 70)
-        self.view.addGradientWithColor(topColor: backGroundColour2, bottomColor: backGroundColour)
+
+        //navigationItem.title = ""
         
+        self.view.backgroundColor = UIColor(patternImage: UIImage(named: "blurred2")!)
+        
+        
+//        let backGroundColour = UIColor(red: 70, green: 132, blue: 153)
+//        let backGroundColour2 = UIColor(red: 153, green: 91, blue: 70)
+//        self.view.addGradientWithColor(topColor: backGroundColour2, bottomColor: backGroundColour)
+        
+        usernameTextField.underlined()
+        passwordTextField.underlined()
+        roomTextField.underlined()
+        
+        usernameTextField.attributedPlaceholder = NSAttributedString(string: "Create a new username",
+                                                                     attributes: [NSAttributedStringKey.foregroundColor: UIColor.white])
+        
+        passwordTextField.attributedPlaceholder = NSAttributedString(string: "Create a new password",
+                                                                     attributes: [NSAttributedStringKey.foregroundColor: UIColor.white])
+        
+        roomTextField.attributedPlaceholder = NSAttributedString(string: "Create a new room",
+                                                                     attributes: [NSAttributedStringKey.foregroundColor: UIColor.white])
+        
+        self.signUpPicture.animationImages = imageArray;
+        self.signUpPicture.animationDuration = 3.0
+        self.signUpPicture.startAnimating()
+        
+        self.blurView.layer.cornerRadius = 35
+        self.blurView.clipsToBounds = true
+
+        
+        self.hideKeyboardWhenTappedAround()
         
     }
     
