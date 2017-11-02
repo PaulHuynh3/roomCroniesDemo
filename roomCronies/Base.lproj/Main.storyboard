@@ -134,9 +134,8 @@
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="82.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="AU4-uA-pPb">
-                                                    <rect key="frame" x="0.0" y="-11" width="375" height="94"/>
-                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="AU4-uA-pPb">
+                                                    <rect key="frame" x="0.0" y="0.0" width="375" height="83"/>
                                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                 </view>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Task" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gco-lG-7mJ">
@@ -153,15 +152,27 @@
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="br3-b3-0AS" customClass="CheckBox" customModule="roomCronies" customModuleProvider="target">
-                                                    <rect key="frame" x="290" y="8" width="77" height="67"/>
-                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="br3-b3-0AS" customClass="CheckBox" customModule="roomCronies" customModuleProvider="target">
+                                                    <rect key="frame" x="296" y="8" width="71" height="67"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="71" id="dFh-h6-uK5"/>
+                                                        <constraint firstAttribute="height" constant="67" id="vW9-js-ZEs"/>
+                                                    </constraints>
                                                     <state key="normal" title="Button" image="task-reject.svg"/>
                                                     <connections>
                                                         <action selector="checkBoxTapped:" destination="c0l-Mi-9r9" eventType="touchUpInside" id="9c0-fm-XH2"/>
                                                     </connections>
                                                 </button>
                                             </subviews>
+                                            <constraints>
+                                                <constraint firstAttribute="bottom" secondItem="AU4-uA-pPb" secondAttribute="bottom" id="IZH-6S-z6a"/>
+                                                <constraint firstAttribute="trailing" secondItem="br3-b3-0AS" secondAttribute="trailing" constant="8" id="Pn6-Hu-MnN"/>
+                                                <constraint firstItem="br3-b3-0AS" firstAttribute="top" secondItem="ZYy-jo-cZq" secondAttribute="top" constant="8" id="TYt-AK-j0z"/>
+                                                <constraint firstItem="AU4-uA-pPb" firstAttribute="leading" secondItem="ZYy-jo-cZq" secondAttribute="leading" id="ULS-HY-KqV"/>
+                                                <constraint firstAttribute="trailing" secondItem="AU4-uA-pPb" secondAttribute="trailing" id="heS-bA-K8y"/>
+                                                <constraint firstAttribute="bottom" secondItem="br3-b3-0AS" secondAttribute="bottom" constant="7.5" id="nKK-TC-9Gj"/>
+                                                <constraint firstItem="AU4-uA-pPb" firstAttribute="top" secondItem="ZYy-jo-cZq" secondAttribute="top" id="ncz-AU-ad3"/>
+                                            </constraints>
                                         </tableViewCellContentView>
                                         <connections>
                                             <outlet property="checkBoxComplete" destination="br3-b3-0AS" id="TDt-Dt-ftF"/>
