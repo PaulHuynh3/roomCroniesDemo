@@ -26,27 +26,30 @@ class AddTaskViewController: UIViewController {
     var selectedPickerExpense: String?
     //set it as incomplete. So we can query for incomplete tasks.
     var isCompleted:Bool? = false
-
     
     @IBOutlet weak var taskNameTextField: UITextField!
     @IBOutlet weak var taskDescriptionTextField: UITextField!
     @IBOutlet weak var priorityLevelView: UIView!
     @IBOutlet weak var expenseTextField: UITextField!
     
-    
+      //Detail View will see this.
     override func viewDidLoad() {
         super.viewDidLoad()
+        //programatically add the tap gesture.
+        //set the firstcolour as green so when the function loops its able to find it.
+        priorityLevelView.backgroundColor = UIColor.green
+        let tap = UITapGestureRecognizer(target: self, action: #selector(handleTap))
+        priorityLevelView.addGestureRecognizer(tap)
+        
         //UIPicker
         createExpensePicker()
         createToolBar()
-        //Detail View
+      //using if let as they are all optionals.
         if let task = task {
             taskNameTextField.text = task.taskName
             taskDescriptionTextField.text = task.taskDescription
             expenseTextField.text = task.taskExpense
-            priorityLevelView.inputView = task.priority
         }
-        
         
     }
     
@@ -56,16 +59,16 @@ class AddTaskViewController: UIViewController {
               let taskDescription = taskDescriptionTextField.text,
               let room = roomObject,
               let currentUser = PFUser.current(),
+              let priorityView = priorityLevelView.backgroundColor,
               let expensePicker = selectedPickerExpense,
               let isComplete = isCompleted else {
                 return
         }
         task = Task(room: room, taskName: name, description: taskDescription, taskExpense:expensePicker, isCompleted:isComplete, createdBy: currentUser)
         
-        
-        
-        task?.priority = priorityLevelView
-        
+        //change the background color.
+        guard let priority =  priorityColor.index(of: priorityView) else { return }
+        task?.priority = priorityColor.startIndex.distance(to: priority)
         
         task?.saveInBackground { (success, error) in
             print(#line, success)
@@ -120,9 +123,6 @@ class AddTaskViewController: UIViewController {
 //        push.setChannel("room2")
 //        push.setMessage("TEST")
 //        push.sendInBackground()
-        
-        
-        
     }
     
     
@@ -132,8 +132,17 @@ class AddTaskViewController: UIViewController {
         dismiss(animated: true, completion: nil)
         
     }
-
+    
+    @objc func handleTap(_ sender:UITapGestureRecognizer) {
+        
+        guard let priority =  priorityColor.index(of: priorityLevelView.backgroundColor!) else { return }
+        let newIndex = priorityColor.startIndex.distance(to: priority) + 1
+        priorityLevelView.backgroundColor = priorityColor[newIndex % priorityColor.count]
+    }
+    
+    
 }
+
 
 
 extension AddTaskViewController: UIPickerViewDelegate, UIPickerViewDataSource {
