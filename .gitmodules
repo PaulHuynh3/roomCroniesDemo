@@ -1,0 +1,3 @@
+[submodule "roomCroniesDemoServer"]
+	path = roomCroniesDemoServer
+	url = https://git.heroku.com/roomcronies.git
