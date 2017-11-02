@@ -39,7 +39,7 @@ class RegisterViewController: UIViewController {
         self.navigationController?.navigationBar.shadowImage = UIImage()
         self.navigationController?.navigationBar.isTranslucent = true
         
-        navigationItem.title = ""
+        //navigationItem.title = ""
         
         self.view.backgroundColor = UIColor(patternImage: UIImage(named: "blurred2")!)
         
@@ -52,13 +52,13 @@ class RegisterViewController: UIViewController {
         passwordTextField.underlined()
         roomTextField.underlined()
         
-        usernameTextField.attributedPlaceholder = NSAttributedString(string: "Username",
+        usernameTextField.attributedPlaceholder = NSAttributedString(string: "Create a new username",
                                                                      attributes: [NSAttributedStringKey.foregroundColor: UIColor.white])
         
-        passwordTextField.attributedPlaceholder = NSAttributedString(string: "Password",
+        passwordTextField.attributedPlaceholder = NSAttributedString(string: "Create a new password",
                                                                      attributes: [NSAttributedStringKey.foregroundColor: UIColor.white])
         
-        roomTextField.attributedPlaceholder = NSAttributedString(string: "Create New Room",
+        roomTextField.attributedPlaceholder = NSAttributedString(string: "Create a new room",
                                                                      attributes: [NSAttributedStringKey.foregroundColor: UIColor.white])
         
         self.signUpPicture.animationImages = imageArray;

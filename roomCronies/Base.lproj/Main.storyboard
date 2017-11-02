@@ -98,6 +98,8 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                     <connections>
+                        <outlet property="blurView" destination="nrd-Hg-vxx" id="Gv7-6c-OrR"/>
+                        <outlet property="existingRoomPicture" destination="Mwo-Ld-6CE" id="jvT-5y-DIn"/>
                         <outlet property="existingRoomTextField" destination="0OP-NI-fU0" id="J7g-W7-J5y"/>
                         <outlet property="passwordTextField" destination="fhJ-hh-bO3" id="aze-e6-HzG"/>
                         <outlet property="usernameTextField" destination="DKp-xR-8g3" id="f8R-S4-5Cs"/>
@@ -534,7 +536,7 @@
                                 </connections>
                             </button>
                             <visualEffectView opaque="NO" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Tuj-XT-cGH">
-                                <rect key="frame" x="68" y="48" width="238" height="209"/>
+                                <rect key="frame" x="68" y="52" width="238" height="209"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" ambiguous="YES" insetsLayoutMarginsFromSafeArea="NO" id="sG2-5X-aqf">
                                     <rect key="frame" x="0.0" y="0.0" width="238" height="209"/>
@@ -600,6 +602,6 @@
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="Vba-1d-IgB"/>
-        <segue reference="xdD-y4-fc8"/>
+        <segue reference="tZp-Kx-uj3"/>
     </inferredMetricsTieBreakers>
 </document>

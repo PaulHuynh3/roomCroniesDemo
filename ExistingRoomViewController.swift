@@ -24,9 +24,10 @@ class ExistingRoomViewController: UIViewController {
     var joinExistingRoom: Room?
     
     var imageArray: [UIImage] = [
-        UIImage(named: "signup1.png")!,
-        UIImage(named: "signup2.png")!,
-        UIImage(named: "signup3.png")!
+        UIImage(named: "joinexisting1.png")!,
+        UIImage(named: "joinexisting2.png")!,
+        UIImage(named: "joinexisting3.png")!,
+        UIImage(named: "joinexisting4.png")!
     ]
     
     override func viewDidLoad() {
@@ -47,14 +48,22 @@ class ExistingRoomViewController: UIViewController {
         existingRoomTextField.underlined()
         
         
-        usernameTextField.attributedPlaceholder = NSAttributedString(string: "Username",
+        usernameTextField.attributedPlaceholder = NSAttributedString(string: "Create a new username",
                                                                      attributes: [NSAttributedStringKey.foregroundColor: UIColor.white])
         
-        passwordTextField.attributedPlaceholder = NSAttributedString(string: "Password",
+        passwordTextField.attributedPlaceholder = NSAttributedString(string: "Create a new password",
                                                                      attributes: [NSAttributedStringKey.foregroundColor: UIColor.white])
         
-        existingRoomTextField.attributedPlaceholder = NSAttributedString(string: "Existing Room",
+        existingRoomTextField.attributedPlaceholder = NSAttributedString(string: "Join an existing Room",
                                                                  attributes: [NSAttributedStringKey.foregroundColor: UIColor.white])
+        
+        self.existingRoomPicture.animationImages = imageArray;
+        self.existingRoomPicture.animationDuration = 3.0
+        self.existingRoomPicture.startAnimating()
+        
+        self.blurView.layer.cornerRadius = 35
+        self.blurView.clipsToBounds = true
+        
         
         self.hideKeyboardWhenTappedAround() 
     }
