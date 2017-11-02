@@ -360,18 +360,32 @@
                                     <rect key="frame" x="0.0" y="0.0" width="238" height="209"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <subviews>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="roomCronies" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="acZ-92-oOr">
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="roomCronies" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="acZ-92-oOr">
                                             <rect key="frame" x="8" y="152" width="222" height="49"/>
-                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="49" id="bXe-Y8-v0X"/>
+                                                <constraint firstAttribute="width" constant="222" id="p3f-Bf-8Bl"/>
+                                            </constraints>
                                             <fontDescription key="fontDescription" name="Helvetica-Bold" family="Helvetica" pointSize="26"/>
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
-                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="loginpic1.png" translatesAutoresizingMaskIntoConstraints="NO" id="Cgx-B1-5tl">
+                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="loginpic1.png" translatesAutoresizingMaskIntoConstraints="NO" id="Cgx-B1-5tl">
                                             <rect key="frame" x="47" y="13" width="144" height="144"/>
-                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <constraints>
+                                                <constraint firstAttribute="width" constant="144" id="I8A-VP-Vur"/>
+                                                <constraint firstAttribute="height" constant="144" id="L9l-QR-Qc2"/>
+                                            </constraints>
                                         </imageView>
                                     </subviews>
+                                    <constraints>
+                                        <constraint firstAttribute="trailing" secondItem="Cgx-B1-5tl" secondAttribute="trailing" constant="47" id="1Ad-XJ-fe1"/>
+                                        <constraint firstItem="acZ-92-oOr" firstAttribute="leading" secondItem="rGV-HU-4XY" secondAttribute="leading" constant="8" id="BgP-0q-O3o"/>
+                                        <constraint firstItem="Cgx-B1-5tl" firstAttribute="top" secondItem="rGV-HU-4XY" secondAttribute="top" constant="13" id="Q2M-I0-KgV"/>
+                                        <constraint firstAttribute="trailing" secondItem="acZ-92-oOr" secondAttribute="trailing" constant="8" id="bBT-zL-rQF"/>
+                                        <constraint firstAttribute="bottom" secondItem="acZ-92-oOr" secondAttribute="bottom" constant="8" id="dwS-dV-XtN"/>
+                                        <constraint firstItem="Cgx-B1-5tl" firstAttribute="leading" secondItem="rGV-HU-4XY" secondAttribute="leading" constant="47" id="jfB-cp-jKM"/>
+                                    </constraints>
                                     <userDefinedRuntimeAttributes>
                                         <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
                                             <integer key="value" value="35"/>
@@ -516,6 +530,6 @@
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="Vba-1d-IgB"/>
-        <segue reference="tZp-Kx-uj3"/>
+        <segue reference="98Q-oU-gbY"/>
     </inferredMetricsTieBreakers>
 </document>
