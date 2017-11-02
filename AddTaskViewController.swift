@@ -44,11 +44,12 @@ class AddTaskViewController: UIViewController {
         //UIPicker
         createExpensePicker()
         createToolBar()
-      //using if let as they are all optionals.
+        
         if let task = task {
             taskNameTextField.text = task.taskName
             taskDescriptionTextField.text = task.taskDescription
             expenseTextField.text = task.taskExpense
+            priorityLevelView.backgroundColor = priorityColor[task.priority]
         }
         
     }
@@ -133,6 +134,7 @@ class AddTaskViewController: UIViewController {
         
     }
     
+    //programatically change the colour of the shapes
     @objc func handleTap(_ sender:UITapGestureRecognizer) {
         
         guard let priority =  priorityColor.index(of: priorityLevelView.backgroundColor!) else { return }
