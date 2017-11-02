@@ -28,7 +28,9 @@ class AddTaskViewController: UIViewController {
     var isCompleted:Bool? = false
     
     @IBOutlet weak var taskNameTextField: UITextField!
-    @IBOutlet weak var taskDescriptionTextField: UITextField!
+   
+    @IBOutlet weak var taskDescriptionTextView: UITextView!
+    
     @IBOutlet weak var priorityLevelView: UIView!
     @IBOutlet weak var expenseTextField: UITextField!
     
@@ -47,7 +49,7 @@ class AddTaskViewController: UIViewController {
         
         if let task = task {
             taskNameTextField.text = task.taskName
-            taskDescriptionTextField.text = task.taskDescription
+            taskDescriptionTextView.text = task.taskDescription
             expenseTextField.text = task.taskExpense
             priorityLevelView.backgroundColor = priorityColor[task.priority]
         }
@@ -57,7 +59,7 @@ class AddTaskViewController: UIViewController {
     //Mark: Action
     @IBAction func saveButtonTapped(_ sender: UIBarButtonItem) {
         guard let name = taskNameTextField.text,
-              let taskDescription = taskDescriptionTextField.text,
+              let taskDescription = taskDescriptionTextView.text,
               let room = roomObject,
               let currentUser = PFUser.current(),
               let priorityView = priorityLevelView.backgroundColor,

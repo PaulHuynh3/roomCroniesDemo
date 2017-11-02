@@ -273,6 +273,7 @@
                     <connections>
                         <outlet property="expenseTextField" destination="5Yk-zf-1Sy" id="00Z-lO-kTk"/>
                         <outlet property="priorityLevelView" destination="b74-fk-fca" id="W2l-Zo-Xrp"/>
+                        <outlet property="taskDescriptionTextView" destination="zwD-9Z-Njm" id="yau-b9-DnW"/>
                         <outlet property="taskNameTextField" destination="XIq-FN-PvO" id="iKe-X7-r1N"/>
                     </connections>
                 </viewController>
