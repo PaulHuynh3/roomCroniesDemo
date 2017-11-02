@@ -141,6 +141,10 @@ class LoginViewController: UIViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         super.prepare(for: segue , sender: sender)
         
+        let backItem = UIBarButtonItem()
+        backItem.title = ""
+        navigationItem.backBarButtonItem = backItem
+        
         switch (segue.identifier ?? "") {
             //dont need to pass anything through segue. taskVC does a query for existing user and fetches the tasks.
         case "TaskViewControllerSegue":

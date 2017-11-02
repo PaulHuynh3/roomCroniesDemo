@@ -5,7 +5,7 @@
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13174"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13173"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -354,10 +354,9 @@
                                     <segue destination="Ygk-Bd-EhF" kind="show" identifier="userRegisterSegue" id="9hD-Dc-IZg"/>
                                 </connections>
                             </button>
-                            <visualEffectView opaque="NO" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="icJ-ui-Mo0">
+                            <visualEffectView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="icJ-ui-Mo0">
                                 <rect key="frame" x="68" y="85" width="238" height="209"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" ambiguous="YES" insetsLayoutMarginsFromSafeArea="NO" id="rGV-HU-4XY">
+                                <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="rGV-HU-4XY">
                                     <rect key="frame" x="0.0" y="0.0" width="238" height="209"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <subviews>
@@ -379,6 +378,10 @@
                                         </userDefinedRuntimeAttribute>
                                     </userDefinedRuntimeAttributes>
                                 </view>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="238" id="9t7-KK-jid"/>
+                                    <constraint firstAttribute="height" constant="209" id="uoC-yL-eeZ"/>
+                                </constraints>
                                 <blurEffect style="light"/>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
@@ -390,6 +393,7 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="wmY-tT-Nq4" firstAttribute="top" secondItem="ewC-pD-ydo" secondAttribute="bottom" constant="8" id="0EV-DV-7ar"/>
+                            <constraint firstItem="icJ-ui-Mo0" firstAttribute="leading" secondItem="Jvm-PX-68L" secondAttribute="leadingMargin" constant="52" id="6ie-Zb-SFh"/>
                             <constraint firstAttribute="trailingMargin" secondItem="wmY-tT-Nq4" secondAttribute="trailing" constant="12" id="CPB-8L-cbI"/>
                             <constraint firstItem="ewC-pD-ydo" firstAttribute="centerX" secondItem="Jvm-PX-68L" secondAttribute="centerX" id="LtY-OE-UQq"/>
                             <constraint firstAttribute="trailingMargin" secondItem="pxd-jm-CgJ" secondAttribute="trailing" constant="12" id="Prf-3H-gtz"/>
@@ -401,7 +405,9 @@
                             <constraint firstItem="E6E-CE-THj" firstAttribute="top" secondItem="pxd-jm-CgJ" secondAttribute="bottom" constant="8" id="eQw-BA-Yyh"/>
                             <constraint firstItem="E6E-CE-THj" firstAttribute="leading" secondItem="Jvm-PX-68L" secondAttribute="leadingMargin" constant="12" id="g3y-r9-OV3"/>
                             <constraint firstAttribute="trailingMargin" secondItem="bhi-06-E95" secondAttribute="trailing" constant="12" id="iFq-Ln-CiF"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="icJ-ui-Mo0" secondAttribute="trailing" constant="53" id="mRL-nR-NPG"/>
                             <constraint firstItem="wmY-tT-Nq4" firstAttribute="leading" secondItem="Jvm-PX-68L" secondAttribute="leadingMargin" constant="12" id="mgx-qd-nIp"/>
+                            <constraint firstItem="icJ-ui-Mo0" firstAttribute="top" secondItem="iIr-nO-7Gr" secondAttribute="bottom" constant="21" id="nhI-GS-J7g"/>
                             <constraint firstItem="bhi-06-E95" firstAttribute="leading" secondItem="Jvm-PX-68L" secondAttribute="leadingMargin" constant="12" id="pRi-PK-z7b"/>
                             <constraint firstItem="pxd-jm-CgJ" firstAttribute="leading" secondItem="Jvm-PX-68L" secondAttribute="leadingMargin" constant="12" id="zCc-PP-C7p"/>
                             <constraint firstItem="pxd-jm-CgJ" firstAttribute="top" secondItem="wmY-tT-Nq4" secondAttribute="bottom" constant="8" id="zKg-FP-Bxq"/>
