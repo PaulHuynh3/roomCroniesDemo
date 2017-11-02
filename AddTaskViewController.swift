@@ -139,15 +139,17 @@ class AddTaskViewController: UIViewController, UITextViewDelegate {
         guard let priority =  priorityColor.index(of: priorityView) else { return }
         task?.priority = priorityColor.startIndex.distance(to: priority)
         
-        task?.saveInBackground { (success, error) in
+        task?.saveInBackground {[unowned self] (success, error) in
             print(#line, success)
             print(#line, error?.localizedDescription ?? "No error saving")
+            PFCloud.callFunction(inBackground: "iosPushTest", withParameters: ["text" : "\(PFUser.current()!.username!) added a new task: \(String(describing: self.taskNameTextField.text!))", "channels": [PFInstallation.current()?.channels]])
+            self.taskDelegate?.addTaskObject(task: self.task!)
+            
+            //presented modally.
+            self.dismiss(animated: true, completion: nil)
         }
         
-        taskDelegate?.addTaskObject(task: task!)
         
-        //presented modally.
-        dismiss(animated: true, completion: nil)
         
         
         //MARK: push notifications
@@ -184,7 +186,7 @@ class AddTaskViewController: UIViewController, UITextViewDelegate {
         
         
         
-        PFCloud.callFunction(inBackground: "iosPushTest", withParameters: ["text" : "\(PFUser.current()!.username!) added a new task: \(String(describing: taskNameTextField.text!))", "channels": [PFInstallation.current()?.channels]])
+        
         
         //PFCloud.callFunction(inBackground: "pushsample", withParameters: ["text" : "\(PFUser.current()!.username!) added a new task: \(String(describing: taskNameTextField.text!))"])
         
