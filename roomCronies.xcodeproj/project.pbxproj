@@ -240,7 +240,6 @@
 				TargetAttributes = {
 					DA7AB7A81F99219D00E816C9 = {
 						CreatedOnToolsVersion = 8.3.3;
-						DevelopmentTeam = VEQ58EUFKD;
 						LastSwiftMigration = 0900;
 						ProvisioningStyle = Automatic;
 						SystemCapabilities = {
@@ -508,7 +507,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer: Jaison Bhatti (EUMMQ68ES6)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = VEQ58EUFKD;
+				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = roomCronies/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -532,7 +531,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = VEQ58EUFKD;
+				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = roomCronies/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";

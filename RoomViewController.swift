@@ -14,7 +14,7 @@ class RoomViewController: UIViewController {
     var myRoom : Room? = nil {
         didSet {
             //viewdidload may load before it gets set.
-            fetchIncompleteNonExpenseTask()
+            refresh()
         }
     }
     
@@ -81,6 +81,7 @@ class RoomViewController: UIViewController {
             break
         }
         
+        
     }
     
     //MARK: Segmented Control.
@@ -140,12 +141,14 @@ class RoomViewController: UIViewController {
                 fatalError("The selected cell is not being displayed by the table")
                 
             }
-            
-            
-            
+
             
             let selectedTask = tasks[indexPath.section]
             detailedTaskVc.task = selectedTask
+            guard let myRoom = myRoom else {
+                return
+            }
+            detailedTaskVc.roomObject = myRoom
             
         default:
             fatalError("unexpected segue identifier \(String(describing: segue.identifier))")
@@ -230,7 +233,7 @@ class RoomViewController: UIViewController {
                 print(#line, error.localizedDescription)
             }
             
-            guard let results = results as? [Task] else {return}
+            guard let results = results as? [Task] else { return }
             
             self.tasks = results
             self.tableView.reloadData()
