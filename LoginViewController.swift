@@ -11,11 +11,22 @@ import Parse
 
 class LoginViewController: UIViewController {
     
+    
+    
     @IBOutlet weak var userNameTextField: UITextField!
     
     @IBOutlet weak var passwordTextField: UITextField!
     
-    @IBOutlet weak var titleLabel: UILabel!
+    @IBOutlet weak var loginPicture: UIImageView!
+    
+    @IBOutlet weak var blurView: UIVisualEffectView!
+    
+    var imageArray: [UIImage] = [
+        UIImage(named: "loginpic1.png")!,
+        UIImage(named: "loginpic2.png")!,
+        UIImage(named: "loginpic3.png")!,
+        UIImage(named: "loginpic4.png")!
+    ]
     
     
     //MARK: Life Cycle
@@ -26,24 +37,65 @@ class LoginViewController: UIViewController {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(true)
 
-        checkLoginState()
+        self.view.bringSubview(toFront: loginPicture)
         
+        self.blurView.layer.cornerRadius = 35
+        self.blurView.clipsToBounds = true
+        
+        checkLoginState()
         navigationController?.isNavigationBarHidden = true
         
-        let backGroundColour = UIColor(red: 70, green: 132, blue: 153)
-        let backGroundColour2 = UIColor(red: 153, green: 91, blue: 70)
-        self.view.addGradientWithColor(topColor: backGroundColour, bottomColor: backGroundColour2)
+        let webViewBG = UIWebView(frame: self.view.frame)
+        webViewBG.isUserInteractionEnabled = false
+        let htmlPath = Bundle.main.path(forResource: "WebViewContent", ofType: "html")
+        let htmlURL = URL(fileURLWithPath: htmlPath!)
+        let html = try? Data(contentsOf: htmlURL)
+
+        webViewBG.load(html!, mimeType: "text/html", textEncodingName: "UTF-8", baseURL: htmlURL.deletingLastPathComponent())
+
+        view.addSubview(webViewBG)
+        self.view.sendSubview(toBack: webViewBG)
         
         
-        UIView.animate(withDuration: 1, delay: 0, options: [.curveEaseOut],
-                       animations: {
-                        self.titleLabel.center.y -= self.view.bounds.height - 250
-                        self.view.layoutIfNeeded()
-        }, completion: nil)
+        self.loginPicture.animationImages = imageArray;
+        self.loginPicture.animationDuration = 3.0
+        self.loginPicture.startAnimating()
         
-        
+//        UIView.animateKeyframes(withDuration: 4.0, delay: 0.0, options: [.repeat, .calculationModeCubic], animations: {
+//            UIView.addKeyframe(withRelativeStartTime: 0.0, relativeDuration: 0.5, animations: {
+//                self.loginPicture.image = UIImage(named: "loginpic1.png")
+//                self.loginPicture.alpha = 1.0
+//            })
+//            UIView.addKeyframe(withRelativeStartTime: 0.5, relativeDuration: 0.5, animations: {
+//                //image1
+//                self.loginPicture.image = UIImage(named: "loginpic1.png")
+//                self.loginPicture.alpha = 0.0
+//            })
+//            UIView.addKeyframe(withRelativeStartTime: 1.0, relativeDuration: 0.5, animations: {
+//                //image1
+//                self.loginPicture.image = UIImage(named: "loginpic2.png")
+//                self.loginPicture.alpha = 1.0
+//            })
+//            UIView.addKeyframe(withRelativeStartTime: 1.5, relativeDuration: 0.5, animations: {
+//                //image1
+//                self.loginPicture.image = UIImage(named: "loginpic2.png")
+//                self.loginPicture.alpha = 0.0
+//            })
+//            UIView.addKeyframe(withRelativeStartTime: 2.0, relativeDuration: 0.5, animations: {
+//                //image1
+//                self.loginPicture.image = UIImage(named: "loginpic3.png")
+//                self.loginPicture.alpha = 1.0
+//            })
+//            UIView.addKeyframe(withRelativeStartTime: 2.5, relativeDuration: 0.5, animations: {
+//                //image1
+//                self.loginPicture.image = UIImage(named: "loginpic3.png")
+//                self.loginPicture.alpha = 0.0
+//            })
+//        }, completion: nil)
+
         
     }
+    
     
     private func checkLoginState() {
         DataManager.checkUserLoginState { (success: Bool) in

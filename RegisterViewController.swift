@@ -25,6 +25,11 @@ class RegisterViewController: UIViewController {
         super.viewDidLoad()
         fetchExistingRoom()
         navigationController?.isNavigationBarHidden = false
+        self.navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
+        self.navigationController?.navigationBar.shadowImage = UIImage()
+        self.navigationController?.navigationBar.isTranslucent = true
+        
+        
         
         let backGroundColour = UIColor(red: 70, green: 132, blue: 153)
         let backGroundColour2 = UIColor(red: 153, green: 91, blue: 70)
