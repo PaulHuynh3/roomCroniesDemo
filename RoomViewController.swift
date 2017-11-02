@@ -24,12 +24,14 @@ class RoomViewController: UIViewController {
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var segmentedControl: UISegmentedControl!
     
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         //fetches the room related to the user.
         DataManager.getRoom(completion: {[unowned self] (room) in
             self.myRoom = room
+            
+            //can use the room after its set.
+            self.navigationController?.navigationBar.topItem?.title = self.myRoom?.roomName
         })
         refreshUserScreen()
         
