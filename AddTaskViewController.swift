@@ -51,7 +51,7 @@ class AddTaskViewController: UIViewController {
             expenseTextField.text = task.taskExpense
             priorityLevelView.backgroundColor = priorityColor[task.priority]
         }
-        
+        self.hideKeyboardWhenTappedAround() 
     }
     
     //Mark: Action

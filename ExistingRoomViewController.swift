@@ -31,6 +31,7 @@ class ExistingRoomViewController: UIViewController {
         let backGroundColour = UIColor(red: 70, green: 132, blue: 153)
         self.view.addGradientWithColor(topColor: backGroundColour, bottomColor: .white)
         
+        self.hideKeyboardWhenTappedAround() 
     }
     
     //MARK: IBAction
