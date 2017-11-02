@@ -72,7 +72,7 @@ class TaskViewCell: UITableViewCell {
         if task.doneByUsername == nil {
             completedByLabel.text = "Completed by: 🤷‍♀️ 🤷‍♂️"
         } else {
-            completedByLabel.text = "Completed by: " + task.doneByUsername!
+            completedByLabel.text = "Completed by: " + task.doneByUsername! + "\u{1F496}"
         }
         
          priorityView.backgroundColor = priorityColor[task.priority]
