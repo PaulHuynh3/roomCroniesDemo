@@ -11,6 +11,8 @@ import Parse
 
 class LoginViewController: UIViewController {
     
+    
+    
     @IBOutlet weak var userNameTextField: UITextField!
     
     @IBOutlet weak var passwordTextField: UITextField!
@@ -26,24 +28,27 @@ class LoginViewController: UIViewController {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(true)
 
-        checkLoginState()
+        
         
         navigationController?.isNavigationBarHidden = true
         
-        let backGroundColour = UIColor(red: 70, green: 132, blue: 153)
-        let backGroundColour2 = UIColor(red: 153, green: 91, blue: 70)
-        self.view.addGradientWithColor(topColor: backGroundColour, bottomColor: backGroundColour2)
+
         
+        let webViewBG = UIWebView(frame: self.view.frame)
+        webViewBG.isUserInteractionEnabled = false
+        let htmlPath = Bundle.main.path(forResource: "WebViewContent", ofType: "html")
+        let htmlURL = URL(fileURLWithPath: htmlPath!)
+        let html = try? Data(contentsOf: htmlURL)
+
+        webViewBG.load(html!, mimeType: "text/html", textEncodingName: "UTF-8", baseURL: htmlURL.deletingLastPathComponent())
+
+        view.addSubview(webViewBG)
+        self.view.sendSubview(toBack: webViewBG)
         
-        UIView.animate(withDuration: 1, delay: 0, options: [.curveEaseOut],
-                       animations: {
-                        self.titleLabel.center.y -= self.view.bounds.height - 250
-                        self.view.layoutIfNeeded()
-        }, completion: nil)
-        
-        
+        checkLoginState()
         
     }
+    
     
     private func checkLoginState() {
         DataManager.checkUserLoginState { (success: Bool) in
