@@ -130,8 +130,6 @@ class RoomViewController: UIViewController {
             
         case "ShowDetailTask":
             
-            
-            
             guard let detailedTaskVc = segue.destination as? AddTaskViewController else {
                 fatalError("unexpected destination:\(segue.destination)")
             }
