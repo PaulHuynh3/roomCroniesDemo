@@ -186,6 +186,7 @@ class RoomViewController: UIViewController {
         
         query.whereKey("room", equalTo: myRoom)
         query.whereKey("isCompleted", equalTo: true)
+        query.addAscendingOrder("doneByUsername")
         
         query.findObjectsInBackground { (results: [PFObject]?, error: Error?) in
             
