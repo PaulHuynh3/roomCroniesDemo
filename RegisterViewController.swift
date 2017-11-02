@@ -21,6 +21,12 @@ class RegisterViewController: UIViewController {
     
     var listOfRoom: [Room]?
     
+    var imageArray: [UIImage] = [
+        UIImage(named: "signup1.png")!,
+        UIImage(named: "signup2.png")!,
+        UIImage(named: "signup3.png")!        
+    ]
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         fetchExistingRoom()
