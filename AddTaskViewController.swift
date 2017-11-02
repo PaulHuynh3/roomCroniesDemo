@@ -40,6 +40,21 @@ class AddTaskViewController: UIViewController, UITextViewDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        
+        self.addTaskNavigationBar.tintColor = UIColor.white
+        
+        let titleDict: NSDictionary = [NSAttributedStringKey.foregroundColor: UIColor.white]
+        self.addTaskNavigationBar.titleTextAttributes = titleDict as? [NSAttributedStringKey : Any]
+        
+        taskNameTextField.underlined()
+        expenseTextField.underlined()
+        
+        taskNameTextField.attributedPlaceholder = NSAttributedString(string: "Enter a task or expense here...",
+                                                                     attributes: [NSAttributedStringKey.foregroundColor: UIColor.white])
+        
+        expenseTextField.attributedPlaceholder = NSAttributedString(string: "Is it an expense or task?",
+                                                                     attributes: [NSAttributedStringKey.foregroundColor: UIColor.white])
+        
         taskDescriptionTextView.delegate = self
         placeholderLabel = UILabel()
         placeholderLabel.text = "Enter your description..."
@@ -47,12 +62,11 @@ class AddTaskViewController: UIViewController, UITextViewDelegate {
         placeholderLabel.sizeToFit()
         taskDescriptionTextView.addSubview(placeholderLabel)
         placeholderLabel.frame.origin = CGPoint(x: 5, y: (taskDescriptionTextView.font?.pointSize)! / 2)
-        placeholderLabel.textColor = UIColor.lightGray
+        placeholderLabel.textColor = UIColor.white
         placeholderLabel.isHidden = !taskDescriptionTextView.text.isEmpty
+        textViewDidChange(taskDescriptionTextView)
         
-        func textViewDidChange(_ textView: UITextView) {
-            placeholderLabel.isHidden = !textView.text.isEmpty
-        }
+        
         
         
         self.addTaskNavigationBar.setBackgroundImage(UIImage(), for: .default)
@@ -95,6 +109,10 @@ class AddTaskViewController: UIViewController, UITextViewDelegate {
             priorityLevelView.backgroundColor = priorityColor[task.priority]
         }
         self.hideKeyboardWhenTappedAround() 
+    }
+    
+    func textViewDidChange(_ textView: UITextView) {
+        placeholderLabel.isHidden = !taskDescriptionTextView.text.isEmpty
     }
     
     
