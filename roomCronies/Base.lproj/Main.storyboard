@@ -5,7 +5,8 @@
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13173"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13174"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -97,6 +98,11 @@
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="82.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
+                                                <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="AU4-uA-pPb">
+                                                    <rect key="frame" x="0.0" y="-11" width="375" height="94"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                </view>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Task" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gco-lG-7mJ">
                                                     <rect key="frame" x="8" y="8" width="118" height="26"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -123,6 +129,8 @@
                                         </tableViewCellContentView>
                                         <connections>
                                             <outlet property="checkBoxComplete" destination="br3-b3-0AS" id="TDt-Dt-ftF"/>
+                                            <outlet property="completedByLabel" destination="9ZY-f3-t5h" id="U4E-8m-kxB"/>
+                                            <outlet property="priorityView" destination="AU4-uA-pPb" id="krN-FL-MyL"/>
                                             <outlet property="taskLabel" destination="gco-lG-7mJ" id="4LK-sc-pXo"/>
                                             <segue destination="kec-Il-1J7" kind="show" identifier="ShowDetailTask" id="1od-P2-kcF"/>
                                         </connections>
@@ -211,48 +219,61 @@
                                     </navigationItem>
                                 </items>
                             </navigationBar>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Task Name" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="XIq-FN-PvO">
-                                <rect key="frame" x="145" y="139" width="97" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <nil key="textColor"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits"/>
-                            </textField>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Task Description" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="5Xa-99-Avw">
-                                <rect key="frame" x="83" y="220" width="228" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <nil key="textColor"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits"/>
-                            </textField>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="1" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ecs-jS-kDf">
-                                <rect key="frame" x="166" y="292" width="51" height="21"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <slider opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="1" minValue="1" maxValue="5" translatesAutoresizingMaskIntoConstraints="NO" id="vot-pg-SsG">
-                                <rect key="frame" x="103" y="341" width="169" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <connections>
-                                    <action selector="prioritySlider:" destination="kec-Il-1J7" eventType="valueChanged" id="BGf-cZ-STH"/>
-                                </connections>
-                            </slider>
-                            <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Expense?" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="5Yk-zf-1Sy">
-                                <rect key="frame" x="94" y="424" width="206" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <nil key="textColor"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits"/>
-                            </textField>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="equalSpacing" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="LOq-fp-CgP">
+                                <rect key="frame" x="26" y="170" width="323" height="347"/>
+                                <subviews>
+                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Task Name" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="XIq-FN-PvO">
+                                        <rect key="frame" x="20" y="0.0" width="283" height="30"/>
+                                        <nil key="textColor"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits"/>
+                                    </textField>
+                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Task Description" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="5Xa-99-Avw">
+                                        <rect key="frame" x="20" y="66" width="283" height="30"/>
+                                        <nil key="textColor"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits"/>
+                                    </textField>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Priority Level:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Zon-g5-sad">
+                                        <rect key="frame" x="125.5" y="132" width="72" height="13.5"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="11"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="b74-fk-fca">
+                                        <rect key="frame" x="111.5" y="181" width="100" height="100"/>
+                                        <color key="backgroundColor" red="0.0" green="1" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                        <gestureRecognizers/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="100" id="RNq-7t-dj3"/>
+                                            <constraint firstAttribute="width" secondItem="b74-fk-fca" secondAttribute="height" id="Z0F-L1-At0"/>
+                                        </constraints>
+                                    </view>
+                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Expense?" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="5Yk-zf-1Sy">
+                                        <rect key="frame" x="20" y="317" width="283" height="30"/>
+                                        <nil key="textColor"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits"/>
+                                    </textField>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstItem="5Xa-99-Avw" firstAttribute="leading" secondItem="LOq-fp-CgP" secondAttribute="leading" constant="20" id="DW5-JJ-Q9H"/>
+                                    <constraint firstItem="5Yk-zf-1Sy" firstAttribute="leading" secondItem="LOq-fp-CgP" secondAttribute="leading" constant="20" id="PVP-3g-BrQ"/>
+                                    <constraint firstItem="XIq-FN-PvO" firstAttribute="leading" secondItem="LOq-fp-CgP" secondAttribute="leading" constant="20" id="aH9-Aj-VKg"/>
+                                </constraints>
+                            </stackView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="LOq-fp-CgP" firstAttribute="top" secondItem="Azf-JA-oJn" secondAttribute="bottom" constant="150" id="1IT-wM-DwW"/>
+                            <constraint firstItem="LOq-fp-CgP" firstAttribute="leading" secondItem="ucY-eJ-tyR" secondAttribute="leadingMargin" constant="10" id="Gme-nN-eG5"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="LOq-fp-CgP" secondAttribute="trailing" constant="10" id="VKS-vI-84a"/>
+                            <constraint firstItem="Wo2-nn-Qi1" firstAttribute="top" secondItem="LOq-fp-CgP" secondAttribute="bottom" constant="150" id="wB6-6D-WVb"/>
+                        </constraints>
                     </view>
                     <connections>
                         <outlet property="expenseTextField" destination="5Yk-zf-1Sy" id="00Z-lO-kTk"/>
-                        <outlet property="prioritySlider" destination="vot-pg-SsG" id="W5e-UF-BDo"/>
-                        <outlet property="sliderLabel" destination="ecs-jS-kDf" id="i4d-8g-xRv"/>
+                        <outlet property="priorityLevelView" destination="b74-fk-fca" id="W2l-Zo-Xrp"/>
                         <outlet property="taskDescriptionTextField" destination="5Xa-99-Avw" id="q5e-3x-aM9"/>
                         <outlet property="taskNameTextField" destination="XIq-FN-PvO" id="iKe-X7-r1N"/>
                     </connections>

@@ -13,8 +13,6 @@ class Task: PFObject {
     @NSManaged var taskName : String
     @NSManaged var taskDescription: String
     @NSManaged var taskExpense: String
-    @NSManaged var priority: String
-    @NSManaged var priortyScale: Int
     
     //many task in one room: room: Room <--->> tasks: [Task]  (Room object)
     @NSManaged var room: Room
@@ -22,16 +20,17 @@ class Task: PFObject {
     @NSManaged var createdBy: PFUser
     //when user checks off a task. it will be.. doneBy.currentUser..
     @NSManaged var doneBy: PFUser?
+    @NSManaged var doneByUsername : String?
     //For UISwitch to keep it on/off
     @NSManaged var isCompleted: Bool
+    @NSManaged var priority: Int
     
-    convenience init(room: Room, taskName:String, description:String, priority:String, taskExpense:String, isCompleted:Bool, createdBy: PFUser) {
+    convenience init(room: Room, taskName:String, description:String, taskExpense:String, isCompleted:Bool, createdBy: PFUser) {
         self.init()
         self.room = room
         self.taskName = taskName
         self.taskDescription = description
         self.taskExpense = taskExpense
-        self.priority = priority
         self.isCompleted = isCompleted
         self.createdBy = createdBy
     }

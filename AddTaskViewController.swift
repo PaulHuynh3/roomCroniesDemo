@@ -9,68 +9,67 @@
 import UIKit
 import Parse
 
-protocol AddTaskDelegate {
+protocol AddTaskDelegate: class {
     
     func addTaskObject(task:Task)
 }
 
 class AddTaskViewController: UIViewController {
     
-    var taskDelegate: AddTaskDelegate?
+    weak var taskDelegate: AddTaskDelegate?
     
     //this value will either be an existing task or to create a new task
     var task: Task?
     var roomObject: Room?
     var pickerTask = ["","Expense","Non-Expense"]
+    var priorityColor = [UIColor.green, UIColor.yellow, UIColor.orange, UIColor.red]
     var selectedPickerExpense: String?
     //set it as incomplete. So we can query for incomplete tasks.
     var isCompleted:Bool? = false
     
-    
     @IBOutlet weak var taskNameTextField: UITextField!
     @IBOutlet weak var taskDescriptionTextField: UITextField!
-    @IBOutlet weak var sliderLabel: UILabel!
-    @IBOutlet weak var prioritySlider: UISlider!
+    @IBOutlet weak var priorityLevelView: UIView!
     @IBOutlet weak var expenseTextField: UITextField!
     
-    
+      //Detail View will see this.
     override func viewDidLoad() {
         super.viewDidLoad()
+        //programatically add the tap gesture.
+        //set the firstcolour as green so when the function loops its able to find it.
+        priorityLevelView.backgroundColor = UIColor.green
+        let tap = UITapGestureRecognizer(target: self, action: #selector(handleTap))
+        priorityLevelView.addGestureRecognizer(tap)
+        
         //UIPicker
         createExpensePicker()
         createToolBar()
-        //Detail View
+        
         if let task = task {
             taskNameTextField.text = task.taskName
             taskDescriptionTextField.text = task.taskDescription
-            sliderLabel.text = task.priority
             expenseTextField.text = task.taskExpense
-            prioritySlider.value = Float(task.priortyScale)
+            priorityLevelView.backgroundColor = priorityColor[task.priority]
         }
         
     }
     
     //Mark: Action
-    @IBAction func prioritySlider(_ sender: UISlider) {
-        let x = Int(prioritySlider.value)
-        sliderLabel.text = String(format: "%d",x)
-    }
-    
     @IBAction func saveButtonTapped(_ sender: UIBarButtonItem) {
         guard let name = taskNameTextField.text,
               let taskDescription = taskDescriptionTextField.text,
               let room = roomObject,
               let currentUser = PFUser.current(),
-              let priorityLabel = sliderLabel.text,
+              let priorityView = priorityLevelView.backgroundColor,
               let expensePicker = selectedPickerExpense,
               let isComplete = isCompleted else {
                 return
         }
-        task = Task(room: room, taskName: name, description: taskDescription, priority: priorityLabel, taskExpense:expensePicker, isCompleted:isComplete, createdBy: currentUser)
+        task = Task(room: room, taskName: name, description: taskDescription, taskExpense:expensePicker, isCompleted:isComplete, createdBy: currentUser)
         
-        //priorityscale can only be set when there is an instance b/c of the optional chain.. cant set task.priortyScale under priority slider action.
-        task?.priortyScale = Int(prioritySlider.value)
-        
+        //change the background color.
+        guard let priority =  priorityColor.index(of: priorityView) else { return }
+        task?.priority = priorityColor.startIndex.distance(to: priority)
         
         task?.saveInBackground { (success, error) in
             print(#line, success)
@@ -125,9 +124,6 @@ class AddTaskViewController: UIViewController {
 //        push.setChannel("room2")
 //        push.setMessage("TEST")
 //        push.sendInBackground()
-        
-        
-        
     }
     
     
@@ -137,8 +133,18 @@ class AddTaskViewController: UIViewController {
         dismiss(animated: true, completion: nil)
         
     }
-
+    
+    //programatically change the colour of the shapes
+    @objc func handleTap(_ sender:UITapGestureRecognizer) {
+        
+        guard let priority =  priorityColor.index(of: priorityLevelView.backgroundColor!) else { return }
+        let newIndex = priorityColor.startIndex.distance(to: priority) + 1
+        priorityLevelView.backgroundColor = priorityColor[newIndex % priorityColor.count]
+    }
+    
+    
 }
+
 
 
 extension AddTaskViewController: UIPickerViewDelegate, UIPickerViewDataSource {

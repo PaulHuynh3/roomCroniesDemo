@@ -46,14 +46,14 @@ class RoomViewController: UIViewController {
     func refreshUserScreen(){
         
         refreshControl = UIRefreshControl()
-        refreshControl.backgroundColor = UIColor.orange
+        refreshControl.backgroundColor = UIColor.clear
         refreshControl.tintColor = UIColor.white
         refreshControl.attributedTitle = NSAttributedString(string: "Pull to refresh")
-        refreshControl.addTarget(self, action:#selector(RoomViewController.refresh(sender:)), for: UIControlEvents.valueChanged)
+        refreshControl.addTarget(self, action:#selector(refresh), for: UIControlEvents.valueChanged)
         tableView.addSubview(refreshControl)
     }
 
-    func refresh(sender:UIRefreshControl) {
+    @objc func refresh() {
         switch segmentedControl.selectedSegmentIndex {
         case 0:
             self.fetchIncompleteNonExpenseTask()
@@ -94,7 +94,6 @@ class RoomViewController: UIViewController {
             break
         }
     }
-    
     
     //MARK: Navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -159,6 +158,7 @@ class RoomViewController: UIViewController {
         query.whereKey("room", equalTo: myRoom)
         query.whereKey("isCompleted", equalTo: false)
         query.whereKey("taskExpense", equalTo:"Expense")
+        query.addDescendingOrder("priority")
         
         query.findObjectsInBackground { (results: [PFObject]?, error: Error?) in
             
@@ -208,6 +208,7 @@ class RoomViewController: UIViewController {
         query.whereKey("room", equalTo: myRoom)
         query.whereKey("isCompleted", equalTo: false)
         query.whereKey("taskExpense", equalTo: "Non-Expense")
+        query.addDescendingOrder("priority")
         
         query.findObjectsInBackground { (results: [PFObject]?, error: Error?) in
             
@@ -248,6 +249,7 @@ extension RoomViewController: UITableViewDelegate, UITableViewDataSource {
             
             fatalError("The dequeued cell is not TaskViewCell")
         }
+        cell.delegate = self
         
         let createTask = tasks[indexPath.section]
         //access a task in the task list.. this is used for all TASK object's anything in the indexpath.. including the customize button. The task object is the whole and the properties are part of the object
@@ -315,15 +317,23 @@ extension RoomViewController: UITableViewDelegate, UITableViewDataSource {
 }
 
 
+// updates immediately when the button is checked.
+extension RoomViewController: TaskCompletedDelegate {
+    func taskCompleted() {
+        //when button is checked in Cell this function will activate.
+        refresh()
+        self.tableView.reloadData()
+    }
+}
 
 extension RoomViewController: AddTaskDelegate{
-    
+
     func addTaskObject(task: Task) {
-        
-        tasks.append(task)
+
+        //refresh contains the correct segmented control. fetching with parse from refresh.
+        refresh()
         self.tableView.reloadData()
-        
     }
-    
+
 }
 
