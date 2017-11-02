@@ -33,6 +33,20 @@ class ExistingRoomViewController: UIViewController {
 
         self.view.backgroundColor = UIColor(patternImage: UIImage(named: "blurred1")!)
         
+        usernameTextField.underlined()
+        passwordTextField.underlined()
+        existingRoomTextField.underlined()
+        
+        
+        usernameTextField.attributedPlaceholder = NSAttributedString(string: "Username",
+                                                                     attributes: [NSAttributedStringKey.foregroundColor: UIColor.white])
+        
+        passwordTextField.attributedPlaceholder = NSAttributedString(string: "Password",
+                                                                     attributes: [NSAttributedStringKey.foregroundColor: UIColor.white])
+        
+        existingRoomTextField.attributedPlaceholder = NSAttributedString(string: "Existing Room",
+                                                                 attributes: [NSAttributedStringKey.foregroundColor: UIColor.white])
+        
         self.hideKeyboardWhenTappedAround() 
     }
     
