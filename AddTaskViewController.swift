@@ -37,7 +37,13 @@ class AddTaskViewController: UIViewController {
     
       //Detail View will see this.
     override func viewDidLoad() {
-        super.viewDidLoad()        
+        super.viewDidLoad()
+        
+        
+        self.addTaskNavigationBar.setBackgroundImage(UIImage(), for: .default)
+        self.addTaskNavigationBar.shadowImage = UIImage()
+        self.addTaskNavigationBar.isTranslucent = true
+        
         
         //textview layout
         taskDescriptionTextView.layer.borderColor = UIColor.black.cgColor
@@ -64,6 +70,7 @@ class AddTaskViewController: UIViewController {
         }
         self.hideKeyboardWhenTappedAround() 
     }
+    
     
     //Mark: Action
     @IBAction func saveButtonTapped(_ sender: UIBarButtonItem) {

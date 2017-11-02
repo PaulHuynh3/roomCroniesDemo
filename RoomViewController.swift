@@ -37,9 +37,15 @@ class RoomViewController: UIViewController {
         
         //put in a function
         navigationController?.isNavigationBarHidden = false
-        let backgroundImage = UIImage(named: "iphone-3.jpg")
+        self.navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
+        self.navigationController?.navigationBar.shadowImage = UIImage()
+        self.navigationController?.navigationBar.isTranslucent = true
+        let backgroundImage = UIImage(named: "blurred5")
         let imageView = UIImageView(image: backgroundImage)
         self.tableView.backgroundView = imageView
+        self.tableView.separatorStyle = UITableViewCellSeparatorStyle.none
+        
+        self.view.backgroundColor = UIColor(patternImage: UIImage(named: "blurred5")!)
         
         navigationItem.hidesBackButton = true
         
@@ -123,7 +129,9 @@ class RoomViewController: UIViewController {
             print("Adding a new task")
             
         case "ShowDetailTask":
-      
+            
+            
+            
             guard let detailedTaskVc = segue.destination as? AddTaskViewController else {
                 fatalError("unexpected destination:\(segue.destination)")
             }
@@ -134,7 +142,10 @@ class RoomViewController: UIViewController {
                 fatalError("The selected cell is not being displayed by the table")
                 
             }
-                        
+            
+            
+            
+            
             let selectedTask = tasks[indexPath.section]
             detailedTaskVc.task = selectedTask
             

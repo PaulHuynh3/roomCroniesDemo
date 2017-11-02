@@ -16,7 +16,6 @@
 		88DF7FBF1FA9A977007B8AA8 /* Gradient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88DF7FBE1FA9A977007B8AA8 /* Gradient.swift */; };
 		88DF7FC11FA9ADA1007B8AA8 /* CustomColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88DF7FC01FA9ADA1007B8AA8 /* CustomColor.swift */; };
 		88FD894F1FAA91F300C2A5CD /* WebViewContent.html in Resources */ = {isa = PBXBuildFile; fileRef = 88FD894D1FAA911300C2A5CD /* WebViewContent.html */; };
-		88FD89501FAA91FA00C2A5CD /* railway.gif in Resources */ = {isa = PBXBuildFile; fileRef = 88FD894E1FAA912700C2A5CD /* railway.gif */; };
 		88FD89521FAA9A0800C2A5CD /* in.gif in Resources */ = {isa = PBXBuildFile; fileRef = 88FD89511FAA99D500C2A5CD /* in.gif */; };
 		DA195E151FA5605700100F08 /* ExistingRoomViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA195E141FA5605700100F08 /* ExistingRoomViewController.swift */; };
 		DA26E8961FA3D94E00080DBD /* DataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA26E8951FA3D94E00080DBD /* DataManager.swift */; };
@@ -48,7 +47,6 @@
 		88DF7FBE1FA9A977007B8AA8 /* Gradient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Gradient.swift; sourceTree = "<group>"; };
 		88DF7FC01FA9ADA1007B8AA8 /* CustomColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomColor.swift; sourceTree = "<group>"; };
 		88FD894D1FAA911300C2A5CD /* WebViewContent.html */ = {isa = PBXFileReference; lastKnownFileType = text.html; path = WebViewContent.html; sourceTree = "<group>"; };
-		88FD894E1FAA912700C2A5CD /* railway.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = railway.gif; sourceTree = "<group>"; };
 		88FD89511FAA99D500C2A5CD /* in.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = in.gif; sourceTree = "<group>"; };
 		88FD89531FAA9CCD00C2A5CD /* loginpic3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = loginpic3.png; sourceTree = "<group>"; };
 		88FD89541FAA9CCD00C2A5CD /* loginpic4.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = loginpic4.png; sourceTree = "<group>"; };
@@ -98,7 +96,6 @@
 		88FD894C1FAA8F3600C2A5CD /* Image */ = {
 			isa = PBXGroup;
 			children = (
-				88FD894E1FAA912700C2A5CD /* railway.gif */,
 				88FD89511FAA99D500C2A5CD /* in.gif */,
 				88FD89551FAA9CCD00C2A5CD /* loginpic1.png */,
 				88FD89561FAA9CCE00C2A5CD /* loginpic2.png */,
@@ -278,7 +275,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				88FD89521FAA9A0800C2A5CD /* in.gif in Resources */,
-				88FD89501FAA91FA00C2A5CD /* railway.gif in Resources */,
 				88FD894F1FAA91F300C2A5CD /* WebViewContent.html in Resources */,
 				DA7AB7B71F99219D00E816C9 /* LaunchScreen.storyboard in Resources */,
 				88161C481F9EAD6500D8CD20 /* Media.xcassets in Resources */,
