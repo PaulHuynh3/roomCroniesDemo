@@ -11,6 +11,7 @@
 		88161C451F9E8B0700D8CD20 /* Secret.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88161C441F9E8B0700D8CD20 /* Secret.swift */; };
 		88161C481F9EAD6500D8CD20 /* Media.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 88161C471F9EAD6500D8CD20 /* Media.xcassets */; };
 		884C34761FA7EBC20078B285 /* PFUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 884C34751FA7EBC20078B285 /* PFUser.swift */; };
+		889026EB1FAADA2600CE5DA6 /* CustomTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 889026EA1FAADA2600CE5DA6 /* CustomTextField.swift */; };
 		8897DDC91FA7A24A00982BDD /* CheckBox.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8897DDC81FA7A24900982BDD /* CheckBox.swift */; };
 		88DF7FBF1FA9A977007B8AA8 /* Gradient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88DF7FBE1FA9A977007B8AA8 /* Gradient.swift */; };
 		88DF7FC11FA9ADA1007B8AA8 /* CustomColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88DF7FC01FA9ADA1007B8AA8 /* CustomColor.swift */; };
@@ -42,6 +43,7 @@
 		88161C461F9E8F1F00D8CD20 /* roomCronies.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = roomCronies.entitlements; sourceTree = "<group>"; };
 		88161C471F9EAD6500D8CD20 /* Media.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Media.xcassets; sourceTree = "<group>"; };
 		884C34751FA7EBC20078B285 /* PFUser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PFUser.swift; sourceTree = "<group>"; };
+		889026EA1FAADA2600CE5DA6 /* CustomTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTextField.swift; sourceTree = "<group>"; };
 		8897DDC81FA7A24900982BDD /* CheckBox.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckBox.swift; sourceTree = "<group>"; };
 		88DF7FBE1FA9A977007B8AA8 /* Gradient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Gradient.swift; sourceTree = "<group>"; };
 		88DF7FC01FA9ADA1007B8AA8 /* CustomColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomColor.swift; sourceTree = "<group>"; };
@@ -165,6 +167,7 @@
 			children = (
 				DA350E151FA2C61D001C653A /* UIViewControllerExtension.swift */,
 				DA350E171FA2C791001C653A /* R.swift */,
+				889026EA1FAADA2600CE5DA6 /* CustomTextField.swift */,
 			);
 			name = Helper;
 			sourceTree = "<group>";
@@ -351,6 +354,7 @@
 				88DF7FC11FA9ADA1007B8AA8 /* CustomColor.swift in Sources */,
 				88161C451F9E8B0700D8CD20 /* Secret.swift in Sources */,
 				DAF3FA0C1F9A99780095B7A4 /* AddTaskViewController.swift in Sources */,
+				889026EB1FAADA2600CE5DA6 /* CustomTextField.swift in Sources */,
 				88DF7FBF1FA9A977007B8AA8 /* Gradient.swift in Sources */,
 				DA42202C1F9FFDF4009FB67F /* RegisterViewController.swift in Sources */,
 				DAF3FA0A1F9A99120095B7A4 /* RoomViewController.swift in Sources */,

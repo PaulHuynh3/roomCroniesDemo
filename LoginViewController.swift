@@ -64,6 +64,14 @@ class LoginViewController: UIViewController {
         self.loginPicture.startAnimating()
         
         
+        userNameTextField.underlined()
+        passwordTextField.underlined()
+        
+        userNameTextField.attributedPlaceholder = NSAttributedString(string: "Username",
+                                                               attributes: [NSAttributedStringKey.foregroundColor: UIColor.white])
+        
+        passwordTextField.attributedPlaceholder = NSAttributedString(string: "Password",
+                                                                     attributes: [NSAttributedStringKey.foregroundColor: UIColor.white])
         
         
         
