@@ -76,7 +76,7 @@ class AddTaskViewController: UIViewController {
               let isComplete = isCompleted,
               name.isEmpty == false,
               taskDescription.isEmpty == false else {
-                let error = R.error(with: "Please fill out all information")
+                let error = R.error(with: "Fill out all information! 😠")
                 showErrorView(error)
                 return
         }
