@@ -14,7 +14,7 @@ protocol AddTaskDelegate: class {
     func addTaskObject(task:Task)
 }
 
-class AddTaskViewController: UIViewController {
+class AddTaskViewController: UIViewController, UITextViewDelegate {
     
     weak var taskDelegate: AddTaskDelegate?
     
@@ -31,6 +31,7 @@ class AddTaskViewController: UIViewController {
     
     @IBOutlet weak var taskNameTextField: UITextField!
     @IBOutlet weak var taskDescriptionTextView: UITextView!
+    var placeholderLabel : UILabel!
     
     @IBOutlet weak var priorityLevelView: UIView!
     @IBOutlet weak var expenseTextField: UITextField!
@@ -38,6 +39,20 @@ class AddTaskViewController: UIViewController {
       //Detail View will see this.
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        taskDescriptionTextView.delegate = self
+        placeholderLabel = UILabel()
+        placeholderLabel.text = "Enter your description..."
+        placeholderLabel.font = UIFont.italicSystemFont(ofSize: (taskDescriptionTextView.font?.pointSize)!)
+        placeholderLabel.sizeToFit()
+        taskDescriptionTextView.addSubview(placeholderLabel)
+        placeholderLabel.frame.origin = CGPoint(x: 5, y: (taskDescriptionTextView.font?.pointSize)! / 2)
+        placeholderLabel.textColor = UIColor.lightGray
+        placeholderLabel.isHidden = !taskDescriptionTextView.text.isEmpty
+        
+        func textViewDidChange(_ textView: UITextView) {
+            placeholderLabel.isHidden = !textView.text.isEmpty
+        }
         
         
         self.addTaskNavigationBar.setBackgroundImage(UIImage(), for: .default)
