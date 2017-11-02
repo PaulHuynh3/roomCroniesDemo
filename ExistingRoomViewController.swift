@@ -17,8 +17,17 @@ class ExistingRoomViewController: UIViewController {
     
     @IBOutlet weak var existingRoomTextField: UITextField!
     
+    @IBOutlet weak var existingRoomPicture: UIImageView!
+    
+    @IBOutlet weak var blurView: UIVisualEffectView!
     
     var joinExistingRoom: Room?
+    
+    var imageArray: [UIImage] = [
+        UIImage(named: "signup1.png")!,
+        UIImage(named: "signup2.png")!,
+        UIImage(named: "signup3.png")!
+    ]
     
     override func viewDidLoad() {
         super.viewDidLoad()

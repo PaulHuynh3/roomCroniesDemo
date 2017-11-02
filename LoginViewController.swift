@@ -168,7 +168,7 @@ class LoginViewController: UIViewController {
         backItem.title = ""
         navigationItem.backBarButtonItem = backItem
         
-        navigationItem.title = ""
+        
         
         
         self.navigationController?.navigationBar.tintColor = UIColor.white

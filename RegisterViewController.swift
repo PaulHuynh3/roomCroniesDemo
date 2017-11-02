@@ -39,6 +39,8 @@ class RegisterViewController: UIViewController {
         self.navigationController?.navigationBar.shadowImage = UIImage()
         self.navigationController?.navigationBar.isTranslucent = true
         
+        navigationItem.title = ""
+        
         self.view.backgroundColor = UIColor(patternImage: UIImage(named: "blurred2")!)
         
         
