@@ -158,6 +158,11 @@ class LoginViewController: UIViewController {
         backItem.title = ""
         navigationItem.backBarButtonItem = backItem
         
+        self.navigationController?.navigationBar.tintColor = UIColor.white
+        
+        let titleDict: NSDictionary = [NSAttributedStringKey.foregroundColor: UIColor.white]
+        self.navigationController?.navigationBar.titleTextAttributes = titleDict as? [NSAttributedStringKey : Any]
+        
         switch (segue.identifier ?? "") {
             //dont need to pass anything through segue. taskVC does a query for existing user and fetches the tasks.
         case "TaskViewControllerSegue":

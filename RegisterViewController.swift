@@ -36,6 +36,16 @@ class RegisterViewController: UIViewController {
 //        let backGroundColour2 = UIColor(red: 153, green: 91, blue: 70)
 //        self.view.addGradientWithColor(topColor: backGroundColour2, bottomColor: backGroundColour)
         
+        userNameTextField.underlined()
+        passwordTextField.underlined()
+        
+        userNameTextField.attributedPlaceholder = NSAttributedString(string: "Username",
+                                                                     attributes: [NSAttributedStringKey.foregroundColor: UIColor.white])
+        
+        passwordTextField.attributedPlaceholder = NSAttributedString(string: "Password",
+                                                                     attributes: [NSAttributedStringKey.foregroundColor: UIColor.white])
+        
+        
         self.hideKeyboardWhenTappedAround()
         
     }
