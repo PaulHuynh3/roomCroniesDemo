@@ -51,10 +51,10 @@ class AddTaskViewController: UIViewController, UITextViewDelegate {
         expenseTextField.underlined()
         
         taskNameTextField.attributedPlaceholder = task != nil ? NSAttributedString(string: "Enter a task or expense here...",
-                                                                                   attributes: [NSAttributedStringKey.foregroundColor: UIColor.white]) : NSAttributedString(string: "")
+                                                                                   attributes: [NSAttributedStringKey.foregroundColor: UIColor.red]) : NSAttributedString(string: "")
         
         expenseTextField.attributedPlaceholder = task != nil ? NSAttributedString(string: "Is it an expense or task?",
-                                                                                  attributes: [NSAttributedStringKey.foregroundColor: UIColor.white]) : NSAttributedString(string: "")
+                                                                                  attributes: [NSAttributedStringKey.foregroundColor: UIColor.red]) : NSAttributedString(string: "")
         
         taskDescriptionTextView.delegate = self
         
