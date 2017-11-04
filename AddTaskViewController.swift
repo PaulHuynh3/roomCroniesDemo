@@ -72,8 +72,6 @@ class AddTaskViewController: UIViewController, UITextViewDelegate {
         }
         
         
-        
-        
         self.addTaskNavigationBar.setBackgroundImage(UIImage(), for: .default)
         self.addTaskNavigationBar.shadowImage = UIImage()
         self.addTaskNavigationBar.isTranslucent = true
@@ -137,15 +135,6 @@ class AddTaskViewController: UIViewController, UITextViewDelegate {
                 return
         }
         
-        /*
- 
-         self.room = room
-         self.taskName = taskName
-         self.taskDescription = description
-         self.taskExpense = taskExpense
-         //        self.isCompleted = isCompleted
-         self.createdBy = createdBy
- */
         if task != nil {
             task?.room = room
             task?.taskName = name
@@ -173,52 +162,10 @@ class AddTaskViewController: UIViewController, UITextViewDelegate {
             //presented modally.
             self.dismiss(animated: true, completion: nil)
         }
-        
-        
-        
-        
-        //MARK: push notifications
-        //QUERY THE ROOM AND FIND THE ARRAY OF USERS
-        //ITERATE THROUGH EACH USER AND SEND NOTIFICATION USING THEIR DEVICE TOKEN
-        
-        
-        //        let text = "\(PFUser.current()!.username!) added a new task: \(String(describing: taskNameTextField.text!))";
-        //        let data = [
-        //            "badge" : "Increment",
-        //            "alert" : text,
-        //            ]
-        //        let request: [String : Any] = [
-        //            //"someKey" : PFUser.current()!.deviceToken,
-        //            "someKey" : PFUser.current()!.objectId!,
-        //            "data" : data
-        //        ]
-        //        print(PFUser.current()!.objectId!)
-        //        print(PFUser.current()!.deviceToken)
-        //
-        //        print(#line, PFInstallation.current()?.channels ?? "No CHANNELS")
-        //
-        //        print("sending push notification...")
-        //        PFCloud.callFunction(inBackground: "pushToFollowers", withParameters: request as [NSObject : AnyObject], block: { (results:AnyObject?, error:NSError?) in
-        //            print("push \(String(describing: results!))")
-        //            if error == nil {
-        //                print (results!)
-        //            }
-        //            else {
-        //                print (error!)
-        //            }
-        //            } as? PFIdResultBlock)
-        
-        //PFCloud.callFunction(inBackground: "pushsample", withParameters: ["text" : "\(PFUser.current()!.username!) added a new task: \(String(describing: taskNameTextField.text!))"])
-        
-        //        let push = PFPush()
-        //        push.setChannel("room2")
-        //        push.setMessage("TEST")
-        //        push.sendInBackground()
     }
     
     
     @IBAction func cancelButtonTapped(_ sender: UIBarButtonItem) {
-        
         //presented modally.
         dismiss(animated: true, completion: nil)
         //presented with push
@@ -227,7 +174,6 @@ class AddTaskViewController: UIViewController, UITextViewDelegate {
     
     //programatically change the colour of the shapes
     @objc func handleTap(_ sender:UITapGestureRecognizer) {
-        
         guard let priority =  priorityColor.index(of: priorityLevelView.backgroundColor!) else { return }
         let newIndex = priorityColor.startIndex.distance(to: priority) + 1
         priorityLevelView.backgroundColor = priorityColor[newIndex % priorityColor.count]
@@ -235,8 +181,6 @@ class AddTaskViewController: UIViewController, UITextViewDelegate {
     
     
 }
-
-
 
 extension AddTaskViewController: UIPickerViewDelegate, UIPickerViewDataSource {
     
