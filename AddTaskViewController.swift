@@ -42,7 +42,6 @@ class AddTaskViewController: UIViewController, UITextViewDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        
         self.addTaskNavigationBar.tintColor = UIColor.white
         
         let titleDict: NSDictionary = [NSAttributedStringKey.foregroundColor: UIColor.white]
@@ -68,7 +67,6 @@ class AddTaskViewController: UIViewController, UITextViewDelegate {
             placeholderLabel.frame.origin = CGPoint(x: 5, y: (taskDescriptionTextView.font?.pointSize)! / 2)
             placeholderLabel.textColor = UIColor.white
             placeholderLabel.isHidden = !taskDescriptionTextView.text.isEmpty
-            //            textViewDidChange(taskDescriptionTextView)
         }
         
         
@@ -105,19 +103,28 @@ class AddTaskViewController: UIViewController, UITextViewDelegate {
         createExpensePicker()
         createToolBar()
         
+        taskDetailedView()
+        hideKeyboardWhenTappedAround()
+    }
+    
+    
+    
+    func taskDetailedView() {
         if let task = task {
             taskNameTextField.text = task.taskName
             taskDescriptionTextView.text = task.taskDescription
             expenseTextField.text = task.taskExpense
             priorityLevelView.backgroundColor = priorityColor[task.priority]
         }
-        self.hideKeyboardWhenTappedAround() 
+        
     }
     
     func textViewDidChange(_ textView: UITextView) {
         guard let label = placeholderLabel else {return}
         label.isHidden = true
     }
+    
+    
     
     
     //Mark: Action

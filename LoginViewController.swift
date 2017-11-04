@@ -74,39 +74,6 @@ class LoginViewController: UIViewController {
         passwordTextField.attributedPlaceholder = NSAttributedString(string: "Password",
                                                                      attributes: [NSAttributedStringKey.foregroundColor: UIColor.white])
         
-        
-        
-//        UIView.animateKeyframes(withDuration: 4.0, delay: 0.0, options: [.repeat, .calculationModeCubic], animations: {
-//            UIView.addKeyframe(withRelativeStartTime: 0.0, relativeDuration: 0.5, animations: {
-//                self.loginPicture.image = UIImage(named: "loginpic1.png")
-//                self.loginPicture.alpha = 1.0
-//            })
-//            UIView.addKeyframe(withRelativeStartTime: 0.5, relativeDuration: 0.5, animations: {
-//                //image1
-//                self.loginPicture.image = UIImage(named: "loginpic1.png")
-//                self.loginPicture.alpha = 0.0
-//            })
-//            UIView.addKeyframe(withRelativeStartTime: 1.0, relativeDuration: 0.5, animations: {
-//                //image1
-//                self.loginPicture.image = UIImage(named: "loginpic2.png")
-//                self.loginPicture.alpha = 1.0
-//            })
-//            UIView.addKeyframe(withRelativeStartTime: 1.5, relativeDuration: 0.5, animations: {
-//                //image1
-//                self.loginPicture.image = UIImage(named: "loginpic2.png")
-//                self.loginPicture.alpha = 0.0
-//            })
-//            UIView.addKeyframe(withRelativeStartTime: 2.0, relativeDuration: 0.5, animations: {
-//                //image1
-//                self.loginPicture.image = UIImage(named: "loginpic3.png")
-//                self.loginPicture.alpha = 1.0
-//            })
-//            UIView.addKeyframe(withRelativeStartTime: 2.5, relativeDuration: 0.5, animations: {
-//                //image1
-//                self.loginPicture.image = UIImage(named: "loginpic3.png")
-//                self.loginPicture.alpha = 0.0
-//            })
-//        }, completion: nil)
 
         
     }
@@ -201,7 +168,7 @@ class LoginViewController: UIViewController {
  
 }
 
-// Put this piece of code anywhere you like
+// Put this piece of code anywhere you like as its an extension of all uiviewcontrollers.
 extension UIViewController {
     func hideKeyboardWhenTappedAround() {
         let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(UIViewController.dismissKeyboard))
