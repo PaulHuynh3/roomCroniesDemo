@@ -145,8 +145,6 @@ class AddTaskViewController: UIViewController, UITextViewDelegate {
             task = Task(room: room, taskName: name, description: taskDescription, taskExpense: expensePicker, createdBy: currentUser)
         }
         
-        
-        
 
         //change the background color.
         guard let priority =  priorityColor.index(of: priorityView) else { return }

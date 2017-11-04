@@ -142,12 +142,12 @@ class RoomViewController: UIViewController {
                 
             }
 
-            
             let selectedTask = tasks[indexPath.section]
             detailedTaskVc.task = selectedTask
             guard let myRoom = myRoom else {
                 return
             }
+            //passing myRoom to set roomObject for detail view.
             detailedTaskVc.roomObject = myRoom
             
         default:
@@ -160,8 +160,6 @@ class RoomViewController: UIViewController {
         PFUser.logOut()
         navigationController?.popToRootViewController(animated: true)
     }
-    
-    
     
     //MARK: Fetch Parse
     
@@ -201,6 +199,7 @@ class RoomViewController: UIViewController {
         query.whereKey("room", equalTo: myRoom)
         query.whereKey("isCompleted", equalTo: true)
         query.addAscendingOrder("doneByUsername")
+        query.addAscendingOrder("taskName")
         
         query.findObjectsInBackground { (results: [PFObject]?, error: Error?) in
             
