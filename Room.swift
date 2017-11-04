@@ -27,7 +27,6 @@ class Room: PFObject{
     
     convenience init(roomName: String) {
         self.init()
-        
         //initlize stored properties.
         self.roomName = roomName
     }

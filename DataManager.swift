@@ -41,8 +41,6 @@ class DataManager  {
             currentInstallation?.channels = [room.roomName]
             currentInstallation?.saveInBackground()
             
-
-            
             completion(room)
         })
     }
