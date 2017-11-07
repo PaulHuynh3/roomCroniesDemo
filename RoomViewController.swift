@@ -59,7 +59,7 @@ class RoomViewController: UIViewController {
     
     
     //MARK: Refresh Screen
-    func refreshUserScreen(){
+    func refreshUserScreen() {
         
         refreshControl = UIRefreshControl()
         refreshControl.backgroundColor = UIColor.clear
@@ -200,7 +200,6 @@ extension RoomViewController: UITableViewDelegate, UITableViewDataSource {
         return 1
         
     }
-    
     
     public func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell{
         

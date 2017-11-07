@@ -127,44 +127,42 @@ class LoginViewController: UIViewController {
     }
     
     // MARK: - Navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        super.prepare(for: segue , sender: sender)
-        
-        let backItem = UIBarButtonItem()
-        backItem.title = ""
-        navigationItem.backBarButtonItem = backItem
-        
-        
-        
-        
-        self.navigationController?.navigationBar.tintColor = UIColor.white
-        
-        let titleDict: NSDictionary = [NSAttributedStringKey.foregroundColor: UIColor.white]
-        self.navigationController?.navigationBar.titleTextAttributes = titleDict as? [NSAttributedStringKey : Any]
-        
-        switch (segue.identifier ?? "") {
-            //dont need to pass anything through segue. taskVC does a query for existing user and fetches the tasks.
-        case "TaskViewControllerSegue":
-            guard let _ = segue.destination as? RoomViewController else {
-                print(#line, "unexpected destination:\(segue.destination)")
-                return
-            }
-            
-        case "userRegisterSegue":
-            guard let registerController = segue.destination as? RegisterViewController else {
-                fatalError("unexpected destination:\(segue.destination)")
-            }
-        case "createNewRoomSegue":
-            guard let createNewRoomController = segue.destination as? ExistingRoomViewController else {
-                 fatalError("unexpected destination:\(segue.destination)")
-            }
-            
-        default:
-            fatalError("unexpected segue identifier \(String(describing: segue.identifier))")
-            
-        }
-        
-    }
+//    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+//        super.prepare(for: segue , sender: sender)
+//
+//        let backItem = UIBarButtonItem()
+//        backItem.title = ""
+//        navigationItem.backBarButtonItem = backItem
+//
+//        
+//        self.navigationController?.navigationBar.tintColor = UIColor.white
+//
+//        let titleDict: NSDictionary = [NSAttributedStringKey.foregroundColor: UIColor.white]
+//        self.navigationController?.navigationBar.titleTextAttributes = titleDict as? [NSAttributedStringKey : Any]
+//
+//        switch (segue.identifier ?? "") {
+//            //dont need to pass anything through segue. taskVC does a query for existing user and fetches the tasks.
+//        case "TaskViewControllerSegue":
+//            guard let _ = segue.destination as? RoomViewController else {
+//                print(#line, "unexpected destination:\(segue.destination)")
+//                return
+//            }
+//
+//        case "userRegisterSegue":
+//            guard let registerController = segue.destination as? RegisterViewController else {
+//                fatalError("unexpected destination:\(segue.destination)")
+//            }
+//        case "createNewRoomSegue":
+//            guard let createNewRoomController = segue.destination as? ExistingRoomViewController else {
+//                 fatalError("unexpected destination:\(segue.destination)")
+//            }
+//
+//        default:
+//            fatalError("unexpected segue identifier \(String(describing: segue.identifier))")
+//
+//        }
+//
+//    }
  
 }
 
