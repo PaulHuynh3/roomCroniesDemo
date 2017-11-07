@@ -94,7 +94,6 @@ class RegisterViewController: UIViewController {
                 return
         }
         
-        //put this in a function
         let roomExists = listOfRoom?.contains(where: { (room) -> Bool in
             
             newRoomCheck == room.roomName
@@ -151,7 +150,7 @@ class RegisterViewController: UIViewController {
                     return
                 }
                 //this has to be within the asynchronous call or else it will crash
-                self.performSegue(withIdentifier: "TaskViewControllerSegue", sender: nil)
+                self.performSegue(withIdentifier: "RoomViewControllerSegue", sender: nil)
             }
         }
     }
