@@ -70,6 +70,7 @@ class DataManager  {
     }
     
     //MARK: Fetch Parse
+    //have to use static func or class func to make this asynchronous request available outside of the class.
     
     //use this filter it with expense and non-expense items.
     static func fetchIncompleteNonExpenseTask(room:Room?,completion:@escaping([Task])->()) {
@@ -96,6 +97,33 @@ class DataManager  {
         }
         
     }
+    
+    static func fetchIncompleteExpenseTask(room:Room?,completion:@escaping ([Task])->()) {
+        
+        let query = PFQuery(className:"Task")
+        
+        guard let myRoom = room else{return}
+        
+        query.whereKey("room", equalTo: myRoom)
+        query.whereKey("isCompleted", equalTo: false)
+        query.whereKey("taskExpense", equalTo:"Expense")
+        query.addDescendingOrder("priority")
+        
+        query.findObjectsInBackground { (results: [PFObject]?, error: Error?) in
+            
+            if let error = error {
+                print(#line, error.localizedDescription)
+            }
+            
+            guard let results = results as? [Task] else {return}
+            
+            completion(results)
+            
+        }
+        
+    }
+    
+    
     
     
     

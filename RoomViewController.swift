@@ -67,15 +67,18 @@ class RoomViewController: UIViewController {
     @objc func refresh() {
         switch segmentedControl.selectedSegmentIndex {
         case 0:
-            DataManager.fetchIncompleteNonExpenseTask(room: self.myRoom, completion: { (tasks) in
+            DataManager.fetchIncompleteNonExpenseTask(room: myRoom, completion: { (tasks) in
                 self.tasks = tasks
                 self.tableView.reloadData()
             })
-            
+   
             refreshControl.endRefreshing()
             
         case 1:
-            self.fetchIncompleteExpenseTask()
+            DataManager.fetchIncompleteExpenseTask(room: myRoom, completion: { (tasks) in
+                self.tasks = tasks
+                self.tableView.reloadData()
+            })
             refreshControl.endRefreshing()
 
         case 2:
@@ -102,7 +105,10 @@ class RoomViewController: UIViewController {
             
         case 1:
             print("Show expense task")
-            self.fetchIncompleteExpenseTask()
+            DataManager.fetchIncompleteExpenseTask(room: myRoom, completion: { (tasks) in
+                self.tasks = tasks
+                self.tableView.reloadData()
+            })
             
         case 2:
             print("show completed task and expense")
@@ -169,33 +175,7 @@ class RoomViewController: UIViewController {
         navigationController?.popToRootViewController(animated: true)
     }
     
-    //MARK: Fetch Parse
-    
-    func fetchIncompleteExpenseTask() {
-        
-        let query = PFQuery(className:"Task")
-        
-        guard let myRoom = self.myRoom else{return}
-        
-        query.whereKey("room", equalTo: myRoom)
-        query.whereKey("isCompleted", equalTo: false)
-        query.whereKey("taskExpense", equalTo:"Expense")
-        query.addDescendingOrder("priority")
-        
-        query.findObjectsInBackground { (results: [PFObject]?, error: Error?) in
-            
-            if let error = error {
-                print(#line, error.localizedDescription)
-            }
-            
-            guard let results = results as? [Task] else {return}
-            
-            self.tasks = results
-            self.tableView.reloadData()
-            
-        }
-        
-    }
+
     
     //fetch all room's completed task and expense and add this to tab bar completed.
     func fetchCompletedTask() {
