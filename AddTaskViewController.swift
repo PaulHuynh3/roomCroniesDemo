@@ -188,10 +188,11 @@ class AddTaskViewController: UIViewController, UITextViewDelegate {
         navigationController?.popViewController(animated: true)
     }
     
-    //programatically change the colour of the shapes
+    //programatically change the colour of the shapes everytime the user taps.
     @objc func handleTap(_ sender:UITapGestureRecognizer) {
         guard let priority =  priorityColor.index(of: priorityLevelView.backgroundColor!) else { return }
         let newIndex = priorityColor.startIndex.distance(to: priority) + 1
+        //modulo operator to reset the array back to zero when new index hits the max of the aray.
         priorityLevelView.backgroundColor = priorityColor[newIndex % priorityColor.count]
     }
     
