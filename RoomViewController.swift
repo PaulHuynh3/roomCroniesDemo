@@ -17,12 +17,13 @@ class RoomViewController: UIViewController {
             refresh()
         }
     }
-    
     let addTaskViewController : AddTaskViewController? = nil
     var tasks: [Task] = []
     var refreshControl: UIRefreshControl!
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var segmentedControl: UISegmentedControl!
+    
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -34,7 +35,12 @@ class RoomViewController: UIViewController {
             self.navigationController?.navigationBar.topItem?.title = self.myRoom?.roomName
         })
         refreshUserScreen()
-        
+        customizeView()
+        self.hideKeyboardWhenTappedAround() 
+    }
+    
+    
+    func customizeView() {
         //put in a function
         navigationController?.isNavigationBarHidden = false
         self.navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
@@ -49,8 +55,8 @@ class RoomViewController: UIViewController {
         
         navigationItem.hidesBackButton = true
         
-        self.hideKeyboardWhenTappedAround() 
     }
+    
     
     //MARK: Refresh Screen
     func refreshUserScreen(){
@@ -92,14 +98,12 @@ class RoomViewController: UIViewController {
             break
         }
         
-        
     }
     
     //MARK: Segmented Control with different fetches.
     @IBAction func indexChanged(_ sender: UISegmentedControl) {
         switch segmentedControl.selectedSegmentIndex {
         case 0:
-            
             print("Show task")
             DataManager.fetchIncompleteNonExpenseTask(room: self.myRoom, completion: { (tasks) in
                 self.tasks = tasks
@@ -180,7 +184,6 @@ class RoomViewController: UIViewController {
         PFUser.logOut()
         navigationController?.popToRootViewController(animated: true)
     }
-    
     
     
 }

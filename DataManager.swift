@@ -72,7 +72,6 @@ class DataManager  {
     //MARK: Fetch Parse
     //have to use static func or class func to make this asynchronous request available outside of the class.
     
-    //use this filter it with expense and non-expense items.
     static func fetchIncompleteNonExpenseTask(room:Room?,completion:@escaping([Task])->()) {
         
         let query = PFQuery(className: "Task")
@@ -123,7 +122,7 @@ class DataManager  {
         
     }
     
-    //fetch all room's completed task and expense and add this to tab bar completed.
+    
     static func fetchCompletedTask(room:Room?, completion:@escaping([Task])->()) {
         
         let query = PFQuery(className: "Task")
