@@ -36,8 +36,6 @@ class DataManager  {
             installation.saveInBackground()
             
             let currentInstallation = PFInstallation.current()
-//            currentInstallation?.remove(forKey: "channels")
-//            currentInstallation?.addUniqueObject("\(room.roomName)", forKey: "channels")
             currentInstallation?.channels = [room.roomName]
             currentInstallation?.saveInBackground()
             
@@ -50,6 +48,7 @@ class DataManager  {
         completion(PFUser.current()?.isAuthenticated ?? false)
     }
     
+    
     static func login(with userName: String, and password: String, completion:@escaping (Bool, Error?)-> Void) {
         PFUser.logInWithUsername(inBackground: userName, password: password) { user, error in
             guard let _ = user else {
@@ -60,6 +59,7 @@ class DataManager  {
         }
     }
     
+    
     static func signup(with userName: String, and password: String, completion: @escaping (Bool, Error?)-> Void) {
         let user = PFUser()
         user.username = userName
@@ -68,6 +68,35 @@ class DataManager  {
             completion(success, error)
         }
     }
+    
+    //MARK: Fetch Parse
+    
+    //use this filter it with expense and non-expense items.
+    static func fetchIncompleteNonExpenseTask(room:Room?,completion:@escaping([Task])->()) {
+        
+        let query = PFQuery(className: "Task")
+        
+        guard let myRoom = room else { return }
+        
+        query.whereKey("room", equalTo: myRoom)
+        query.whereKey("isCompleted", equalTo: false)
+        query.whereKey("taskExpense", equalTo: "Task")
+        query.addDescendingOrder("priority")
+        
+        query.findObjectsInBackground { (results: [PFObject]?, error: Error?) in
+            
+            if let error = error {
+                print(#line, error.localizedDescription)
+            }
+            
+            guard let results = results as? [Task] else { return }
+            
+            completion(results)
+            
+        }
+        
+    }
+    
     
     
     

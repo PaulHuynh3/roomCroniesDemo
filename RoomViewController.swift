@@ -63,10 +63,15 @@ class RoomViewController: UIViewController {
         tableView.addSubview(refreshControl)
     }
 
+    //pull to refresh function
     @objc func refresh() {
         switch segmentedControl.selectedSegmentIndex {
         case 0:
-            self.fetchIncompleteNonExpenseTask()
+            DataManager.fetchIncompleteNonExpenseTask(room: self.myRoom, completion: { (tasks) in
+                self.tasks = tasks
+                self.tableView.reloadData()
+            })
+            
             refreshControl.endRefreshing()
             
         case 1:
@@ -84,13 +89,16 @@ class RoomViewController: UIViewController {
         
     }
     
-    //MARK: Segmented Control.
+    //MARK: Segmented Control with different fetches.
     @IBAction func indexChanged(_ sender: UISegmentedControl) {
         switch segmentedControl.selectedSegmentIndex {
         case 0:
             
             print("Show task")
-            self.fetchIncompleteNonExpenseTask()
+            DataManager.fetchIncompleteNonExpenseTask(room: self.myRoom, completion: { (tasks) in
+                self.tasks = tasks
+                self.tableView.reloadData()
+            })
             
         case 1:
             print("Show expense task")
@@ -214,32 +222,6 @@ class RoomViewController: UIViewController {
         }
     }
     
-    //use this filter it with expense and non-expense items.
-    func fetchIncompleteNonExpenseTask() {
-        
-        let query = PFQuery(className: "Task")
-        
-        guard let myRoom = self.myRoom else{return}
-        
-        query.whereKey("room", equalTo: myRoom)
-        query.whereKey("isCompleted", equalTo: false)
-        query.whereKey("taskExpense", equalTo: "Task")
-        query.addDescendingOrder("priority")
-        
-        query.findObjectsInBackground { (results: [PFObject]?, error: Error?) in
-            
-            if let error = error {
-                print(#line, error.localizedDescription)
-            }
-            
-            guard let results = results as? [Task] else { return }
-            
-            self.tasks = results
-            self.tableView.reloadData()
-            
-        }
-        
-    }
     
 }
 

@@ -70,7 +70,6 @@ class TaskViewCell: UITableViewCell {
         super.setSelected(selected, animated: animated)
 
     }
-
     
     func setupCell(task:Task) {
         
