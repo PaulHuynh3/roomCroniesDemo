@@ -123,6 +123,30 @@ class DataManager  {
         
     }
     
+    //fetch all room's completed task and expense and add this to tab bar completed.
+    static func fetchCompletedTask(room:Room?, completion:@escaping([Task])->()) {
+        
+        let query = PFQuery(className: "Task")
+        
+        guard let myRoom = room else{return}
+        
+        query.whereKey("room", equalTo: myRoom)
+        query.whereKey("isCompleted", equalTo: true)
+        query.addAscendingOrder("doneByUsername")
+        query.addAscendingOrder("taskName")
+        
+        query.findObjectsInBackground { (results: [PFObject]?, error: Error?) in
+            
+            if let error = error {
+                print(#line, error.localizedDescription)
+            }
+            
+            guard let results = results as? [Task] else {return}
+            
+           completion(results)
+        }
+    }
+    
     
     
     
