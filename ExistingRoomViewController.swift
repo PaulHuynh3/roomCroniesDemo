@@ -37,10 +37,6 @@ class ExistingRoomViewController: UIViewController {
         self.navigationController?.navigationBar.shadowImage = UIImage()
         self.navigationController?.navigationBar.isTranslucent = true
         
-        
-//        let backGroundColour = UIColor(red: 70, green: 132, blue: 153)
-//        self.view.addGradientWithColor(topColor: backGroundColour, bottomColor: .white)
-
         self.view.backgroundColor = UIColor(patternImage: UIImage(named: "blurred1")!)
         
         usernameTextField.underlined()
@@ -55,7 +51,7 @@ class ExistingRoomViewController: UIViewController {
                                                                      attributes: [NSAttributedStringKey.foregroundColor: UIColor.white])
         
         existingRoomTextField.attributedPlaceholder = NSAttributedString(string: "Join an existing Room",
-                                                                 attributes: [NSAttributedStringKey.foregroundColor: UIColor.white])
+                                                                         attributes: [NSAttributedStringKey.foregroundColor: UIColor.white])
         
         self.existingRoomPicture.animationImages = imageArray;
         self.existingRoomPicture.animationDuration = 3.0
@@ -87,15 +83,12 @@ class ExistingRoomViewController: UIViewController {
                 return
         }
         
-        //query to see if there is an existing room.
-        let roomQuery = Room.query()
-        roomQuery?.whereKey("roomName", equalTo: existingRoomTextField.text!)
-        roomQuery?.findObjectsInBackground(block: { (results, error) in
-            if let results = results as? [Room],
-                let foundRoom = results.first {
+        
+        queryRoom { (foundRoom) in
+            
+            // Use the room found from the database
+            self.joinExistingRoom = foundRoom
                 
-                // Use the room found from the database
-                self.joinExistingRoom = foundRoom
                 
                 DataManager.signup(with: username, and: password) { (success:Bool?, error:Error?) in
                     
@@ -129,16 +122,35 @@ class ExistingRoomViewController: UIViewController {
                     }
                     
                 }
+                
+            }
+        
+    }
+    
+    
+    func queryRoom(completion:@escaping(Room)->() ) {
+        
+        let query = Room.query()
+        query?.whereKey("roomName", equalTo: existingRoomTextField.text!)
+        query?.findObjectsInBackground(block: { (results, error) in
+            
+            let results = results as? [Room]
+            
+            if let foundRoom = results?.first{
+                completion(foundRoom)
+                
             } else {
+                
                 let error = R.error(with: "Existing room does not exist. Please try again")
                 self.showErrorView(error)
+                return
+                
             }
+            
         })
+        
+        
     }
-
-
-    
-    
     
     
     
