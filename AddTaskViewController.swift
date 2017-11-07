@@ -42,49 +42,9 @@ class AddTaskViewController: UIViewController, UITextViewDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.addTaskNavigationBar.tintColor = UIColor.white
-        
-        let titleDict: NSDictionary = [NSAttributedStringKey.foregroundColor: UIColor.white]
-        self.addTaskNavigationBar.titleTextAttributes = titleDict as? [NSAttributedStringKey : Any]
-        
-        taskNameTextField.underlined()
-        expenseTextField.underlined()
-        
-        taskNameTextField.attributedPlaceholder = task != nil ? NSAttributedString(string: "Enter a task or expense here...",
-                                                                                   attributes: [NSAttributedStringKey.foregroundColor: UIColor.red]) : NSAttributedString(string: "")
-        
-        expenseTextField.attributedPlaceholder = task != nil ? NSAttributedString(string: "Is it an expense or task?",
-                                                                                  attributes: [NSAttributedStringKey.foregroundColor: UIColor.red]) : NSAttributedString(string: "")
-        
-        taskDescriptionTextView.delegate = self
-        
-        if task == nil {
-            placeholderLabel = UILabel()
-            placeholderLabel.text = "Enter your description..."
-            placeholderLabel.font = UIFont.italicSystemFont(ofSize: (taskDescriptionTextView.font?.pointSize)!)
-            placeholderLabel.sizeToFit()
-            taskDescriptionTextView.addSubview(placeholderLabel)
-            placeholderLabel.frame.origin = CGPoint(x: 5, y: (taskDescriptionTextView.font?.pointSize)! / 2)
-            placeholderLabel.textColor = UIColor.white
-            placeholderLabel.isHidden = !taskDescriptionTextView.text.isEmpty
-        }
-        
-        
-        self.addTaskNavigationBar.setBackgroundImage(UIImage(), for: .default)
-        self.addTaskNavigationBar.shadowImage = UIImage()
-        self.addTaskNavigationBar.isTranslucent = true
-        
-        
-        UIGraphicsBeginImageContext(self.view.frame.size)
-        UIImage(named: "blurred8")?.draw(in: self.view.bounds)
-        
-        if let image = UIGraphicsGetImageFromCurrentImageContext(){
-            UIGraphicsEndImageContext()
-            self.view.backgroundColor = UIColor(patternImage: image)
-        }else{
-            UIGraphicsEndImageContext()
-            debugPrint("Image not available")
-        }
+        taskDetailedView()
+        uiCustomizeView()
+        customizeNavigationBar()
         
         //textview layout
         taskDescriptionTextView.layer.borderColor = UIColor.black.cgColor
@@ -108,7 +68,6 @@ class AddTaskViewController: UIViewController, UITextViewDelegate {
     }
     
     
-    
     func taskDetailedView() {
         if let task = task {
             taskNameTextField.text = task.taskName
@@ -118,6 +77,58 @@ class AddTaskViewController: UIViewController, UITextViewDelegate {
         }
         
     }
+    
+    func uiCustomizeView() {
+        taskNameTextField.underlined()
+        expenseTextField.underlined()
+        
+        taskNameTextField.attributedPlaceholder = task != nil ? NSAttributedString(string: "Enter a task or expense here...",
+                                                                                   attributes: [NSAttributedStringKey.foregroundColor: UIColor.red]) : NSAttributedString(string: "")
+        
+        expenseTextField.attributedPlaceholder = task != nil ? NSAttributedString(string: "Is it an expense or task?",
+                                                                                  attributes: [NSAttributedStringKey.foregroundColor: UIColor.red]) : NSAttributedString(string: "")
+        
+        taskDescriptionTextView.delegate = self
+        
+        if task == nil {
+            placeholderLabel = UILabel()
+            placeholderLabel.text = "Enter your description..."
+            placeholderLabel.font = UIFont.italicSystemFont(ofSize: (taskDescriptionTextView.font?.pointSize)!)
+            placeholderLabel.sizeToFit()
+            taskDescriptionTextView.addSubview(placeholderLabel)
+            placeholderLabel.frame.origin = CGPoint(x: 5, y: (taskDescriptionTextView.font?.pointSize)! / 2)
+            placeholderLabel.textColor = UIColor.white
+            placeholderLabel.isHidden = !taskDescriptionTextView.text.isEmpty
+        }
+        
+        
+        UIGraphicsBeginImageContext(self.view.frame.size)
+        UIImage(named: "blurred8")?.draw(in: self.view.bounds)
+        
+        if let image = UIGraphicsGetImageFromCurrentImageContext(){
+            UIGraphicsEndImageContext()
+            self.view.backgroundColor = UIColor(patternImage: image)
+        }else{
+            UIGraphicsEndImageContext()
+            debugPrint("Image not available")
+        }
+        
+    }
+    
+    
+    
+    func customizeNavigationBar() {
+        self.addTaskNavigationBar.tintColor = UIColor.white
+        let titleDict: NSDictionary = [NSAttributedStringKey.foregroundColor: UIColor.white]
+        
+        self.addTaskNavigationBar.titleTextAttributes = titleDict as? [NSAttributedStringKey : Any]
+        self.addTaskNavigationBar.setBackgroundImage(UIImage(), for: .default)
+        self.addTaskNavigationBar.shadowImage = UIImage()
+        self.addTaskNavigationBar.isTranslucent = true
+        
+        
+    }
+    
     
     func textViewDidChange(_ textView: UITextView) {
         guard let label = placeholderLabel else {return}
